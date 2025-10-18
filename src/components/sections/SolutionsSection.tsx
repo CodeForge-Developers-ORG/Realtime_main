@@ -1,83 +1,89 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Slider from '../ui/Slider';
 
 const SolutionsSection = () => {
   const solutions = [
     {
       id: 1,
-      title: 'Home Security',
-      description: 'Comprehensive security solutions for residential properties',
-      image: '/images/solution1.jpg',
+      title: 'Office Management',
+      description: 'Streamline your office operations with our advanced biometric solutions.',
+      image: '/images/solution1.png',
     },
     {
       id: 2,
-      title: 'Business Security',
-      description: 'Advanced security systems for commercial establishments',
-      image: '/images/solution2.jpg',
+      title: 'School Management',
+      description: 'Enhance security and attendance tracking in educational institutions.',
+      image: '/images/solution3.png',
     },
     {
       id: 3,
-      title: 'Smart Integration',
-      description: 'Seamless integration with existing smart home systems',
-      image: '/images/solution3.jpg',
+      title: 'Office Management',
+      description: 'Secure access control systems for corporate environments.',
+      image: '/images/solution1.png',
     },
     {
       id: 4,
-      title: 'Remote Monitoring',
-      description: 'Monitor your security systems from anywhere in the world',
-      image: '/images/solution4.jpg',
+      title: 'Retail Solutions',
+      description: 'Biometric solutions for retail environments and customer authentication.',
+      image: '/images/solution3.png',
     },
     {
       id: 5,
-      title: 'Access Control',
-      description: 'Advanced access control for restricted areas',
-      image: '/images/solution3.jpg',
-    },
-    {
-      id: 6,
-      title: 'Surveillance',
-      description: '24/7 monitoring with high-definition cameras',
-      image: '/images/solution4.jpg',
-    },
+      title: 'Healthcare Systems',
+      description: 'Patient identification and secure access for healthcare facilities.',
+      image: '/images/solution1.png',
+    }
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-20 bg-[#2B2B2B]">
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-10">
-          <h2 className="text-3xl font-bold">Solutions</h2>
-          <div className="h-1 bg-orange-500 w-24 ml-4"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {solutions.map((solution) => (
-            <div key={solution.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-              <div className="relative h-48">
-                <Image
-                  src={solution.image}
-                  alt={solution.title}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{solution.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{solution.description}</p>
-                <Link href={`/solutions/${solution.id}`} className="text-orange-500 hover:text-orange-600 text-sm font-medium inline-flex items-center">
-                  Learn more 
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              </div>
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-1">
+            <h2 className="text-6xl font-thin text-white mb-4">Solutions</h2>
+            <p className="text-lg text-white font-[100] uppercase mb-5 tracking-[1]">India's Leading Biometric Solutions</p>
+            <p className="text-lg text-white font-thin tracking-[1]">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
+            <div className="mt-50">
+              <Link href="/solutions" className="bg-orange-500 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition">
+                View All Solutions
+              </Link>
             </div>
-          ))}
+          </div>
+          
+          <div className="col-span-2 pb-10">
+            <Slider 
+              autoPlay={true}
+              autoPlayInterval={3000}
+              showArrows={false}
+              showDots={false}
+              slidesToShow={2.3}
+              className="h-full"
+            >
+            {solutions.map((solution) => (
+              <div 
+                key={solution.id} 
+                className="rounded-2xl transition-transform mx-4 overflow-hidden border border-1 bg-[#414141] h-135"
+              >
+                <div className="flex flex-col ">
+                  <div className="relative h-110 w-full mb-4 object-contain ">
+                    <Image
+                      src={solution.image || '/images/solution1.png'}
+                      alt={solution.title}
+                      fill
+                      style={{ objectFit: 'fill' , objectPosition:'left' }}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="text-white  ">
+                    <h3 className="text-3xl font-thin mb-2 mt-5 ms-3">{solution.title}</h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>  
         </div>
-        <div className="text-center mt-10">
-          <Link href="/solutions" className="bg-orange-500 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition">
-            View All Solutions
-          </Link>
-        </div>
+      </div>
       </div>
     </section>
   );

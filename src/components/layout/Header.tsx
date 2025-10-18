@@ -64,23 +64,23 @@ const Header = () => {
   };
   
   return (
-    <header className="w-full bg-[#1a1a1a] z-50 shadow-sm">
+    <header className="w-full bg-[#2B2B2B] z-50 shadow-sm">
       {/* Main Navigation */}
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container-fluid mx-auto px-8 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center transition-transform duration-300 hover:scale-105">
           <Image 
-            src="/images/logo.svg" 
+            src="/logo.png" 
             alt="Realtime Logo" 
-            width={150} 
-            height={50}
-            className="h-10 w-auto"
+            width={200} 
+            height={100}
+            className="h-15 w-auto"
             priority
           />
         </Link>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8" ref={dropdownRef}>
+        <nav className="hidden md:flex items-center space-x-8 text-lg" ref={dropdownRef}>
           <Link 
             href="/" 
             className={`${pathname === '/' ? 'text-orange-500' : 'text-white'} font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-orange-500 after:transition-all after:duration-300`}
@@ -225,21 +225,21 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <Link 
             href="/smart-app" 
-            className="flex items-center bg-[#222222] text-white text-xs px-3 py-2 rounded transition-transform hover:scale-105 duration-300"
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300"
           >
-            <Image src="/images/logo-white.svg" alt="App Icon" width={20} height={20} className="h-5 w-5" />
+            <Image src="/images/gplay.png" alt="App Icon" width={25} height={25} className="h-7 w-7" />
             <div className="ml-2">
-              <div className="text-[10px]">REALTIME MOBILE</div>
+              <div className="text-[12px]">REALTIME MOBILE</div>
               <div className="font-bold">SMART APP</div>
             </div>
           </Link>
           <Link 
             href="/attendance-app" 
-            className="flex items-center bg-[#222222] text-white text-xs px-3 py-2 rounded transition-transform hover:scale-105 duration-300"
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300"
           >
-            <Image src="/images/logo-white.svg" alt="App Icon" width={20} height={20} className="h-5 w-5" />
+            <Image src="/images/gplay.png" alt="App Icon" width={25} height={25} className="h-7 w-7" />
             <div className="ml-2">
-              <div className="text-[10px]">REALTIME MOBILE</div>
+              <div className="text-[12px]">REALTIME MOBILE</div>
               <div className="font-bold text-orange-500">ATTENDANCE APP</div>
             </div>
           </Link>
@@ -325,11 +325,11 @@ const Header = () => {
               placeholder="Search Products"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2 pl-4 pr-10 rounded bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-500 transition-all duration-300"
+              className="w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none   focus:border-orange-500 transition-all duration-300 "
             />
             <button 
               type="submit"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors duration-300"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors duration-300"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -341,19 +341,19 @@ const Header = () => {
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
             <Link 
               href="/partner" 
-              className="bg-orange-500 text-white text-center py-2 px-6 rounded hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all duration-300"
+              className="bg-orange-500 border border-orange-500 text-white py-2 px-6 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full"
             >
               BECOME A PARTNER
             </Link>
             <Link 
               href="/login" 
-              className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all duration-300"
+              className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full"
             >
               PARTNER LOG IN
             </Link>
             <Link 
               href="/pay" 
-              className="bg-yellow-500 text-black text-center py-2 px-6 rounded hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all duration-300"
+              className="bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full"
             >
               PAY ONLINE
             </Link>

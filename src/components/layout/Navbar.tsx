@@ -9,10 +9,10 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image 
-            src="/public/images/logo.svg" 
+            src="/logo.png" 
             alt="Realtime Logo" 
-            width={150} 
-            height={50}
+            width={200} 
+            height={100}
             priority
           />
         </Link>

@@ -1,53 +1,72 @@
+"use client"
+import Slider from '../ui/Slider';
 import Image from 'next/image';
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'John Smith',
-      position: 'Homeowner',
-      content: 'The smart lock system has completely transformed how I secure my home. The fingerprint recognition is lightning fast and the app is intuitive.',
-      image: '/images/testimonial1.jpg',
+      quote: "The biometric attendance system has completely streamlined our workforce management. No more manual errors or proxy attendance—everything is accurate and real-time. Highly recommend their solutions!",
+      author: "Rahul Mehta",
+      position: "HR Manager, TechNova Solutions"
     },
     {
       id: 2,
-      name: 'Sarah Johnson',
-      position: 'Business Owner',
-      content: 'We installed Realtime security systems across all our retail locations. The customer service was exceptional and the products are top-notch.',
-      image: '/images/testimonial2.jpg',
+      quote: "The biometric attendance system has completely streamlined our workforce management. No more manual errors or proxy attendance—everything is accurate and real-time. Highly recommend their solutions!",
+      author: "Priya Sharma",
+      position: "HR Manager, TechNova Solutions"
     },
+    {
+      id: 3,
+      quote: "Implementing this biometric solution has improved our security protocols significantly. The system is reliable and the support team is always responsive.",
+      author: "Vikram Singh",
+      position: "Security Head, GlobalSecure"
+    },
+    {
+      id: 4,
+      quote: "The ease of integration with our existing systems was impressive. The biometric solutions have enhanced our access control measures tremendously.",
+      author: "Ananya Patel",
+      position: "CTO, FutureTech Industries"
+    }
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-[#FFF2EC]">
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-10">
-          <h2 className="text-3xl font-bold">What our partners Say</h2>
-          <div className="h-1 bg-orange-500 w-24 ml-4"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
-              <div className="mb-6">
-                <span className="text-orange-500 text-5xl font-serif">&ldquo;</span>
-                <p className="text-gray-700 italic">{testimonial.content}</p>
-              </div>
-              <div className="flex items-center">
-                <Image
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  width={50}
-                  height={50}
-                  className="rounded-full mr-4"
-                  unoptimized
-                />
-                <div>
-                  <h3 className="text-lg font-semibold">{testimonial.name}</h3>
-                  <p className="text-gray-600 text-sm">{testimonial.position}</p>
+        <h2 className="text-6xl font-thin text-black  mb-20 text-center">What our partners Say</h2>
+        
+        <div className="pb-10">
+          <Slider 
+            autoPlay={true}
+            autoPlayInterval={5000}
+            showArrows={false}
+            showDots={false}
+            slidesToShow={2}
+            className="h-full"
+          >
+            {testimonials.map((testimonial) => (
+              <div 
+                key={testimonial.id} 
+                className="mx-4"
+              >
+                <div className="bg-white rounded-4xl border border-2 overflow-hidden p-10  h-full relative ">
+                  <div className="flex items-center justify-center  mb-4 bg-[#F5F5F5] absolute top-0 left-0 h-30 w-30 overflow-hiddne">
+                    <Image
+                    src='/images/testimonialIcon.png'
+                    alt='testimonialIcon'
+                    width={35}
+                    height={35}
+                  />
+                  </div>
+                  <p className="text-gray-700 font-thin text-xl mb-10 ms-30 tracking-[0.4]">{`"${testimonial.quote}"`}</p>
+                  <div className="mt-auto mt-1">
+                    <p className="text-gray-500 font-medium text-xl ">{testimonial.author}</p>
+                    <p className="text-black/70 text-lg">{testimonial.position}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </Slider>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import React from "react";
 
 type Spec = {
-  key: string;
+  title: string;
   value: string | number | undefined;
 };
 
@@ -10,6 +10,7 @@ interface SpecsTableProps {
 }
 
 export default function SpecsTable({ specs = [] }: SpecsTableProps) {
+  console.log("SpecsTable specs:", specs);
   return (
     <div className="rounded-xl overflow-hidden border border-[#DDDDDD] w-full mb-4 text-white bg-transparent">
       <div className="divide-y divide-[#DDDDDD]">
@@ -20,7 +21,7 @@ export default function SpecsTable({ specs = [] }: SpecsTableProps) {
             {/* Key */}
             <div className="py-3 px-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-[#1E1410] rounded-full" />
-              <span className="text-[#1E1410] text-sm font-[400]">{s.key}</span>
+              <span className="text-[#1E1410] text-sm font-[400]">{s.title.charAt(0).toUpperCase()+s.title.slice(1)}</span>
             </div>
 
             {/* Vertical divider */}

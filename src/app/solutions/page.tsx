@@ -8,6 +8,7 @@ import AboutRealtimeBiometrics from "@/components/sections/AboutRealtimeBiometri
 import RealtimeSystems from "@/components/sections/RealtimeSystems";
 import Footer from "@/components/layout/Footer";
 import Title from "@/components/common/Title";
+import Layout from "@/components/layout/Layout";
 
 // Components for the solutions page
 const SolutionsPage = () => {
@@ -142,7 +143,7 @@ const SolutionsPage = () => {
   ];
 
   return (
-    <>
+    <Layout>
       <Title title="Solutions" />
 
       <main className="min-h-screen bg-gray-50">
@@ -279,7 +280,7 @@ const SolutionsPage = () => {
           </div>
         </div>
       </main>
-    </>
+    </Layout>
   );
 };
 

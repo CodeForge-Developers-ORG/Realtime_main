@@ -37,15 +37,71 @@ const SolutionsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#2B2B2B]">
+    <section className="py-5 md:py-20 bg-[#2B2B2B]">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-3 gap-6">
+        {/* Mobile layout - stacked */}
+        <div className="md:hidden">
+          <div className="text-center mb-8">
+            <h2 className="text-xl sm:text-4xl font-thin text-white sm:mb-3">Solutions</h2>
+            <p className="text-xs sm:text-lg text-white font-[100] uppercase mb-1 sm:mb-4 tracking-[1px]">India's Leading Biometric Solutions</p>
+            <p className="text-xs text-white font-thin tracking-[0.5px] mb-6">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
+          </div>
+          
+          <Slider 
+            autoPlay={true}
+            autoPlayInterval={2000}
+            showArrows={false}
+            showDots={true}
+            slidesToShow={2.4}
+            className="h-full mb-8"
+            responsive={[
+              {
+                breakpoint:992,
+                slidesToShow:2,
+                showDots:false
+
+              }
+            ]}
+          >
+            {solutions.map((solution) => (
+              <div 
+                key={solution.id} 
+                className="rounded-md md:rounded-2xl transition-transform mx-1 md:mx-2 overflow-hidden border-grey-500  sm:h-auto  border-1 bg-[#414141]"
+              >
+                <div className="flex flex-col">
+                  <div className="relative h-[100px] md:h-[200px] w-full">
+                    <Image
+                      src={solution.image || '/images/solution1.png'}
+                      alt={solution.title}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="text-white p-2 md:p-4">
+                    <h3 className="text-lg md:text-2xl font-thin md:mb-2">{solution.title}</h3>
+                    <p className="text-xs md:text-sm text-gray-300">{solution.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+          
+          <div className="text-center  md:mt-6">
+            <Link href="/solutions" className="bg-orange-500 text-xs md:text-lg text-white px-3 md:px-5 py-2 md:py-2 rounded-md font-medium hover:bg-orange-600 transition inline-block">
+              View All Solutions
+            </Link>
+          </div>
+        </div>
+        
+        {/* Desktop layout - grid */}
+        <div className="hidden md:grid md:grid-cols-3 gap-10">
           <div className="col-span-1">
-            <h2 className="text-6xl font-thin text-white mb-4">Solutions</h2>
-            <p className="text-lg text-white font-[100] uppercase mb-5 tracking-[1]">India's Leading Biometric Solutions</p>
-            <p className="text-lg text-white font-thin tracking-[1]">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
-            <div className="mt-50">
-              <Link href="/solutions" className="bg-orange-500 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition">
+            <h2 className="text-4xl lg:text-6xl font-thin text-white mb-4">Solutions</h2>
+            <p className="text-lg text-white font-[100] uppercase mb-6 tracking-[1px]">India's Leading Biometric Solutions</p>
+            <p className="text-lg text-white font-thin tracking-[1px]">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
+            <div className="mt-10">
+              <Link href="/solutions" className="bg-orange-500 mt-45 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition inline-block">
                 View All Solutions
               </Link>
             </div>
@@ -57,33 +113,34 @@ const SolutionsSection = () => {
               autoPlayInterval={3000}
               showArrows={false}
               showDots={false}
-              slidesToShow={2.3}
+              slidesToShow={2.4}
               className="h-full"
             >
-            {solutions.map((solution) => (
-              <div 
-                key={solution.id} 
-                className="rounded-2xl transition-transform mx-4 overflow-hidden border border-1 bg-[#414141] h-135"
-              >
-                <div className="flex flex-col ">
-                  <div className="relative h-110 w-full mb-4 object-contain ">
-                    <Image
-                      src={solution.image || '/images/solution1.png'}
-                      alt={solution.title}
-                      fill
-                      style={{ objectFit: 'fill' , objectPosition:'left' }}
-                      unoptimized
-                    />
-                  </div>
-                  <div className="text-white  ">
-                    <h3 className="text-3xl font-thin mb-2 mt-5 ms-3">{solution.title}</h3>
+              {solutions.map((solution) => (
+                <div 
+                  key={solution.id} 
+                  className="rounded-2xl transition-transform mx-4 overflow-hidden border-[#414141] border-1 bg-[#414141]"
+                >
+                  <div className="flex flex-col">
+                    <div className="relative h-110 w-full mb-3">
+                      <Image
+                        src={solution.image || '/images/solution1.png'}
+                        alt={solution.title}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        unoptimized
+                      />
+                    </div>
+                    <div className="text-white px-3 pb-4">
+                      <h3 className="text-2xl lg:text-2xl font-thin mb-2 mt-3 ms-4">{solution.title}</h3>
+                      {/* <p className="text-sm text-gray-300">{solution.description}</p> */}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </Slider>  
+              ))}
+            </Slider>  
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );

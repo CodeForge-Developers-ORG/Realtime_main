@@ -1,7 +1,31 @@
+"use client"
+
 import Image from 'next/image';
 import Link from 'next/link';
+import Slider from '../ui/Slider';
+import { useEffect, useState } from 'react';
 
 const BlogSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if we're on mobile and set state
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   const blogPosts = [
     {
       id: 1,
@@ -34,16 +58,60 @@ const BlogSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#E8E9E3]">
+    <section className="py-5 md:py-20 bg-[#E8E9E3]">
       <div className="container mx-auto px-4">
-        <div className=" mb-10">
-          <h2 className="text-7xl font-thin text-[#1E1410]  mb-8">Blogs</h2>
-          <p className="text-3xl font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">Our Leatest Updates</p>
+        <div className="mb-6 md:mb-10">
+          <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-3 md:mb-8">Blogs</h2>
+          <p className="text-shadow-amber-100 text-sm md:text-3xl font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">Our Latest Updates</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+        
+        {/* Mobile view - slider */}
+        <div className="md:hidden">
+          <Slider 
+            autoPlay={true}
+            autoPlayInterval={3000}
+            showArrows={false}
+            showDots={true}
+            slidesToShow={1.2}
+            responsive={[
+              {
+                breakpoint: 640,
+                slidesToShow: 2,
+                showDots: false
+              }
+            ]}
+            className="pb-8"
+          >
+            {blogPosts.map((post) => (
+              <div 
+                key={post.id} 
+                className=" bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+              >
+                <div className="relative h-30 md:h-48">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                </div>
+                <div className="p-2 md:p-4">
+                  <h3 className="text-sm md:text-lg font-light text-black md:mb-2 line-clamp-2">{post.title}</h3>
+                  <p className="text-gray-400 text-xs md:text-sm font-light md:mb-2 line-clamp-2">{post.excerpt}</p>
+                  <p className="text-gray-600 text-[8px] mb-0">Posted on: {post.date}</p>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+                {/* Desktop view - grid layout */}
+        <div className="hidden  md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
           {blogPosts.map((post) => (
             <div key={post.id} className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden">
-              <div className="relative h-90">
+              <div className="relative h-60 lg:h-48 xl:h-60">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -55,13 +123,14 @@ const BlogSection = () => {
               <div className="p-4">
                 <h3 className="text-xl font-light text-black mb-2 line-clamp-2">{post.title}</h3>
                 <p className="text-gray-400 text-md font-light mb-3 line-clamp-2">{post.excerpt}</p>
-                <p className="text-gray-600 text-sm mb-2">Posted on :  {post.date}</p>
+                <p className="text-gray-600 text-sm mb-2">Posted on: {post.date}</p>
               </div>
             </div>
           ))}
         </div>
-        <div className="text-right mt-6">
-          <Link href="/blog" className="bg-orange-500 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center">
+        
+        <div className="text-right mt-0 md:mt-6">
+          <Link href="/blog" className="bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center">
             View All
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />

@@ -87,7 +87,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white border border-gray-200">
+    <section className="max-w-6xl mx-auto py-20 bg-white ">
       <div className="container mx-auto px-4">
         <div className="mb-6 text-[#1E1410]">
           <h2 className="text-6xl font-thin mb-4 ">Contact Us</h2>

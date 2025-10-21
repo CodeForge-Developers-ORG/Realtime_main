@@ -1,145 +1,119 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+// app/products/[title]/page.tsx
+import { baseUri } from "@/services/constant";
+import { getProductBySlug } from "@/services/productService";
+import Layout from "@/components/layout/Layout";
 import CTAButton from "@/components/common/CTAButton";
 import FeaturePill from "@/components/common/FeaturePill";
 import ProductImage from "@/components/common/ProductImage";
 import SpecsTable from "@/components/products/productdetail/SpecsTable";
 import Testimonials from "@/components/sections/Testimonials";
-
-type ProductItem = {
-  id: string;
-  name: string;
-  image: string;
-  features?: string[];
-  specifications?: {
-    faceCapacity?: number;
-    fingerprintCapacity?: number;
-    passwordCapacity?: number;
-    identifyMode?: string;
-    display?: string;
-  };
-  buttons?: {
-    viewDemo?: boolean;
-    downloadCatalogue?: boolean;
-  };
-};
+import { ArrowDownToLine, Play } from "lucide-react";
+import DownloadCatalogueButton from "./DownloadCatalogueButton";
 
 type ProductCategory = {
   title: string;
-  items: ProductItem[];
+  images: string[];
+  features: string[];
+  specifications: Record<string, string | number>;
+  meta_title?: string;
+  meta_description?: string;
+  catalogue_document?: string;
 };
 
-export default function ProductPageClient() {
-  const router = useRouter();
-  const params = useParams(); // dynamic route params
-  const [products, setProducts] = useState<ProductCategory[] | null>(null);
-  const [product, setProduct] = useState<ProductCategory | null>(null);
+// ✅ Next.js 13+ SEO metadata
+export async function generateMetadata({
+  params,
+}: {
+  params: { title: string };
+}) {
+  const res = await getProductBySlug(params.title);
+  const product: ProductCategory | null = res?.data?.[0] || null;
 
-  useEffect(() => {
-    let mounted = true;
-    fetch("/api/categories")
-      .then((r) => r.json())
-      .then((json) => {
-        if (!mounted) return;
-        setProducts(json);
-        setProduct({
-          title: "Realtime T501 Mini",
-          items: [
-            {
-              id: "t501-mini",
-              name: "Realtime T501 Mini",
-              image:
-                "https://realtimebiometrics.com/upload/2805220119_RS%209n.png",
-              features: [
-                "Face Recognition",
-                "Fingerprint",
-                "RF Card",
-                "Password",
-                "TCP/IP",
-                "USB Disk",
-                "Access Control",
-                "Battery Backup",
-              ],
-              specifications: {
-                faceCapacity: 5000,
-                fingerprintCapacity: 5000,
-                passwordCapacity: 5000,
-                identifyMode:
-                  "Face, Fingerprint, Card, Password and Combination",
-                display: 'Color Scene 3.0" Inch',
-              },
-              buttons: {
-                viewDemo: true,
-                downloadCatalogue: true,
-              },
-            },
-          ],
-        });
-      })
-      .catch((err) => console.error(err));
-
-    return () => {
-      mounted = false;
+  if (!product) {
+    return {
+      title: "Product Not Found",
+      description: "Product not found in our catalog.",
     };
-  }, [params?.title]);
+  }
 
-  if (!products) return <div className="text-center py-20">Loading...</div>;
-  if (!product)
-    return <div className="text-center py-20">Product not found</div>;
+  return {
+    title: product.meta_title || product.title,
+    description: product.meta_description || product.title,
+  };
+}
+
+// ✅ Page component (Server)
+export default async function ProductPage({
+  params,
+}: {
+  params: { title: string };
+}) {
+  const res = await getProductBySlug(params.title);
+  const product: ProductCategory | null = res?.data?.[0] || null;
+
+  if (!product) {
+    return (
+      <Layout>
+        <div className="text-center py-20 text-gray-600">
+          Product not found.
+        </div>
+      </Layout>
+    );
+  }
 
   return (
-    <div className="bg-white">
-      <div className="max-w-6xl mx-auto px-6 py-25">
-        <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-8 items-start">
-          {/* Left - Main Image */}
-          <div>
-            <ProductImage
-              src={product?.items[0]?.image}
-              alt={product.items[0].name}
-            />
-          </div>
-
-          {/* Right - Content */}
-          <div>
-            <h1 className="text-3xl font-semibold text-gray-900 mb-4">
-              {product.title}
-            </h1>
-
-            <div className="flex items-center gap-3 mb-6">
-              <CTAButton variant="primary">▶ VIEW DEMO</CTAButton>
-              <CTAButton variant="yellow">⬇ DOWNLOAD CATALOGUE</CTAButton>
+    <Layout>
+      <div className="bg-white">
+        <div className="max-w-6xl mx-auto px-6 py-25">
+          <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
+            {/* Left - Image */}
+            <div>
+              <ProductImage
+                src={`${baseUri}${product.images[0]}`}
+                alt={product.title}
+              />
             </div>
-            <div className="bg-[#F7F7F7]  rounded-[24px]">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 border-b border-[#DDDDDD] pb-6 p-3">
-                {product.items[0].features?.map((feature, idx) => (
-                  <FeaturePill key={idx} label={feature} />
-                ))}
+
+            {/* Right - Content */}
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-900 mb-4">
+                {product.title}
+              </h1>
+
+              <div className="flex items-center gap-3 mb-6">
+                <CTAButton variant="primary">
+                  <span className="border rounded-full w-[20px] h-[20px] flex items-center justify-center">
+                    <Play className="w-[10px]" />
+                  </span>{" "}
+                  VIEW DEMO
+                </CTAButton>
+
+                {/* Client component for download */}
+                <DownloadCatalogueButton
+                  productTitle={product.title}
+                  catalogueDoc={product.catalogue_document}
+                />
               </div>
 
-              <div className="p-3">
-                <h3 className="text-gray-800 font-semibold mb-4">
-                  Specifications
-                </h3>
-                <SpecsTable
-                  specs={
-                    product.items[0]?.specifications
-                      ? Object.entries(product.items[0].specifications).map(
-                          ([key, value]) => ({
-                            key,
-                            value,
-                          })
-                        )
-                      : []
-                  }
-                />
+              <div className="bg-[#F3F3F3] rounded-[24px]">
+                <div className="flex flex-wrap gap-3 mb-6 border-b border-[#DDDDDD] pb-6 p-3">
+                  {product.features?.map((feature, idx) => (
+                    <FeaturePill key={idx} label={feature} />
+                  ))}
+                </div>
+
+                <div className="p-3">
+                  <h3 className="text-gray-800 font-semibold mb-4">
+                    Specifications
+                  </h3>
+                  <SpecsTable specs={product.specifications} />
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <Testimonials />
       </div>
-      <Testimonials />
-    </div>
+    </Layout>
   );
 }

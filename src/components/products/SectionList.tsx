@@ -70,9 +70,10 @@ export default function SectionList({
           ref={(el) => (sectionRefs.current[i] = el)}
           className="mb-10 p-4 rounded-lg border border-gray-200 bg-white">
           <h3 className="text-2xl text-black font-medium mb-4">{cat.title}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {cat.items.map((it) => (
-              <Card key={it.id} name={it.name} image={it.image} />
+              <Card key={it.id} it={it} />
+              // <Card key={it.id} name={it.name} image={it.image} />
             ))}
           </div>
         </div>

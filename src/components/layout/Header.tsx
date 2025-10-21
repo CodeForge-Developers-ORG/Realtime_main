@@ -64,7 +64,7 @@ const Header = () => {
   };
   
   return (
-    <header className="w-full bg-[#2B2B2B] z-50 shadow-sm">
+    <header className="w-full bg-[#2B2B2B] z-50 shado-sm">
       {/* Main Navigation */}
       <div className="container-fluid mx-auto px-8 py-4 flex items-center justify-between">
         {/* Logo */}

@@ -44,19 +44,29 @@ const HeroSection = () => {
         showArrows={false}
         showDots={true}
         slidesToShow={1}
+        responsive={[
+          {
+            breakpoint: 768,
+            showDots: false,
+            slidesToShow: 1
+          }
+        ]}
       >
         {heroSlides.map((slide) => (
-          <div key={slide.id} className="relative h-full w-full object-contain">
-            <Image 
-              src={slide.imageUrl}
-              alt={slide.altText}
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-full h-[82vh] relative z-10"
-              style={{ width: '100%' }}
-              unoptimized
-            />
+          <div key={slide.id} className="relative w-full">
+            <div className="relative">
+              <Image 
+                src={slide.imageUrl}
+                alt={slide.altText}
+                width={0}
+                height={0}
+                sizes="60vw"
+                className="w-[100vw] h-[28vh] sm:h-[60vh] md:h-[70vh] lg:h-[82vh] object-cover relative z-10"
+                priority
+                unoptimized
+              />
+       
+            </div>
           </div>
         ))}
       </Slider>

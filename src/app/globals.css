@@ -32,4 +32,6 @@ body {
 .font-thin {
   font-weight: 300 !important;
 }
-
+.scrolling-section .pin-spacer{
+      background:#FFE8DF;
+}

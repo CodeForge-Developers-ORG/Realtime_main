@@ -36,64 +36,70 @@ const ProductsSection = () => {
       image: '/images/product1.png',
     },
   ];
-  
+
   // Duplicate the products array to create an infinite scroll effect
   const products = [...originalProducts, ...originalProducts, ...originalProducts];
 
   return (
-    <section className="py-20 bg-[#FFE8DF] ">
+    <section className="py-5 md:py-20 bg-[#FFE8DF]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-6xl font-thin text-black  mb-4">Featured Products</h2>
-          <p className="text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
+        <div className="text-center mb-3 md:mb-12">
+          <h2 className="text-xl  md:text-5xl lg:text-6xl font-thin text-black mb-0 md:mb-4">Featured Products</h2>
+          <p className="text-xs font-thin md:text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
         </div>
-        
-        <div >
-                    <Slider 
-                 autoPlay={true}
-        autoPlayInterval={2000}
-        showArrows={false}
-        showDots={false}
-        slidesToShow={3.3}
-        className='h-full'
+
+        <div>
+          <Slider
+            autoPlay={true}
+            autoPlayInterval={2000}
+            showArrows={false}
+            showDots={false}
+            slidesToShow={3.4}
+            className='h-full'
+            responsive={[
+                 {
+                breakpoint: 992,
+                showDots: false,
+                slidesToShow: 2
+              }
+            ]}
           >
-          {products.map((product) => (
-            <div 
-              key={product.id} 
-              className="rounded-3xl p-8  transition-transform  mx-4"
-              style={{
-                background: product.id % 2 === 0 ? 
-                  'linear-gradient(to bottom, #FFCC33, #FFB347)' : 
-                  'linear-gradient(to bottom, #FF7F50, #FF6347)' , 
-              }}
-            >
-              <div className=" flex flex-col ">
-                <div className="relative h-90 w-full mb-4 bg-white rounded-xl ">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    unoptimized
-                    
-                  />
-                </div>
-                <div style={{
-                  color: product.id % 2 === 0 ? '#000' : '#fff'
-              }}>
-                  <p className="text-xl font-thin mb-1">{product.category}</p>
-                  <h3 className="text-4xl font-thin tracking-[3]">{product.name}</h3>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
+                style={{
+                  background: product.id % 2 === 0 ?
+                    'linear-gradient(to bottom, #FFCC33, #FFB347)' :
+                    'linear-gradient(to bottom, #FF7F50, #FF6347)',
+                }}
+              >
+                <div className="flex flex-col">
+                  <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl sm:p-5">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      unoptimized
+                    />
+                  </div>
+                  <div style={{
+                    color: product.id % 2 === 0 ? '#000' : '#fff'
+                  }}>
+                    <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">{product.category}</p>
+                    <h3 className="text-md sm:text-3xl md:text-4xl font-thin tracking-[0.5px] md:tracking-[3px]">{product.name}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>  
+            ))}
+          </Slider>
         </div>
 
 
-        <div className="text-center mt-10">
-          <Link 
-            href="/products" 
-            className="inline-flex items-center bg-orange-500 text-white px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition"
+        <div className="text-center mt-3 sm:mt-10">
+          <Link
+            href="/products"
+            className="inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition"
           >
             VIEW ALL
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

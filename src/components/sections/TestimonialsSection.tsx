@@ -31,11 +31,11 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#FFF2EC]">
+    <section className="py-5 md:py-16 bg-[#FFF2EC]">
       <div className="container mx-auto px-4">
-        <h2 className="text-6xl font-thin text-black  mb-20 text-center">What our partners Say</h2>
+        <h2 className="text-xl md:text-6xl font-thin text-black mb-3 md:mb-20 text-center">What our partners Say</h2>
         
-        <div className="pb-10">
+        <div className="pb-2 md:pb-10">
           <Slider 
             autoPlay={true}
             autoPlayInterval={5000}
@@ -43,25 +43,33 @@ const TestimonialsSection = () => {
             showDots={false}
             slidesToShow={2}
             className="h-full"
+            responsive={[
+              {
+                breakpoint: 768,
+                  slidesToShow: 1,
+                  showDots: false,
+              }
+            ]}
           >
             {testimonials.map((testimonial) => (
               <div 
                 key={testimonial.id} 
-                className="mx-4"
+                className="mx-2 md:mx-4"
               >
-                <div className="bg-white rounded-4xl border border-2 overflow-hidden p-10  h-full relative ">
-                  <div className="flex items-center justify-center  mb-4 bg-[#F5F5F5] absolute top-0 left-0 h-30 w-30 overflow-hiddne">
+                <div className="bg-white rounded-lg md:rounded-4xl border-[#F5F5F5] border-2 overflow-hidden p-5 md:p-10  h-[230px] md:h-[280px] relative ">
+                  <div className="flex items-center justify-center mb-0 md:mb-4 bg-[#F5F5F5] absolute top-0 left-0 h-10 md:h-30 w-10 md:w-30 overflow-hiddne">
                     <Image
                     src='/images/testimonialIcon.png'
                     alt='testimonialIcon'
-                    width={35}
-                    height={35}
+                    width={0}
+                    height={0}
+                    className='h-3 md:h-20 w-3 md:w-20'
                   />
                   </div>
-                  <p className="text-gray-700 font-thin text-xl mb-10 ms-30 tracking-[0.4]">{`"${testimonial.quote}"`}</p>
-                  <div className="mt-auto mt-1">
-                    <p className="text-gray-500 font-medium text-xl ">{testimonial.author}</p>
-                    <p className="text-black/70 text-lg">{testimonial.position}</p>
+                  <p className="text-gray-700 font-thin text-sm mb-2 md:mb-10 ms-10 md:ms-30 tracking-[0.4] ">{`"${testimonial.quote}"`}</p>
+                  <div className="mt-auto mt-1 absolute bottom-5 md:bottom-10 left-5 md:left-10">
+                    <p className="text-gray-500 font-medium text-sm md:text-xl ">{testimonial.author}</p>
+                    <p className="text-black/70 text-xs md:text-lg">{testimonial.position}</p>
                   </div>
                 </div>
               </div>

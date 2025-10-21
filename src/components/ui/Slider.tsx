@@ -12,6 +12,7 @@ interface SliderProps {
   responsive?: {
     breakpoint: number;
     slidesToShow: number;
+    showDots:boolean;
   }[];
   dotStyle?: {
     size?: number;
@@ -42,6 +43,7 @@ const Slider: React.FC<SliderProps> = ({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(autoPlay);
   const [currentSlidesToShow, setCurrentSlidesToShow] = useState(slidesToShow);
+  const [currentShowDots, setCurrentShowDots] = useState(showDots);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
@@ -58,11 +60,19 @@ const Slider: React.FC<SliderProps> = ({
       // Sort responsive breakpoints in descending order
       const sortedBreakpoints = [...responsive].sort((a, b) => b.breakpoint - a.breakpoint);
       
-      // Find the appropriate slidesToShow value based on current window width
+      // Find the appropriate settings based on current window width
       const width = window.innerWidth;
       const matchedBreakpoint = sortedBreakpoints.find(item => width <= item.breakpoint);
       
+      // Update slidesToShow and showDots based on responsive settings
       setCurrentSlidesToShow(matchedBreakpoint ? matchedBreakpoint.slidesToShow : slidesToShow);
+      
+      // Update showDots state if it exists in the responsive settings
+      if (matchedBreakpoint && 'showDots' in matchedBreakpoint) {
+        setCurrentShowDots(matchedBreakpoint.showDots);
+      } else {
+        setCurrentShowDots(showDots);
+      }
     };
     
     // Initial check
@@ -75,7 +85,7 @@ const Slider: React.FC<SliderProps> = ({
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [responsive, slidesToShow]);
+  }, [responsive, slidesToShow, showDots]);
 
   // Calculate slide width when container is available or window resizes
   useEffect(() => {
@@ -307,7 +317,7 @@ const Slider: React.FC<SliderProps> = ({
       )}
 
       {/* Dots Navigation */}
-      {showDots && totalSlides > 1 && (
+      {currentShowDots && totalSlides > 1 && (
         <div className="absolute left-0 right-0 flex justify-center">
           <div className={`${dotStyle.position === 'outside' ? 'bottom-[-20px]' : 'bottom-4'} absolute bg-black/20 px-4 py-[5px] border rounded-full flex gap-2 items-center`}>
             {Array.from({ length: Math.ceil(totalSlides / currentSlidesToShow) }).map((_, index) => (

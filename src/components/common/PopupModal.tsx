@@ -41,7 +41,7 @@ const PopupModal = () => {
 
           setPopup(popupData);
 
-          const delay = (popupData.show_after || 5) * 1000;
+          const delay = (popupData.show_after || 10) * 1000;
           setTimeout(() => setVisible(true), delay);
         }
       } catch (error) {

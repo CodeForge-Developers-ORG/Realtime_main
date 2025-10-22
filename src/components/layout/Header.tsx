@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect, useRef, useCallback } from "react";
+import axiosClient from "@/services/axiosClient";
 
 type ChildItem = {
   title: string | null;
@@ -24,6 +25,35 @@ type Branding = {
   logo_url: string;
 };
 
+type Product = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  images: string[];
+  category?: {
+    name: string;
+    slug: string;
+    parent?: {
+      name: string;
+      slug: string;
+    };
+  };
+};
+
+type SearchResponse = {
+  success: boolean;
+  data: Product[];
+  meta: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    from: number;
+    to: number;
+  };
+};
+
 type HeaderData = {
   settings: any;
   branding: Branding;
@@ -36,21 +66,27 @@ type HeaderData = {
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [headerData, setHeaderData] = useState<HeaderData | null>(null);
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const searchTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Fetch API data
+  // Fetch API data using axiosClient
   useEffect(() => {
     const fetchHeader = async () => {
       try {
-        const res = await fetch("http://64.227.165.108/api/site/header");
-        const json = await res.json();
-        setHeaderData(json.data);
+        const response = await axiosClient.get("/site/header");
+        setHeaderData(response.data.data);
       } catch (err) {
         console.error("Error fetching header:", err);
       } finally {
@@ -58,6 +94,84 @@ const Header = () => {
       }
     };
     fetchHeader();
+  }, []);
+
+  // Debounced search function
+  const performSearch = useCallback(async (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      setShowSearchDropdown(false);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    setSearchError(null);
+
+    try {
+      const response = await axiosClient.get<SearchResponse>(
+        `/content/products?search=${encodeURIComponent(query)}`
+      );
+
+      if (response.data.success) {
+        setSearchResults(response.data.data);
+        setShowSearchDropdown(response.data.data.length > 0);
+      }
+    } catch (err) {
+      console.error("Error searching products:", err);
+      setSearchError("Failed to search products");
+      setSearchResults([]);
+      setShowSearchDropdown(false);
+    } finally {
+      setIsSearching(false);
+    }
+  }, []);
+
+  // Debounce search input
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    if (searchQuery.trim()) {
+      searchTimeoutRef.current = setTimeout(() => {
+        performSearch(searchQuery);
+      }, 300); // 300ms debounce
+    } else {
+      setSearchResults([]);
+      setShowSearchDropdown(false);
+      setIsSearching(false);
+    }
+
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, [searchQuery, performSearch]);
+
+  // Close search dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      // Close navigation dropdown
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setActiveDropdown(null);
+      }
+
+      // Close search dropdown
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowSearchDropdown(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Inject Custom CSS dynamically
@@ -82,29 +196,19 @@ const Header = () => {
     };
   }, [headerData?.scripts?.header_scripts]);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setActiveDropdown(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   // Handle search submission
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // In a real app, you would implement search functionality here
-      console.log("Searching for:", searchQuery);
-      // Could redirect to search results page
-      // router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setShowSearchDropdown(false);
     }
+  };
+
+  // Handle product selection from search results
+  const handleProductSelect = (product: Product) => {
+    router.push(`/products/${product.slug}`);
+    // setSearchQuery(product.title);
+    // setShowSearchDropdown(false);
   };
 
   const toggleDropdown = (title: string) => {
@@ -150,64 +254,63 @@ const Header = () => {
         <nav
           className="hidden md:flex items-center space-x-8 text-lg"
           ref={dropdownRef}>
-        {navigation.map((item, index) => {
-  if (item.type === "single") {
-    return (
-      <Link
-        key={index}
-        href={item.url}
-        className={`relative font-[600] text-[14px] hover:text-orange-500 ${
-          pathname === item.url ? "text-orange-500" : "text-white"
-        }`}>
-        {item.title}
-      </Link>
-    );
-  }
+          {navigation.map((item, index) => {
+            if (item.type === "single") {
+              return (
+                <Link
+                  key={index}
+                  href={item.url}
+                  className={`relative font-[600] text-[14px] hover:text-orange-500 ${
+                    pathname === item.url ? "text-orange-500" : "text-white"
+                  }`}>
+                  {item.title}
+                </Link>
+              );
+            }
 
-  if (item.type === "dropdown") {
-    return (
-      <div key={index} className="relative group">
-        <Link
-          href={item.url}
-          className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
-            pathname === item.url ? "text-orange-500" : "text-white"
-          }`}>
-          {item.title}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:rotate-180"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </Link>
+            if (item.type === "dropdown") {
+              return (
+                <div key={index} className="relative group">
+                  <Link
+                    href={item.url}
+                    className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
+                      pathname === item.url ? "text-orange-500" : "text-white"
+                    }`}>
+                    {item.title}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </Link>
 
-        {/* Dropdown on hover */}
-        {item.children?.length ? (
-          <div className="absolute left-0 mt-2 w-48 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
-            {item.children.map((child, idx) => (
-              <Link
-                key={idx}
-                href={child.url}
-                className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                {child.title || "Untitled"}
-              </Link>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    );
-  }
+                  {/* Dropdown on hover */}
+                  {item.children?.length ? (
+                    <div className="absolute left-0 mt-2 w-48 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
+                      {item.children.map((child, idx) => (
+                        <Link
+                          key={idx}
+                          href={child.url}
+                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+                          {child.title || "Untitled"}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            }
 
-  return null;
-})}
-
+            return null;
+          })}
         </nav>
 
         {/* Mobile Toggle */}
@@ -230,6 +333,7 @@ const Header = () => {
             />
           </svg>
         </button>
+
         {/* Mobile App Links */}
         <div className="hidden md:flex items-center space-x-4">
           <Link
@@ -325,38 +429,115 @@ const Header = () => {
           })}
         </div>
       )}
+
       {/* Search and Action Bar */}
       <div className="bg-white py-3">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-          {/* Search Bar */}
-          <form
-            onSubmit={handleSearch}
-            className={`relative w-full md:w-96 mb-4 md:mb-0 ${headerData?.settings?.show_search_in_header ? "" : "opacity-0 pointer-events-none"}`}>
-            <input
-              type="text"
-              placeholder="Search Products"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none   focus:border-orange-500 transition-all duration-300 "
-            />
-            <button
-              type="submit"
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-          </form>
+          {/* Search Bar with Dropdown */}
+          <div
+            ref={searchRef}
+            className={`relative w-full md:w-96 mb-4 md:mb-0 ${
+              headerData?.settings?.show_search_in_header
+                ? ""
+                : "opacity-0 pointer-events-none"
+            }`}>
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search Products"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() =>
+                  searchQuery.trim() && setShowSearchDropdown(true)
+                }
+                className="w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500 transition-all duration-300"
+              />
+              <button
+                type="submit"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            {/* Search Results Dropdown */}
+            {showSearchDropdown && (
+              <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-[8px] shadow-lg mt-1 max-h-80 overflow-y-auto z-50">
+                {isSearching ? (
+                  <div className="p-4 text-center text-gray-500">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"></div>
+                    <p className="mt-2">Searching...</p>
+                  </div>
+                ) : searchError ? (
+                  <div className="p-4 text-center text-red-500">
+                    {searchError}
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  <div className="py-2">
+                    {searchResults.map((product) => (
+                      <button
+                        key={product.id}
+                        onClick={() => handleProductSelect(product)}
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-200">
+                        <div className="flex items-center space-x-3">
+                          {product.images && product.images.length > 0 ? (
+                            <img
+                              src={`http://64.227.165.108/storage/${product.images[0]}`}
+                              alt={product.title}
+                              className="w-10 h-10 object-cover rounded"
+                            />
+                          ) : (
+                            <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 text-gray-400"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M4 6h16M4 12h16M4 18h16"
+                                />
+                              </svg>
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
+                              {product.title}
+                            </p>
+                            {product.category && (
+                              <p className="text-xs text-gray-500 truncate">
+                                {product.category.parent?.name &&
+                                  `${product.category.parent.name} › `}
+                                {product.category.name}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : searchQuery.trim() ? (
+                  <div className="p-4 text-center text-gray-500">
+                    No products found for "{searchQuery}"
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </div>
 
           {/* Action Buttons */}
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">

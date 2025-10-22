@@ -8,9 +8,9 @@ type CTAButtonProps = {
 };
 
 const CTAButton: React.FC<CTAButtonProps> = ({ children, variant = 'primary', onClick, href }) => {
-  const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-md font-medium shadow-sm transition';
+  const base = 'inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer';
   const variants: Record<'primary' | 'yellow' | 'ghost', string> = {
-    primary: 'bg-orange-500 text-white hover:bg-orange-600',
+    primary: 'bg-[#EA5921] text-white hover:bg-orange-600',
     yellow: 'bg-yellow-500 text-black hover:bg-yellow-600',
     ghost: 'bg-white ring-1 ring-gray-200 text-gray-700 hover:bg-gray-50',
   };

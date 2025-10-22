@@ -1,7 +1,26 @@
+"use client"
+
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from '../ui/Slider';
+import { useEffect, useState } from 'react';
+import { getProductsWithoutPagination } from '@/services/productService';
+import { baseUri } from '@/services/constant';
 
+
+export type Product = {
+  slug: string;
+  id: string;
+  title: string;
+  description: string;
+  category: { name: string; slug: string };
+  images: string[];
+};
+
+export type Category = {
+  title: string;
+  items: { id: string; name: string; image: string; slug: string }[];
+};
 const ProductsSection = () => {
   // Original products array
   const originalProducts = [
@@ -37,79 +56,94 @@ const ProductsSection = () => {
     },
   ];
 
-  // Duplicate the products array to create an infinite scroll effect
-  const products = [...originalProducts, ...originalProducts, ...originalProducts];
+  const [products, setProducts] = useState<Product[]>([])
 
-  return (
-    <section className="py-5 md:py-20 bg-[#FFE8DF]">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-3 md:mb-12">
-          <h2 className="text-xl  md:text-5xl lg:text-6xl font-thin text-black mb-0 md:mb-4">Featured Products</h2>
-          <p className="text-xs font-thin md:text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
-        </div>
+  useEffect(() => {
+    async function fetchData(){
+      try{
+        const resp = await getProductsWithoutPagination()
+        setProducts(resp.data)
+      }
+      catch (err) {
+        console.error(err);
+      }
+  }
+  fetchData()
+  }, [])
+  
 
-        <div>
-          <Slider
-            autoPlay={true}
-            autoPlayInterval={2000}
-            showArrows={false}
-            showDots={false}
-            slidesToShow={3.4}
-            className='h-full'
-            responsive={[
-                 {
-                breakpoint: 992,
-                showDots: false,
-                slidesToShow: 2
-              }
-            ]}
-          >
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
-                style={{
-                  background: product.id % 2 === 0 ?
-                    'linear-gradient(to bottom, #FFCC33, #FFB347)' :
-                    'linear-gradient(to bottom, #FF7F50, #FF6347)',
-                }}
-              >
-                <div className="flex flex-col">
-                  <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl sm:p-5">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      unoptimized
-                    />
-                  </div>
-                  <div style={{
-                    color: product.id % 2 === 0 ? '#000' : '#fff'
-                  }}>
-                    <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">{product.category}</p>
-                    <h3 className="text-md sm:text-3xl md:text-4xl font-thin tracking-[0.5px] md:tracking-[3px]">{product.name}</h3>
-                  </div>
+return (
+  <section className="py-5 md:py-20 bg-[#FFE8DF]">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-3 md:mb-12">
+        <h2 className="text-xl  md:text-5xl lg:text-6xl font-thin text-black mb-0 md:mb-4">Featured Products</h2>
+        <p className="text-xs font-thin md:text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
+      </div>
+
+      <div>
+        <Slider
+          autoPlay={true}
+          autoPlayInterval={2000}
+          showArrows={false}
+          showDots={false}
+          slidesToShow={3.4}
+          className='h-full'
+          responsive={[
+            {
+              breakpoint: 992,
+              showDots: false,
+              slidesToShow: 2
+            }
+          ]}
+        >
+          {products &&  products.map((product ,  index) => (
+            <div
+              key={product.id}
+              className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
+              style={{
+                background: index % 2 === 0 ?
+                  'linear-gradient(to bottom, #FFCC33, #FFB347)' :
+                  'linear-gradient(to bottom, #FF7F50, #FF6347)',
+              }}
+            >
+              <div className="flex flex-col">
+                <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl sm:p-5 flex align-middle justify-center">
+                  <Image
+                    src={`${baseUri}${product.images[0]}` }
+                    alt={product.title}
+                    width={0}
+                    height={0}
+                    unoptimized
+                    className='h-[200] w-[180] '
+                  />
+                </div>
+                <div style={{
+                  color: index % 2 === 0 ? '#000' : '#fff'
+                }}>
+                  <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">{product.category?.name}</p>
+                  <h3 className="text-md sm:text-3xl md:text-4xl font-thin tracking-[0.5px] md:tracking-[3px]">{product.title}</h3>
                 </div>
               </div>
-            ))}
-          </Slider>
-        </div>
-
-
-        <div className="text-center mt-3 sm:mt-10">
-          <Link
-            href="/products"
-            className="inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition"
-          >
-            VIEW ALL
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </Link>
-        </div>
+            </div>
+          ))}
+        </Slider>
       </div>
-    </section>
-  );
+
+
+      <div className="text-center mt-3 sm:mt-10">
+        <Link
+          href="/products"
+          className="inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition"
+        >
+          VIEW ALL
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </Link>
+      </div>
+    </div>
+  </section>
+);
 };
 
 export default ProductsSection;

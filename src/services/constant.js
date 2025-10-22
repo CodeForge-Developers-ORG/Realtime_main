@@ -1,0 +1,1 @@
+export const baseUri = "http://64.227.165.108/storage/"

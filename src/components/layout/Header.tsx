@@ -138,7 +138,7 @@ const Header = () => {
               </svg>
             </button>
             {activeDropdown === 'solutions' && (
-              <div className="absolute top-full md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
+              <div className="absolute top-6 md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
                 {dropdownContent.solutions.map((item, index) => (
                   <Link 
                     key={index} 
@@ -173,7 +173,7 @@ const Header = () => {
               </svg>
             </button>
             {activeDropdown === 'products' && (
-               <div className="absolute top-full md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
+               <div className="absolute top-6 md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
                  {dropdownContent.products.map((item, index) => (
                    <Link 
                      key={index} 
@@ -208,7 +208,7 @@ const Header = () => {
               </svg>
             </button>
             {activeDropdown === 'software' && (
-               <div className="absolute top-full md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
+               <div className="absolute top-6 md:left-auto md:right-0 lg:left-0 lg:right-auto mt-1 w-48 bg-[#222222] rounded-md shadow-lg py-2 z-50 animate-fadeIn max-h-[80vh] overflow-y-auto">
                  {dropdownContent.software.map((item, index) => (
                    <Link 
                      key={index} 

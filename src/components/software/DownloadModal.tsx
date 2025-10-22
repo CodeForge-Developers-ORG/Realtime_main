@@ -310,7 +310,7 @@ export default function DownloadModal({ software, onClose }: Props) {
                     href={`${baseUri}${software.file}`}
                     download
                     className="bg-orange-600 text-white px-5 py-2 rounded-md font-medium hover:bg-orange-700 transition flex items-center gap-2">
-                    DOWNLOAD <ArrowDownToLine />
+                    DOWNLOAD <ArrowDownToLine className="w-5" />
                   </a>
                 ) : software.external_url ? (
                   <a
@@ -318,7 +318,7 @@ export default function DownloadModal({ software, onClose }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-orange-600 text-white px-5 py-2 rounded-md font-medium hover:bg-orange-700 transition flex items-center gap-2">
-                    GO TO DOWNLOAD <span>⬇️</span>
+                    GO TO DOWNLOAD <ArrowDownToLine className="w-5" />
                   </a>
                 ) : (
                   <p>No download available</p>

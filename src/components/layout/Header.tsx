@@ -55,7 +55,10 @@ type SearchResponse = {
 };
 
 type HeaderData = {
-  settings: any;
+  settings?: {
+    show_search_in_header?: boolean;
+    [key: string]: unknown;
+  };
   branding: Branding;
   navigation: NavItem[];
   custom_css?: string;
@@ -79,7 +82,7 @@ const Header = () => {
   const [loading, setLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Fetch API data using axiosClient
   useEffect(() => {
@@ -234,7 +237,7 @@ const Header = () => {
   const { branding, navigation } = headerData;
 
   return (
-    <header className="w-full bg-[#2B2B2B] text-white z-50 shadow-sm">
+    <header className="w-full bg-[#2B2B2B] text-white z-50">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -246,7 +249,7 @@ const Header = () => {
             width={180}
             height={60}
             className="h-auto w-auto"
-            priority
+            // priority
           />
         </Link>
 
@@ -532,7 +535,7 @@ const Header = () => {
                   </div>
                 ) : searchQuery.trim() ? (
                   <div className="p-4 text-center text-gray-500">
-                    No products found for "{searchQuery}"
+                    No products found for &quot;{searchQuery}&quot;
                   </div>
                 ) : null}
               </div>
@@ -547,7 +550,7 @@ const Header = () => {
               BECOME A PARTNER
             </Link>
             <Link
-              href="/login"
+              href="https://partner.markvisitor.com/"
               className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full">
               PARTNER LOG IN
             </Link>

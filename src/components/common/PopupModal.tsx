@@ -1,6 +1,7 @@
 "use client";
 
 import axiosClient from "@/services/axiosClient";
+import { baseUri } from "@/services/constant";
 import { useEffect, useState } from "react";
 
 type PopupData = {
@@ -74,8 +75,7 @@ const PopupModal = () => {
     <div className="fixed inset-0 z-[100] flex justify-center bg-black/25 bg-opacity-50 backdrop-blur-sm transition-opacity duration-300">
       <div
         className={`flex ${positionClass} justify-center w-full`}
-        onClick={handleClose}
-      >
+        onClick={handleClose}>
         <div
           onClick={(e) => e.stopPropagation()}
           className={`relative ${modalSize} bg-white rounded-xl shadow-lg p-6 text-center`}
@@ -85,13 +85,11 @@ const PopupModal = () => {
             borderColor: popup.styles?.["border-color"],
             borderRadius: popup.styles?.["border-radius"],
             borderWidth: popup.styles?.["border-color"] ? "1px" : "0px",
-          }}
-        >
+          }}>
           {/* Close Button */}
           <button
             onClick={handleClose}
-            className="absolute top-2 right-2 text-gray-500 hover:text-black"
-          >
+            className="absolute top-2 right-2 text-gray-500 hover:text-black">
             ✕
           </button>
 
@@ -99,7 +97,7 @@ const PopupModal = () => {
           {popup.image && (
             <div className="mb-4 flex justify-center">
               <img
-                src={`http://64.227.165.108/storage/${popup.image}`}
+                src={`${baseUri}${popup.image}`}
                 alt="Popup"
                 className="rounded-md max-h-48 object-contain"
               />
@@ -118,8 +116,7 @@ const PopupModal = () => {
               href={popup.button_url || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition-all"
-            >
+              className="inline-block bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition-all">
               {popup.button_text}
             </a>
           )}

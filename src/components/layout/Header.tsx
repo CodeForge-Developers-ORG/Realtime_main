@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useCallback } from "react";
 import axiosClient from "@/services/axiosClient";
+import { baseUri } from "@/services/constant";
 
 type ChildItem = {
   children: unknown;
@@ -45,20 +46,11 @@ type Product = {
 type SearchResponse = {
   success: boolean;
   data: Product[];
-  meta: {
-    current_page: number;
-    last_page: number;
-    per_page: number;
-    total: number;
-    from: number;
-    to: number;
-  };
 };
 
 type HeaderData = {
   settings?: {
     show_search_in_header?: boolean;
-    [key: string]: unknown;
   };
   branding: Branding;
   navigation: NavItem[];
@@ -68,9 +60,7 @@ type HeaderData = {
   };
 };
 
-// Global cache - yeh sab pages ke liye same rahega
 let headerDataCache: HeaderData | null = null;
-let fetchPromise: Promise<HeaderData> | null = null;
 
 const Header = () => {
   const pathname = usePathname();
@@ -80,49 +70,33 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchError, setSearchError] = useState<string | null>(null);
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [headerData, setHeaderData] = useState<HeaderData | null>(
     headerDataCache
   );
   const [loading, setLoading] = useState(!headerDataCache);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fetch API data - sirf ek baar, cache use karo
+  // Fetch header data
   useEffect(() => {
-    // Agar cache mein data hai toh directly use karo
     if (headerDataCache) {
       setHeaderData(headerDataCache);
       setLoading(false);
       return;
     }
 
-    // Agar fetch already chal raha hai toh wait karo
-    if (fetchPromise) {
-      fetchPromise.then((data) => {
-        setHeaderData(data);
-        setLoading(false);
-      });
-      return;
-    }
-
-    // Naya fetch start karo
     const fetchHeader = async () => {
       try {
-        console.log("Fetching header data...");
         const response = await axiosClient.get("/site/header");
         const data = response.data.data;
-
-        // Cache mein store karo
         headerDataCache = data;
         setHeaderData(data);
-        return data;
       } catch (err) {
         console.error("Error fetching header:", err);
-        // Fallback data
         const fallbackData: HeaderData = {
           branding: {
             site_title: "Default Site",
@@ -130,57 +104,44 @@ const Header = () => {
             logo_url: "/logo.png",
           },
           navigation: [],
-          settings: {
-            show_search_in_header: true,
-          },
+          settings: { show_search_in_header: true },
         };
         headerDataCache = fallbackData;
         setHeaderData(fallbackData);
-        return fallbackData;
       } finally {
         setLoading(false);
-        fetchPromise = null;
       }
     };
 
-    fetchPromise = fetchHeader();
-    fetchPromise.then((data) => {
-      setHeaderData(data);
-    });
-  }, []); // Empty dependency - sirf first render par chalega
+    fetchHeader();
+  }, []);
 
-  // Debounced search function
+  // Search function
   const performSearch = useCallback(async (query: string) => {
     if (!query.trim()) {
       setSearchResults([]);
       setShowSearchDropdown(false);
-      setIsSearching(false);
       return;
     }
 
     setIsSearching(true);
-    setSearchError(null);
-
     try {
       const response = await axiosClient.get<SearchResponse>(
         `/content/products?search=${encodeURIComponent(query)}`
       );
-
       if (response.data.success) {
         setSearchResults(response.data.data);
         setShowSearchDropdown(response.data.data.length > 0);
       }
     } catch (err) {
-      console.error("Error searching products:", err);
-      setSearchError("Failed to search products");
+      console.error("Search error:", err);
       setSearchResults([]);
-      setShowSearchDropdown(false);
     } finally {
       setIsSearching(false);
     }
   }, []);
 
-  // Debounce search input
+  // Debounce search
   useEffect(() => {
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
@@ -193,7 +154,6 @@ const Header = () => {
     } else {
       setSearchResults([]);
       setShowSearchDropdown(false);
-      setIsSearching(false);
     }
 
     return () => {
@@ -203,51 +163,47 @@ const Header = () => {
     };
   }, [searchQuery, performSearch]);
 
-  // Close search dropdown when clicking outside
+  // Close dropdowns on outside click
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setActiveDropdown(null);
       }
-
       if (
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
       ) {
         setShowSearchDropdown(false);
       }
-    }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        !(event.target as Element).closest('button[aria-label="Mobile menu"]')
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Inject Custom CSS dynamically
+  // Handle body scroll
   useEffect(() => {
-    if (!headerData?.custom_css) return;
-    const styleTag = document.createElement("style");
-    styleTag.innerHTML = headerData.custom_css;
-    document.head.appendChild(styleTag);
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
     return () => {
-      document.head.removeChild(styleTag);
+      document.body.style.overflow = "unset";
     };
-  }, [headerData?.custom_css]);
+  }, [mobileMenuOpen]);
 
-  // Inject Header Scripts dynamically
-  useEffect(() => {
-    if (!headerData?.scripts?.header_scripts) return;
-    const scriptTag = document.createElement("script");
-    scriptTag.innerHTML = headerData.scripts.header_scripts;
-    document.head.appendChild(scriptTag);
-    return () => {
-      document.head.removeChild(scriptTag);
-    };
-  }, [headerData?.scripts?.header_scripts]);
-
-  // Handle search submission
+  // Handle search
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -255,8 +211,12 @@ const Header = () => {
     }
   };
 
-  // Handle product selection from search results
   const handleProductSelect = (product: Product) => {
+    alert("ayyo ji");
+    setMobileMenuOpen(false);
+    setShowSearchDropdown(false);
+    setSearchQuery("");
+    setSearchResults([]);
     router.push(`/products/${product.slug}`);
   };
 
@@ -264,11 +224,17 @@ const Header = () => {
     setActiveDropdown(activeDropdown === title ? null : title);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+    setSearchQuery("");
+    setSearchResults([]);
+    setShowSearchDropdown(false);
+  };
+
   if (loading) {
     return (
-      <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Loading header...
-      </div>
+      <div className="bg-[#2B2B2B] text-white text-center py-4">Loading...</div>
     );
   }
 
@@ -283,18 +249,18 @@ const Header = () => {
   const { branding, navigation, settings } = headerData;
 
   return (
-    <header className="w-full bg-[#2B2B2B] text-white z-50">
+    <header className="w-full bg-[#2B2B2B] text-white z-50 relative">
+      {/* Top Bar */}
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center transition-transform duration-300 hover:scale-105">
+          className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
           <img
             src={branding?.logo_url || "/logo.png"}
             alt={branding?.site_title || "Logo"}
             width={180}
             height={60}
-            // className="h-auto w-auto"
+            className="h-auto w-auto max-w-[140px] md:max-w-[180px]"
           />
         </Link>
 
@@ -308,7 +274,7 @@ const Header = () => {
                 <Link
                   key={index}
                   href={item.url}
-                  className={`relative font-[600] text-[14px] hover:text-orange-500 ${
+                  className={`font-[600] text-[14px] hover:text-orange-500 transition-colors ${
                     pathname === item.url ? "text-orange-500" : "text-white"
                   }`}>
                   {item.title}
@@ -327,7 +293,7 @@ const Header = () => {
                     {item.title}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                      className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor">
@@ -340,23 +306,24 @@ const Header = () => {
                     </svg>
                   </Link>
 
-                  {/* Dropdown on hover */}
-                  {item.children?.length ? (
-                    <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
+                  {item.children?.length && (
+                    <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                       {item.children.flatMap((child) => {
-                        // agar subchildren hain to wo dikhayein
-                        if (Array.isArray(child.children) && child.children.length) {
-                          return (child.children as ChildItem[]).map((sub, subIdx) => (
-                            <Link
-                              key={`${child.title}-${subIdx}`}
-                              href={sub.url}
-                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                              {sub.title || "Untitled"}
-                            </Link>
-                          ));
+                        if (
+                          Array.isArray(child.children) &&
+                          child.children.length
+                        ) {
+                          return (child.children as ChildItem[]).map(
+                            (sub, subIdx) => (
+                              <Link
+                                key={`${child.title}-${subIdx}`}
+                                href={sub.url}
+                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+                                {sub.title || "Untitled"}
+                              </Link>
+                            )
+                          );
                         }
-
-                        // otherwise normal child dikhayein
                         return (
                           <Link
                             key={child.title}
@@ -367,41 +334,41 @@ const Header = () => {
                         );
                       })}
                     </div>
-                  ) : null}
+                  )}
                 </div>
               );
             }
-
             return null;
           })}
         </nav>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden focus:outline-none text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={`h-6 w-6 transition-transform duration-300 ${
-              mobileMenuOpen ? "rotate-90" : ""
-            }`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+        {/* Mobile Menu Button - Hide when menu is open */}
+        {!mobileMenuOpen && (
+          <button
+            aria-label="Mobile menu"
+            className="md:hidden focus:outline-none text-white z-50 p-2"
+            onClick={() => setMobileMenuOpen(true)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        )}
 
-        {/* Mobile App Links */}
+        {/* Desktop App Links */}
         <div className="hidden lg:flex items-center space-x-4">
           <Link
             href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
-            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300">
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105">
             <Image
               src="/images/gplay.png"
               alt="App Icon"
@@ -416,7 +383,7 @@ const Header = () => {
           </Link>
           <Link
             href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
-            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300">
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105">
             <Image
               src="/images/gplay.png"
               alt="App Icon"
@@ -432,113 +399,292 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      {/* ✅ MOBILE NAVIGATION FIXED */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#222] px-4 py-3 space-y-2">
-          {navigation.map((item, index) => {
-            if (item.type === "single") {
-              return (
-                <Link
-                  key={index}
-                  href={item.url}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block text-white py-2 font-medium ${
-                    pathname === item.url ? "text-orange-500" : ""
-                  }`}>
-                  {item.title}
-                </Link>
-              );
-            }
+      {/* Mobile Menu */}
+      <div
+        ref={mobileMenuRef}
+        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-[#222] z-40 transform transition-transform duration-500 ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        style={{ paddingTop: "100px" }}>
+        <button
+          onClick={closeMobileMenu}
+          className="absolute top-4 right-4 text-white p-2 z-50"
+          aria-label="Close menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
 
-            if (item.type === "dropdown") {
-              return (
-                <div key={index} className="border-b border-[#333]">
-                  {/* Header Row */}
-                  <div className="flex justify-between items-center py-2">
-                    {/* ✅ Clickable main link */}
-                    <Link
-                      href={item.url}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-white font-medium flex-1">
-                      {item.title}
-                    </Link>
+        <div className="h-full overflow-y-auto pb-32">
+          {/* Navigation Links - UPAR */}
+          <nav className="px-4 py-2 space-y-0">
+            {navigation.map((item, index) => {
+              if (item.type === "single") {
+                return (
+                  <Link
+                    key={index}
+                    href={item.url}
+                    onClick={closeMobileMenu}
+                    className={`block text-white py-4 font-medium border-b border-[#333] transition-colors ${
+                      pathname === item.url
+                        ? "text-orange-500"
+                        : "hover:text-orange-500"
+                    }`}>
+                    {item.title}
+                  </Link>
+                );
+              }
 
-                    {/* Toggle Arrow */}
-                    <button
-                      onClick={() => toggleDropdown(item.title || "")}
-                      className="text-gray-300 px-2 focus:outline-none">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 transition-transform ${
-                          activeDropdown === item.title
-                            ? "rotate-180 text-orange-500"
-                            : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+              if (item.type === "dropdown") {
+                return (
+                  <div key={index} className="border-b border-[#333]">
+                    <div className="flex justify-between items-center py-4">
+                      <Link
+                        href={item.url}
+                        onClick={closeMobileMenu}
+                        className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
+                        {item.title}
+                      </Link>
+                      <button
+                        onClick={() => toggleDropdown(item.title || "")}
+                        className="text-gray-300 px-2 hover:text-orange-500 transition-colors">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`h-5 w-5 transition-transform duration-300 ${
+                            activeDropdown === item.title
+                              ? "rotate-180 text-orange-500"
+                              : ""
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                    </div>
 
-                  {/* ✅ Children / Subchildren */}
-                  {activeDropdown === item.title && item.children?.length ? (
-                    <div className="pl-6 pb-2 space-y-1">
-                      {item.children.flatMap((child, childIdx) => {
-                        // Agar subchildren hain -> unko dikhao
-                        if (Array.isArray(child.children) && child.children.length) {
-                          return (child.children as ChildItem[]).map(
-                            (sub, subIdx) => (
-                              <Link
-                                key={`${childIdx}-${subIdx}`}
-                                href={sub.url}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-gray-300 text-sm py-1 hover:text-orange-500 transition-colors">
-                                {sub.title || "Untitled"}
-                              </Link>
-                            )
+                    {activeDropdown === item.title && item.children?.length && (
+                      <div className="pl-4 pb-2 space-y-1">
+                        {item.children.flatMap((child, childIdx) => {
+                          if (
+                            Array.isArray(child.children) &&
+                            child.children.length
+                          ) {
+                            return (child.children as ChildItem[]).map(
+                              (sub, subIdx) => (
+                                <Link
+                                  key={`${childIdx}-${subIdx}`}
+                                  href={sub.url}
+                                  onClick={closeMobileMenu}
+                                  className="block text-gray-300 text-sm py-3 pl-2 border-b border-[#2a2a2a] hover:text-orange-500 transition-colors">
+                                  {sub.title || "Untitled"}
+                                </Link>
+                              )
+                            );
+                          }
+                          return (
+                            <Link
+                              key={childIdx}
+                              href={child.url}
+                              onClick={closeMobileMenu}
+                              className="block text-gray-300 text-sm py-3 pl-2 border-b border-[#2a2a2a] hover:text-orange-500 transition-colors">
+                              {child.title || "Untitled"}
+                            </Link>
                           );
-                        }
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </nav>
 
-                        // Warna normal child dikhao
-                        return (
-                          <Link
-                            key={childIdx}
-                            href={child.url}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-gray-300 text-sm py-1 hover:text-orange-500 transition-colors">
-                            {child.title || "Untitled"}
-                          </Link>
-                        );
-                      })}
+          {/* Search Bar - MIDDLE */}
+          <div className="px-4 py-4 border-b hidden border-[#333]">
+            <div
+              className={`relative w-full ${
+                settings?.show_search_in_header ? "" : "hidden"
+              }`}>
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  placeholder="Search Products"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() =>
+                    searchQuery.trim() && setShowSearchDropdown(true)
+                  }
+                  className="w-full py-3 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+              </form>
+
+              {showSearchDropdown && (
+                <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-[8px] shadow-lg mt-1 max-h-60 overflow-y-auto z-50">
+                  {isSearching ? (
+                    <div className="p-4 text-center text-gray-500">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"></div>
+                      <p className="mt-2">Searching...</p>
+                    </div>
+                  ) : searchResults.length > 0 ? (
+                    <div className="py-2">
+                      {searchResults.map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => handleProductSelect(product)}
+                          className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors">
+                          <div className="flex items-center space-x-3">
+                            {product.images?.[0] ? (
+                              <img
+                                src={`${baseUri}${product.images[0]}`}
+                                alt={product.title}
+                                className="w-10 h-10 object-cover rounded"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 text-gray-400"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor">
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">
+                                {product.title}
+                              </p>
+                              {product.category && (
+                                <p className="text-xs text-gray-500 truncate">
+                                  {product.category.parent?.name &&
+                                    `${product.category.parent.name} › `}
+                                  {product.category.name}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  ) : searchQuery.trim() ? (
+                    <div className="p-4 text-center text-gray-500">
+                      No products found for &quot;{searchQuery}&quot;
                     </div>
                   ) : null}
                 </div>
-              );
-            }
+              )}
+            </div>
+          </div>
 
-            return null;
-          })}
+          {/* Action Buttons - NICHE */}
+          <div className="px-4 py-4 border-b border-[#333] space-y-3">
+            <Link
+              href="/partner"
+              onClick={closeMobileMenu}
+              className="block bg-orange-500 border border-orange-500 text-white py-3 px-6 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-md font-light tracking-[1] text-center">
+              BECOME A PARTNER
+            </Link>
+            <Link
+              href="https://partner.markvisitor.com/"
+              onClick={closeMobileMenu}
+              className="block border border-orange-500 text-orange-500 text-center py-3 px-6 rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-md font-light tracking-[1]">
+              PARTNER LOG IN
+            </Link>
+            <Link
+              href="/pay"
+              onClick={closeMobileMenu}
+              className="block bg-yellow-500 border border-yellow-500 text-black text-center py-3 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-md font-light tracking-[1]">
+              PAY ONLINE
+            </Link>
+          </div>
+
+          {/* App Links - SABSE NICHE */}
+          <div className="px-4 py-4 space-y-3">
+            <Link
+              href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
+              onClick={closeMobileMenu}
+              className="flex items-center justify-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 py-3 rounded-xl transition-transform hover:scale-105">
+              <Image
+                src="/images/gplay.png"
+                alt="App Icon"
+                width={25}
+                height={25}
+                className="h-6 w-6"
+              />
+              <div className="ml-2">
+                <div className="text-[11px]">REALTIME MOBILE</div>
+                <div className="font-bold text-[12px]">SMART APP</div>
+              </div>
+            </Link>
+            <Link
+              href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
+              onClick={closeMobileMenu}
+              className="flex items-center justify-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 py-3 rounded-xl transition-transform hover:scale-105">
+              <Image
+                src="/images/gplay.png"
+                alt="App Icon"
+                width={25}
+                height={25}
+                className="h-6 w-6"
+              />
+              <div className="ml-2">
+                <div className="text-[11px]">REALTIME MOBILE</div>
+                <div className="font-bold text-orange-500 text-[12px]">
+                  ATTENDANCE APP
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
-      )}
+      </div>
 
-      {/* Search and Action Bar */}
-      <div className="bg-white py-3">
+      {/* Search and Action Bar - ONLY DESKTOP */}
+      <div className="hidden md:block bg-white py-3">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-          {/* Search Bar with Dropdown */}
           <div
             ref={searchRef}
             className={`relative w-full md:w-96 mb-4 md:mb-0 ${
-              settings?.show_search_in_header
-                ? ""
-                : "opacity-0 pointer-events-none"
+              settings?.show_search_in_header ? "" : "hidden"
             }`}>
             <form onSubmit={handleSearch}>
               <input
@@ -549,11 +695,11 @@ const Header = () => {
                 onFocus={() =>
                   searchQuery.trim() && setShowSearchDropdown(true)
                 }
-                className="w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500 transition-all duration-300"
+                className="w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
               />
               <button
                 type="submit"
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -570,7 +716,6 @@ const Header = () => {
               </button>
             </form>
 
-            {/* Search Results Dropdown */}
             {showSearchDropdown && (
               <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-[8px] shadow-lg mt-1 max-h-80 overflow-y-auto z-50">
                 {isSearching ? (
@@ -578,21 +723,17 @@ const Header = () => {
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"></div>
                     <p className="mt-2">Searching...</p>
                   </div>
-                ) : searchError ? (
-                  <div className="p-4 text-center text-red-500">
-                    {searchError}
-                  </div>
                 ) : searchResults.length > 0 ? (
                   <div className="py-2">
                     {searchResults.map((product) => (
                       <button
                         key={product.id}
                         onClick={() => handleProductSelect(product)}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-200">
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors">
                         <div className="flex items-center space-x-3">
-                          {product.images && product.images.length > 0 ? (
+                          {product.images?.[0] ? (
                             <img
-                              src={`http://64.227.165.108/storage/${product.images[0]}`}
+                              src={`${baseUri}${product.images[0]}`}
                               alt={product.title}
                               className="w-10 h-10 object-cover rounded"
                             />
@@ -638,26 +779,33 @@ const Header = () => {
             )}
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+          <div className="flex space-x-4">
             <Link
               href="/partner"
-              className="bg-orange-500 border border-orange-500 text-white py-2 px-6 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full">
+              className="bg-orange-500 border border-orange-500 text-white py-2 px-6 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
               BECOME A PARTNER
             </Link>
             <Link
               href="https://partner.markvisitor.com/"
-              className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full">
+              className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
               PARTNER LOG IN
             </Link>
             <Link
               href="/pay"
-              className="bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all duration-300 text-md font-light tracking-[1] flex items-center justify-center h-full">
+              className="bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
               PAY ONLINE
             </Link>
           </div>
         </div>
       </div>
+
+      {/* Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden transition-opacity duration-500"
+          onClick={closeMobileMenu}
+        />
+      )}
     </header>
   );
 };

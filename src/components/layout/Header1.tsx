@@ -7,7 +7,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import axiosClient from "@/services/axiosClient";
 
 type ChildItem = {
-  children: unknown;
   title: string | null;
   url: string;
   slug?: string;
@@ -68,11 +67,11 @@ type HeaderData = {
   };
 };
 
-// Global cache - yeh sab pages ke liye same rahega
-let headerDataCache: HeaderData | null = null;
-let fetchPromise: Promise<HeaderData> | null = null;
+interface HeaderProps {
+  initialData: HeaderData;
+}
 
-const Header = () => {
+const Header = ({ initialData }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -81,73 +80,14 @@ const Header = () => {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [headerData, setHeaderData] = useState<HeaderData | null>(
-    headerDataCache
-  );
-  const [loading, setLoading] = useState(!headerDataCache);
+
+  // Ab initialData use karo, fetch nahi karna hoga
+  const [headerData] = useState<HeaderData>(initialData);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Fetch API data - sirf ek baar, cache use karo
-  useEffect(() => {
-    // Agar cache mein data hai toh directly use karo
-    if (headerDataCache) {
-      setHeaderData(headerDataCache);
-      setLoading(false);
-      return;
-    }
-
-    // Agar fetch already chal raha hai toh wait karo
-    if (fetchPromise) {
-      fetchPromise.then((data) => {
-        setHeaderData(data);
-        setLoading(false);
-      });
-      return;
-    }
-
-    // Naya fetch start karo
-    const fetchHeader = async () => {
-      try {
-        console.log("Fetching header data...");
-        const response = await axiosClient.get("/site/header");
-        const data = response.data.data;
-
-        // Cache mein store karo
-        headerDataCache = data;
-        setHeaderData(data);
-        return data;
-      } catch (err) {
-        console.error("Error fetching header:", err);
-        // Fallback data
-        const fallbackData: HeaderData = {
-          branding: {
-            site_title: "Default Site",
-            site_tagline: "Default Tagline",
-            logo_url: "/logo.png",
-          },
-          navigation: [],
-          settings: {
-            show_search_in_header: true,
-          },
-        };
-        headerDataCache = fallbackData;
-        setHeaderData(fallbackData);
-        return fallbackData;
-      } finally {
-        setLoading(false);
-        fetchPromise = null;
-      }
-    };
-
-    fetchPromise = fetchHeader();
-    fetchPromise.then((data) => {
-      setHeaderData(data);
-    });
-  }, []); // Empty dependency - sirf first render par chalega
 
   // Debounced search function
   const performSearch = useCallback(async (query: string) => {
@@ -189,7 +129,7 @@ const Header = () => {
     if (searchQuery.trim()) {
       searchTimeoutRef.current = setTimeout(() => {
         performSearch(searchQuery);
-      }, 300);
+      }, 300); // 300ms debounce
     } else {
       setSearchResults([]);
       setShowSearchDropdown(false);
@@ -206,6 +146,7 @@ const Header = () => {
   // Close search dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      // Close navigation dropdown
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -213,6 +154,7 @@ const Header = () => {
         setActiveDropdown(null);
       }
 
+      // Close search dropdown
       if (
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
@@ -264,14 +206,7 @@ const Header = () => {
     setActiveDropdown(activeDropdown === title ? null : title);
   };
 
-  if (loading) {
-    return (
-      <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Loading header...
-      </div>
-    );
-  }
-
+  // Ab loading state ki zaroorat nahi hai
   if (!headerData) {
     return (
       <div className="bg-[#2B2B2B] text-white text-center py-4">
@@ -294,7 +229,7 @@ const Header = () => {
             alt={branding?.site_title || "Logo"}
             width={180}
             height={60}
-            // className="h-auto w-auto"
+            className="h-auto w-auto"
           />
         </Link>
 
@@ -342,30 +277,15 @@ const Header = () => {
 
                   {/* Dropdown on hover */}
                   {item.children?.length ? (
-                    <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
-                      {item.children.flatMap((child) => {
-                        // agar subchildren hain to wo dikhayein
-                        if (Array.isArray(child.children) && child.children.length) {
-                          return (child.children as ChildItem[]).map((sub, subIdx) => (
-                            <Link
-                              key={`${child.title}-${subIdx}`}
-                              href={sub.url}
-                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                              {sub.title || "Untitled"}
-                            </Link>
-                          ));
-                        }
-
-                        // otherwise normal child dikhayein
-                        return (
-                          <Link
-                            key={child.title}
-                            href={child.url}
-                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                            {child.title || "Untitled"}
-                          </Link>
-                        );
-                      })}
+                    <div className="absolute left-0 mt-2 w-48 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out">
+                      {item.children.map((child, idx) => (
+                        <Link
+                          key={idx}
+                          href={child.url}
+                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+                          {child.title || "Untitled"}
+                        </Link>
+                      ))}
                     </div>
                   ) : null}
                 </div>
@@ -398,9 +318,9 @@ const Header = () => {
         </button>
 
         {/* Mobile App Links */}
-        <div className="hidden lg:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-4">
           <Link
-            href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
+            href="/smart-app"
             className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300">
             <Image
               src="/images/gplay.png"
@@ -415,7 +335,7 @@ const Header = () => {
             </div>
           </Link>
           <Link
-            href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
+            href="/attendance-app"
             className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105 duration-300">
             <Image
               src="/images/gplay.png"
@@ -433,7 +353,6 @@ const Header = () => {
       </div>
 
       {/* Mobile Nav */}
-      {/* ✅ MOBILE NAVIGATION FIXED */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#222] px-4 py-3 space-y-2">
           {navigation.map((item, index) => {
@@ -442,10 +361,8 @@ const Header = () => {
                 <Link
                   key={index}
                   href={item.url}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block text-white py-2 font-medium ${
-                    pathname === item.url ? "text-orange-500" : ""
-                  }`}>
+                  className="block text-white py-2"
+                  onClick={() => setMobileMenuOpen(false)}>
                   {item.title}
                 </Link>
               );
@@ -453,71 +370,38 @@ const Header = () => {
 
             if (item.type === "dropdown") {
               return (
-                <div key={index} className="border-b border-[#333]">
-                  {/* Header Row */}
-                  <div className="flex justify-between items-center py-2">
-                    {/* ✅ Clickable main link */}
-                    <Link
-                      href={item.url}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-white font-medium flex-1">
-                      {item.title}
-                    </Link>
-
-                    {/* Toggle Arrow */}
-                    <button
-                      onClick={() => toggleDropdown(item.title || "")}
-                      className="text-gray-300 px-2 focus:outline-none">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 transition-transform ${
-                          activeDropdown === item.title
-                            ? "rotate-180 text-orange-500"
-                            : ""
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* ✅ Children / Subchildren */}
+                <div key={index}>
+                  <button
+                    onClick={() => toggleDropdown(item.title || "")}
+                    className="flex justify-between items-center w-full text-left text-white py-2">
+                    {item.title}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`h-4 w-4 transition-transform ${
+                        activeDropdown === item.title ? "rotate-180" : ""
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
                   {activeDropdown === item.title && item.children?.length ? (
-                    <div className="pl-6 pb-2 space-y-1">
-                      {item.children.flatMap((child, childIdx) => {
-                        // Agar subchildren hain -> unko dikhao
-                        if (Array.isArray(child.children) && child.children.length) {
-                          return (child.children as ChildItem[]).map(
-                            (sub, subIdx) => (
-                              <Link
-                                key={`${childIdx}-${subIdx}`}
-                                href={sub.url}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block text-gray-300 text-sm py-1 hover:text-orange-500 transition-colors">
-                                {sub.title || "Untitled"}
-                              </Link>
-                            )
-                          );
-                        }
-
-                        // Warna normal child dikhao
-                        return (
-                          <Link
-                            key={childIdx}
-                            href={child.url}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-gray-300 text-sm py-1 hover:text-orange-500 transition-colors">
-                            {child.title || "Untitled"}
-                          </Link>
-                        );
-                      })}
+                    <div className="pl-6 space-y-1">
+                      {item.children.map((child, idx) => (
+                        <Link
+                          key={idx}
+                          href={child.url}
+                          className="block text-gray-300 text-sm py-1 hover:text-orange-500"
+                          onClick={() => setMobileMenuOpen(false)}>
+                          {child.title || "Untitled"}
+                        </Link>
+                      ))}
                     </div>
                   ) : null}
                 </div>

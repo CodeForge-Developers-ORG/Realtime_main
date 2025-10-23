@@ -67,7 +67,7 @@ export default function SectionList({
         <div
           key={cat.title}
           data-idx={i}
-          ref={(el) => (sectionRefs.current[i] = el)}
+          ref={(el) => { sectionRefs.current[i] = el; }}
           className="mb-10 p-4 rounded-lg border border-gray-200 bg-white">
           <h3 className="text-2xl text-black font-medium mb-4">{cat.title}</h3>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">

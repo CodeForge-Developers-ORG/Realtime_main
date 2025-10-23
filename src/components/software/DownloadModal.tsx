@@ -7,6 +7,7 @@ import { base, div } from "framer-motion/client";
 import { baseUri } from "@/services/constant";
 
 type Software = {
+  id: string;
   title: string;
   version: string;
   file?: string | null;

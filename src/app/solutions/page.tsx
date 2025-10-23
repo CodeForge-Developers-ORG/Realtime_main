@@ -146,10 +146,10 @@ const SolutionsPage = () => {
     <Layout>
       <Title title="Solutions" />
 
-      <main className="min-h-screen bg-gray-50">
+      <main className=" bg-gray-50">
         {/* Page Header */}
-        <div className="bg-gray-50 py-4">
-          <div className="container mx-auto px-4">
+        <div className="bg-gray-50 py-4 h-auto">
+          <div className="container-fluid mx-auto px-4">
             {/* About Section */}
             <div className="hidden fle flex-col md:flex-row items-center mb-12 bg-gray-50 p-4 md:p-8 rounded-lg">
               <div className="w-full md:w-1/3 md:pr-8 mb-6 md:mb-0">

@@ -67,11 +67,11 @@ type HeaderData = {
   };
 };
 
-// Global cache - yeh sab pages ke liye same rahega
-let headerDataCache: HeaderData | null = null;
-let fetchPromise: Promise<HeaderData> | null = null;
+interface HeaderProps {
+  initialData: HeaderData;
+}
 
-const Header = () => {
+const Header = ({ initialData }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -80,73 +80,14 @@ const Header = () => {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [headerData, setHeaderData] = useState<HeaderData | null>(
-    headerDataCache
-  );
-  const [loading, setLoading] = useState(!headerDataCache);
+
+  // Ab initialData use karo, fetch nahi karna hoga
+  const [headerData] = useState<HeaderData>(initialData);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Fetch API data - sirf ek baar, cache use karo
-  useEffect(() => {
-    // Agar cache mein data hai toh directly use karo
-    if (headerDataCache) {
-      setHeaderData(headerDataCache);
-      setLoading(false);
-      return;
-    }
-
-    // Agar fetch already chal raha hai toh wait karo
-    if (fetchPromise) {
-      fetchPromise.then((data) => {
-        setHeaderData(data);
-        setLoading(false);
-      });
-      return;
-    }
-
-    // Naya fetch start karo
-    const fetchHeader = async () => {
-      try {
-        console.log("Fetching header data...");
-        const response = await axiosClient.get("/site/header");
-        const data = response.data.data;
-
-        // Cache mein store karo
-        headerDataCache = data;
-        setHeaderData(data);
-        return data;
-      } catch (err) {
-        console.error("Error fetching header:", err);
-        // Fallback data
-        const fallbackData: HeaderData = {
-          branding: {
-            site_title: "Default Site",
-            site_tagline: "Default Tagline",
-            logo_url: "/logo.png",
-          },
-          navigation: [],
-          settings: {
-            show_search_in_header: true,
-          },
-        };
-        headerDataCache = fallbackData;
-        setHeaderData(fallbackData);
-        return fallbackData;
-      } finally {
-        setLoading(false);
-        fetchPromise = null;
-      }
-    };
-
-    fetchPromise = fetchHeader();
-    fetchPromise.then((data) => {
-      setHeaderData(data);
-    });
-  }, []); // Empty dependency - sirf first render par chalega
 
   // Debounced search function
   const performSearch = useCallback(async (query: string) => {
@@ -188,7 +129,7 @@ const Header = () => {
     if (searchQuery.trim()) {
       searchTimeoutRef.current = setTimeout(() => {
         performSearch(searchQuery);
-      }, 300);
+      }, 300); // 300ms debounce
     } else {
       setSearchResults([]);
       setShowSearchDropdown(false);
@@ -205,6 +146,7 @@ const Header = () => {
   // Close search dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      // Close navigation dropdown
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -212,6 +154,7 @@ const Header = () => {
         setActiveDropdown(null);
       }
 
+      // Close search dropdown
       if (
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
@@ -263,14 +206,7 @@ const Header = () => {
     setActiveDropdown(activeDropdown === title ? null : title);
   };
 
-  if (loading) {
-    return (
-      <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Loading header...
-      </div>
-    );
-  }
-
+  // Ab loading state ki zaroorat nahi hai
   if (!headerData) {
     return (
       <div className="bg-[#2B2B2B] text-white text-center py-4">

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import Slider from '../ui/Slider';
 
 // Define types for CMS integration

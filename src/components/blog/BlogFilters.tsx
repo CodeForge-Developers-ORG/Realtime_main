@@ -1,7 +1,7 @@
 // components/blog/BlogFilters.tsx
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { BlogFilters as BlogFiltersType } from "@/types/blog";
 
 interface BlogFiltersProps {

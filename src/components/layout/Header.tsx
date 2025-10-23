@@ -212,7 +212,6 @@ const Header = () => {
   };
 
   const handleProductSelect = (product: Product) => {
-    alert("ayyo ji");
     setMobileMenuOpen(false);
     setShowSearchDropdown(false);
     setSearchQuery("");
@@ -255,7 +254,7 @@ const Header = () => {
         <Link
           href="/"
           className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
-          <img
+          <Image
             src={branding?.logo_url || "/logo.png"}
             alt={branding?.site_title || "Logo"}
             width={180}
@@ -568,10 +567,12 @@ const Header = () => {
                           className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors">
                           <div className="flex items-center space-x-3">
                             {product.images?.[0] ? (
-                              <img
+                              <Image
                                 src={`${baseUri}${product.images[0]}`}
                                 alt={product.title}
                                 className="w-10 h-10 object-cover rounded"
+                                width={25}
+                                height={25}
                               />
                             ) : (
                               <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">
@@ -732,10 +733,12 @@ const Header = () => {
                         className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors">
                         <div className="flex items-center space-x-3">
                           {product.images?.[0] ? (
-                            <img
+                            <Image
                               src={`${baseUri}${product.images[0]}`}
                               alt={product.title}
                               className="w-10 h-10 object-cover rounded"
+                              width={25}
+                              height={25}
                             />
                           ) : (
                             <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">

@@ -6,6 +6,7 @@ export interface BlogAuthor {
 }
 
 export interface Blog {
+  image: unknown;
   id: string;
   title: string;
   slug: string;

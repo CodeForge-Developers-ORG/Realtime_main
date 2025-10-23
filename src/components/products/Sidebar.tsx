@@ -39,7 +39,7 @@ export default function Sidebar({
         {categories.map((c, i) => (
           <button
             key={c.title}
-            ref={(el) => (btnRefs.current[i] = el)}
+            ref={(el) => { btnRefs.current[i] = el; }}
             className={`block w-full text-[16px] text-left px-4 py-3 rounded-lg transition-shadow hover:shadow-md ${
               activeIndex === i
                 ? "bg-[#EFAF00] text-[#1E1410] font-[300]"

@@ -10,7 +10,7 @@ export default function ProductImage({
     <div
       className={`p-6 rounded-xl bg-white shadow-sm ring-1 ring-gray-100 ${className}`}>
       <div className="w-full max-w-[520px] flex-wrap h-auto rounded-lg overflow-hidden">
-        <img
+        <Image
           src={src}
           alt={alt}
           width={700}

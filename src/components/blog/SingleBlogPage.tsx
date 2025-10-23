@@ -4,7 +4,6 @@
 import React from "react";
 import Link from "next/link";
 import { Blog } from "@/types/blog";
-import AdvancedBreadcrumb from "../common/Bredacrumb";
 
 interface SingleBlogPageProps {
   blog: Blog;

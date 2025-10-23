@@ -1,6 +1,6 @@
 import axiosClient from "./axiosClient";
 
-export const submitForm = async (formData: any) => {
+export const submitForm = async (formData: unknown) => {
   const response = await axiosClient.post(`/contact/submit`, formData);
   return response.data;
 };

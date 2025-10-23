@@ -1,11 +1,9 @@
 "use client"
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import locationService from '../../services/locationService';
 import { submitForm, submitNewsletter } from '@/services/contactServices';
 import Swal from 'sweetalert2';
-import { m } from 'framer-motion';
 
 interface Country {
   name: string;
@@ -18,11 +16,6 @@ interface State {
   countryCode: string;
 }
 
-interface City {
-  name: string;
-  stateCode: string;
-  countryCode: string;
-}
 
 const ContactSection = () => {
   const [countries, setCountries] = useState<Country[]>([]);
@@ -115,13 +108,24 @@ const ContactSection = () => {
         text: response.message || "Your form has been submitted successfully.",
         icon: "success"
       });
-      console.log("Response:", response);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      type ApiError = { response?: { data?: { message?: string } } };
+
+      const apiMessage =
+        typeof error === "object" && error !== null && "response" in error
+          ? (error as ApiError).response?.data?.message
+          : null;
+
+      const errorMessage =
+        apiMessage ||
+        (error instanceof Error ? error.message : null) ||
+        "Something went wrong! Please try again later.";
+
       Swal.fire({
         showCancelButton: true,
         icon: "error",
         title: "Oops...",
-        text: error.response?.data?.message || "Something went wrong! Please try again later.",
+        text: errorMessage,
       });
       console.error("Form submission error:", error);
     } finally {
@@ -143,12 +147,24 @@ const ContactSection = () => {
           icon: "success"
         });
 
-      } catch (error : any) {
+      } catch (error: unknown) {
+        type ApiError = { response?: { data?: { message?: string } } };
+
+        const apiMessage =
+          typeof error === "object" && error !== null && "response" in error
+            ? (error as ApiError).response?.data?.message
+            : null;
+
+        const errorMessage =
+          apiMessage ||
+          (error instanceof Error ? error.message : null) ||
+          "Something went wrong! Please try again later.";
+
         Swal.fire({
           showCancelButton: true,
           icon: "error",
           title: "Oops...",
-          text: error.response?.data?.message || "Something went wrong! Please try again later.",
+          text: errorMessage,
         });
         console.error("Newsletter subscription error:", error);
       }

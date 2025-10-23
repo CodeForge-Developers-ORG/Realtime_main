@@ -10,8 +10,18 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Define service card type
+interface ServiceCard {
+  id: number;
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+  buttonText: string;
+}
+
 // Define service card data outside the component
-const serviceCardsData = [
+const serviceCardsData: ServiceCard[] = [
   {
     id: 1,
     src: '/images/serviceImg1.png',
@@ -47,10 +57,12 @@ const serviceCardsData = [
 ];
 
 const ServicesSections = () => {
-  const sectionRef = useRef(null);
-  const headerRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   // Create an array of refs with the correct length
-  const imageRefs = useRef(serviceCardsData.map(() => React.createRef()));
+  const imageRefs = useRef<Array<React.MutableRefObject<HTMLDivElement | null>>>(
+    serviceCardsData.map(() => React.createRef())
+  );
   
   useEffect(() => {
     const section = sectionRef.current;
@@ -120,7 +132,6 @@ const ServicesSections = () => {
           trigger: currentImage,
           start: "top bottom", // Trigger when element's top reaches bottom of viewport
           end: "top center",
-          ease: true,
           scrub: 0.3, // Decrease scroll duration (smaller value = faster response)
           onEnter: () => {
             console.log(`Animation triggered for image ${i}`);

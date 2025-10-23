@@ -2,14 +2,14 @@
 import { baseUri } from "@/services/constant";
 import { getProductBySlug } from "@/services/productService";
 import Layout from "@/components/layout/Layout";
-import CTAButton from "@/components/common/CTAButton";
 import FeaturePill from "@/components/common/FeaturePill";
 import ProductImage from "@/components/common/ProductImage";
 import SpecsTable from "@/components/products/productdetail/SpecsTable";
 import Testimonials from "@/components/sections/Testimonials";
-import { ArrowDownToLine, Play } from "lucide-react";
 import DownloadCatalogueButton from "./DownloadCatalogueButton";
 import Link from "next/link";
+import { Play } from "lucide-react";
+import { notFound } from "next/navigation";
 
 type ProductCategory = {
   title: string;
@@ -21,13 +21,14 @@ type ProductCategory = {
   catalogue_document?: string;
 };
 
-// ✅ Next.js 13+ SEO metadata
+// ✅ Generate Metadata (Next.js 15+ compatible)
 export async function generateMetadata({
   params,
 }: {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 }) {
-  const res = await getProductBySlug(params.title);
+  const { title } = await params; // ✅ FIXED
+  const res = await getProductBySlug(title);
   const product: ProductCategory | null = res?.data?.[0] || null;
 
   if (!product) {
@@ -43,23 +44,18 @@ export async function generateMetadata({
   };
 }
 
-// ✅ Page component (Server)
+// ✅ Page Component (Next.js 15+ compatible)
 export default async function ProductPage({
   params,
 }: {
-  params: { title: string };
+  params: Promise<{ title: string }>;
 }) {
-  const res = await getProductBySlug(params.title);
+  const { title } = await params; // ✅ FIXED
+  const res = await getProductBySlug(title);
   const product: ProductCategory | null = res?.data?.[0] || null;
 
   if (!product) {
-    return (
-      <Layout>
-        <div className="text-center py-20 text-gray-600">
-          Product not found.
-        </div>
-      </Layout>
-    );
+    notFound(); // ✅ Better UX than manual div
   }
 
   return (
@@ -70,7 +66,7 @@ export default async function ProductPage({
             {/* Left - Image */}
             <div>
               <ProductImage
-                src={`${baseUri}${product.images[0]}`}
+                src={`${baseUri}${product.images?.[0] || ""}`}
                 alt={product.title}
               />
             </div>
@@ -82,7 +78,10 @@ export default async function ProductPage({
               </h1>
 
               <div className="flex items-center gap-3 mb-6">
-                <Link href={"/support"} className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer" >
+                <Link
+                  href="/support"
+                  className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer"
+                >
                   <span className="border rounded-full w-[20px] h-[20px] flex items-center justify-center">
                     <Play className="w-[10px]" />
                   </span>{" "}
@@ -113,6 +112,7 @@ export default async function ProductPage({
             </div>
           </div>
         </div>
+
         <Testimonials />
       </div>
     </Layout>

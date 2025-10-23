@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -11,11 +10,17 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 }
 
+type Solution = {
+  title: string;
+  description?: string;
+  // add other fields returned by getSolutions() as needed
+};
+
 export default function RealtimeScrollCards() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const [activeCard, setActiveCard] = useState<number>(0);
-  const [solutions, setSolutions] = useState<any[]>([]);
+  const [solutions, setSolutions] = useState<Solution[]>([]);
 
   // ✅ Fetch API Data
   useEffect(() => {
@@ -86,7 +91,7 @@ export default function RealtimeScrollCards() {
       duration: 0.8,
       scrollTo: { y: targetCard, offsetY: 120 },
       ease: "power2.inOut",
-      onComplete: () => gsap.set(targetCard, { zIndex: 999 }),
+      onComplete: () => { gsap.set(targetCard, { zIndex: 999 }); },
     });
 
     gsap.fromTo(

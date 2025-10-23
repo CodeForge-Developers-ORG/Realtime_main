@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowDownToLine, Download, Edit, X } from "lucide-react";
+import { ArrowDownToLine, Edit, X } from "lucide-react";
 import axios from "axios";
-import { base, div } from "framer-motion/client";
 import { baseUri } from "@/services/constant";
 
 type Software = {

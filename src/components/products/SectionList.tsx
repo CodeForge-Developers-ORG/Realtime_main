@@ -76,8 +76,8 @@ export default function SectionList({
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {cat.items.map((it) => (
               // eslint-disable-next-line react/jsx-key
-              <Link href={`/products/${it?.slug}`}>
-                <Card key={it.id} it={it} />
+              <Link key={it.id} href={`/products/${it?.slug}`}>
+                <Card it={it} />
               </Link>
             ))}
           </div>

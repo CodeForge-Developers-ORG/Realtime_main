@@ -2,6 +2,7 @@
 
 import axiosClient from "@/services/axiosClient";
 import { baseUri } from "@/services/constant";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type PopupData = {
@@ -96,10 +97,12 @@ const PopupModal = () => {
           {/* Image */}
           {popup.image && (
             <div className="mb-4 flex justify-center">
-              <img
+              <Image
                 src={`${baseUri}${popup.image}`}
                 alt="Popup"
                 className="rounded-md max-h-48 object-contain"
+                width={300}
+                height={200}
               />
             </div>
           )}

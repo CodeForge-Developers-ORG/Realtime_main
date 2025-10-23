@@ -6,15 +6,20 @@ type Spec = {
 };
 
 interface SpecsTableProps {
-  specs?: Spec[];
+  specs?: Spec[] | Record<string, string | number>;
 }
 
-export default function SpecsTable({ specs = [] }: SpecsTableProps) {
-  console.log("SpecsTable specs:", specs);
+export default function SpecsTable({ specs }: SpecsTableProps) {
+  const specArray: Spec[] = Array.isArray(specs)
+    ? specs
+    : specs
+    ? Object.entries(specs).map(([title, value]) => ({ title, value }))
+    : [];
+
   return (
     <div className="rounded-xl overflow-hidden border border-[#DDDDDD] w-full mb-4 text-white bg-transparent">
       <div className="divide-y divide-[#DDDDDD]">
-        {specs.map((s, i) => (
+        {specArray.map((s, i) => (
           <div
             key={i}
             className="grid grid-cols-[1fr_auto_1fr] items-center text-sm">

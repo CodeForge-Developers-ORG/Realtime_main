@@ -1,7 +1,5 @@
 "use client";
-
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
-import Title from "@/components/common/Title";
 import Layout from "@/components/layout/Layout";
 import { useEffect, useState } from "react";
 import axiosClient from "@/services/axiosClient";
@@ -24,7 +22,7 @@ type Feature = {
 };
 
 type AboutData = {
-  vision_image(vision_image: unknown): string | Blob | undefined;
+  vision_image: string;
   who_we_are_title: string;
   who_we_are_subtitle: string;
   who_we_are_content: string;
@@ -175,14 +173,14 @@ const Page = () => {
                         }}
                       />
                     </div>
-                    
+
                     {/* Who We Are Image */}
                     <div className="relative">
                       <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl transform rotate-2"></div>
                       <div className="relative bg-white p-2 rounded-2xl shadow-xl">
                         {data.who_we_are_image ? (
-                          <img
-                            src={getImageUrl(data.who_we_are_image) || ''}
+                          <Image
+                            src={getImageUrl(data.who_we_are_image) || ""}
                             alt="Who We Are"
                             width={600}
                             height={400}
@@ -190,13 +188,15 @@ const Page = () => {
                             onError={(e) => {
                               // Fallback if image fails to load
                               const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
+                              target.style.display = "none";
                               // Show fallback content
                               const parent = target.parentElement;
                               if (parent) {
-                                const fallback = document.createElement('div');
-                                fallback.className = 'w-full h-64 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center';
-                                fallback.innerHTML = '<FaUsers className="text-6xl text-orange-400 opacity-50" />';
+                                const fallback = document.createElement("div");
+                                fallback.className =
+                                  "w-full h-64 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center";
+                                fallback.innerHTML =
+                                  '<FaUsers className="text-6xl text-orange-400 opacity-50" />';
                                 parent.appendChild(fallback);
                               }
                             }}
@@ -214,8 +214,7 @@ const Page = () => {
                     {data.who_we_are_features.map((feature, i) => (
                       <div
                         key={i}
-                        className="group bg-gradient-to-br from-white to-orange-50 p-8 rounded-2xl border border-orange-100 hover:border-orange-300 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
-                      >
+                        className="group bg-gradient-to-br from-white to-orange-50 p-8 rounded-2xl border border-orange-100 hover:border-orange-300 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
                         <div className="flex justify-center mb-6">
                           <div className="p-4 text-black bg-orange-100 rounded-2xl group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
                             {renderIcon(feature.icon)}
@@ -258,7 +257,9 @@ const Page = () => {
                       </div>
                       <div
                         className="text-orange-50 space-y-4 leading-relaxed mb-6"
-                        dangerouslySetInnerHTML={{ __html: data.mission_content }}
+                        dangerouslySetInnerHTML={{
+                          __html: data.mission_content,
+                        }}
                       />
                     </div>
 
@@ -267,20 +268,22 @@ const Page = () => {
                       <div className="relative z-10">
                         <div className="absolute -inset-4 bg-white/10 rounded-2xl transform rotate-1"></div>
                         <div className="relative bg-white/10 p-2 rounded-xl backdrop-blur-sm">
-                          <img
-                            src={getImageUrl(data.mission_image) || ''}
+                          <Image
+                            src={getImageUrl(data.mission_image) || ""}
                             alt="Our Mission"
                             width={400}
                             height={200}
                             className="w-full h-48 object-cover rounded-lg"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
+                              target.style.display = "none";
                               const parent = target.parentElement;
                               if (parent) {
-                                const fallback = document.createElement('div');
-                                fallback.className = 'w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center';
-                                fallback.innerHTML = '<FaRocket className="text-4xl text-white/40" />';
+                                const fallback = document.createElement("div");
+                                fallback.className =
+                                  "w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center";
+                                fallback.innerHTML =
+                                  '<FaRocket className="text-4xl text-white/40" />';
                                 parent.appendChild(fallback);
                               }
                             }}
@@ -303,7 +306,9 @@ const Page = () => {
                       </div>
                       <div
                         className="text-gray-200 space-y-4 leading-relaxed mb-6"
-                        dangerouslySetInnerHTML={{ __html: data.vision_content }}
+                        dangerouslySetInnerHTML={{
+                          __html: data.vision_content,
+                        }}
                       />
                     </div>
 
@@ -313,26 +318,28 @@ const Page = () => {
                       <div className="relative bg-white/10 p-4 rounded-xl backdrop-blur-sm flex items-center justify-center">
                         <div className="w-full h-40 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-lg flex items-center justify-center">
                           {/* <FaEye className="text-4xl text-white/40" /> */}
-                             {/* <div className="relative bg-white/10 p-2 rounded-xl backdrop-blur-sm"> */}
-                          <img
-                            src={getImageUrl(data.vision_image) || ''}
+                          {/* <div className="relative bg-white/10 p-2 rounded-xl backdrop-blur-sm"> */}
+                          <Image
+                            src={getImageUrl(data.vision_image) || ""}
                             alt="Our Mission"
                             width={400}
                             height={200}
                             className="w-full h-48 object-cover rounded-lg"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
+                              target.style.display = "none";
                               const parent = target.parentElement;
                               if (parent) {
-                                const fallback = document.createElement('div');
-                                fallback.className = 'w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center';
-                                fallback.innerHTML = '<FaRocket className="text-4xl text-white/40" />';
+                                const fallback = document.createElement("div");
+                                fallback.className =
+                                  "w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center";
+                                fallback.innerHTML =
+                                  '<FaRocket className="text-4xl text-white/40" />';
                                 parent.appendChild(fallback);
                               }
                             }}
                           />
-                        {/* </div> */}
+                          {/* </div> */}
                         </div>
                       </div>
                     </div>

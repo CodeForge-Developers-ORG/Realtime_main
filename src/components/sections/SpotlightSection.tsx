@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 
 const SpotlightSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const gsapContainerRef = useRef<HTMLDivElement>(null);
+  // const gsapContainerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   const images = [

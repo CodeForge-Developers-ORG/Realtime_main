@@ -12,7 +12,7 @@ interface Props {
   };
 }
 
-// Generate metadata dynamically
+// ✅ Generate metadata dynamically
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const response = await blogService.getBlogBySlug(params.slug);
@@ -45,7 +45,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: blog.meta_description || blog.excerpt,
       },
     };
-  } catch (error) {
+  } catch {
+    // ⚡ Ignore error silently but return fallback metadata
     return {
       title: "Blog Post",
       description: "Read this amazing blog post",
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// Generate static paths for SSG
+// ✅ Generate static paths for SSG
 export async function generateStaticParams() {
   try {
     const response = await blogService.getPublishedBlogs({ per_page: 50 });
@@ -65,19 +66,18 @@ export async function generateStaticParams() {
     for (const blog of response.data) {
       if (blog.slug && !uniqueSlugs.has(blog.slug)) {
         uniqueSlugs.add(blog.slug);
-        paths.push({
-          slug: blog.slug,
-        });
+        paths.push({ slug: blog.slug });
       }
     }
 
     return paths;
-  } catch (error) {
+  } catch {
+    // ⚡ Error ignore, empty list return
     return [];
   }
 }
 
-// Page component
+// ✅ Page component
 export default async function BlogDetailPage({ params }: Props) {
   try {
     const response = await blogService.getBlogBySlug(params.slug);
@@ -92,14 +92,14 @@ export default async function BlogDetailPage({ params }: Props) {
       { label: "Blog", href: "/blog" },
       { label: blog.title }, // Current page - no href
     ];
+
     return (
       <Layout>
         <AdvancedBreadcrumb items={breadcrumbItems} />
-
         <SingleBlogPage blog={blog} />
       </Layout>
     );
-  } catch (error) {
+  } catch {
     notFound();
   }
 }

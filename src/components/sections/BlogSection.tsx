@@ -25,7 +25,7 @@ const BlogSection = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await blogService.getPublishedBlogs({ limit: 4 });
+        const response = await blogService.getPublishedBlogs();
         if (response?.success && Array.isArray(response.data)) {
           setBlogs(response.data);
         } else {

@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "./Footer";
-import PopupModal from "../common/PopupModal";
 import Header from "./Header";
 
 interface LayoutProps {

@@ -6,10 +6,10 @@ import Link from 'next/link';
 
 const FloatingButtons = () => {
   return (
-    <div className="fixed right-10 bottom-25 z-50 flex flex-col gap-4">
+    <div className="hidden md:flex fixed right-10 bottom-25 z-50 flex-col gap-4">
       {/* WhatsApp Button */}
       <Link 
-        href="https://wa.me/yourphonenumber" 
+        href="https://wa.me/918860886086"
         target="_blank" 
         rel="noopener noreferrer"
         className="flex items-center justify-center w-18 h-18 bg-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
@@ -27,7 +27,7 @@ const FloatingButtons = () => {
 
       {/* Ask RIA Button */}
       <Link 
-        href="/ask-ria" 
+        href="phone:8860886086" 
         className="flex items-center justify-center px-7 py-3 bg-white rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
         aria-label="Ask RIA"
       >

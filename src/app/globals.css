@@ -35,3 +35,6 @@ body {
 .scrolling-section .pin-spacer{
       background:#FFE8DF;
 }
+.swal2-confirm{
+      background-color:#FF5C00 !important;
+}

@@ -78,7 +78,7 @@ const BlogSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-6 md:mb-10">
-          <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-3 md:mb-8">
+          <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-8">
             Blogs
           </h2>
           <p className="text-shadow-amber-100 text-sm md:text-3xl font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">

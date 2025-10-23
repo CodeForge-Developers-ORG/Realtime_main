@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import locationService from '../../services/locationService';
+import { submitForm, submitNewsletter } from '@/services/contactServices';
+import Swal from 'sweetalert2';
+import { m } from 'framer-motion';
 
 interface Country {
   name: string;
@@ -24,20 +27,22 @@ interface City {
 const ContactSection = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [states, setStates] = useState<State[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedState, setSelectedState] = useState<State | null>(null);
-  const [selectedCity, setSelectedCity] = useState<string>('');
   const [name, setName] = useState("John Doi");
   const [email, setEmail] = useState("John@outlook.com");
   const [phone, setPhone] = useState("(215) 424-7763");
+  const [city, setCity] = useState('Enter City');
   const [zipCode, setZipCode] = useState("Enter Zip Code");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [message, setMessage] = useState("Enter your message here");
   const [isLoading, setIsLoading] = useState({
     countries: false,
     states: false,
     cities: false
   });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch countries on component mount
   useEffect(() => {
@@ -59,7 +64,6 @@ const ContactSection = () => {
         const statesData = await locationService.fetchStatesByCountry(selectedCountry.code);
         setStates(statesData);
         setSelectedState(null);
-        setCities([]);
         setIsLoading(prev => ({ ...prev, states: false }));
       };
       
@@ -81,10 +85,82 @@ const ContactSection = () => {
     setSelectedState(state);
   };
 
-  // Handle city change
-  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCity(e.target.value);
+
+    // Handle submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const payload = {
+      name,
+      email,
+      phone,
+      message,
+      subject: "Website Contact",
+      country: selectedCountry?.name || "",
+      state: selectedState?.name || "",
+      city,
+      zip: zipCode,
+      form_type: "contact",
+      page_url: typeof window !== "undefined" ? window.location.href : "",
+      custom_fields: {
+        subscribed: isSubscribed ? "Yes" : "No",
+      },
+    };
+
+    try {
+      const response = await submitForm(payload);
+      Swal.fire({
+        showCancelButton: true,
+        title: "Success!",
+        text: response.message || "Your form has been submitted successfully.",
+        icon: "success"
+      });
+      console.log("Response:", response);
+    } catch (error: any) {
+      Swal.fire({
+        showCancelButton: true,
+        icon: "error",
+        title: "Oops...",
+        text: error.response?.data?.message || "Something went wrong! Please try again later.",
+      });
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const handleSubscribeChange = async(e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSubscribed(e.target.checked);
+
+    if(e.target.checked){
+    try {
+          const response  = await submitNewsletter(name , email);
+          console.log("Newsletter Response:", response);
+        Swal.fire({
+        showCancelButton: true,
+        title: "Subscribed!",
+        text: response.message || "Your form has been submitted successfully.",
+        icon: "success"
+      });
+
+    } catch (error : any) {
+
+        Swal.fire({
+        showCancelButton: true,
+        icon: "error",
+        title: "Oops...",
+        text: error.response?.data?.message || "Something went wrong! Please try again later.",
+      });
+
+      console.error("Newsletter subscription error:", error);
+
+      
+    }
+  }    
+
+  }
+
 
   return (
     <section className="py-5 md:py-20 bg-white border border-gray-200">
@@ -98,7 +174,7 @@ const ContactSection = () => {
           {/* Left Column - Contact Form */}
           <div>
             <h3 className="text-md md:text-3xl font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
-            <form className="space-y-2 md:space-y-5">
+            <form className="space-y-2 md:space-y-5" onSubmit={handleSubmit}>
               <div className='px-2 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
                 <label htmlFor="name" className="text-black/40 text-xs md:text-xl">Name*</label>
                 <input
@@ -128,7 +204,7 @@ const ContactSection = () => {
                     type="checkbox"
                     className="sr-only peer"
                     checked={isSubscribed}
-                    onChange={(e) => setIsSubscribed(e.target.checked)}
+                    onChange={handleSubscribeChange}
                   />
                   <div className="w-5 h-5 md:w-6 md:h-6 border border-gray-300 rounded peer-checked:bg-orange-500 peer-checked:border-orange-500 transition-colors"></div>
                   <svg 
@@ -222,8 +298,8 @@ const ContactSection = () => {
                     type="text"
                     id="city"
                     className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                    onChange={handleCityChange}
-                    value={'Enter City'}
+                    onChange={(e) => setCity(e.target.value)}
+                    value={city}
                   />
                 </div>
                 
@@ -238,12 +314,22 @@ const ContactSection = () => {
                   />
                 </div>
               </div>
+               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
+                  <label htmlFor="message" className="text-black/40 text-xs md:text-xl">Messages*</label>
+                  <input
+                    type="text"
+                    id="message"
+                    className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </div>
               
               <button
                 type="submit"
-                className="bg-orange-500 text-white px-4 md:px-6 py-2 md:py-3 rounded-md font-medium hover:bg-orange-600 transition flex items-center text-sm md:text-xs"
+                className="bg-orange-500 text-white px-4 md:px-6 py-2 md:py-3 rounded-md font-medium hover:bg-orange-600 transition flex items-center text-sm md:text-lg"
               >
-                SUBMIT
+                {isSubmitting ? "Submitting..." : "Submit"}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>

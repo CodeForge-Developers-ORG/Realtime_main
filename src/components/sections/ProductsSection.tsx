@@ -22,39 +22,6 @@ export type Category = {
   items: { id: string; name: string; image: string; slug: string }[];
 };
 const ProductsSection = () => {
-  // Original products array
-  const originalProducts = [
-    {
-      id: 1,
-      name: 'Realtime C101',
-      category: 'Bio Metric Attendance',
-      image: '/images/product1.png',
-    },
-    {
-      id: 2,
-      name: 'Realtime C101',
-      category: 'Bio Metric Attendance',
-      image: '/images/product1.png',
-    },
-    {
-      id: 3,
-      name: 'Realtime C101',
-      category: 'Bio Metric Attendance',
-      image: '/images/product1.png',
-    },
-    {
-      id: 4,
-      name: 'Realtime C101',
-      category: 'Bio Metric Attendance',
-      image: '/images/product1.png',
-    },
-    {
-      id: 5,
-      name: 'Realtime C101',
-      category: 'Bio Metric Attendance',
-      image: '/images/product1.png',
-    },
-  ];
 
   const [products, setProducts] = useState<Product[]>([])
 
@@ -107,21 +74,21 @@ return (
               }}
             >
               <div className="flex flex-col">
-                <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl sm:p-5 flex align-middle justify-center">
+                <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl pt-2 sm:pt-12  flex align-middle justify-center">
                   <Image
                     src={`${baseUri}${product.images[0]}` }
                     alt={product.title}
                     width={0}
                     height={0}
                     unoptimized
-                    className='h-[200] w-[180] '
+                    className='h-[200] w-[200] object-contain'
                   />
                 </div>
                 <div style={{
                   color: index % 2 === 0 ? '#000' : '#fff'
                 }}>
                   <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">{product.category?.name}</p>
-                  <h3 className="text-md sm:text-3xl md:text-4xl font-thin tracking-[0.5px] md:tracking-[3px]">{product.title}</h3>
+                  <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px]">{product.title}</h3>
                 </div>
               </div>
             </div>

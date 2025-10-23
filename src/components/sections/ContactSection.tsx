@@ -29,20 +29,20 @@ const ContactSection = () => {
   const [states, setStates] = useState<State[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedState, setSelectedState] = useState<State | null>(null);
-  const [name, setName] = useState("John Doi");
-  const [email, setEmail] = useState("John@outlook.com");
-  const [phone, setPhone] = useState("(215) 424-7763");
-  const [city, setCity] = useState('Enter City');
-  const [zipCode, setZipCode] = useState("Enter Zip Code");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [message, setMessage] = useState("Enter your message here");
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState({
     countries: false,
     states: false,
     cities: false
   });
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch countries on component mount
   useEffect(() => {
@@ -85,8 +85,7 @@ const ContactSection = () => {
     setSelectedState(state);
   };
 
-
-    // Handle submit
+  // Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -134,33 +133,27 @@ const ContactSection = () => {
     setIsSubscribed(e.target.checked);
 
     if(e.target.checked){
-    try {
-          const response  = await submitNewsletter(name , email);
-          console.log("Newsletter Response:", response);
+      try {
+        const response  = await submitNewsletter(name , email);
+        console.log("Newsletter Response:", response);
         Swal.fire({
-        showCancelButton: true,
-        title: "Subscribed!",
-        text: response.message || "Your form has been submitted successfully.",
-        icon: "success"
-      });
+          showCancelButton: true,
+          title: "Subscribed!",
+          text: response.message || "Your form has been submitted successfully.",
+          icon: "success"
+        });
 
-    } catch (error : any) {
-
+      } catch (error : any) {
         Swal.fire({
-        showCancelButton: true,
-        icon: "error",
-        title: "Oops...",
-        text: error.response?.data?.message || "Something went wrong! Please try again later.",
-      });
-
-      console.error("Newsletter subscription error:", error);
-
-      
-    }
-  }    
-
+          showCancelButton: true,
+          icon: "error",
+          title: "Oops...",
+          text: error.response?.data?.message || "Something went wrong! Please try again later.",
+        });
+        console.error("Newsletter subscription error:", error);
+      }
+    }    
   }
-
 
   return (
     <section className="py-5 md:py-20 bg-white border border-gray-200">
@@ -176,26 +169,26 @@ const ContactSection = () => {
             <h3 className="text-md md:text-3xl font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
             <form className="space-y-2 md:space-y-5" onSubmit={handleSubmit}>
               <div className='px-2 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="name" className="text-black/40 text-xs md:text-xl">Name*</label>
+                <label htmlFor="name" className="text-black/40 text-xs md:text-lg">Name*</label>
                 <input
                   type="text"
                   id="name"
-                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                  value={name}
+                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                  placeholder="John Doi"
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
+              
               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="email" className="text-black/40 text-xs md:text-xl">Email*</label>
+                <label htmlFor="email" className="text-black/40 text-xs md:text-lg">Email*</label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                  value={email}
+                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                  placeholder="John@outlook.com"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-            
               
               <div className="flex items-center mb-4 md:mb-7">
                 <div className="relative flex items-center">
@@ -226,19 +219,19 @@ const ContactSection = () => {
               </div>
               
               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="phone" className="text-black/40 text-xs md:text-xl">Phone Number*</label>
+                <label htmlFor="phone" className="text-black/40 text-xs md:text-lg">Phone Number*</label>
                 <input
                   type="tel"
                   id="phone"
-                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                  value={phone}
+                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                  placeholder="(215) 424-7763"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="country" className="text-black/40 text-xs md:text-xl">Country*</label>
+                  <label htmlFor="country" className="text-black/40 text-xs md:text-lg">Country*</label>
                   <select
                     id="country"
                     className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg appearance-none bg-white cursor-pointer"
@@ -263,7 +256,7 @@ const ContactSection = () => {
                 </div>
                 
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="state" className="text-black/40 text-xs md:text-xl">State*</label>
+                  <label htmlFor="state" className="text-black/40 text-xs md:text-lg">State*</label>
                   <select
                     id="state"
                     className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg appearance-none bg-white cursor-pointer"
@@ -293,37 +286,38 @@ const ContactSection = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="city" className="text-black/40 text-xs md:text-xl">City*</label>
+                  <label htmlFor="city" className="text-black/40 text-xs md:text-lg">City*</label>
                     <input
-                    type="text"
-                    id="city"
-                    className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                    onChange={(e) => setCity(e.target.value)}
-                    value={city}
-                  />
+                      type="text"
+                      id="city"
+                      className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                      placeholder="Enter City"
+                      onChange={(e) => setCity(e.target.value)}
+                    />
                 </div>
                 
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="zip" className="text-black/40 text-xs md:text-xl">Zip Code*</label>
+                  <label htmlFor="zip" className="text-black/40 text-xs md:text-lg">Zip Code*</label>
                   <input
                     type="text"
                     id="zip"
-                    className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                    value={zipCode}
+                    className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                    placeholder="Enter Zip Code"
                     onChange={(e) => setZipCode(e.target.value)}
                   />
                 </div>
               </div>
-               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="message" className="text-black/40 text-xs md:text-xl">Messages*</label>
-                  <input
-                    type="text"
-                    id="message"
-                    className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
-                </div>
+
+              <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
+                <label htmlFor="message" className="text-black/40 text-xs md:text-lg">Messages*</label>
+                <input
+                  type="text"
+                  id="message"
+                  className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg placeholder-black"
+                  placeholder="Enter your message here"
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
               
               <button
                 type="submit"
@@ -374,7 +368,7 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="relative h-48 sm:h-64 rounded-lg overflow-hidden">
+            <div className="relative h-40 sm:h-81 rounded-lg overflow-hidden">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.2676026374565!2d77.28099627550043!3d28.621740775670638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce350d82a5555%3A0xded517f01ea7b98f!2sRealtime%20Biometrics!5e0!3m2!1sen!2sin!4v1760680350707!5m2!1sen!2sin" width="100%" height="100%" style={{border:0}} loading="lazy" ></iframe>
             </div>
           </div>

@@ -9,6 +9,7 @@ import SpecsTable from "@/components/products/productdetail/SpecsTable";
 import Testimonials from "@/components/sections/Testimonials";
 import { ArrowDownToLine, Play } from "lucide-react";
 import DownloadCatalogueButton from "./DownloadCatalogueButton";
+import Link from "next/link";
 
 type ProductCategory = {
   title: string;
@@ -81,12 +82,12 @@ export default async function ProductPage({
               </h1>
 
               <div className="flex items-center gap-3 mb-6">
-                <CTAButton variant="primary">
+                <Link href={"/support"} className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer" >
                   <span className="border rounded-full w-[20px] h-[20px] flex items-center justify-center">
                     <Play className="w-[10px]" />
                   </span>{" "}
                   VIEW DEMO
-                </CTAButton>
+                </Link>
 
                 {/* Client component for download */}
                 <DownloadCatalogueButton

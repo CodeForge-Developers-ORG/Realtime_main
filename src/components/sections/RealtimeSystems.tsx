@@ -99,13 +99,13 @@ export default function RealtimeScrollCards() {
   return (
     <section ref={containerRef} className="bg-white py-10 relative">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
-      <div className="sticky top-3 bg-white z-50 rounded-full border-black/50 border-1 py-2 px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto scrollbar-hide" style={{ maxWidth: "75%" }}>
+      <div className="sticky lg:max-w-[75%] top-3 bg-white z-50 rounded-full border-black/50 border-1 py-2 px-2 md:px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
         {solutions.map((card, index) => (
           <button
             key={index}
             onClick={() => handleScrollTo(index)}
-            className={`px-5 py-3 pb-4 rounded-full text-2xl font-thin transition-all ${activeCard === index
-                ? "bg-yellow-300 text-black"
+            className={`px-5 py-3  rounded-full text-[14px] md:text-[18px] text-nowrap font-thin transition-all ${activeCard === index
+                ? "bg-[#EFAF00] text-black"
                 : "bg-[#F9F9F9] text-black"
               }`}
           >

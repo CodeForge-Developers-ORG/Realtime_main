@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
@@ -78,7 +78,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#2B2B2B] text-white py-10 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {/* Contact */}
           <div>
             <h3 className="text-lg uppercase mb-4 font-medium">CONTACT</h3>
@@ -105,9 +105,9 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div>
-            <h3 className="text-lg uppercase mb-4 font-medium">COMPANY</h3>
-            <ul className="space-y-2">
+          <div className="ml-[50px] md:ml-0">
+            <h3 className="text-lg  uppercase mb-4 font-medium">COMPANY</h3>
+            <ul className="space-y-2 ">
               {quick_links.company.map((link) => (
                 <li key={link.url}>
                   <Link
@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div>
+          <div className="ml-[50px] md:ml-0" >
             <h3 className="text-lg uppercase mb-4 font-medium">LEGAL</h3>
             <ul className="space-y-2">
               {quick_links.legal.map((link) => (

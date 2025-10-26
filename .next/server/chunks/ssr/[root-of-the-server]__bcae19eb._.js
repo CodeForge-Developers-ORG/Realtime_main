@@ -548,7 +548,7 @@ const SolutionsSection = ()=>{
                                 }
                             ],
                             children: solutions.map((solution)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "rounded-md md:rounded-2xl transition-transform mx-1 md:mx-2 overflow-hidden border-grey-500  sm:h-auto  border-1 bg-[#414141]",
+                                    className: "rounded-md md:rounded-2xl transition-transform mx-1 md:mx-2 overflow-hidden border-grey-500  h-55 sm:h-auto  border-1 bg-[#414141]",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex flex-col",
                                         children: [
@@ -576,7 +576,7 @@ const SolutionsSection = ()=>{
                                                 className: "text-white p-2 md:p-4",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                        className: "text-lg md:text-2xl font-thin md:mb-2",
+                                                        className: "text-md md:text-2xl font-thin mb-1 md:mb-2 leading-4",
                                                         children: solution.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
@@ -584,7 +584,7 @@ const SolutionsSection = ()=>{
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "text-xs md:text-sm text-gray-300",
+                                                        className: "text-xs md:text-sm text-gray-300 line-clamp-5",
                                                         children: solution.description
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",

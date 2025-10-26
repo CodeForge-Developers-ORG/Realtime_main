@@ -102,7 +102,7 @@ const BlogSection = () => {
             {blogs.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden"
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden h-60 mx-1"
               >
                 <div className="relative h-30 md:h-48">
                   <Image
@@ -118,13 +118,13 @@ const BlogSection = () => {
                   />
                 </div>
                 <div className="p-2 md:p-4">
-                  <h3 className="text-sm md:text-lg font-light text-black md:mb-2 line-clamp-2">
+                  <h3 className="text-xs md:text-lg font-light text-black md:mb-2 line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-gray-400 text-xs md:text-sm font-light md:mb-2 line-clamp-2">
                     {post.excerpt || ""}
                   </p>
-                  <p className="text-gray-600 text-[8px] mb-0">
+                  <p className="text-gray-600 text-[10px] mb-0">
                     Posted on:{" "}
                     {new Date(post.published_at || post.created_at).toLocaleDateString(
                       "en-US",
@@ -138,7 +138,7 @@ const BlogSection = () => {
         </div>
 
         {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-0">
           {blogs.map((post) => (
             <div
               key={post.id}
@@ -183,7 +183,7 @@ const BlogSection = () => {
         <div className="text-right mt-0 md:mt-6">
           <Link
             href="/blog"
-            className="bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center"
+            className="bg-orange-500 text-white mt-0 text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center"
           >
             View All
             <svg

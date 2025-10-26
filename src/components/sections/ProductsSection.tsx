@@ -43,8 +43,8 @@ return (
   <section className="py-5 md:py-20 bg-[#FFE8DF]">
     <div className="container mx-auto px-4">
       <div className="text-center mb-3 md:mb-8">
-        <h2 className="text-xl lg:text-4xl text-[#1E1410] font-thin mb-2">Featured Products</h2>
-        <p className="text-sm md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
+        <h2 className="text-xl lg:text-4xl text-[#1E1410] font-thin md:mb-2">Featured Products</h2>
+        <p className="text-xs md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
       </div>
 
       <div>
@@ -74,14 +74,14 @@ return (
               }}
             >
               <div className="flex flex-col">
-                <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl pt-2 sm:pt-12  flex align-middle justify-center">
+                <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl p-2 sm:p-12  flex align-middle justify-center">
                   <Image
                     src={`${baseUri}${product.images[0]}` }
                     alt={product.title}
                     width={0}
                     height={0}
                     unoptimized
-                    className='h-[200] w-[200] object-contain'
+                    className='h-full w-full md:h-[200] md:w-[200] object-contain'
                   />
                 </div>
                 <div style={{
@@ -100,7 +100,7 @@ return (
       <div className="text-center mt-3 sm:mt-10">
         <Link
           href="/products"
-          className="inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition"
+          className="inline-flex items-center bg-orange-500 text-xs sm:text-lg text-white px-3 sm:px-6 py-2 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition"
         >
           VIEW ALL
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -172,7 +172,7 @@ const ContactSection = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-25">
+    <section className="max-w-6xl mx-auto px-6 py-25 bg-white">
       <div className="container mx-auto px-4">
         <div className="md:mb-6 text-[#1E1410]">
           <h2 className="text-xl md:text-6xl font-thin mb-1 md:mb-4">Contact Us</h2>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const FloatingButtons = () => {
   return (
-    <div className="hidden md:flex fixed right-10 bottom-25 z-50 flex-col gap-4">
+    <div className="hidden md:flex fixed right-8 bottom-8 z-50 flex-col gap-4">
       {/* WhatsApp Button */}
       <Link 
         href="https://wa.me/918860886086"
@@ -15,18 +15,19 @@ const FloatingButtons = () => {
         className="flex items-center justify-center w-18 h-18 bg-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
         aria-label="Contact us on WhatsApp"
       >
-        <div className="relative w-14 h-14">
+        <div className="relative w-14 h-14 flex items-center justify-center">
           <Image 
             src="/watsapp.png" 
             alt="WhatsApp" 
-            fill
-            className="object-contain"
+            height={50}
+            width={50}
+            className="h-auto w-auto object-contain"
           />
         </div>
       </Link>
 
       {/* Ask RIA Button */}
-      <Link 
+      {/* <Link 
         href="phone:8860886086" 
         className="flex items-center justify-center px-7 py-3 bg-white rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
         aria-label="Ask RIA"
@@ -35,12 +36,13 @@ const FloatingButtons = () => {
           <Image 
             src="/ria.png" 
             alt="RIA" 
-            fill
-            className="object-contain"
+            height={40}
+            width={40}
+            className="h-auto w-auto object-contain"
           />
         </div>
         <span className="text-orange-500 font-bold text-xl">ASK RIA</span>
-      </Link>
+      </Link> */}
     </div>
   );
 };

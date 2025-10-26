@@ -51,7 +51,9 @@ const BlogSection = () => {
             <div className="h-4 w-1/4 bg-gray-200 mb-6 rounded"></div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="bg-white rounded-2xl shadow-sm h-60"></div>
+                <div
+                  key={i}
+                  className="bg-white rounded-2xl shadow-sm h-60"></div>
               ))}
             </div>
           </div>
@@ -94,16 +96,12 @@ const BlogSection = () => {
             showArrows={false}
             showDots
             slidesToShow={1.2}
-            responsive={[
-              { breakpoint: 640, slidesToShow: 2, showDots: false },
-            ]}
-            className="pb-8"
-          >
+            responsive={[{ breakpoint: 640, slidesToShow: 2, showDots: false }]}
+            className="pb-8">
             {blogs.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
-              >
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="relative h-30 md:h-48">
                   <Image
                     src={
@@ -118,18 +116,21 @@ const BlogSection = () => {
                   />
                 </div>
                 <div className="p-2 md:p-4">
-                  <h3 className="text-sm md:text-lg font-light text-black md:mb-2 line-clamp-2">
+                  <h3 className="text-sm md:text-lg font-[400] text-[#1E1410] md:mb-2 line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-gray-400 text-xs md:text-sm font-light md:mb-2 line-clamp-2">
+                  <p className="text-[#4F423D] text-xs md:text-[16px] font-[300] md:mb-2 line-clamp-2">
                     {post.excerpt || ""}
                   </p>
                   <p className="text-gray-600 text-[8px] mb-0">
                     Posted on:{" "}
-                    {new Date(post.published_at || post.created_at).toLocaleDateString(
-                      "en-US",
-                      { month: "short", day: "numeric", year: "numeric" }
-                    )}
+                    {new Date(
+                      post.published_at || post.created_at
+                    ).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
                   </p>
                 </div>
               </div>
@@ -142,14 +143,11 @@ const BlogSection = () => {
           {blogs.map((post) => (
             <div
               key={post.id}
-              className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden"
-            >
+              className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="relative h-60 lg:h-48 xl:h-60">
                 <Image
                   src={
-                    post.image
-                      ? `${baseUri}${post.image}`
-                      : "/images/blog1.png" 
+                    post.image ? `${baseUri}${post.image}` : "/images/blog1.png"
                   }
                   alt={post.title}
                   fill
@@ -161,19 +159,22 @@ const BlogSection = () => {
                 <h3 className="text-xl font-light text-black mb-2 line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-gray-400 text-md font-light mb-3 line-clamp-2">
+                <p className="text-[#4F423D] text-[14px] md:text-[16px] font-[400] mb-3 line-clamp-2">
                   {post.excerpt || ""}
                 </p>
-                <p className="text-gray-600 text-sm mb-2">
+                <p className="text-[#9B918D] text-sm mb-2">
                   Posted on:{" "}
-                  {new Date(post.published_at || post.created_at).toLocaleDateString(
-                    "en-US",
-                    { month: "short", day: "numeric", year: "numeric" }
-                  )}
+                  {new Date(
+                    post.published_at || post.created_at
+                  ).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </p>
-                <p className="text-gray-500 text-xs">
+                {/* <p className="text-[#9B918D] text-xs">
                   Author: {post.author?.name || "Unknown"}
-                </p>
+                </p> */}
               </div>
             </div>
           ))}
@@ -183,15 +184,13 @@ const BlogSection = () => {
         <div className="text-right mt-0 md:mt-6">
           <Link
             href="/blog"
-            className="bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center"
-          >
+            className="bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center">
             View All
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 ml-1"
               viewBox="0 0 20 20"
-              fill="currentColor"
-            >
+              fill="currentColor">
               <path
                 fillRule="evenodd"
                 d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"

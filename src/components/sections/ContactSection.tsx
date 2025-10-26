@@ -175,17 +175,17 @@ const ContactSection = () => {
     <section className="py-5 md:py-20 bg-white border border-gray-200">
       <div className="container mx-auto px-4">
         <div className="md:mb-6 text-[#1E1410]">
-          <h2 className="text-xl md:text-6xl font-thin mb-1 md:mb-4">Contact Us</h2>
-          <p className="text-xs md:text-lg uppercase">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
+          <h2 className="text-lg md:text-4xl font-thin mb-1 md:mb-4">Contact Us</h2>
+          <p className="text-xs md:text-lg/normal uppercase">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Column - Contact Form */}
           <div>
-            <h3 className="text-md md:text-3xl font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
+            <h3 className="text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
             <form className="space-y-2 md:space-y-5" onSubmit={handleSubmit}>
               <div className='px-2 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="name" className="text-black/40 text-xs md:text-lg">Name*</label>
+                <label htmlFor="name" className="text-black/40 text-xs md:text-sm">Name*</label>
                 <input
                   type="text"
                   id="name"
@@ -196,7 +196,7 @@ const ContactSection = () => {
               </div>
               
               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="email" className="text-black/40 text-xs md:text-lg">Email*</label>
+                <label htmlFor="email" className="text-black/40 text-xs md:text-sm">Email*</label>
                 <input
                   type="email"
                   id="email"
@@ -235,7 +235,7 @@ const ContactSection = () => {
               </div>
               
               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="phone" className="text-black/40 text-xs md:text-lg">Phone Number*</label>
+                <label htmlFor="phone" className="text-black/40 text-xs md:text-sm">Phone Number*</label>
                 <input
                   type="tel"
                   id="phone"
@@ -247,7 +247,7 @@ const ContactSection = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="country" className="text-black/40 text-xs md:text-lg">Country*</label>
+                  <label htmlFor="country" className="text-black/40 text-xs md:text-sm">Country*</label>
                   <select
                     id="country"
                     className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg appearance-none bg-white cursor-pointer"
@@ -272,7 +272,7 @@ const ContactSection = () => {
                 </div>
                 
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="state" className="text-black/40 text-xs md:text-lg">State*</label>
+                  <label htmlFor="state" className="text-black/40 text-xs md:text-sm">State*</label>
                   <select
                     id="state"
                     className="w-full text-black border-none outline-none shadow-none text-sm md:text-lg appearance-none bg-white cursor-pointer"
@@ -302,7 +302,7 @@ const ContactSection = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="city" className="text-black/40 text-xs md:text-lg">City*</label>
+                  <label htmlFor="city" className="text-black/40 text-xs md:text-sm">City*</label>
                     <input
                       type="text"
                       id="city"
@@ -313,7 +313,7 @@ const ContactSection = () => {
                 </div>
                 
                 <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                  <label htmlFor="zip" className="text-black/40 text-xs md:text-lg">Zip Code*</label>
+                  <label htmlFor="zip" className="text-black/40 text-xs md:text-sm">Zip Code*</label>
                   <input
                     type="text"
                     id="zip"
@@ -325,7 +325,7 @@ const ContactSection = () => {
               </div>
 
               <div className='px-3 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
-                <label htmlFor="message" className="text-black/40 text-xs md:text-lg">Messages*</label>
+                <label htmlFor="message" className="text-black/40 text-xs md:text-sm">Messages*</label>
                 <input
                   type="text"
                   id="message"
@@ -350,36 +350,36 @@ const ContactSection = () => {
           {/* Right Column - Contact Information */}
           <div>
             <div className="mb-4 mt-1 md:mt-15">
-              <h4 className="text-md md:text-xl uppercase font-medium mb-4 text-[#1E1410]">CORPORATE HEADQUARTERS - DELHI, INDIA</h4>
+              <h4 className="text-md md:text-lg uppercase font-medium mb-4 text-[#1E1410]">CORPORATE HEADQUARTERS - DELHI, INDIA</h4>
               
               <div className="mb-4 md:mb-6">
-                <h5 className="text-gray-700 text-sm md:text-lg md:mb-2 tracking-[1]">ENQUIRE US</h5>
+                <h5 className="text-gray-700 text-sm md:text-sm md:mb-2 tracking-[1]">ENQUIRE US</h5>
                 <div className="flex items-center text-orange-500">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6 mr-2 md:mr-3" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  <span className="text-sm md:text-xl break-all">8860886086</span> 
+                  <span className="text-sm md:text-lg break-all">8860886086</span> 
                 </div>
               </div>
               
               <div className="mb-4 md:mb-6">
-                <h5 className="text-gray-700 md:mb-2 text-sm md:text-lg tracking-[1]">SEND AN EMAIL</h5>
+                <h5 className="text-gray-700 md:mb-2 text-sm md:text-sm tracking-[1]">SEND AN EMAIL</h5>
                 <div className="flex items-center text-orange-500">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 mr-2 md:mr-3 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
-                  <span className="text-sm md:text-xl break-all">INFO@REALTIMEBIOMETRICS.COM</span>
+                  <span className="text-sm md:text-lg break-all">INFO@REALTIMEBIOMETRICS.COM</span>
                 </div>
               </div>
               
               <div className="mb-4 md:mb-6">
-                <h5 className="text-gray-700 md:mb-2 text-sm md:text-lg tracking-[1]">CORPORATE HEADQUARTERS - DELHI, INDIA</h5>
+                <h5 className="text-gray-700 md:mb-2 text-sm md:text-sm tracking-[1]">CORPORATE HEADQUARTERS - DELHI, INDIA</h5>
                 <div className="flex items-start text-orange-500">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 mr-2 mt-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm md:text-xl">C-83, GANESH NAGAR PANDAV NAGAR COMPLEX DELHI-110092</span>
+                  <span className="text-sm md:text-lg">C-83, GANESH NAGAR PANDAV NAGAR COMPLEX DELHI-110092</span>
                 </div>
               </div>
             </div>

@@ -44,7 +44,7 @@ export default function TestimonialCarousel() {
 
   return (
     <section className="bg-[#f8f8f8] py-5 md:py-16 px-4 md:px-12 lg:px-20">
-        <h2 className="text-xl md:text-6xl font-thin text-black text-center">What our partners Say</h2>
+        <h2 className="text-xl md:text-4xl font-thin text-black text-center">What our partners Say</h2>
 
 
       <div className="relative max-w-6xl mx-auto">

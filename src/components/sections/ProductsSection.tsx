@@ -42,9 +42,9 @@ const ProductsSection = () => {
 return (
   <section className="py-5 md:py-20 bg-[#FFE8DF]">
     <div className="container mx-auto px-4">
-      <div className="text-center mb-3 md:mb-12">
-        <h2 className="text-xl  md:text-5xl lg:text-6xl font-thin text-black mb-0 md:mb-4">Featured Products</h2>
-        <p className="text-xs font-thin md:text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
+      <div className="text-center mb-3 md:mb-8">
+        <h2 className="text-xl lg:text-4xl text-[#1E1410] font-thin mb-2">Featured Products</h2>
+        <p className="text-sm md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
       </div>
 
       <div>
@@ -87,8 +87,8 @@ return (
                 <div style={{
                   color: index % 2 === 0 ? '#000' : '#fff'
                 }}>
-                  <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">{product.category?.name}</p>
-                  <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px]">{product.title}</h3>
+                  <p className="text-xs sm:text-sm md:text-lg font-light">{product.category?.name}</p>
+                  <h3 className="text-sm sm:text-lg md:text-2xl font-thin tracking-[0.5px] md:tracking-[1px]">{product.title}</h3>
                 </div>
               </div>
             </div>

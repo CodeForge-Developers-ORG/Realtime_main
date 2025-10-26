@@ -90,16 +90,16 @@ const SpotlightSection = () => {
     
     // Create a timeline for the horizontal scrolling
      const tl = gsap.timeline({
+        ease: "none",
        scrollTrigger: {
          trigger: '.scrolling-section',
           start: 'top-=200 top', // Adjusted to start much higher on the page
          end: () => '+=' + ((document.querySelector('.banner-container') as HTMLElement)?.offsetWidth || 0) * 0.8,
          pin: true,
          pinSpacing: true,
-         scrub: 1,
+         scrub: 1.2,
          anticipatePin: 0,
          preventOverlaps: true,
-         fastScrollEnd: true,
          refreshPriority: 1,
          onEnter: () => {
            // Prevent default scroll behavior when entering the trigger area
@@ -224,7 +224,7 @@ const SpotlightSection = () => {
               {cards.map((card) => (
                 <div className="banner-item" key={card.id}>
                   <div
-                    className={`relative ${card.bgColor} text-white rounded-2xl overflow-hidden shadow-xl mx-4 h-[500px]  flex flex-col p-8 lg:pb-0 lg:p-12`}
+                    className={`relative ${card.bgColor} text-white rounded-2xl overflow-hidden shadow-xl mx-4 h-110  flex flex-col p-8 lg:pb-0 lg:p-12`}
                   >
                     <div className="flex flex-col h-full">
                       <div className="flex relative flex-col lg:flex-row items-center justify-center h-full">
@@ -244,7 +244,7 @@ const SpotlightSection = () => {
                           <div className="bg-white text-black w-fit p-4 rounded-xl shadow-md absolute top-1 -left-20">
                             <p className="font-medium text-lg">{card.subtitle}</p>
                           </div>
-                          <div className="bg-white text-black w-fit p-4 rounded-xl shadow-md  absolute -left-20 top-1/4 ">
+                          <div className="bg-white text-black w-fit p-4 rounded-xl shadow-md  absolute -left-20 top-1/3 ">
                             <p className='text-lg font-medium'>{card.description}</p>
                           </div>
                         </div>

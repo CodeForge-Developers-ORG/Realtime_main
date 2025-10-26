@@ -74,14 +74,14 @@ const BlogSection = () => {
   }
 
   return (
-    <section className="py-5 md:py-20 bg-[#e8e9e3]">
+    <section className="py-5 md:py-14 bg-[#e8e9e3]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-6 md:mb-10">
-          <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-8">
+          <h2 className="text-xl md:text-4xl font-thin text-[#1E1410] md:mb-4">
             Blogs
           </h2>
-          <p className="text-shadow-amber-100 text-sm md:text-3xl font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">
+          <p className="text-shadow-amber-100 text-sm md:text-lg font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">
             Our Latest Updates
           </p>
         </div>
@@ -102,7 +102,7 @@ const BlogSection = () => {
             {blogs.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden"
               >
                 <div className="relative h-30 md:h-48">
                   <Image
@@ -142,9 +142,9 @@ const BlogSection = () => {
           {blogs.map((post) => (
             <div
               key={post.id}
-              className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden"
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
             >
-              <div className="relative h-60 lg:h-48 xl:h-60">
+              <div className="relative h-50 lg:h-45 xl:h-60">
                 <Image
                   src={
                     post.image
@@ -158,10 +158,10 @@ const BlogSection = () => {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-light text-black mb-2 line-clamp-2">
+                <h3 className="text-lg font-light text-black mb-2 line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-gray-400 text-md font-light mb-3 line-clamp-2">
+                <p className="text-gray-400 text-sm font-light mb-3 line-clamp-2">
                   {post.excerpt || ""}
                 </p>
                 <p className="text-gray-600 text-sm mb-2">

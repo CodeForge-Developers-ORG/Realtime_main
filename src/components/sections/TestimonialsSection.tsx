@@ -35,9 +35,9 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-5 md:py-16 bg-[#FFF2EC]">
+    <section className="py-5 md:py-14 bg-[#FFF2EC]">
       <div className="container mx-auto px-4">
-        <h2 className="text-xl md:text-6xl font-thin text-black mb-3 md:mb-20 text-center">
+        <h2 className="text-xl md:text-4xl font-thin text-black mb-3 md:mb-20 text-center">
           What our partners Say
         </h2>
 

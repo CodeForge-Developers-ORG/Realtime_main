@@ -259,7 +259,7 @@ const Header = () => {
             alt={branding?.site_title || "Logo"}
             width={180}
             height={60}
-            className="h-auto w-auto max-w-[140px] md:max-w-[180px]"
+            className="h-auto  w-[120px] md:w-[150px] "
           />
         </Link>
 
@@ -367,7 +367,7 @@ const Header = () => {
         <div className="hidden lg:flex items-center space-x-4">
           <Link
             href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
-            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105">
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105">
             <Image
               src="/images/gplay.png"
               alt="App Icon"
@@ -382,7 +382,7 @@ const Header = () => {
           </Link>
           <Link
             href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
-            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105">
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105">
             <Image
               src="/images/gplay.png"
               alt="App Icon"
@@ -622,19 +622,19 @@ const Header = () => {
             <Link
               href="/partner"
               onClick={closeMobileMenu}
-              className="block bg-orange-500 border border-orange-500 text-white py-3 px-6 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-md font-light tracking-[1] text-center">
+              className="block bg-orange-500 border border-orange-500 text-white py-3 px-5 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-sm tracking-[1] text-center">
               BECOME A PARTNER
             </Link>
             <Link
               href="https://partner.markvisitor.com/"
               onClick={closeMobileMenu}
-              className="block border border-orange-500 text-orange-500 text-center py-3 px-6 rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-md font-light tracking-[1]">
+              className="block border border-orange-500 text-orange-500 text-center  py-3 px-5  rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-sm font-light tracking-[1]">
               PARTNER LOG IN
             </Link>
             <Link
               href="/pay"
               onClick={closeMobileMenu}
-              className="block bg-yellow-500 border border-yellow-500 text-black text-center py-3 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-md font-light tracking-[1]">
+              className="block bg-yellow-500 border border-yellow-500 text-black text-center  py-3 px-5  rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-sm font-light tracking-[1]">
               PAY ONLINE
             </Link>
           </div>
@@ -785,17 +785,17 @@ const Header = () => {
           <div className="flex space-x-4">
             <Link
               href="/partner"
-              className="bg-orange-500 border border-orange-500 text-white py-2 px-6 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
+              className="bg-orange-500 border border-orange-500 text-white py-2 px-5 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center">
               BECOME A PARTNER
             </Link>
             <Link
               href="https://partner.markvisitor.com/"
-              className="border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
+              className="border border-orange-500 text-orange-500 text-center py-2 px-5 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center">
               PARTNER LOG IN
             </Link>
             <Link
               href="/pay"
-              className="bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center">
+              className="bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-5 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center">
               PAY ONLINE
             </Link>
           </div>

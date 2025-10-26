@@ -77,7 +77,7 @@ const BlogSection = () => {
 
   return (
     <section className="py-5 md:py-20 bg-[#e8e9e3]">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <div className="mb-6 md:mb-10">
           <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-8">

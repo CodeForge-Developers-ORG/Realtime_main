@@ -43,8 +43,8 @@ return (
   <section className="py-5 md:py-20 bg-[#FFE8DF]">
     <div className="container mx-auto px-4">
       <div className="text-center mb-3 md:mb-12">
-        <h2 className="text-xl  md:text-5xl lg:text-6xl font-thin text-black mb-0 md:mb-4">Featured Products</h2>
-        <p className="text-xs font-thin md:text-lg text-gray-600 uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
+        <h2 className="text-xl  md:text-5xl lg:text-6xl font-[300] text-[#1E1410] mb-0 md:mb-4">Featured Products</h2>
+        <p className="text-xs font-[300] md:text-[16px] text-[#1E1410] uppercase">OUR BEST-IN-CLASS SECURITY PRODUCTS</p>
       </div>
 
       <div>

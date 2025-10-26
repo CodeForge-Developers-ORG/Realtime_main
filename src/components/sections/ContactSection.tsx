@@ -175,14 +175,14 @@ const ContactSection = () => {
     <section className="py-5 md:py-20 bg-white border border-gray-200">
       <div className="container mx-auto px-4">
         <div className="md:mb-6 text-[#1E1410]">
-          <h2 className="text-lg md:text-4xl font-thin mb-1 md:mb-4">Contact Us</h2>
-          <p className="text-xs md:text-lg/normal uppercase">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
+          <h2 className="text-lg md:text-4xl font-thin mb-1 md:mb-4 text-center md:text-left">Contact Us</h2>
+          <p className="text-xs md:text-lg/normal uppercase text-center md:text-left">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Column - Contact Form */}
           <div>
-            <h3 className="text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
+            <h3 className="text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410] text-center md:text-left">Send Us a Message</h3>
             <form className="space-y-2 md:space-y-5" onSubmit={handleSubmit}>
               <div className='px-2 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
                 <label htmlFor="name" className="text-black/40 text-xs md:text-sm">Name*</label>
@@ -350,7 +350,7 @@ const ContactSection = () => {
           {/* Right Column - Contact Information */}
           <div>
             <div className="mb-4 mt-1 md:mt-15">
-              <h4 className="text-md md:text-lg uppercase font-medium mb-4 text-[#1E1410]">CORPORATE HEADQUARTERS - DELHI, INDIA</h4>
+              <h4 className="text-sm md:text-lg uppercase font-medium mb-4 text-[#1E1410]">CORPORATE HEADQUARTERS - DELHI, INDIA</h4>
               
               <div className="mb-4 md:mb-6">
                 <h5 className="text-gray-700 text-sm md:text-sm md:mb-2 tracking-[1]">ENQUIRE US</h5>

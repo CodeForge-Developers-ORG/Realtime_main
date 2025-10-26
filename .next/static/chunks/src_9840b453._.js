@@ -2076,7 +2076,7 @@ const ProductsSection = ()=>{
                     className: "text-center mb-3 md:mb-8",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-xl lg:text-4xl text-[#1E1410] font-thin mb-2",
+                            className: "text-xl lg:text-4xl text-[#1E1410] font-thin md:mb-2",
                             children: "Featured Products"
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ProductsSection.tsx",
@@ -2084,7 +2084,7 @@ const ProductsSection = ()=>{
                             columnNumber: 9
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-sm md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2",
+                            className: "text-xs md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2",
                             children: "OUR BEST-IN-CLASS SECURITY PRODUCTS"
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ProductsSection.tsx",
@@ -2123,14 +2123,14 @@ const ProductsSection = ()=>{
                                     className: "flex flex-col",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl pt-2 sm:pt-12  flex align-middle justify-center",
+                                            className: "relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl p-2 sm:p-12  flex align-middle justify-center",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                 src: "".concat(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$constant$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["baseUri"]).concat(product.images[0]),
                                                 alt: product.title,
                                                 width: 0,
                                                 height: 0,
                                                 unoptimized: true,
-                                                className: "h-[200] w-[200] object-contain"
+                                                className: "h-full w-full md:h-[200] md:w-[200] object-contain"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/sections/ProductsSection.tsx",
                                                 lineNumber: 78,
@@ -2194,7 +2194,7 @@ const ProductsSection = ()=>{
                     className: "text-center mt-3 sm:mt-10",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         href: "/products",
-                        className: "inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition",
+                        className: "inline-flex items-center bg-orange-500 text-xs sm:text-lg text-white px-3 sm:px-6 py-2 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition",
                         children: [
                             "VIEW ALL",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -2549,7 +2549,7 @@ const ContactSection = ()=>{
                     className: "md:mb-6 text-[#1E1410]",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-lg md:text-4xl font-thin mb-1 md:mb-4",
+                            className: "text-lg md:text-4xl font-thin mb-1 md:mb-4 text-center md:text-left",
                             children: "Contact Us"
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -2557,7 +2557,7 @@ const ContactSection = ()=>{
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-xs md:text-lg/normal uppercase",
+                            className: "text-xs md:text-lg/normal uppercase text-center md:text-left",
                             children: "CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP."
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -2576,7 +2576,7 @@ const ContactSection = ()=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]",
+                                    className: "text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410] text-center md:text-left",
                                     children: "Send Us a Message"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -3009,7 +3009,7 @@ const ContactSection = ()=>{
                                     className: "mb-4 mt-1 md:mt-15",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                            className: "text-md md:text-lg uppercase font-medium mb-4 text-[#1E1410]",
+                                            className: "text-sm md:text-lg uppercase font-medium mb-4 text-[#1E1410]",
                                             children: "CORPORATE HEADQUARTERS - DELHI, INDIA"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -3528,7 +3528,7 @@ const BlogSection = ()=>{
                         ],
                         className: "pb-8",
                         children: blogs.map((post)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden",
+                                className: "bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden h-60 mx-1",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "relative h-30 md:h-48",
@@ -3552,7 +3552,7 @@ const BlogSection = ()=>{
                                         className: "p-2 md:p-4",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                className: "text-sm md:text-lg font-light text-black md:mb-2 line-clamp-2",
+                                                className: "text-xs md:text-lg font-light text-black md:mb-2 line-clamp-2",
                                                 children: post.title
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/sections/BlogSection.tsx",
@@ -3568,7 +3568,7 @@ const BlogSection = ()=>{
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                className: "text-gray-600 text-[8px] mb-0",
+                                                className: "text-gray-600 text-[10px] mb-0",
                                                 children: [
                                                     "Posted on:",
                                                     " ",
@@ -3606,7 +3606,7 @@ const BlogSection = ()=>{
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6",
+                    className: "hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-0",
                     children: blogs.map((post)=>{
                         var _post_author;
                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3698,7 +3698,7 @@ const BlogSection = ()=>{
                     className: "text-right mt-0 md:mt-6",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                         href: "/blog",
-                        className: "bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center",
+                        className: "bg-orange-500 text-white mt-0 text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center",
                         children: [
                             "View All",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
@@ -3905,7 +3905,7 @@ const SpotlightSection = ()=>{
                 className: "container-fluid px-4 mx-auto relative",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "text-center py-4 mb-6",
+                        className: "text-center py-4 mb-1",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                 className: "text-xl sm:text-3xl text-black font-thin ",
@@ -3934,9 +3934,9 @@ const SpotlightSection = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 ref: scrollRef,
-                                className: "scroll-container flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-4",
+                                className: "scroll-container flex  overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-4",
                                 children: cards.map((card)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "scroll-item w-[85vw] flex-shrink-0 snap-center",
+                                        className: "scroll-item w-[85vw] flex-shrink-0 snap-center overflow-hidden",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "relative rounded-xl  shadow-lg ".concat(card.bgColor, " text-white pb-0 px-4  pt-4 h-[200px] flex flex-col"),
                                             children: [
@@ -4938,9 +4938,9 @@ function TestimonialCarousel() {
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "p-5 md:p-6 w-[85%]",
+                                                    className: "ps-0 p-5 md:p-6 w-[85%]",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "text-[#4F423D] font-[300] text-[13px] lg:text-[16px] leading-relaxed mb-0 ",
+                                                        className: "text-[#4F423D] font-[300] text-[13px] lg:text-[16px] leading-4.5 mb-0 ",
                                                         children: [
                                                             "“",
                                                             t.content.slice(0, 300),

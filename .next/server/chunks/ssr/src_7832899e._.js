@@ -1952,7 +1952,7 @@ const ContactSection = ()=>{
                     className: "md:mb-6 text-[#1E1410]",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-lg md:text-4xl font-thin mb-1 md:mb-4",
+                            className: "text-lg md:text-4xl font-thin mb-1 md:mb-4 text-center md:text-left",
                             children: "Contact Us"
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -1960,7 +1960,7 @@ const ContactSection = ()=>{
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-xs md:text-lg/normal uppercase",
+                            className: "text-xs md:text-lg/normal uppercase text-center md:text-left",
                             children: "CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP."
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -1979,7 +1979,7 @@ const ContactSection = ()=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]",
+                                    className: "text-md md:text-2xl/normal font-thin mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410] text-center md:text-left",
                                     children: "Send Us a Message"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/ContactSection.tsx",
@@ -2412,7 +2412,7 @@ const ContactSection = ()=>{
                                     className: "mb-4 mt-1 md:mt-15",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
-                                            className: "text-md md:text-lg uppercase font-medium mb-4 text-[#1E1410]",
+                                            className: "text-sm md:text-lg uppercase font-medium mb-4 text-[#1E1410]",
                                             children: "CORPORATE HEADQUARTERS - DELHI, INDIA"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/sections/ContactSection.tsx",

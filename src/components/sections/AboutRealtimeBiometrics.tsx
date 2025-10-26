@@ -46,14 +46,14 @@ const AboutRealtimeBiometrics: React.FC = () => {
             flex flex-col justify-center
           ">
           {/* Title */}
-          <h2 className="text-3xl sm:text-4xl font-normal text-gray-800 mb-6">
+          <h2 className="text-[40px] font-[400] text-[#1E1410] mb-6">
             About Realtime Biometrics
           </h2>
 
           {/* Text Paragraphs (Flex container for side-by-side on desktop) */}
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Main Text */}
-            <p className="text-lg text-gray-600 lg:w-2/3 leading-relaxed">
+            <p className="text-lg text-[#1E1410] lg:w-2/3 leading-relaxed">
               This is a growing market. Security incidents in schools grab the
               headlines, emotions and budget allocations. How to address
               security concerns leaves room for many opinions and strategies.

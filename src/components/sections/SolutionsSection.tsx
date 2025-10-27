@@ -38,7 +38,7 @@ const SolutionsSection = () => {
 
   return (
     <section className="py-5 md:py-20 bg-[#2B2B2B]">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         {/* Mobile layout - stacked */}
         <div className="md:hidden">
           <div className="text-center mb-8">
@@ -97,11 +97,11 @@ const SolutionsSection = () => {
         {/* Desktop layout - grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-10">
           <div className="col-span-1">
-            <h2 className="text-xl lg:text-4xl font-thin text-white mb-4">Solutions</h2>
-            <p className="text-md text-white font-[100] uppercase mb-6 tracking-[1px]">India&apos;s Leading Biometric Solutions</p>
-            <p className="text-md text-white font-thin ">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
-            <div className="mt-10">
-              <Link href="/solutions" className="bg-orange-500 mt-45 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition inline-block">
+            <h2 className="text-4xl lg:text-6xl font-[300] text-white mb-4">Solutions</h2>
+            <p className="text-[16px] text-white font-[300] uppercase mb-6 tracking-[1px]">India&apos;s Leading Biometric Solutions</p>
+            <p className="text-[14px] text-white font-[300] tracking-[1px]">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
+            <div className="">
+              <Link href="/solutions" className="bg-orange-500 mt-38 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600 transition inline-block">
                 View All Solutions
               </Link>
             </div>
@@ -122,7 +122,7 @@ const SolutionsSection = () => {
                   className="rounded-2xl transition-transform mx-4 overflow-hidden border-[#414141] border-1 bg-[#414141]"
                 >
                   <div className="flex flex-col">
-                    <div className="relative h-90 w-full mb-3">
+                    <div className="relative h-[329px] w-full mb-3">
                       <Image
                         src={solution.image || '/images/solution1.png'}
                         alt={solution.title}

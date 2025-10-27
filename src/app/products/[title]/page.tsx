@@ -10,6 +10,8 @@ import DownloadCatalogueButton from "./DownloadCatalogueButton";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { notFound } from "next/navigation";
+import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
+// import Title from "@/components/common/Title";
 
 type ProductCategory = {
   title: string;
@@ -58,8 +60,16 @@ export default async function ProductPage({
     notFound(); // ✅ Better UX than manual div
   }
 
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: product.title, href: `/products/${title}` },
+  ];
+
   return (
     <Layout>
+      <AdvancedBreadcrumb items={breadcrumbItems} />
+      {/* <Title title={product.title} /> */}
       <div className="bg-white">
         <div className="max-w-6xl mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
@@ -80,8 +90,7 @@ export default async function ProductPage({
               <div className="flex items-center gap-3 mb-6">
                 <Link
                   href="/support"
-                  className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer"
-                >
+                  className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer">
                   <span className="border rounded-full w-[20px] h-[20px] flex items-center justify-center">
                     <Play className="w-[10px]" />
                   </span>{" "}

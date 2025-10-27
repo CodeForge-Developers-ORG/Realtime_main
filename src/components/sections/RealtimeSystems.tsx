@@ -109,9 +109,9 @@ export default function RealtimeScrollCards() {
           <button
             key={index}
             onClick={() => handleScrollTo(index)}
-            className={`px-5 py-3  rounded-full text-[14px] md:text-[18px] text-nowrap font-thin transition-all ${activeCard === index
-                ? "bg-[#EFAF00] text-black"
-                : "bg-[#F9F9F9] text-black"
+            className={`px-5 py-3  rounded-full text-[14px] md:text-[18px] text-nowrap font-[350] transition-all ${activeCard === index
+                ? "bg-[#EFAF00] text-[#1E1410]"
+                : "bg-[#F9F9F9] text-[#1E1410]"
               }`}
           >
             {card.title}
@@ -133,19 +133,19 @@ export default function RealtimeScrollCards() {
             className={`relative ${i > 0 ? "mt-[100vh]" : ""}`}
             data-index={i}
           >
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl shadow-sm border border-[#D9D9D9]  p-6 max-w-3xl mx-auto">
               {/* Top row: Number + Title */}
               <div className="flex items-center mb-3">
                 <span className="text-orange-500 font-semibold text-3xl mr-3 bg-gray-100 rounded-md w-15 h-15 flex items-center justify-center">
                   {i + 1}
                 </span>
-                <h2 className="text-3xl font-thin text-gray-800 leading-snug">
+                <h2 className="text-[24px] font-[300] text-[#1E1410] leading-snug">
                   {card.title}
                 </h2>
               </div>
 
               {/* Description */}
-              <p className="text-gray-700 text-lg mt-4 leading-relaxed">
+              <p className="text-[#4F423D] text-[16px] font-[300] mt-4 leading-[150%]">
                 {card.description}
               </p>
             </div>

@@ -66,7 +66,7 @@ const HeroSection = () => {
     <section className="bg-[#FFF5F2]">
       <Slider
         autoPlay={true}
-        autoPlayInterval={5000}
+        autoPlayInterval={3000}
         showArrows={false}
         showDots={true}
         slidesToShow={1}

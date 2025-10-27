@@ -172,17 +172,17 @@ const ContactSection = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-25 bg-white">
-      <div className="container mx-auto px-4">
+    <section className=" mx-auto not-first:py-25 bg-white">
+      <div className="container max-w-6xl mx-auto px-4">
         <div className="md:mb-6 text-[#1E1410]">
-          <h2 className="text-xl md:text-6xl font-thin mb-1 md:mb-4">Contact Us</h2>
+          <h2 className="text-lg md:text-5xl font-thin mb-1 md:mb-4">Contact Us</h2>
           <p className="text-xs md:text-[15px] font-[300] uppercase">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Column - Contact Form */}
           <div>
-            <h3 className="text-md md:text-[40px] font-[300] mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
+            <h3 className="text-md md:text-[30px] font-[300] mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
             <form className="space-y-2 md:space-y-5" onSubmit={handleSubmit}>
               <div className='px-2 md:px-4 py-2 border-1 border-[#D6D6D6] rounded-2xl focus:outline-[#000] hover:border-[#000] transition-all'>
                 <label htmlFor="name" className="text-black/40 text-xs md:text-[15px]">Name*</label>

@@ -25,6 +25,7 @@ type Branding = {
   site_title: string;
   site_tagline: string;
   logo_url: string;
+  favicon_url?: string;
 };
 
 type Product = {
@@ -81,10 +82,73 @@ const Header = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Update document meta tags and favicon
+  const updateDocumentMetadata = useCallback((data: HeaderData) => {
+    if (data?.branding) {
+      const { site_title, site_tagline, favicon_url } = data.branding;
+      
+      // Update document title
+      if (site_title) {
+        const currentTitle = document.title;
+        // Only update if not already set correctly
+        if (!currentTitle.includes(site_title)) {
+          document.title = site_title + (site_tagline ? ` | ${site_tagline}` : '');
+        }
+      }
+
+      // Update favicon
+      if (favicon_url) {
+        let link = document.querySelector("link[rel*='icon']") as HTMLLinkElement | null;
+        
+        if (!link) {
+          // Create new favicon link if doesn't exist
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.head.appendChild(link);
+        }
+        
+        // Update favicon URL
+        link.href = favicon_url;
+      }
+
+      // Update meta description
+      if (site_tagline) {
+        let metaDescription = document.querySelector('meta[name="description"]');
+        
+        if (!metaDescription) {
+          // Create new meta description if doesn't exist
+          metaDescription = document.createElement('meta');
+          metaDescription.setAttribute('name', 'description');
+          document.head.appendChild(metaDescription);
+        }
+        
+        metaDescription.setAttribute('content', site_tagline);
+      }
+
+      // Update og:title and og:description
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.setAttribute('content', site_title || 'RealTime Biometrics');
+
+      let ogDescription = document.querySelector('meta[property="og:description"]');
+      if (!ogDescription) {
+        ogDescription = document.createElement('meta');
+        ogDescription.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDescription);
+      }
+      ogDescription.setAttribute('content', site_tagline || 'Advanced Biometric Solutions');
+    }
+  }, []);
+
   // Fetch header data
   useEffect(() => {
     if (headerDataCache) {
       setHeaderData(headerDataCache);
+      updateDocumentMetadata(headerDataCache);
       setLoading(false);
       return;
     }
@@ -95,26 +159,29 @@ const Header = () => {
         const data = response.data.data;
         headerDataCache = data;
         setHeaderData(data);
+        updateDocumentMetadata(data);
       } catch (err) {
         console.error("Error fetching header:", err);
         const fallbackData: HeaderData = {
           branding: {
-            site_title: "Default Site",
-            site_tagline: "Default Tagline",
+            site_title: "RealTime Biometrics",
+            site_tagline: "Advanced Biometric Solutions",
             logo_url: "/logo.png",
+            favicon_url: "/favicon.ico"
           },
           navigation: [],
           settings: { show_search_in_header: true },
         };
         headerDataCache = fallbackData;
         setHeaderData(fallbackData);
+        updateDocumentMetadata(fallbackData);
       } finally {
         setLoading(false);
       }
     };
 
     fetchHeader();
-  }, []);
+  }, [updateDocumentMetadata]);
 
   // Search function
   const performSearch = useCallback(async (query: string) => {

@@ -230,7 +230,7 @@ const ContactSection = () => {
                   </svg>
                 </div>
                 <label htmlFor="subscribe" className="ml-2 text-xs md:text-[16px] text-[#1E1410] cursor-pointer">
-                  Subscribe to our news letter
+                  Subscribe to our news letter 
                 </label>
               </div>
               

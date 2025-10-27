@@ -16,10 +16,10 @@
 /coverage
 
 # Next.js build outputs
-/.next/
+# /.next/
 out/
-build/
-.next/static
+# build/
+# .next/static
 
 # Environment files
 .env

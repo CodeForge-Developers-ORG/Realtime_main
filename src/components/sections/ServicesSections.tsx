@@ -79,7 +79,7 @@ const ServicesSections = () => {
       // Make the first image sticky immediately
       gsap.set(imageElements[0], { 
         position: "sticky",
-        top: "25vh",
+        top: "30vh",
         zIndex: 1
       });
       
@@ -157,7 +157,7 @@ const ServicesSections = () => {
           onEnterBack: () => {
             // Reset animation when scrolling back up with a smoother transition
             gsap.to(currentImage, {
-              y: "80%", 
+              y: "50%", 
               opacity: 0, 
               position: "relative",
               duration: 0.5,
@@ -168,7 +168,7 @@ const ServicesSections = () => {
             // When image reaches the top position, make it sticky with increasing offset
             gsap.to(currentImage, {
               position: "sticky",
-              top: `calc(25vh + ${offsetPixels}px)`, // Increasing offset for each element
+              top: `calc(30vh + ${offsetPixels}px)`, // Increasing offset for each element
               y: 0,
               zIndex: zIndex,
               duration: 0.5,
@@ -212,8 +212,8 @@ const ServicesSections = () => {
       <div className="container mx-auto relative py-5 md:py-14 px-4 md:px-6 lg:px-0">
         {/* Desktop heading with sticky behavior */}
         <div ref={headerRef} className="hidden md:block text-center mb-8 sticky top-20 pb-14 bg-white">
-          <h2 className="text-5xl lg:text-6xl text-[#1E1410] font-thin mb-4">Services</h2>
-          <p className="text-lg md:text-xl text-gray-700 uppercase tracking-[1px] px-2">Wide-Range of Attendance Recorder & Access Control</p>
+          <h2 className="text-2xl lg:text-4xl text-[#1E1410] font-thin mb-4">Services</h2>
+          <p className="text-sm md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2">Wide-Range of Attendance Recorder & Access Control</p>
         </div>
         
         {/* Mobile heading with static behavior */}
@@ -243,10 +243,10 @@ const ServicesSections = () => {
                   />
                 </div>
                 <div className="flex flex-col mx-6 lg:mx-14 me-6 lg:me-20">
-                  <h2 className="text-2xl md:text-3xl lg:text-[46px] font-[100] text-black mb-3 md:mb-5 leading-snug">{card.title}</h2>
-                  <p className="text-base md:text-lg lg:text-[20px] font-[100] text-light text-black/60 mb-3 md:mb-5 tracking-wide">{card.description}</p>
+                  <h2 className="text-2xl md:text-3xl lg:text-[32px] font-[100] text-black mb-3 md:mb-5 leading-snug">{card.title}</h2>
+                  <p className="text-base md:text-lg lg:text-[20px] font-medium text-light text-black/60 mb-3 md:mb-5 tracking-wide">{card.description}</p>
                 </div>
-                <button className="w-100 uppercase text-[#EA5921] text-lg md:text-xl lg:text-2xl tracking-wide flex items-center mr-4 md:mr-0">
+                <button className="w-100 uppercase text-[#EA5921] text-lg md:text-xl lg:text-xl font-medium tracking-wide flex items-center mr-4 md:mr-0">
                   {card.buttonText}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5" />

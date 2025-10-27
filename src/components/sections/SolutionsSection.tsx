@@ -66,7 +66,7 @@ const SolutionsSection = () => {
             {solutions.map((solution) => (
               <div 
                 key={solution.id} 
-                className="rounded-md md:rounded-2xl transition-transform mx-1 md:mx-2 overflow-hidden border-grey-500  sm:h-auto  border-1 bg-[#414141]"
+                className="rounded-md md:rounded-2xl transition-transform mx-1 md:mx-2 overflow-hidden border-grey-500  h-55 sm:h-auto  border-1 bg-[#414141]"
               >
                 <div className="flex flex-col">
                   <div className="relative h-[100px] md:h-[200px] w-full">
@@ -79,8 +79,8 @@ const SolutionsSection = () => {
                     />
                   </div>
                   <div className="text-white p-2 md:p-4">
-                    <h3 className="text-lg md:text-2xl font-thin md:mb-2">{solution.title}</h3>
-                    <p className="text-xs md:text-sm text-gray-300">{solution.description}</p>
+                    <h3 className="text-md md:text-2xl font-thin mb-1 md:mb-2 leading-4">{solution.title}</h3>
+                    <p className="text-xs md:text-sm text-gray-300 line-clamp-5">{solution.description}</p>
                   </div>
                 </div>
               </div>
@@ -132,7 +132,7 @@ const SolutionsSection = () => {
                       />
                     </div>
                     <div className="text-white px-3 pb-4">
-                      <h3 className="text-2xl lg:text-2xl font-thin mb-2 mt-3 ms-4">{solution.title}</h3>
+                      <h3 className="text-lg lg:text-xl font-thin mb-2 mt-3 ms-4">{solution.title}</h3>
                       {/* <p className="text-sm text-gray-300">{solution.description}</p> */}
                     </div>
                   </div>

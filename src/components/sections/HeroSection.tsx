@@ -89,11 +89,11 @@ const HeroSection = () => {
                     {slide.subtitle}
                   </div>
                    {slide.ctaText && (
-                    <Link href={slide.ctaUrl || '#'} className=" absolute top-11 sm:top-16 left-[43%] sm:left-[52%] px-7 py-1 bg-[#1E1410] text-white text-xs sm:text-lg uppercase rounded-full hover:bg-gray-800 transition-colors transform-3d" style={{ transform: 'rotate(-5deg)' }}>
+                    <Link href={slide.ctaUrl || '#'} className=" absolute top-11 sm:top-16 left-[43%] sm:left-[52%] px-7 py-1 bg-[#1E1410] text-white text-xs sm:text-lg uppercase rounded-full hover:bg-gray-800 transition-colors transform-3d z-1" style={{ transform: 'rotate(-5deg)' }}>
                       {slide.ctaText}
                     </Link>
                   )}
-                <h1 className={`text-[40px] sm:text-[60px] md:text-[80px] leading-none lg:text-[120px] mb-6 relative  left-0 md:left-0 top-12 sm:top-20 md:top-0 text-[#F8D1C7] text-center whitespace-wrap sm:whitespace-nowrap`} style={{ fontWeight: 'bolder' }}>
+                <h1 className={`text-[40px] sm:text-[60px] md:text-[80px] leading-none lg:text-[110px] mb-6 relative  left-0 md:left-0 top-12 sm:top-20 md:top-0 text-[#F8D1C7] text-center whitespace-wrap sm:whitespace-nowrap`} style={{ fontWeight: 'bolder' }}>
                     {slide.title}
                 </h1>
                   <div className="w-full  relative">

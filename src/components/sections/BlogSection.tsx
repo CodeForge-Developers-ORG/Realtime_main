@@ -80,10 +80,10 @@ const BlogSection = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="mb-6 md:mb-10">
-          <h2 className="text-xl md:text-6xl font-thin text-[#1E1410] md:mb-8">
+          <h2 className="text-xl md:text-4xl font-thin text-[#1E1410] md:mb-4">
             Blogs
           </h2>
-          <p className="text-shadow-amber-100 text-sm md:text-3xl font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">
+          <p className="text-shadow-amber-100 text-sm md:text-lg font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">
             Our Latest Updates
           </p>
         </div>
@@ -101,7 +101,8 @@ const BlogSection = () => {
             {blogs.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden h-60 mx-1"
+              >
                 <div className="relative h-30 md:h-48">
                   <Image
                     src={
@@ -116,13 +117,13 @@ const BlogSection = () => {
                   />
                 </div>
                 <div className="p-2 md:p-4">
-                  <h3 className="text-sm md:text-lg font-[400] text-[#1E1410] md:mb-2 line-clamp-2">
+                  <h3 className="text-xs md:text-lg font-light text-black md:mb-2 line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-[#4F423D] text-xs md:text-[16px] font-[300] md:mb-2 line-clamp-2">
                     {post.excerpt || ""}
                   </p>
-                  <p className="text-gray-600 text-[8px] mb-0">
+                  <p className="text-gray-600 text-[10px] mb-0">
                     Posted on:{" "}
                     {new Date(
                       post.published_at || post.created_at
@@ -139,11 +140,12 @@ const BlogSection = () => {
         </div>
 
         {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-0">
           {blogs.map((post) => (
             <div
               key={post.id}
-              className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden">
+              className="bg-white rounded-4xl shadow-sm border border-gray-100 overflow-hidden"
+            >
               <div className="relative h-60 lg:h-48 xl:h-60">
                 <Image
                   src={
@@ -156,7 +158,7 @@ const BlogSection = () => {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-xl font-light text-black mb-2 line-clamp-2">
+                <h3 className="text-lg font-light text-black mb-2 line-clamp-2">
                   {post.title}
                 </h3>
                 <p className="text-[#4F423D] text-[14px] md:text-[16px] font-[400] mb-3 line-clamp-2">

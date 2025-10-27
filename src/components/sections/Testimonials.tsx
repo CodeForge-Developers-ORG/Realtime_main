@@ -44,7 +44,7 @@ export default function TestimonialCarousel() {
 
   return (
     <section className="bg-[#f8f8f8] py-5 md:py-16 px-4 md:px-12 lg:px-20">
-        <h2 className="text-xl md:text-6xl font-thin text-black text-center">What our partners Say</h2>
+        <h2 className="text-xl md:text-4xl font-thin text-black text-center">What our partners Say</h2>
 
 
       <div className="relative max-w-6xl mx-auto">
@@ -78,8 +78,8 @@ export default function TestimonialCarousel() {
                     <div className="text-orange-500 bg-[#F5F5F5] w-[50] md:w-[80px] h-[50] md:h-[80px] flex items-center justify-center">
                       <Quote className="w-5 md:w-8 h-4 md:h-6" fill="currentColor" />
                     </div>
-                    <div className="p-5 md:p-6 w-[85%]">
-                      <p className="text-[#4F423D] font-[300] text-[13px] lg:text-[16px] leading-relaxed mb-0 ">
+                    <div className="ps-0 p-5 md:p-6 w-[85%]">
+                      <p className="text-[#4F423D] font-[300] text-[13px] lg:text-[16px] leading-4.5 mb-0 ">
                         “{t.content.slice(0, 300)}”
                       </p>
                     </div>

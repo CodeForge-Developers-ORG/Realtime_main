@@ -179,17 +179,34 @@ function RealtimeScrollCards() {
                             }
                             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollTrigger"].create({
                                 trigger: card,
-                                start: "top bottom",
-                                end: "top center",
+                                start: "top center",
+                                end: "top 20%",
                                 scrub: true,
                                 onEnter: {
                                     "RealtimeScrollCards.useEffect.ctx": ()=>{
                                         setActiveCard(i);
+                                        // Apply blur effect to lower cards only when card reaches the top center
                                         cardRefs.current.forEach({
                                             "RealtimeScrollCards.useEffect.ctx": (c, index)=>{
                                                 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].set(c, {
                                                     zIndex: index <= i ? index + 1 : index
                                                 });
+                                                // Apply blur to cards below the current one (previous cards)
+                                                if (index < i) {
+                                                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].to(c, {
+                                                        filter: "blur(2px)",
+                                                        opacity: 0.7,
+                                                        duration: 0.5,
+                                                        ease: "power2.inOut"
+                                                    });
+                                                } else {
+                                                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].to(c, {
+                                                        filter: "blur(0px)",
+                                                        opacity: 1,
+                                                        duration: 0.5,
+                                                        ease: "power2.inOut"
+                                                    });
+                                                }
                                             }
                                         }["RealtimeScrollCards.useEffect.ctx"]);
                                         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].to(card, {
@@ -215,6 +232,17 @@ function RealtimeScrollCards() {
                                             zIndex: 1,
                                             top: 0
                                         });
+                                        // Reset blur for ALL cards when scrolling back up
+                                        cardRefs.current.forEach({
+                                            "RealtimeScrollCards.useEffect.ctx": (c)=>{
+                                                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["gsap"].to(c, {
+                                                    filter: "blur(0px)",
+                                                    opacity: 1,
+                                                    duration: 0.5,
+                                                    ease: "power2.inOut"
+                                                });
+                                            }
+                                        }["RealtimeScrollCards.useEffect.ctx"]);
                                     }
                                 }["RealtimeScrollCards.useEffect.ctx"]
                             });
@@ -265,31 +293,31 @@ function RealtimeScrollCards() {
         className: "bg-white py-10 relative",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "sticky lg:max-w-[75%] top-3 bg-white z-50 rounded-full border-black/50 border-1 py-2 px-2 md:px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar",
+                className: "sticky lg:max-w-[75%] top-10 lg:top-3 bg-white z-50 rounded-full border-black/50 border-1 py-2 px-2 md:px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar",
                 children: solutions.map((card, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: ()=>handleScrollTo(index),
-                        className: "px-5 py-3  rounded-full text-[14px] md:text-[18px] text-nowrap font-thin transition-all ".concat(activeCard === index ? "bg-[#EFAF00] text-black" : "bg-[#F9F9F9] text-black"),
+                        className: "px-2 lg:px-5 py-1 lg:py-3  rounded-full text-[12px]  md:text-[18px] text-nowrap font-thin transition-all ".concat(activeCard === index ? "bg-[#EFAF00] text-black" : "bg-[#F9F9F9] text-black"),
                         children: card.title
                     }, index, false, {
                         fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                        lineNumber: 109,
+                        lineNumber: 137,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                lineNumber: 107,
+                lineNumber: 135,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative container mx-auto px-4",
                 style: {
-                    minHeight: "".concat(solutions.length * 100, "vh")
+                    minHeight: "".concat(solutions.length * 50, "vh")
                 },
                 children: solutions.map((card, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         ref: (el)=>{
                             if (el) cardRefs.current[i] = el;
                         },
-                        className: "relative ".concat(i > 0 ? "mt-[100vh]" : ""),
+                        className: "relative ".concat(i > 0 ? "mt-[50vh] md:mt-[100vh]" : ""),
                         "data-index": i,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-6xl mx-auto",
@@ -302,51 +330,51 @@ function RealtimeScrollCards() {
                                             children: i + 1
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                                            lineNumber: 139,
+                                            lineNumber: 168,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                            className: "text-3xl font-thin text-gray-800 leading-snug",
+                                            className: " text-lg lg:text-3xl font-thin text-gray-800 leading-snug",
                                             children: card.title
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                                            lineNumber: 142,
+                                            lineNumber: 171,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                                    lineNumber: 138,
+                                    lineNumber: 167,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-gray-700 text-lg mt-4 leading-relaxed",
+                                    className: "text-gray-700 text-sm lg:text-lg mt-4 leading-relaxed",
                                     children: card.description
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                                    lineNumber: 148,
+                                    lineNumber: 177,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                            lineNumber: 136,
+                            lineNumber: 165,
                             columnNumber: 13
                         }, this)
                     }, i, false, {
                         fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                        lineNumber: 128,
+                        lineNumber: 157,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-                lineNumber: 123,
+                lineNumber: 151,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/sections/RealtimeSystems.tsx",
-        lineNumber: 105,
+        lineNumber: 133,
         columnNumber: 5
     }, this);
 }
@@ -988,7 +1016,7 @@ const Header = ()=>{
                             alt: (branding === null || branding === void 0 ? void 0 : branding.site_title) || "Logo",
                             width: 180,
                             height: 60,
-                            className: "h-auto  w-[120px] md:w-[150px] "
+                            className: "h-auto  w-[120px] lg:w-[130px]  xl:w-[150px] "
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/Header.tsx",
                             lineNumber: 257,
@@ -1125,18 +1153,18 @@ const Header = ()=>{
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "hidden lg:flex items-center space-x-4",
+                        className: "hidden lg:flex items-center lg:space-x-1 xl:space-x-4",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 href: "https://play.google.com/store/apps/details?id=com.realtimecamsmarthome",
-                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105",
+                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 xl:py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         src: "/images/gplay.png",
                                         alt: "App Icon",
                                         width: 25,
                                         height: 25,
-                                        className: "h-7 w-7"
+                                        className: "h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
                                         lineNumber: 371,
@@ -1146,7 +1174,7 @@ const Header = ()=>{
                                         className: "ml-2",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-[12px]",
+                                                className: "text-[12px] lg:text-[10px] xl:text-[12px]",
                                                 children: "REALTIME MOBILE"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
@@ -1154,7 +1182,7 @@ const Header = ()=>{
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "font-bold",
+                                                className: "lg:text-[9px] font-bold",
                                                 children: "SMART APP"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
@@ -1175,14 +1203,14 @@ const Header = ()=>{
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 href: "https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime",
-                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105",
+                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                         src: "/images/gplay.png",
                                         alt: "App Icon",
                                         width: 25,
                                         height: 25,
-                                        className: "h-7 w-7"
+                                        className: "h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
                                         lineNumber: 386,
@@ -1192,7 +1220,7 @@ const Header = ()=>{
                                         className: "ml-2",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "text-[12px]",
+                                                className: "text-[12px] lg:text-[10px] xl:text-[12px]",
                                                 children: "REALTIME MOBILE"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
@@ -1200,7 +1228,7 @@ const Header = ()=>{
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "font-bold text-orange-500",
+                                                className: "lg:text-[9px] font-bold text-orange-500",
                                                 children: "ATTENDANCE APP"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
@@ -1741,7 +1769,7 @@ const Header = ()=>{
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "hidden md:block bg-white py-3",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "container mx-auto px-4 flex flex-col md:flex-row items-center justify-between",
+                    className: "container mx-auto lg:px-4 flex flex-col md:flex-row items-center justify-between",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             ref: searchRef,
@@ -1756,7 +1784,7 @@ const Header = ()=>{
                                             value: searchQuery,
                                             onChange: (e)=>setSearchQuery(e.target.value),
                                             onFocus: ()=>searchQuery.trim() && setShowSearchDropdown(true),
-                                            className: "w-full py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
+                                            className: " w-[85%] lg:w-full py-1 lg:py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
                                             lineNumber: 691,
@@ -1764,7 +1792,7 @@ const Header = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             type: "submit",
-                                            className: "absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500",
+                                            className: "absolute right-4  md:right-20 lg:right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500",
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                 xmlns: "http://www.w3.org/2000/svg",
                                                 className: "h-5 w-5",
@@ -1938,11 +1966,11 @@ const Header = ()=>{
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex space-x-4",
+                            className: "flex space-x-2  lg:space-x-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     href: "/partner",
-                                    className: "bg-orange-500 border border-orange-500 text-white py-2 px-5 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
+                                    className: "bg-orange-500 border border-orange-500 text-white py-2 px-2 lg:px-5 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-xs lg:text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "BECOME A PARTNER"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
@@ -1951,7 +1979,7 @@ const Header = ()=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     href: "https://partner.markvisitor.com/",
-                                    className: "border border-orange-500 text-orange-500 text-center py-2 px-5 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
+                                    className: "border border-orange-500 text-orange-500 text-center py-2 px-2 lg:px-5 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-xs lg:text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "PARTNER LOG IN"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
@@ -1960,7 +1988,7 @@ const Header = ()=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     href: "/pay",
-                                    className: "bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-5 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
+                                    className: "bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-2 lg:px-5 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-xs lg:text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "PAY ONLINE"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",

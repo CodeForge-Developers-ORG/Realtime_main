@@ -281,7 +281,7 @@ const Footer = ()=>{
                         alt: "Footer Logo",
                         width: 200,
                         height: 100,
-                        className: "h-12 md:h-16 w-auto",
+                        className: "h-10 md:h-14 w-auto",
                         unoptimized: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Footer.tsx",
@@ -554,7 +554,7 @@ const Header = ()=>{
                             alt: branding?.site_title || "Logo",
                             width: 180,
                             height: 60,
-                            className: "h-auto w-auto max-w-[140px] md:max-w-[180px]"
+                            className: "h-auto  w-[120px] md:w-[150px] "
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/Header.tsx",
                             lineNumber: 257,
@@ -694,7 +694,7 @@ const Header = ()=>{
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "https://play.google.com/store/apps/details?id=com.realtimecamsmarthome",
-                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105",
+                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         src: "/images/gplay.png",
@@ -740,7 +740,7 @@ const Header = ()=>{
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: "https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime",
-                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-6 py-3 rounded-xl transition-transform hover:scale-105",
+                                className: "flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-5 py-2 rounded-xl transition-transform hover:scale-105",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         src: "/images/gplay.png",
@@ -1151,7 +1151,7 @@ const Header = ()=>{
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/partner",
                                         onClick: closeMobileMenu,
-                                        className: "block bg-orange-500 border border-orange-500 text-white py-3 px-6 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-md font-light tracking-[1] text-center",
+                                        className: "block bg-orange-500 border border-orange-500 text-white py-3 px-5 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-sm tracking-[1] text-center",
                                         children: "BECOME A PARTNER"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
@@ -1161,7 +1161,7 @@ const Header = ()=>{
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         href: "https://partner.markvisitor.com/",
                                         onClick: closeMobileMenu,
-                                        className: "block border border-orange-500 text-orange-500 text-center py-3 px-6 rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-md font-light tracking-[1]",
+                                        className: "block border border-orange-500 text-orange-500 text-center  py-3 px-5  rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-sm font-light tracking-[1]",
                                         children: "PARTNER LOG IN"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
@@ -1171,7 +1171,7 @@ const Header = ()=>{
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                         href: "/pay",
                                         onClick: closeMobileMenu,
-                                        className: "block bg-yellow-500 border border-yellow-500 text-black text-center py-3 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-md font-light tracking-[1]",
+                                        className: "block bg-yellow-500 border border-yellow-500 text-black text-center  py-3 px-5  rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-sm font-light tracking-[1]",
                                         children: "PAY ONLINE"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
@@ -1500,7 +1500,7 @@ const Header = ()=>{
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     href: "/partner",
-                                    className: "bg-orange-500 border border-orange-500 text-white py-2 px-6 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center",
+                                    className: "bg-orange-500 border border-orange-500 text-white py-2 px-5 rounded-[8px] hover:bg-orange-600 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "BECOME A PARTNER"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
@@ -1509,7 +1509,7 @@ const Header = ()=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     href: "https://partner.markvisitor.com/",
-                                    className: "border border-orange-500 text-orange-500 text-center py-2 px-6 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center",
+                                    className: "border border-orange-500 text-orange-500 text-center py-2 px-5 rounded-[8px] hover:bg-orange-50 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "PARTNER LOG IN"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
@@ -1518,7 +1518,7 @@ const Header = ()=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     href: "/pay",
-                                    className: "bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-6 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-md font-light tracking-[1] flex items-center justify-center",
+                                    className: "bg-yellow-500 border border-yellow-500 text-black text-center py-2 px-5 rounded-[8px] hover:bg-yellow-400 transform hover:-translate-y-0.5 transition-all text-sm font-light tracking-[1] flex items-center justify-center",
                                     children: "PAY ONLINE"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",

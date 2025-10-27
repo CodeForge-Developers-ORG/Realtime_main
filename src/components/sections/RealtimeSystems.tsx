@@ -44,13 +44,13 @@ export default function RealtimeScrollCards() {
         if (!card) return;
 
         if (i === 0) {
-          gsap.set(card, { position: "sticky", top: "20vh", zIndex: 1 });
+          gsap.set(card, { position: "sticky", top: "35vh", zIndex: 1 });
         }
 
         ScrollTrigger.create({
           trigger: card,
           start: "top center", // Changed from "top bottom" to "top center"
-          end: "top 20%",      // Changed from "top center" to "top 20%"
+          end: "top 25%",      // Changed from "top center" to "top 20%"
           scrub: true,
           onEnter: () => {
             setActiveCard(i);
@@ -111,6 +111,16 @@ export default function RealtimeScrollCards() {
 
     setActiveCard(index);
 
+    // Reset blur for ALL cards when clicking on any button
+    cardRefs.current.forEach((c) => {
+      gsap.to(c, { 
+        filter: "blur(0px)", 
+        opacity: 1, 
+        duration: 0.5,
+        ease: "power2.inOut"
+      });
+    });
+
     cardRefs.current.forEach((c, i) => {
       gsap.set(c, { zIndex: i === index ? 999 : i + 1 });
     });
@@ -132,12 +142,12 @@ export default function RealtimeScrollCards() {
   return (
     <section ref={containerRef} className="bg-white py-10 relative">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
-      <div className="sticky lg:max-w-[75%] top-10 lg:top-3 bg-white z-50 rounded-full border-black/50 border-1 py-2 px-2 md:px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
+      <div className="sticky lg:max-w-[75%] top-1 lg:top-3 bg-white z-50 sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
         {solutions.map((card, index) => (
           <button
             key={index}
             onClick={() => handleScrollTo(index)}
-            className={`px-2 lg:px-5 py-1 lg:py-3  rounded-full text-[12px]  md:text-[18px] text-nowrap font-thin transition-all ${activeCard === index
+            className={`px-4 lg:px-5 py-2 lg:py-3 w-full rounded-full text-[13px]  md:text-[18px] text-nowrap font-thin transition-all ${activeCard === index
                 ? "bg-[#EFAF00] text-black"
                 : "bg-[#F9F9F9] text-black"
               }`}

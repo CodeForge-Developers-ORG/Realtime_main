@@ -39,7 +39,7 @@ const ProductsSection = () => {
     <section className="py-5 md:py-20 bg-[#FFE8DF]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-3 md:mb-12">
-          <h2 className="text-xl  md:text-5xl lg:text-6xl font-[300] text-[#1E1410] mb-0 md:mb-4">
+          <h2 className="text-lg  md:text-4xl  font-[300] text-[#1E1410] mb-0 md:mb-4">
             Featured Products
           </h2>
           <p className="text-xs font-[300] md:text-[16px] text-[#1E1410] uppercase">
@@ -81,7 +81,7 @@ const ProductsSection = () => {
                         width={0}
                         height={0}
                         unoptimized
-                        className="h-[200] w-[200] object-contain"
+                        className="h-[100] lg:h-[200] w-[100] lg:w-[200] object-contain"
                       />
                     </div>
                     <div
@@ -106,7 +106,7 @@ const ProductsSection = () => {
         <div className="text-center mt-3 sm:mt-10">
           <Link
             href="/products"
-            className="inline-flex items-center bg-orange-500 text-sm sm:text-lg text-white px-2 sm:px-6 py-1 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition">
+            className="inline-flex items-center bg-orange-500 text-xs sm:text-lg text-white px-4 sm:px-6 py-2 sm:py-2 rounded-md font-medium hover:bg-orange-600 transition">
             VIEW ALL
             <svg
               xmlns="http://www.w3.org/2000/svg"

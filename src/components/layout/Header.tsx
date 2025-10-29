@@ -416,7 +416,7 @@ const Header = () => {
   if (!headerData) {
     return (
       <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Failed to load header
+        Failed to load header 
       </div>
     );
   }

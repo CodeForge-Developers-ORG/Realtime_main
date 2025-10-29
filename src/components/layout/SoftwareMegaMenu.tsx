@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
+import Portal from "../common/Portal";
 import DownloadModal from "../software/DownloadModal";
 
 type Software = {
@@ -41,7 +41,9 @@ const SoftwareMegaMenu = () => {
   const [activeSoftware, setActiveSoftware] = useState<string | null>(null);
   const [software, setSoftware] = useState<Software[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSoftware, setSelectedSoftware] = useState<Software | null>(null);
+  const [selectedSoftware, setSelectedSoftware] = useState<Software | null>(
+    null
+  );
 
   // Fetch software from API
   useEffect(() => {
@@ -51,7 +53,7 @@ const SoftwareMegaMenu = () => {
         const response = await axiosClient.get("/content/software");
         const data = await response.data;
         console.log("Fetched software data:", data);
-        
+
         if (data.success) {
           const softwareData = data.data;
           setSoftware(softwareData);
@@ -178,8 +180,17 @@ const SoftwareMegaMenu = () => {
                     {/* Basic Information */}
                     <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
                       <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
-                        <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <svg
+                          className="w-4 h-4 text-orange-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
                         </svg>
                         Details
                       </h4>
@@ -187,100 +198,156 @@ const SoftwareMegaMenu = () => {
                         {activeSoftwareData.version && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">Version:</span>
-                            <span className="text-white">{activeSoftwareData.version}</span>
+                            <span className="text-white">
+                              {activeSoftwareData.version}
+                            </span>
                           </div>
                         )}
                         {activeSoftwareData.size && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">Size:</span>
-                            <span className="text-white">{formatFileSize(activeSoftwareData.size)}</span>
+                            <span className="text-white">
+                              {formatFileSize(activeSoftwareData.size)}
+                            </span>
                           </div>
                         )}
                         {activeSoftwareData.developer && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">Developer:</span>
-                            <span className="text-white">{activeSoftwareData.developer}</span>
+                            <span className="text-white">
+                              {activeSoftwareData.developer}
+                            </span>
                           </div>
                         )}
                         {activeSoftwareData.license && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">License:</span>
-                            <span className="text-white">{activeSoftwareData.license}</span>
+                            <span className="text-white">
+                              {activeSoftwareData.license}
+                            </span>
                           </div>
                         )}
                         {activeSoftwareData.main_category && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">Category:</span>
-                            <span className="text-white">{activeSoftwareData.main_category}</span>
+                            <span className="text-white">
+                              {activeSoftwareData.main_category}
+                            </span>
                           </div>
                         )}
                         {activeSoftwareData.sub_category && (
                           <div className="flex justify-between">
                             <span className="text-gray-400">Sub Category:</span>
-                            <span className="text-white">{activeSoftwareData.sub_category}</span>
+                            <span className="text-white">
+                              {activeSoftwareData.sub_category}
+                            </span>
                           </div>
                         )}
                       </div>
                     </div>
 
                     {/* Platforms */}
-                    {activeSoftwareData.platforms && activeSoftwareData.platforms.length > 0 && (
-                      <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                        <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
-                          <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                          Platforms
-                        </h4>
-                        <ul className="space-y-1">
-                          {activeSoftwareData.platforms.map((platform, index) => (
-                            <li key={index} className="text-gray-300 text-xs flex items-start gap-1">
-                              <span className="text-blue-400 mt-0.5">•</span>
-                              {platform}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                    {activeSoftwareData.platforms &&
+                      activeSoftwareData.platforms.length > 0 && (
+                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
+                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                            <svg
+                              className="w-4 h-4 text-blue-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                              />
+                            </svg>
+                            Platforms
+                          </h4>
+                          <ul className="space-y-1">
+                            {activeSoftwareData.platforms.map(
+                              (platform, index) => (
+                                <li
+                                  key={index}
+                                  className="text-gray-300 text-xs flex items-start gap-1">
+                                  <span className="text-blue-400 mt-0.5">
+                                    •
+                                  </span>
+                                  {platform}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      )}
 
                     {/* Requirements */}
-                    {activeSoftwareData.requirements && activeSoftwareData.requirements.length > 0 && (
-                      <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                        <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
-                          <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          Requirements
-                        </h4>
-                        <ul className="space-y-1">
-                          {activeSoftwareData.requirements.map((requirement, index) => (
-                            <li key={index} className="text-gray-300 text-xs flex items-start gap-1">
-                              <span className="text-green-400 mt-0.5">•</span>
-                              {requirement}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                    {activeSoftwareData.requirements &&
+                      activeSoftwareData.requirements.length > 0 && (
+                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
+                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                            <svg
+                              className="w-4 h-4 text-green-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            Requirements
+                          </h4>
+                          <ul className="space-y-1">
+                            {activeSoftwareData.requirements.map(
+                              (requirement, index) => (
+                                <li
+                                  key={index}
+                                  className="text-gray-300 text-xs flex items-start gap-1">
+                                  <span className="text-green-400 mt-0.5">
+                                    •
+                                  </span>
+                                  {requirement}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      )}
 
                     {/* Tags */}
-                    {activeSoftwareData.tags && activeSoftwareData.tags.length > 0 && (
-                      <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                        <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
-                          <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                          </svg>
-                          Tags
-                        </h4>
-                        <div className="flex flex-wrap gap-1">
-                          {activeSoftwareData.tags.map((tag, index) => (
-                            <span key={index} className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
-                              {tag}
-                            </span>
-                          ))}
+                    {activeSoftwareData.tags &&
+                      activeSoftwareData.tags.length > 0 && (
+                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
+                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                            <svg
+                              className="w-4 h-4 text-purple-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24">
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                              />
+                            </svg>
+                            Tags
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            {activeSoftwareData.tags.map((tag, index) => (
+                              <span
+                                key={index}
+                                className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
                   </div>
 
                   {/* Download/External Link */}
@@ -288,14 +355,22 @@ const SoftwareMegaMenu = () => {
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => handleDownloadClick(activeSoftwareData)}
-                        className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2">
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                          />
                         </svg>
                         {activeSoftwareData.file ? "Download" : "Get Software"}
                       </button>
-                      
+
                       <Link
                         href={`/software/${activeSoftwareData.slug}`}
                         className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors flex items-center gap-1">
@@ -332,9 +407,7 @@ const SoftwareMegaMenu = () => {
                       />
                     </svg>
                   </div>
-                  <p className="text-gray-500 text-sm">
-                    No software selected
-                  </p>
+                  <p className="text-gray-500 text-sm">No software selected</p>
                 </div>
               )}
             </div>
@@ -342,18 +415,20 @@ const SoftwareMegaMenu = () => {
         </div>
       </div>
 
-      {/* Download Modal */}
+      {/* Download Modal with Portal - यह अब body में render होगा */}
       {selectedSoftware && (
-        <DownloadModal
-          software={{
-            id: selectedSoftware.id,
-            title: selectedSoftware.title,
-            version: selectedSoftware.version || "",
-            file: selectedSoftware.file,
-            external_url: selectedSoftware.external_url,
-          }}
-          onClose={() => setSelectedSoftware(null)}
-        />
+        <Portal>
+          <DownloadModal
+            software={{
+              id: selectedSoftware.id,
+              title: selectedSoftware.title,
+              version: selectedSoftware.version || "",
+              file: selectedSoftware.file,
+              external_url: selectedSoftware.external_url,
+            }}
+            onClose={() => setSelectedSoftware(null)}
+          />
+        </Portal>
       )}
 
       <style jsx>{`

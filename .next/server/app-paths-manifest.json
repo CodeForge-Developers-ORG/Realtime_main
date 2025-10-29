@@ -1,12 +1,5 @@
 {
-  "/about-us/page": "app/about-us/page.js",
-  "/blog/page": "app/blog/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
-  "/products/page": "app/products/page.js",
-  "/software/[title]/page": "app/software/[title]/page.js",
-  "/software/page": "app/software/page.js",
-  "/solutions/[title]/page": "app/solutions/[title]/page.js",
-  "/solutions/page": "app/solutions/page.js",
-  "/support/page": "app/support/page.js"
+  "/software/page": "app/software/page.js"
 }

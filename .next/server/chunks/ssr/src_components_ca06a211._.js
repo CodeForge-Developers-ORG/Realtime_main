@@ -953,22 +953,22 @@ const SoftwareMegaMenu = ()=>{
                         className: "animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                        lineNumber: 97,
+                        lineNumber: 100,
                         columnNumber: 13
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                    lineNumber: 96,
+                    lineNumber: 99,
                     columnNumber: 11
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                lineNumber: 95,
+                lineNumber: 98,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-            lineNumber: 94,
+            lineNumber: 97,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -989,7 +989,7 @@ const SoftwareMegaMenu = ()=>{
                                         children: "SOFTWARE"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 114,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1003,7 +1003,7 @@ const SoftwareMegaMenu = ()=>{
                                                         children: item.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 124,
+                                                        lineNumber: 127,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1014,7 +1014,7 @@ const SoftwareMegaMenu = ()=>{
                                                                 children: "Free"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 127,
+                                                                lineNumber: 130,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             item.main_category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1025,30 +1025,30 @@ const SoftwareMegaMenu = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 130,
+                                                                lineNumber: 133,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 125,
+                                                        lineNumber: 128,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, item.id, true, {
                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                lineNumber: 116,
+                                                lineNumber: 119,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                        lineNumber: 114,
+                                        lineNumber: 117,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                lineNumber: 110,
+                                lineNumber: 113,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1065,7 +1065,7 @@ const SoftwareMegaMenu = ()=>{
                                                         children: activeSoftwareData.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 144,
+                                                        lineNumber: 147,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1076,7 +1076,7 @@ const SoftwareMegaMenu = ()=>{
                                                                 children: "FREE"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 149,
+                                                                lineNumber: 152,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             activeSoftwareData.featured && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1087,14 +1087,14 @@ const SoftwareMegaMenu = ()=>{
                                                                         children: "⭐"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                        lineNumber: 155,
+                                                                        lineNumber: 158,
                                                                         columnNumber: 29
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     "Featured"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 154,
+                                                                lineNumber: 157,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             activeSoftwareData.download_count > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1105,24 +1105,24 @@ const SoftwareMegaMenu = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 160,
+                                                                lineNumber: 163,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 147,
+                                                        lineNumber: 150,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                lineNumber: 143,
+                                                lineNumber: 146,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 142,
+                                            lineNumber: 145,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1132,12 +1132,12 @@ const SoftwareMegaMenu = ()=>{
                                                 children: activeSoftwareData.one_line_description
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                lineNumber: 170,
+                                                lineNumber: 173,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 172,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1162,19 +1162,19 @@ const SoftwareMegaMenu = ()=>{
                                                                         className: "jsx-24e7c41c66268dec"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                        lineNumber: 181,
+                                                                        lineNumber: 188,
                                                                         columnNumber: 27
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 180,
+                                                                    lineNumber: 183,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 "Details"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 179,
+                                                            lineNumber: 182,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1188,62 +1188,12 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "Version:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 188,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-white",
-                                                                            children: activeSoftwareData.version
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 189,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 187,
-                                                                    columnNumber: 27
-                                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                                activeSoftwareData.size && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-24e7c41c66268dec" + " " + "flex justify-between",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-gray-400",
-                                                                            children: "Size:"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 194,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-white",
-                                                                            children: formatFileSize(activeSoftwareData.size)
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 195,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 193,
-                                                                    columnNumber: 27
-                                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                                activeSoftwareData.developer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "jsx-24e7c41c66268dec" + " " + "flex justify-between",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-gray-400",
-                                                                            children: "Developer:"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
                                                                             lineNumber: 200,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                             className: "jsx-24e7c41c66268dec" + " " + "text-white",
-                                                                            children: activeSoftwareData.developer
+                                                                            children: activeSoftwareData.version
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
                                                                             lineNumber: 201,
@@ -1255,6 +1205,56 @@ const SoftwareMegaMenu = ()=>{
                                                                     lineNumber: 199,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
+                                                                activeSoftwareData.size && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "jsx-24e7c41c66268dec" + " " + "flex justify-between",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-gray-400",
+                                                                            children: "Size:"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                            lineNumber: 208,
+                                                                            columnNumber: 29
+                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-white",
+                                                                            children: formatFileSize(activeSoftwareData.size)
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                            lineNumber: 209,
+                                                                            columnNumber: 29
+                                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                    lineNumber: 207,
+                                                                    columnNumber: 27
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                activeSoftwareData.developer && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "jsx-24e7c41c66268dec" + " " + "flex justify-between",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-gray-400",
+                                                                            children: "Developer:"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                            lineNumber: 216,
+                                                                            columnNumber: 29
+                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            className: "jsx-24e7c41c66268dec" + " " + "text-white",
+                                                                            children: activeSoftwareData.developer
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                            lineNumber: 217,
+                                                                            columnNumber: 29
+                                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
+                                                                    lineNumber: 215,
+                                                                    columnNumber: 27
+                                                                }, ("TURBOPACK compile-time value", void 0)),
                                                                 activeSoftwareData.license && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     className: "jsx-24e7c41c66268dec" + " " + "flex justify-between",
                                                                     children: [
@@ -1263,7 +1263,7 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "License:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 206,
+                                                                            lineNumber: 224,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1271,13 +1271,13 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: activeSoftwareData.license
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 207,
+                                                                            lineNumber: 225,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 205,
+                                                                    lineNumber: 223,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 activeSoftwareData.main_category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1288,7 +1288,7 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "Category:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 212,
+                                                                            lineNumber: 232,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1296,13 +1296,13 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: activeSoftwareData.main_category
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 213,
+                                                                            lineNumber: 233,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 211,
+                                                                    lineNumber: 231,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 activeSoftwareData.sub_category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1313,7 +1313,7 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "Sub Category:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 218,
+                                                                            lineNumber: 240,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1321,25 +1321,25 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: activeSoftwareData.sub_category
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 219,
+                                                                            lineNumber: 241,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 217,
+                                                                    lineNumber: 239,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 185,
+                                                            lineNumber: 197,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                    lineNumber: 178,
+                                                    lineNumber: 181,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 activeSoftwareData.platforms && activeSoftwareData.platforms.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1361,20 +1361,20 @@ const SoftwareMegaMenu = ()=>{
                                                                         className: "jsx-24e7c41c66268dec"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                        lineNumber: 230,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 259,
+                                                                        columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 229,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 254,
+                                                                    columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 "Platforms"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 228,
-                                                            columnNumber: 25
+                                                            lineNumber: 253,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                                             className: "jsx-24e7c41c66268dec" + " " + "space-y-1",
@@ -1386,26 +1386,26 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "•"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 237,
-                                                                            columnNumber: 31
+                                                                            lineNumber: 274,
+                                                                            columnNumber: 35
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         platform
                                                                     ]
                                                                 }, index, true, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 236,
-                                                                    columnNumber: 29
+                                                                    lineNumber: 271,
+                                                                    columnNumber: 33
                                                                 }, ("TURBOPACK compile-time value", void 0)))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 234,
-                                                            columnNumber: 25
+                                                            lineNumber: 268,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                    lineNumber: 227,
-                                                    columnNumber: 23
+                                                    lineNumber: 252,
+                                                    columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 activeSoftwareData.requirements && activeSoftwareData.requirements.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "jsx-24e7c41c66268dec" + " " + "bg-[#424141] rounded-lg p-3 border border-gray-700",
@@ -1426,20 +1426,20 @@ const SoftwareMegaMenu = ()=>{
                                                                         className: "jsx-24e7c41c66268dec"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                        lineNumber: 250,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 295,
+                                                                        columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 249,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 290,
+                                                                    columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 "Requirements"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 248,
-                                                            columnNumber: 25
+                                                            lineNumber: 289,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
                                                             className: "jsx-24e7c41c66268dec" + " " + "space-y-1",
@@ -1451,26 +1451,26 @@ const SoftwareMegaMenu = ()=>{
                                                                             children: "•"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                            lineNumber: 257,
-                                                                            columnNumber: 31
+                                                                            lineNumber: 310,
+                                                                            columnNumber: 35
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         requirement
                                                                     ]
                                                                 }, index, true, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 256,
-                                                                    columnNumber: 29
+                                                                    lineNumber: 307,
+                                                                    columnNumber: 33
                                                                 }, ("TURBOPACK compile-time value", void 0)))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 254,
-                                                            columnNumber: 25
+                                                            lineNumber: 304,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                    lineNumber: 247,
-                                                    columnNumber: 23
+                                                    lineNumber: 288,
+                                                    columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 activeSoftwareData.tags && activeSoftwareData.tags.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "jsx-24e7c41c66268dec" + " " + "bg-[#424141] rounded-lg p-3 border border-gray-700",
@@ -1491,20 +1491,20 @@ const SoftwareMegaMenu = ()=>{
                                                                         className: "jsx-24e7c41c66268dec"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                        lineNumber: 270,
-                                                                        columnNumber: 29
+                                                                        lineNumber: 331,
+                                                                        columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 269,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 326,
+                                                                    columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 "Tags"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 268,
-                                                            columnNumber: 25
+                                                            lineNumber: 325,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "jsx-24e7c41c66268dec" + " " + "flex flex-wrap gap-1",
@@ -1513,24 +1513,24 @@ const SoftwareMegaMenu = ()=>{
                                                                     children: tag
                                                                 }, index, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 276,
-                                                                    columnNumber: 29
+                                                                    lineNumber: 342,
+                                                                    columnNumber: 31
                                                                 }, ("TURBOPACK compile-time value", void 0)))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                            lineNumber: 274,
-                                                            columnNumber: 25
+                                                            lineNumber: 340,
+                                                            columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                    lineNumber: 267,
-                                                    columnNumber: 23
+                                                    lineNumber: 324,
+                                                    columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 176,
+                                            lineNumber: 179,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1555,19 +1555,19 @@ const SoftwareMegaMenu = ()=>{
                                                                     className: "jsx-24e7c41c66268dec"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 293,
+                                                                    lineNumber: 364,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 292,
+                                                                lineNumber: 359,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             activeSoftwareData.file ? "Download" : "Get Software"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 288,
+                                                        lineNumber: 356,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1588,29 +1588,29 @@ const SoftwareMegaMenu = ()=>{
                                                                     className: "jsx-24e7c41c66268dec"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                    lineNumber: 307,
+                                                                    lineNumber: 383,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                                lineNumber: 302,
+                                                                lineNumber: 378,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                        lineNumber: 298,
+                                                        lineNumber: 374,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                lineNumber: 287,
+                                                lineNumber: 355,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 286,
+                                            lineNumber: 354,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
@@ -1632,17 +1632,17 @@ const SoftwareMegaMenu = ()=>{
                                                     className: "jsx-24e7c41c66268dec"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                    lineNumber: 326,
+                                                    lineNumber: 402,
                                                     columnNumber: 23
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                                lineNumber: 321,
+                                                lineNumber: 397,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 320,
+                                            lineNumber: 396,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1650,37 +1650,37 @@ const SoftwareMegaMenu = ()=>{
                                             children: "No software selected"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                            lineNumber: 334,
+                                            lineNumber: 410,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                    lineNumber: 319,
+                                    lineNumber: 395,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                                lineNumber: 139,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                        lineNumber: 108,
+                        lineNumber: 111,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                    lineNumber: 107,
+                    lineNumber: 110,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                lineNumber: 106,
+                lineNumber: 109,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
-            selectedSoftware && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DownloadModal, {
+            selectedSoftware && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DownloadModalHeader, {
                 software: {
                     id: selectedSoftware.id,
                     title: selectedSoftware.title,
@@ -1691,8 +1691,8 @@ const SoftwareMegaMenu = ()=>{
                 onClose: ()=>setSelectedSoftware(null)
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/SoftwareMegaMenu.tsx",
-                lineNumber: 346,
-                columnNumber: 9
+                lineNumber: 420,
+                columnNumber: 11
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 id: "24e7c41c66268dec",
@@ -2320,6 +2320,27 @@ const renderChildItems = (children, closeMenu)=>{
         }, ("TURBOPACK compile-time value", void 0));
     }).filter(Boolean);
 };
+// Responsive Mega Menu Wrapper Component
+const ResponsiveMegaMenu = ({ children, isMobile = false })=>{
+    if (isMobile) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "md:hidden bg-[#2B2B2B] border-t border-gray-700 mt-2 mx-4 rounded-lg",
+            children: children
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/Header.tsx",
+            lineNumber: 130,
+            columnNumber: 7
+        }, ("TURBOPACK compile-time value", void 0));
+    }
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "hidden md:block absolute left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300",
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/src/components/layout/Header.tsx",
+        lineNumber: 137,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+};
 const Header = ()=>{
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
@@ -2329,6 +2350,7 @@ const Header = ()=>{
     const [showSearchDropdown, setShowSearchDropdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isSearching, setIsSearching] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [activeDropdown, setActiveDropdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [activeMegaMenu, setActiveMegaMenu] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [headerData, setHeaderData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(headerDataCache);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(!headerDataCache);
     const dropdownRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -2475,12 +2497,14 @@ const Header = ()=>{
         const handleClickOutside = (event)=>{
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setActiveDropdown(null);
+                setActiveMegaMenu(null);
             }
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setShowSearchDropdown(false);
             }
             if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && !event.target.closest('button[aria-label="Mobile menu"]')) {
                 setMobileMenuOpen(false);
+                setActiveMegaMenu(null);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
@@ -2516,12 +2540,41 @@ const Header = ()=>{
     const toggleDropdown = (title)=>{
         setActiveDropdown(activeDropdown === title ? null : title);
     };
+    const toggleMegaMenu = (title)=>{
+        setActiveMegaMenu(activeMegaMenu === title ? null : title);
+    };
     const closeMobileMenu = ()=>{
         setMobileMenuOpen(false);
         setActiveDropdown(null);
+        setActiveMegaMenu(null);
         setSearchQuery("");
         setSearchResults([]);
         setShowSearchDropdown(false);
+    };
+    // Render mega menu for mobile
+    const renderMobileMegaMenu = (type)=>{
+        switch(type.toLowerCase()){
+            case "products":
+                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$ProductsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                    fileName: "[project]/src/components/layout/Header.tsx",
+                    lineNumber: 400,
+                    columnNumber: 16
+                }, ("TURBOPACK compile-time value", void 0));
+            case "solutions":
+                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SolutionsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                    fileName: "[project]/src/components/layout/Header.tsx",
+                    lineNumber: 402,
+                    columnNumber: 16
+                }, ("TURBOPACK compile-time value", void 0));
+            case "software":
+                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SoftwareMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                    fileName: "[project]/src/components/layout/Header.tsx",
+                    lineNumber: 404,
+                    columnNumber: 16
+                }, ("TURBOPACK compile-time value", void 0));
+            default:
+                return null;
+        }
     };
     if (loading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2529,7 +2582,7 @@ const Header = ()=>{
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/src/components/layout/Header.tsx",
-            lineNumber: 373,
+            lineNumber: 412,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -2539,7 +2592,7 @@ const Header = ()=>{
             children: "Failed to load header"
         }, void 0, false, {
             fileName: "[project]/src/components/layout/Header.tsx",
-            lineNumber: 379,
+            lineNumber: 418,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -2548,7 +2601,7 @@ const Header = ()=>{
         className: "w-full bg-[#2B2B2B] text-white z-50 relative",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "container mx-auto px-6 py-4 flex items-center justify-between",
+                className: "container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         href: "/",
@@ -2558,19 +2611,19 @@ const Header = ()=>{
                             alt: branding?.site_title || "Logo",
                             width: 180,
                             height: 60,
-                            className: "h-auto  w-[120px] lg:w-[130px]  xl:w-[150px] "
+                            className: "h-auto w-[120px] lg:w-[130px] xl:w-[150px]"
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/Header.tsx",
-                            lineNumber: 394,
+                            lineNumber: 433,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 391,
+                        lineNumber: 430,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                        className: "hidden md:flex items-center space-x-8 text-lg",
+                        className: "hidden md:flex items-center space-x-4 lg:space-x-8 text-lg",
                         ref: dropdownRef,
                         children: navigation.map((item, index)=>{
                             if (!item?.title || item.title.trim() === "") {
@@ -2583,7 +2636,7 @@ const Header = ()=>{
                                     children: item.title
                                 }, index, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 415,
+                                    lineNumber: 453,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0));
                             }
@@ -2613,18 +2666,18 @@ const Header = ()=>{
                                                         d: "M19 9l-7 7-7-7"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 449,
+                                                        lineNumber: 487,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 443,
+                                                    lineNumber: 481,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 437,
+                                            lineNumber: 475,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         hasValidChildren(item.children) && !isProductsDropdown && !isSolutionsDropdown && !isSoftwareDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2632,28 +2685,46 @@ const Header = ()=>{
                                             children: renderChildItems(item.children)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 463,
+                                            lineNumber: 501,
                                             columnNumber: 23
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        isProductsDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$ProductsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                        isProductsDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ResponsiveMegaMenu, {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$ProductsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                                fileName: "[project]/src/components/layout/Header.tsx",
+                                                lineNumber: 509,
+                                                columnNumber: 23
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 469,
-                                            columnNumber: 42
+                                            lineNumber: 508,
+                                            columnNumber: 21
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        isSolutionsDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SolutionsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                        isSolutionsDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ResponsiveMegaMenu, {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SolutionsMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                                fileName: "[project]/src/components/layout/Header.tsx",
+                                                lineNumber: 516,
+                                                columnNumber: 23
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 472,
-                                            columnNumber: 43
+                                            lineNumber: 515,
+                                            columnNumber: 21
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        isSoftwareDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SoftwareMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                        isSoftwareDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ResponsiveMegaMenu, {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$layout$2f$SoftwareMegaMenu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                                fileName: "[project]/src/components/layout/Header.tsx",
+                                                lineNumber: 523,
+                                                columnNumber: 23
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 475,
-                                            columnNumber: 42
+                                            lineNumber: 522,
+                                            columnNumber: 21
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 436,
+                                    lineNumber: 474,
                                     columnNumber: 17
                                 }, ("TURBOPACK compile-time value", void 0));
                             }
@@ -2661,7 +2732,7 @@ const Header = ()=>{
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 405,
+                        lineNumber: 443,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     !mobileMenuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2681,17 +2752,17 @@ const Header = ()=>{
                                 d: "M4 6h16M4 12h16M4 18h16"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 495,
+                                lineNumber: 545,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/Header.tsx",
-                            lineNumber: 489,
+                            lineNumber: 539,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 485,
+                        lineNumber: 535,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2709,7 +2780,7 @@ const Header = ()=>{
                                         className: "h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 510,
+                                        lineNumber: 560,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2720,7 +2791,7 @@ const Header = ()=>{
                                                 children: "REALTIME MOBILE"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 518,
+                                                lineNumber: 568,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2728,19 +2799,19 @@ const Header = ()=>{
                                                 children: "SMART APP"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 521,
+                                                lineNumber: 571,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 517,
+                                        lineNumber: 567,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 507,
+                                lineNumber: 557,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2755,7 +2826,7 @@ const Header = ()=>{
                                         className: "h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 527,
+                                        lineNumber: 577,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2766,7 +2837,7 @@ const Header = ()=>{
                                                 children: "REALTIME MOBILE"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 535,
+                                                lineNumber: 585,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2774,31 +2845,31 @@ const Header = ()=>{
                                                 children: "ATTENDANCE APP"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 538,
+                                                lineNumber: 588,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 534,
+                                        lineNumber: 584,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 524,
+                                lineNumber: 574,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 506,
+                        lineNumber: 556,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/Header.tsx",
-                lineNumber: 390,
+                lineNumber: 429,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2825,17 +2896,17 @@ const Header = ()=>{
                                 d: "M6 18L18 6M6 6l12 12"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 563,
+                                lineNumber: 613,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/Header.tsx",
-                            lineNumber: 557,
+                            lineNumber: 607,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 553,
+                        lineNumber: 603,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2855,12 +2926,13 @@ const Header = ()=>{
                                             children: item.title
                                         }, index, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 582,
+                                            lineNumber: 632,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0));
                                     }
                                     if (item.type === "dropdown") {
                                         const hasChildren = hasValidChildren(item.children);
+                                        const isMegaMenu = item.title?.toLowerCase() === "products" || item.title?.toLowerCase() === "solutions" || item.title?.toLowerCase() === "software";
                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "border-b border-[#333]",
                                             children: [
@@ -2874,15 +2946,21 @@ const Header = ()=>{
                                                             children: item.title
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 602,
+                                                            lineNumber: 656,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        hasChildren && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                            onClick: ()=>toggleDropdown(item.title || ""),
+                                                        (hasChildren || isMegaMenu) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            onClick: ()=>{
+                                                                if (isMegaMenu) {
+                                                                    toggleMegaMenu(item.title || "");
+                                                                } else {
+                                                                    toggleDropdown(item.title || "");
+                                                                }
+                                                            },
                                                             className: "text-gray-300 px-2 hover:text-orange-500 transition-colors",
                                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                                                                 xmlns: "http://www.w3.org/2000/svg",
-                                                                className: `h-5 w-5 transition-transform duration-300 ${activeDropdown === item.title ? "rotate-180 text-orange-500" : ""}`,
+                                                                className: `h-5 w-5 transition-transform duration-300 ${activeDropdown === item.title || activeMegaMenu === item.title ? "rotate-180 text-orange-500" : ""}`,
                                                                 fill: "none",
                                                                 viewBox: "0 0 24 24",
                                                                 stroke: "currentColor",
@@ -2893,23 +2971,23 @@ const Header = ()=>{
                                                                     d: "M19 9l-7 7-7-7"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 623,
+                                                                    lineNumber: 683,
                                                                     columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                                lineNumber: 613,
+                                                                lineNumber: 673,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 610,
+                                                            lineNumber: 664,
                                                             columnNumber: 25
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 601,
+                                                    lineNumber: 655,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 activeDropdown === item.title && hasChildren && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2917,13 +2995,21 @@ const Header = ()=>{
                                                     children: renderChildItems(item.children, closeMobileMenu)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 635,
+                                                    lineNumber: 696,
+                                                    columnNumber: 23
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                activeMegaMenu === item.title && isMegaMenu && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ResponsiveMegaMenu, {
+                                                    isMobile: true,
+                                                    children: renderMobileMegaMenu(item.title)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/layout/Header.tsx",
+                                                    lineNumber: 703,
                                                     columnNumber: 23
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, index, true, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 600,
+                                            lineNumber: 654,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0));
                                     }
@@ -2931,7 +3017,7 @@ const Header = ()=>{
                                 })
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 574,
+                                lineNumber: 624,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2951,7 +3037,7 @@ const Header = ()=>{
                                                     className: "w-full py-3 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 653,
+                                                    lineNumber: 721,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2970,23 +3056,23 @@ const Header = ()=>{
                                                             d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 672,
+                                                            lineNumber: 740,
                                                             columnNumber: 21
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 666,
+                                                        lineNumber: 734,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 663,
+                                                    lineNumber: 731,
                                                     columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 652,
+                                            lineNumber: 720,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         showSearchDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2998,7 +3084,7 @@ const Header = ()=>{
                                                         className: "animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 686,
+                                                        lineNumber: 754,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3006,13 +3092,13 @@ const Header = ()=>{
                                                         children: "Searching..."
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 687,
+                                                        lineNumber: 755,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 685,
+                                                lineNumber: 753,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)) : searchResults.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "py-2",
@@ -3030,7 +3116,7 @@ const Header = ()=>{
                                                                     height: 25
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 698,
+                                                                    lineNumber: 766,
                                                                     columnNumber: 31
                                                                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     className: "w-10 h-10 bg-gray-200 rounded flex items-center justify-center",
@@ -3047,17 +3133,17 @@ const Header = ()=>{
                                                                             d: "M4 6h16M4 12h16M4 18h16"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                                            lineNumber: 713,
+                                                                            lineNumber: 781,
                                                                             columnNumber: 35
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                                        lineNumber: 707,
+                                                                        lineNumber: 775,
                                                                         columnNumber: 33
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 706,
+                                                                    lineNumber: 774,
                                                                     columnNumber: 31
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3068,7 +3154,7 @@ const Header = ()=>{
                                                                             children: product.title
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                                            lineNumber: 723,
+                                                                            lineNumber: 791,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         product.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3079,29 +3165,29 @@ const Header = ()=>{
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                                            lineNumber: 727,
+                                                                            lineNumber: 795,
                                                                             columnNumber: 33
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 722,
+                                                                    lineNumber: 790,
                                                                     columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 696,
+                                                            lineNumber: 764,
                                                             columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     }, product.id, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 692,
+                                                        lineNumber: 760,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0)))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 690,
+                                                lineNumber: 758,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)) : searchQuery.trim() ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 className: "p-4 text-center text-gray-500",
@@ -3112,23 +3198,23 @@ const Header = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 739,
+                                                lineNumber: 807,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)) : null
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 683,
+                                            lineNumber: 751,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 648,
+                                    lineNumber: 716,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 647,
+                                lineNumber: 715,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3141,7 +3227,7 @@ const Header = ()=>{
                                         children: "BECOME A PARTNER"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 750,
+                                        lineNumber: 818,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3151,7 +3237,7 @@ const Header = ()=>{
                                         children: "PARTNER LOG IN"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 756,
+                                        lineNumber: 824,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3161,13 +3247,13 @@ const Header = ()=>{
                                         children: "PAY ONLINE"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 762,
+                                        lineNumber: 830,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 749,
+                                lineNumber: 817,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3186,7 +3272,7 @@ const Header = ()=>{
                                                 className: "h-6 w-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 776,
+                                                lineNumber: 844,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3197,7 +3283,7 @@ const Header = ()=>{
                                                         children: "REALTIME MOBILE"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 784,
+                                                        lineNumber: 852,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3205,19 +3291,19 @@ const Header = ()=>{
                                                         children: "SMART APP"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 785,
+                                                        lineNumber: 853,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 783,
+                                                lineNumber: 851,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 772,
+                                        lineNumber: 840,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3233,7 +3319,7 @@ const Header = ()=>{
                                                 className: "h-6 w-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 792,
+                                                lineNumber: 860,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3244,7 +3330,7 @@ const Header = ()=>{
                                                         children: "REALTIME MOBILE"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 800,
+                                                        lineNumber: 868,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3252,37 +3338,37 @@ const Header = ()=>{
                                                         children: "ATTENDANCE APP"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                                        lineNumber: 801,
+                                                        lineNumber: 869,
                                                         columnNumber: 17
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 799,
+                                                lineNumber: 867,
                                                 columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 788,
+                                        lineNumber: 856,
                                         columnNumber: 13
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                lineNumber: 771,
+                                lineNumber: 839,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/layout/Header.tsx",
-                        lineNumber: 572,
+                        lineNumber: 622,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/Header.tsx",
-                lineNumber: 547,
+                lineNumber: 597,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3306,7 +3392,7 @@ const Header = ()=>{
                                             className: " w-[85%] lg:w-full py-1 lg:py-2 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 819,
+                                            lineNumber: 887,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3325,23 +3411,23 @@ const Header = ()=>{
                                                     d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 838,
+                                                    lineNumber: 906,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 832,
+                                                lineNumber: 900,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                            lineNumber: 829,
+                                            lineNumber: 897,
                                             columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 818,
+                                    lineNumber: 886,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 showSearchDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3353,7 +3439,7 @@ const Header = ()=>{
                                                 className: "animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 852,
+                                                lineNumber: 920,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3361,13 +3447,13 @@ const Header = ()=>{
                                                 children: "Searching..."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 853,
+                                                lineNumber: 921,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 851,
+                                        lineNumber: 919,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0)) : searchResults.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "py-2",
@@ -3385,7 +3471,7 @@ const Header = ()=>{
                                                             height: 25
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 864,
+                                                            lineNumber: 932,
                                                             columnNumber: 29
                                                         }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "w-10 h-10 bg-gray-200 rounded flex items-center justify-center",
@@ -3402,17 +3488,17 @@ const Header = ()=>{
                                                                     d: "M4 6h16M4 12h16M4 18h16"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 879,
+                                                                    lineNumber: 947,
                                                                     columnNumber: 33
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                                lineNumber: 873,
+                                                                lineNumber: 941,
                                                                 columnNumber: 31
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 872,
+                                                            lineNumber: 940,
                                                             columnNumber: 29
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3423,7 +3509,7 @@ const Header = ()=>{
                                                                     children: product.title
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 889,
+                                                                    lineNumber: 957,
                                                                     columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 product.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3434,29 +3520,29 @@ const Header = ()=>{
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                                    lineNumber: 893,
+                                                                    lineNumber: 961,
                                                                     columnNumber: 31
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/layout/Header.tsx",
-                                                            lineNumber: 888,
+                                                            lineNumber: 956,
                                                             columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                                    lineNumber: 862,
+                                                    lineNumber: 930,
                                                     columnNumber: 25
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, product.id, false, {
                                                 fileName: "[project]/src/components/layout/Header.tsx",
-                                                lineNumber: 858,
+                                                lineNumber: 926,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 856,
+                                        lineNumber: 924,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0)) : searchQuery.trim() ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "p-4 text-center text-gray-500",
@@ -3467,18 +3553,18 @@ const Header = ()=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/layout/Header.tsx",
-                                        lineNumber: 905,
+                                        lineNumber: 973,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0)) : null
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 849,
+                                    lineNumber: 917,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/layout/Header.tsx",
-                            lineNumber: 813,
+                            lineNumber: 881,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3490,7 +3576,7 @@ const Header = ()=>{
                                     children: "BECOME A PARTNER"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 914,
+                                    lineNumber: 982,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3499,7 +3585,7 @@ const Header = ()=>{
                                     children: "PARTNER LOG IN"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 919,
+                                    lineNumber: 987,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -3508,24 +3594,24 @@ const Header = ()=>{
                                     children: "PAY ONLINE"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/Header.tsx",
-                                    lineNumber: 924,
+                                    lineNumber: 992,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/layout/Header.tsx",
-                            lineNumber: 913,
+                            lineNumber: 981,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/layout/Header.tsx",
-                    lineNumber: 812,
+                    lineNumber: 880,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/Header.tsx",
-                lineNumber: 811,
+                lineNumber: 879,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             mobileMenuOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3533,13 +3619,13 @@ const Header = ()=>{
                 onClick: closeMobileMenu
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/Header.tsx",
-                lineNumber: 935,
+                lineNumber: 1003,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/layout/Header.tsx",
-        lineNumber: 388,
+        lineNumber: 427,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

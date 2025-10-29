@@ -7,9 +7,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import axiosClient from "@/services/axiosClient";
 import { baseUri } from "@/services/constant";
 import ProductsMegaMenu from "./ProductsMegaMenu";
+import SoftwareMegaMenu from "./SoftwareMegaMenu";
+import SolutionsMegaMenu from "./SolutionsMegaMenu";
 
 type ChildItem = {
-  children: unknown;
+  children?: ChildItem[];
   title: string | null;
   url: string;
   slug?: string;
@@ -64,6 +66,80 @@ type HeaderData = {
 
 let headerDataCache: HeaderData | null = null;
 
+// Helper function to check if children array has valid items
+const hasValidChildren = (children?: ChildItem[]): boolean => {
+  if (!children || !Array.isArray(children) || children.length === 0) {
+    return false;
+  }
+
+  // Check if there's at least one child with a title
+  return children.some((child) => child?.title && child.title.trim() !== "");
+};
+
+// Helper function to render child items safely
+const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
+  if (!hasValidChildren(children)) {
+    return null;
+  }
+
+  return children
+    .flatMap((child, childIndex) => {
+      if (!child?.title || child.title.trim() === "") {
+        return null;
+      }
+
+      // If child has its own children, render them recursively
+      if (hasValidChildren(child.children)) {
+        return (child.children as ChildItem[])
+          .map((subChild, subIndex) => {
+            if (!subChild?.title || subChild.title.trim() === "") {
+              return null;
+            }
+
+            return (
+              <Link
+                key={`${childIndex}-${subIndex}`}
+                href={subChild.url || "#"}
+                onClick={closeMenu}
+                className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+                {subChild.title}
+              </Link>
+            );
+          })
+          .filter(Boolean);
+      }
+
+      // Render single child item
+      return (
+        <Link
+          key={childIndex}
+          href={child.url || "#"}
+          onClick={closeMenu}
+          className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+          {child.title}
+        </Link>
+      );
+    })
+    .filter(Boolean);
+};
+
+// Responsive Mega Menu Wrapper Component
+const ResponsiveMegaMenu = ({ children, isMobile = false }: { children: React.ReactNode; isMobile?: boolean }) => {
+  if (isMobile) {
+    return (
+      <div className="md:hidden bg-[#2B2B2B] border-t border-gray-700 mt-2 mx-4 rounded-lg">
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <div className="hidden md:block absolute left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+      {children}
+    </div>
+  );
+};
+
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -73,6 +149,7 @@ const Header = () => {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [headerData, setHeaderData] = useState<HeaderData | null>(
     headerDataCache
   );
@@ -249,6 +326,7 @@ const Header = () => {
         !dropdownRef.current.contains(event.target as Node)
       ) {
         setActiveDropdown(null);
+        setActiveMegaMenu(null);
       }
       if (
         searchRef.current &&
@@ -262,6 +340,7 @@ const Header = () => {
         !(event.target as Element).closest('button[aria-label="Mobile menu"]')
       ) {
         setMobileMenuOpen(false);
+        setActiveMegaMenu(null);
       }
     };
 
@@ -301,12 +380,31 @@ const Header = () => {
     setActiveDropdown(activeDropdown === title ? null : title);
   };
 
+  const toggleMegaMenu = (title: string) => {
+    setActiveMegaMenu(activeMegaMenu === title ? null : title);
+  };
+
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
+    setActiveMegaMenu(null);
     setSearchQuery("");
     setSearchResults([]);
     setShowSearchDropdown(false);
+  };
+
+  // Render mega menu for mobile
+  const renderMobileMegaMenu = (type: string) => {
+    switch (type.toLowerCase()) {
+      case "products":
+        return <ProductsMegaMenu />;
+      case "solutions":
+        return <SolutionsMegaMenu />;
+      case "software":
+        return <SoftwareMegaMenu />;
+      default:
+        return null;
+    }
   };
 
   if (loading) {
@@ -318,7 +416,7 @@ const Header = () => {
   if (!headerData) {
     return (
       <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Failed to load header
+        Failed to load header 
       </div>
     );
   }
@@ -328,7 +426,7 @@ const Header = () => {
   return (
     <header className="w-full bg-[#2B2B2B] text-white z-50 relative">
       {/* Top Bar */}
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
@@ -337,20 +435,24 @@ const Header = () => {
             alt={branding?.site_title || "Logo"}
             width={180}
             height={60}
-            className="h-auto  w-[120px] lg:w-[130px]  xl:w-[150px] "
+            className="h-auto w-[120px] lg:w-[130px] xl:w-[150px]"
           />
         </Link>
 
         {/* Desktop Nav */}
         <nav
-          className="hidden md:flex items-center space-x-8 text-lg"
+          className="hidden md:flex items-center space-x-4 lg:space-x-8 text-lg"
           ref={dropdownRef}>
           {navigation.map((item, index) => {
+            if (!item?.title || item.title.trim() === "") {
+              return null;
+            }
+
             if (item.type === "single") {
               return (
                 <Link
                   key={index}
-                  href={item.url}
+                  href={item.url || "#"}
                   className={`font-[600] text-[14px] hover:text-orange-500 transition-colors ${
                     pathname === item.url ? "text-orange-500" : "text-white"
                   }`}>
@@ -360,14 +462,18 @@ const Header = () => {
             }
 
             if (item.type === "dropdown") {
-              // Check if this is the Products dropdown
+              // Check which mega menu to show
               const isProductsDropdown =
                 item.title?.toLowerCase() === "products";
+              const isSolutionsDropdown =
+                item.title?.toLowerCase() === "solutions";
+              const isSoftwareDropdown =
+                item.title?.toLowerCase() === "software";
 
               return (
                 <div key={index} className="relative group">
                   <Link
-                    href={item.url}
+                    href={item.url || "#"}
                     className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
                       pathname === item.url ? "text-orange-500" : "text-white"
                     }`}>
@@ -387,40 +493,35 @@ const Header = () => {
                     </svg>
                   </Link>
 
-                  {/* Regular Dropdown for non-products */}
-                  {item.children?.length && !isProductsDropdown && (
-                    <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                      {item.children.flatMap((child) => {
-                        if (
-                          Array.isArray(child.children) &&
-                          child.children.length
-                        ) {
-                          return (child.children as ChildItem[]).map(
-                            (sub, subIdx) => (
-                              <Link
-                                key={`${child.title}-${subIdx}`}
-                                href={sub.url}
-                                className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                                {sub.title || "Untitled"}
-                              </Link>
-                            )
-                          );
-                        }
-                        return (
-                          <Link
-                            key={child.title}
-                            href={child.url}
-                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
-                            {child.title || "Untitled"}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
+                  {/* Regular Dropdown for items without mega menu */}
+                  {hasValidChildren(item.children) &&
+                    !isProductsDropdown &&
+                    !isSolutionsDropdown &&
+                    !isSoftwareDropdown && (
+                      <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        {renderChildItems(item.children!)}
+                      </div>
+                    )}
 
                   {/* Mega Menu for Products */}
-                  {item.children?.length && isProductsDropdown && (
-                    <ProductsMegaMenu />
+                  {isProductsDropdown && (
+                    <ResponsiveMegaMenu>
+                      <ProductsMegaMenu />
+                    </ResponsiveMegaMenu>
+                  )}
+
+                  {/* Mega Menu for Solutions */}
+                  {isSolutionsDropdown && (
+                    <ResponsiveMegaMenu>
+                      <SolutionsMegaMenu />
+                    </ResponsiveMegaMenu>
+                  )}
+
+                  {/* Mega Menu for Software */}
+                  {isSoftwareDropdown && (
+                    <ResponsiveMegaMenu>
+                      <SoftwareMegaMenu />
+                    </ResponsiveMegaMenu>
                   )}
                 </div>
               );
@@ -464,7 +565,9 @@ const Header = () => {
               className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
             />
             <div className="ml-2">
-              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">REALTIME MOBILE</div>
+              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
+                REALTIME MOBILE
+              </div>
               <div className="lg:text-[9px] font-bold">SMART APP</div>
             </div>
           </Link>
@@ -479,8 +582,12 @@ const Header = () => {
               className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
             />
             <div className="ml-2">
-              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">REALTIME MOBILE</div>
-              <div className="lg:text-[9px] font-bold text-orange-500">ATTENDANCE APP</div>
+              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
+                REALTIME MOBILE
+              </div>
+              <div className="lg:text-[9px] font-bold text-orange-500">
+                ATTENDANCE APP
+              </div>
             </div>
           </Link>
         </div>
@@ -516,11 +623,15 @@ const Header = () => {
           {/* Navigation Links - UPAR */}
           <nav className="px-4 py-2 space-y-0">
             {navigation.map((item, index) => {
+              if (!item?.title || item.title.trim() === "") {
+                return null;
+              }
+
               if (item.type === "single") {
                 return (
                   <Link
                     key={index}
-                    href={item.url}
+                    href={item.url || "#"}
                     onClick={closeMobileMenu}
                     className={`block text-white py-4 font-medium border-b border-[#333] transition-colors ${
                       pathname === item.url
@@ -533,68 +644,65 @@ const Header = () => {
               }
 
               if (item.type === "dropdown") {
+                const hasChildren = hasValidChildren(item.children);
+                const isMegaMenu =
+                  item.title?.toLowerCase() === "products" ||
+                  item.title?.toLowerCase() === "solutions" ||
+                  item.title?.toLowerCase() === "software";
+
                 return (
                   <div key={index} className="border-b border-[#333]">
                     <div className="flex justify-between items-center py-4">
                       <Link
-                        href={item.url}
+                        href={item.url || "#"}
                         onClick={closeMobileMenu}
                         className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
                         {item.title}
                       </Link>
-                      <button
-                        onClick={() => toggleDropdown(item.title || "")}
-                        className="text-gray-300 px-2 hover:text-orange-500 transition-colors">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={`h-5 w-5 transition-transform duration-300 ${
-                            activeDropdown === item.title
-                              ? "rotate-180 text-orange-500"
-                              : ""
-                          }`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
+
+                      {(hasChildren || isMegaMenu) && (
+                        <button
+                          onClick={() => {
+                            if (isMegaMenu) {
+                              toggleMegaMenu(item.title || "");
+                            } else {
+                              toggleDropdown(item.title || "");
+                            }
+                          }}
+                          className="text-gray-300 px-2 hover:text-orange-500 transition-colors">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-5 w-5 transition-transform duration-300 ${
+                              (activeDropdown === item.title || activeMegaMenu === item.title)
+                                ? "rotate-180 text-orange-500"
+                                : ""
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                      )}
                     </div>
 
-                    {activeDropdown === item.title && item.children?.length && (
+                    {/* Regular Dropdown */}
+                    {activeDropdown === item.title && hasChildren && (
                       <div className="pl-4 pb-2 space-y-1">
-                        {item.children.flatMap((child, childIdx) => {
-                          if (
-                            Array.isArray(child.children) &&
-                            child.children.length
-                          ) {
-                            return (child.children as ChildItem[]).map(
-                              (sub, subIdx) => (
-                                <Link
-                                  key={`${childIdx}-${subIdx}`}
-                                  href={sub.url}
-                                  onClick={closeMobileMenu}
-                                  className="block text-gray-300 text-sm py-3 pl-2 border-b border-[#2a2a2a] hover:text-orange-500 transition-colors">
-                                  {sub.title || "Untitled"}
-                                </Link>
-                              )
-                            );
-                          }
-                          return (
-                            <Link
-                              key={childIdx}
-                              href={child.url}
-                              onClick={closeMobileMenu}
-                              className="block text-gray-300 text-sm py-3 pl-2 border-b border-[#2a2a2a] hover:text-orange-500 transition-colors">
-                              {child.title || "Untitled"}
-                            </Link>
-                          );
-                        })}
+                        {renderChildItems(item.children!, closeMobileMenu)}
                       </div>
+                    )}
+
+                    {/* Mega Menu Content */}
+                    {activeMegaMenu === item.title && isMegaMenu && (
+                      <ResponsiveMegaMenu isMobile={true}>
+                        {renderMobileMegaMenu(item.title)}
+                      </ResponsiveMegaMenu>
                     )}
                   </div>
                 );

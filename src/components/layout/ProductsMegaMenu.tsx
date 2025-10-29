@@ -47,6 +47,7 @@ const ProductsMegaMenu = () => {
         setLoading(true);
         const response = await axiosClient.get("/content/products");
         const data = await response.data;
+        console.log("Fetched products data:", data);
         if (data.success) {
           // Organize products by category
           const categoriesMap = new Map();

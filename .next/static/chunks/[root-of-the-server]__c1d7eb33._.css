@@ -973,26 +973,6 @@
     top: calc(var(--spacing) * 24);
   }
 
-  .top-40 {
-    top: calc(var(--spacing) * 40);
-  }
-
-  .top-50 {
-    top: calc(var(--spacing) * 50);
-  }
-
-  .top-60 {
-    top: calc(var(--spacing) * 60);
-  }
-
-  .top-100 {
-    top: calc(var(--spacing) * 100);
-  }
-
-  .top-160 {
-    top: calc(var(--spacing) * 160);
-  }
-
   .top-\[30px\] {
     top: 30px;
   }
@@ -1125,12 +1105,8 @@
     z-index: 50;
   }
 
-  .z-100, .z-\[100\] {
+  .z-\[100\] {
     z-index: 100;
-  }
-
-  .z-\[9999\] {
-    z-index: 9999;
   }
 
   .col-span-1 {
@@ -1556,10 +1532,6 @@
     height: calc(var(--spacing) * 64);
   }
 
-  .h-100 {
-    height: calc(var(--spacing) * 100);
-  }
-
   .h-110 {
     height: calc(var(--spacing) * 110);
   }
@@ -1582,10 +1554,6 @@
 
   .h-\[100\], .h-\[100px\] {
     height: 100px;
-  }
-
-  .h-\[100vh\] {
-    height: 100vh;
   }
 
   .h-\[200px\] {
@@ -1790,10 +1758,6 @@
 
   .w-\[100\] {
     width: 100px;
-  }
-
-  .w-\[100vh\] {
-    width: 100vh;
   }
 
   .w-\[120px\] {
@@ -2601,16 +2565,6 @@
     }
   }
 
-  .bg-black\/60 {
-    background-color: rgba(0, 0, 0, .6);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-black\/60 {
-      background-color: color-mix(in oklab, var(--color-black) 60%, transparent);
-    }
-  }
-
   .bg-blue-50 {
     background-color: var(--color-blue-50);
   }
@@ -3259,10 +3213,6 @@
     font-size: 20px;
   }
 
-  .text-\[26px\] {
-    font-size: 26px;
-  }
-
   .text-\[30px\] {
     font-size: 30px;
   }
@@ -3648,10 +3598,6 @@
     color: var(--color-yellow-700);
   }
 
-  .capitalize {
-    text-transform: capitalize;
-  }
-
   .uppercase {
     text-transform: uppercase;
   }
@@ -3679,11 +3625,6 @@
 
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgba(0, 0, 0, .1)), 0 1px 2px -1px var(--tw-shadow-color, rgba(0, 0, 0, .1));
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-
-  .shadow-2xl {
-    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgba(0, 0, 0, .25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
@@ -4132,12 +4073,6 @@
   @media (hover: hover) {
     .hover\:text-orange-300:hover {
       color: var(--color-orange-300);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:text-orange-400:hover {
-      color: var(--color-orange-400);
     }
   }
 

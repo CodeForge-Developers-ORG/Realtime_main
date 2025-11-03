@@ -123,21 +123,80 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
     .filter(Boolean);
 };
 
-// Responsive Mega Menu Wrapper Component
-const ResponsiveMegaMenu = ({ children, isMobile = false }: { children: React.ReactNode; isMobile?: boolean }) => {
-  if (isMobile) {
-    return (
-      <div className="md:hidden bg-[#2B2B2B] border-t border-gray-700 mt-2 mx-4 rounded-lg">
-        {children}
-      </div>
-    );
-  }
-
+// Responsive Mega Menu Wrapper Component - DESKTOP ONLY
+const ResponsiveMegaMenu = ({ 
+  children 
+}: { 
+  children: React.ReactNode;
+}) => {
   return (
     <div className="hidden md:block absolute left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
       {children}
     </div>
   );
+};
+
+// Mobile Dropdown Component - SIMPLE DROPDOWN
+const MobileDropdown = ({ 
+  children, 
+  title 
+}: { 
+  children: React.ReactNode; 
+  title?: string;
+}) => {
+  return (
+    <div className="md:hidden bg-[#2B2B2B] border border-gray-700 rounded-lg mx-4 my-2">
+      <div className="text-white font-medium p-3 border-b border-gray-600 text-sm bg-[#333] rounded-t-lg">
+        {title}
+      </div>
+      <div className="py-2">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+// Recursive function to render nested children in mobile view
+const renderMobileNestedChildren = (children: ChildItem[], closeMenu: () => void, level: number = 0) => {
+  if (!hasValidChildren(children)) {
+    return null;
+  }
+
+  return children.map((child, index) => {
+    if (!child?.title || child.title.trim() === "") {
+      return null;
+    }
+
+    const hasNestedChildren = hasValidChildren(child.children);
+    console.log("nes",child)
+    return (
+      <div key={index}>
+        <div className={`flex justify-between items-center ${level > 0 ? 'pl-4' : ''}`}>
+          <Link
+            href={child.url || "#"}
+            onClick={closeMenu}
+            className={`flex-1 py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 border-b border-gray-700 transition-colors ${
+              level > 0 ? 'text-sm' : ''
+            }`}>
+            {child.title}
+          </Link>
+          
+          {hasNestedChildren && (
+            <div className="px-4 text-gray-400 text-xs">
+              {child.children?.length} items
+            </div>
+          )}
+        </div>
+        
+        {/* Render nested children */}
+        {hasNestedChildren && (
+          <div className="bg-[#252525] border-l-2 border-orange-500">
+            {renderMobileNestedChildren(child.children!, closeMenu, level + 1)}
+          </div>
+        )}
+      </div>
+    );
+  });
 };
 
 const Header = () => {
@@ -341,6 +400,7 @@ const Header = () => {
       ) {
         setMobileMenuOpen(false);
         setActiveMegaMenu(null);
+        setActiveDropdown(null);
       }
     };
 
@@ -365,6 +425,7 @@ const Header = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setShowSearchDropdown(false);
+      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -378,10 +439,12 @@ const Header = () => {
 
   const toggleDropdown = (title: string) => {
     setActiveDropdown(activeDropdown === title ? null : title);
+    setActiveMegaMenu(null);
   };
 
   const toggleMegaMenu = (title: string) => {
     setActiveMegaMenu(activeMegaMenu === title ? null : title);
+    setActiveDropdown(null);
   };
 
   const closeMobileMenu = () => {
@@ -393,18 +456,110 @@ const Header = () => {
     setShowSearchDropdown(false);
   };
 
-  // Render mega menu for mobile
-  const renderMobileMegaMenu = (type: string) => {
-    switch (type.toLowerCase()) {
-      case "products":
-        return <ProductsMegaMenu />;
-      case "solutions":
-        return <SolutionsMegaMenu />;
-      case "software":
-        return <SoftwareMegaMenu />;
-      default:
-        return null;
+  // Render mobile dropdown for regular items with API data
+  const renderMobileDropdown = (children: ChildItem[]) => {
+    if (!hasValidChildren(children)) {
+      return null;
     }
+
+    return (
+      <div className="space-y-0">
+        {children.map((child, childIndex) => {
+          if (!child?.title || child.title.trim() === "") {
+            return null;
+          }
+
+          const hasNestedChildren = hasValidChildren(child.children);
+
+          return (
+            <div key={childIndex}>
+              <div className="flex justify-between items-center hover:bg-[#333] transition-colors">
+                <Link
+                  href={child.url || "#"}
+                  onClick={closeMobileMenu}
+                  className="flex-1 py-3 px-4 text-sm text-gray-300 hover:text-orange-500 border-b border-gray-700 transition-colors">
+                  {child.title}
+                </Link>
+                
+                {hasNestedChildren && (
+                  <div className="px-4 text-gray-400 text-xs">
+                    {child.children?.length}
+                  </div>
+                )}
+              </div>
+              
+              {/* Render nested children if they exist */}
+              {hasNestedChildren && (
+                <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
+                  {renderMobileNestedChildren(child.children!, closeMobileMenu, 1)}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  // Render mobile content for mega menu items - DYNAMIC FROM API
+  const renderMobileMegaMenu = (item: NavItem) => {
+    if (!hasValidChildren(item.children)) {
+      return (
+        <MobileDropdown title={item.title || ""}>
+          <Link 
+            href={item.url || "#"} 
+            onClick={closeMobileMenu}
+            className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium">
+            Explore {item.title} →
+          </Link>
+        </MobileDropdown>
+      );
+    }
+
+    return (
+      <MobileDropdown title={item.title || ""}>
+        <div className="space-y-0">
+          {/* Main category link */}
+          <Link 
+            href={item.url || "#"} 
+            onClick={closeMobileMenu}
+            className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium border-b border-gray-700 bg-[#333]">
+            All {item.title} →
+          </Link>
+          
+          {/* Child items from API */}
+          {item.children!.map((child, index) => {
+            const hasNestedChildren = hasValidChildren(child.children);
+            
+            return (
+              <div key={index}>
+                <div className="flex justify-between items-center hover:bg-[#333] transition-colors">
+                  <Link
+                    href={child.url || "#"}
+                    onClick={closeMobileMenu}
+                    className="flex-1 py-3 px-4 text-sm text-gray-300 hover:text-orange-500 border-b border-gray-700 transition-colors">
+                    {child.title}
+                  </Link>
+                  
+                  {hasNestedChildren && (
+                    <div className="px-4 text-gray-400 text-xs">
+                      {child.children?.length}
+                    </div>
+                  )}
+                </div>
+                
+                {/* Render nested children for items like Smart Cameras */}
+                {hasNestedChildren && (
+                  <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
+                    {renderMobileNestedChildren(child.children!, closeMobileMenu, 1)}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </MobileDropdown>
+    );
   };
 
   if (loading) {
@@ -530,12 +685,26 @@ const Header = () => {
           })}
         </nav>
 
-        {/* Mobile Menu Button - Hide when menu is open */}
-        {!mobileMenuOpen && (
-          <button
-            aria-label="Mobile menu"
-            className="md:hidden focus:outline-none text-white z-50 p-2"
-            onClick={() => setMobileMenuOpen(true)}>
+        {/* Mobile Menu Button */}
+        <button
+          aria-label="Mobile menu"
+          className="md:hidden focus:outline-none text-white z-50 p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 transition-transform"
@@ -549,8 +718,8 @@ const Header = () => {
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-          </button>
-        )}
+          )}
+        </button>
 
         {/* Desktop App Links */}
         <div className="hidden lg:flex items-center lg:space-x-1 xl:space-x-4">
@@ -596,123 +765,14 @@ const Header = () => {
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-[#222] z-40 transform transition-transform duration-500 ${
+        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-[#222] z-40 transform transition-transform duration-300 ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ paddingTop: "100px" }}>
-        <button
-          onClick={closeMobileMenu}
-          className="absolute top-4 right-4 text-white p-2 z-50"
-          aria-label="Close menu">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-
+        
         <div className="h-full overflow-y-auto pb-32">
-          {/* Navigation Links - UPAR */}
-          <nav className="px-4 py-2 space-y-0">
-            {navigation.map((item, index) => {
-              if (!item?.title || item.title.trim() === "") {
-                return null;
-              }
-
-              if (item.type === "single") {
-                return (
-                  <Link
-                    key={index}
-                    href={item.url || "#"}
-                    onClick={closeMobileMenu}
-                    className={`block text-white py-4 font-medium border-b border-[#333] transition-colors ${
-                      pathname === item.url
-                        ? "text-orange-500"
-                        : "hover:text-orange-500"
-                    }`}>
-                    {item.title}
-                  </Link>
-                );
-              }
-
-              if (item.type === "dropdown") {
-                const hasChildren = hasValidChildren(item.children);
-                const isMegaMenu =
-                  item.title?.toLowerCase() === "products" ||
-                  item.title?.toLowerCase() === "solutions" ||
-                  item.title?.toLowerCase() === "software";
-
-                return (
-                  <div key={index} className="border-b border-[#333]">
-                    <div className="flex justify-between items-center py-4">
-                      <Link
-                        href={item.url || "#"}
-                        onClick={closeMobileMenu}
-                        className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
-                        {item.title}
-                      </Link>
-
-                      {(hasChildren || isMegaMenu) && (
-                        <button
-                          onClick={() => {
-                            if (isMegaMenu) {
-                              toggleMegaMenu(item.title || "");
-                            } else {
-                              toggleDropdown(item.title || "");
-                            }
-                          }}
-                          className="text-gray-300 px-2 hover:text-orange-500 transition-colors">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-5 w-5 transition-transform duration-300 ${
-                              (activeDropdown === item.title || activeMegaMenu === item.title)
-                                ? "rotate-180 text-orange-500"
-                                : ""
-                            }`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Regular Dropdown */}
-                    {activeDropdown === item.title && hasChildren && (
-                      <div className="pl-4 pb-2 space-y-1">
-                        {renderChildItems(item.children!, closeMobileMenu)}
-                      </div>
-                    )}
-
-                    {/* Mega Menu Content */}
-                    {activeMegaMenu === item.title && isMegaMenu && (
-                      <ResponsiveMegaMenu isMobile={true}>
-                        {renderMobileMegaMenu(item.title)}
-                      </ResponsiveMegaMenu>
-                    )}
-                  </div>
-                );
-              }
-              return null;
-            })}
-          </nav>
-
-          {/* Search Bar - MIDDLE */}
-          <div className="px-4 py-4 border-b hidden border-[#333]">
+          {/* Search Bar - TOP */}
+          <div className="px-4 py-4 border-b border-[#333]">
             <div
               className={`relative w-full ${
                 settings?.show_search_in_header ? "" : "hidden"
@@ -720,17 +780,17 @@ const Header = () => {
               <form onSubmit={handleSearch}>
                 <input
                   type="text"
-                  placeholder="Search Products"
+                  placeholder="Search Products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() =>
                     searchQuery.trim() && setShowSearchDropdown(true)
                   }
-                  className="w-full py-3 pl-4 pr-10 rounded-[8px] bg-gray-100 border border-gray-200 text-gray-800 focus:outline-none focus:border-orange-500"
+                  className="w-full py-3 pl-4 pr-10 rounded-lg bg-gray-100 border border-gray-300 text-gray-800 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
                 />
                 <button
                   type="submit"
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500">
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -748,7 +808,7 @@ const Header = () => {
               </form>
 
               {showSearchDropdown && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-[8px] shadow-lg mt-1 max-h-60 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto z-50">
                   {isSearching ? (
                     <div className="p-4 text-center text-gray-500">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500 mx-auto"></div>
@@ -813,30 +873,121 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Action Buttons - NICHE */}
-          <div className="px-4 py-4 border-b border-[#333] space-y-3">
+          {/* Navigation Links */}
+          <nav className="py-2">
+            {navigation.map((item, index) => {
+              if (!item?.title || item.title.trim() === "") {
+                return null;
+              }
+
+              if (item.type === "single") {
+                return (
+                  <Link
+                    key={index}
+                    href={item.url || "#"}
+                    onClick={closeMobileMenu}
+                    className={`block text-white py-4 px-4 font-medium border-b border-[#333] transition-colors ${
+                      pathname === item.url
+                        ? "text-orange-500 bg-[#333]"
+                        : "hover:text-orange-500 hover:bg-[#333]"
+                    }`}>
+                    {item.title}
+                  </Link>
+                );
+              }
+
+              if (item.type === "dropdown") {
+                const hasChildren = hasValidChildren(item.children);
+                const isMegaMenu =
+                  item.title?.toLowerCase() === "products" ||
+                  item.title?.toLowerCase() === "solutions" ||
+                  item.title?.toLowerCase() === "software";
+
+                return (
+                  <div key={index} className="border-b border-[#333]">
+                    <div className="flex justify-between items-center py-4 px-4 hover:bg-[#333] transition-colors">
+                      <Link
+                        href={item.url || ""}
+                        onClick={closeMobileMenu}
+                        className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
+                        {item.title}
+                      </Link>
+
+                      {(hasChildren || isMegaMenu) && (
+                        <button
+                          onClick={() => {
+                            if (isMegaMenu) {
+                              toggleMegaMenu(item.title || "");
+                            } else {
+                              toggleDropdown(item.title || "");
+                            }
+                          }}
+                          className="text-gray-400 hover:text-orange-500 transition-colors p-1">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-5 w-5 transition-transform duration-300 ${
+                              (activeDropdown === item.title || activeMegaMenu === item.title)
+                                ? "rotate-180 text-orange-500"
+                                : ""
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Regular Dropdown for non-mega menu items */}
+                    {activeDropdown === item.title && hasChildren && !isMegaMenu && (
+                      <div className="bg-[#2B2B2B] border-t border-[#333]">
+                        {renderMobileDropdown(item.children!)}
+                      </div>
+                    )}
+
+                    {/* Mega Menu Content - DYNAMIC FROM API */}
+                    {activeMegaMenu === item.title && isMegaMenu && (
+                      <div className="bg-[#2B2B2B] border-t border-[#333]">
+                        {renderMobileMegaMenu(item)}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </nav>
+
+          {/* Action Buttons */}
+          <div className="px-4 py-6 border-t border-[#333] space-y-3">
             <Link
               href="/partner"
               onClick={closeMobileMenu}
-              className="block bg-orange-500 border border-orange-500 text-white py-3 px-5 rounded-[8px] hover:bg-orange-600 transform hover:scale-105 transition-all text-sm tracking-[1] text-center">
+              className="block bg-orange-500 border border-orange-500 text-white py-3 px-5 rounded-lg hover:bg-orange-600 transform hover:scale-105 transition-all text-sm font-medium text-center">
               BECOME A PARTNER
             </Link>
             <Link
               href="https://partner.markvisitor.com/"
               onClick={closeMobileMenu}
-              className="block border border-orange-500 text-orange-500 text-center  py-3 px-5  rounded-[8px] hover:bg-orange-50 transform hover:scale-105 transition-all text-sm font-light tracking-[1]">
+              className="block border border-orange-500 text-orange-500 text-center py-3 px-5 rounded-lg hover:bg-orange-50 transform hover:scale-105 transition-all text-sm font-medium">
               PARTNER LOG IN
             </Link>
             <Link
               href="/pay"
               onClick={closeMobileMenu}
-              className="block bg-yellow-500 border border-yellow-500 text-black text-center  py-3 px-5  rounded-[8px] hover:bg-yellow-400 transform hover:scale-105 transition-all text-sm font-light tracking-[1]">
+              className="block bg-yellow-500 border border-yellow-500 text-black text-center py-3 px-5 rounded-lg hover:bg-yellow-400 transform hover:scale-105 transition-all text-sm font-medium">
               PAY ONLINE
             </Link>
           </div>
 
-          {/* App Links - SABSE NICHE */}
-          <div className="px-4 py-4 space-y-3">
+          {/* App Links */}
+          <div className="px-4 py-6 space-y-3 border-t border-[#333]">
             <Link
               href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
               onClick={closeMobileMenu}
@@ -1001,7 +1152,7 @@ const Header = () => {
       {/* Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden transition-opacity duration-500"
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden transition-opacity duration-300"
           onClick={closeMobileMenu}
         />
       )}

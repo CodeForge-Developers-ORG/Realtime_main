@@ -142,7 +142,7 @@ const ProductsMegaMenu = () => {
             </div>
 
             {activeProducts.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+              <div className="grid grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar mb-12">
                 {activeProducts.map((product) => (
                   <Link
                     key={product.id}
@@ -222,7 +222,7 @@ const ProductsMegaMenu = () => {
 
             {/* View All Button */}
             {activeProducts.length > 0 && (
-              <div className="mt-4 pt-3 border-t border-gray-700">
+              <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-3 w-[70%]">
                 <Link
                   href={`/products`}
                   className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors flex items-center justify-center gap-1">

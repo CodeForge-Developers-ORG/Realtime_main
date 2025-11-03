@@ -109,12 +109,13 @@ export default function DownloadModal({ software, onClose }: Props) {
         {/* Header */}
         <div className="flex justify-between items-center mb-5">
           <h3 className="text-2xl font-medium text-[#222]">
-            Download {software.title} v{software.version}
+            Download {software.title}
           </h3>
           <button onClick={onClose}>
             <X className="cursor-pointer w-6 h-6 text-gray-500 hover:text-gray-800" />
           </button>
         </div>
+
 
         {/* FORM STEP */}
         {step === "form" && (

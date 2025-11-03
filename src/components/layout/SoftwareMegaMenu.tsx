@@ -139,7 +139,7 @@ const SoftwareMegaMenu = () => {
             </div>
 
             {/* Right Side - Software Details */}
-            <div className="flex-1">
+            <div className="flex-1 mb-14">
               {activeSoftwareData ? (
                 <>
                   <div className="flex justify-between items-start mb-3">
@@ -351,7 +351,7 @@ const SoftwareMegaMenu = () => {
                   </div>
 
                   {/* Download/External Link */}
-                  <div className="mt-4 pt-3 border-t border-gray-700">
+                  <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-3 w-[70%] ">
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => handleDownloadClick(activeSoftwareData)}

@@ -1,5 +1,4 @@
 // app/products/[title]/page.tsx
-import { baseUri } from "@/services/constant";
 import { getProductBySlug } from "@/services/productService";
 import Layout from "@/components/layout/Layout";
 import FeaturePill from "@/components/common/FeaturePill";
@@ -13,8 +12,14 @@ import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 // import Title from "@/components/common/Title";
 
+type Category = {
+  id?: number | string;
+  name?: string;
+  slug?: string;
+};
+
 type ProductCategory = {
-  category: any;
+  category: Category | null;
   title: string;
   images: string[];
   features: string[];
@@ -65,8 +70,8 @@ export default async function ProductPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product.category?.name, href: `#` },
-    { label: product.title, href: `/products/${title}` },
+    { label: product.category?.name || "Category", href: "#" },
+    { label: product.title || "Product", href: `/products/${title}` },
   ];
 
   return (
@@ -77,7 +82,7 @@ export default async function ProductPage({
         <div className="max-w-6xl mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
             {/* Left - Image */}
-            <div className="sticky top-10">
+            <div className="lg:sticky lg:top-10">
               <ProductImage images={product.images || []} alt={product.title} />
             </div>
 
@@ -103,10 +108,12 @@ export default async function ProductPage({
                 </Link>
 
                 {/* Client component for download */}
-                <DownloadCatalogueButton
-                  productTitle={product.title}
-                  catalogueDoc={product.catalogue_document}
-                />
+                {product.catalogue_document && (
+                  <DownloadCatalogueButton
+                    productTitle={product.title}
+                    catalogueDoc={product.catalogue_document}
+                  />
+                )}
               </div>
 
               <div className="bg-[#F3F3F3] rounded-[24px]">

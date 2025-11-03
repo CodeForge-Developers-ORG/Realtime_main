@@ -1,6 +1,4 @@
 "use client";
-
-import Image from "next/image";
 import Link from "next/link";
 import Slider from "../ui/Slider";
 import { useEffect, useState } from "react";
@@ -75,7 +73,7 @@ const SolutionsSection = () => {
               Solutions
             </h2>
             <p className="text-xs sm:text-lg text-white font-light uppercase mb-1 sm:mb-4 tracking-[1px]">
-              India's Leading Biometric Solutions
+              {'India\'s Leading Biometric Solutions'}
             </p>
             <p className="text-xs text-white font-thin tracking-[0.5px] mb-6">
               This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.
@@ -178,7 +176,7 @@ const SolutionsSection = () => {
               Solutions
             </h2>
             <p className="text-[16px] text-white font-thin uppercase mb-6 tracking-[1px]">
-              India's Leading Biometric Solutions
+              {"India's Leading Biometric Solutions"}
             </p>
             <p className="text-[14px] text-white font-thin tracking-[1px]">
               This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.

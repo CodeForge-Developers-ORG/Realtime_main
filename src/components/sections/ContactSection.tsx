@@ -190,7 +190,7 @@ const ContactSection = () => {
                   type="text"
                   id="name"
                   className="w-full text-black border-none outline-none shadow-none text-sm md:text-[15px] placeholder-black"
-                  placeholder="John Doi"
+                  placeholder="Enter Name.."
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -201,7 +201,7 @@ const ContactSection = () => {
                   type="email"
                   id="email"
                   className="w-full text-black border-none outline-none shadow-none text-sm md:text-[15px] placeholder-black"
-                  placeholder="John@outlook.com"
+                  placeholder="Enter Email.. "
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -240,7 +240,7 @@ const ContactSection = () => {
                   type="tel"
                   id="phone"
                   className="w-full text-black border-none outline-none shadow-none text-sm md:text-[15px] placeholder-black"
-                  placeholder="(215) 424-7763"
+                  placeholder="Enter Phone Number.."
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>

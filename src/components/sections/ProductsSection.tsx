@@ -88,11 +88,11 @@ const ProductsSection = () => {
                       style={{
                         color: index % 2 === 0 ? "#000" : "#fff",
                       }}>
-                      <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1">
+                      <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1 line-clamp-1">
                         {product.category?.name.charAt(0).toLocaleUpperCase()}
                         {product?.category?.name?.slice(1)}
                       </p>
-                      <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px]">
+                      <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px] line-clamp-1">
                         {product.title.charAt(0).toUpperCase()}
                         {product.title.slice(1)}
                       </h3>

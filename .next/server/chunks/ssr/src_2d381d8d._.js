@@ -3658,7 +3658,7 @@ const Header = ()=>{
                     className: "h-full overflow-y-auto pb-32",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "px-4 py-4 border-b border-[#333]",
+                            className: "px-4 py-4 border-b border-[#333] hidden",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: `relative w-full ${settings?.show_search_in_header ? "" : "hidden"}`,
                                 children: [
@@ -5058,7 +5058,7 @@ const SolutionsSection = ()=>{
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-xs text-white font-thin tracking-[0.5px] mb-6",
-                                    children: "This is a growing market. Security incidents in schools grab the headlines, emotions & budget allocations."
+                                    children: "This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies."
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
                                     lineNumber: 80,
@@ -5089,7 +5089,7 @@ const SolutionsSection = ()=>{
                                                         children: solution?.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                        lineNumber: 101,
+                                                        lineNumber: 100,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5097,13 +5097,13 @@ const SolutionsSection = ()=>{
                                                         children: solution?.short_description
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                        lineNumber: 104,
+                                                        lineNumber: 103,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                lineNumber: 100,
+                                                lineNumber: 99,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5127,19 +5127,19 @@ const SolutionsSection = ()=>{
                                                                             d: "M5 13l4 4L19 7"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 112,
+                                                                            lineNumber: 111,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 111,
+                                                                        lineNumber: 110,
                                                                         columnNumber: 29
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     "Features"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 110,
+                                                                lineNumber: 109,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5152,25 +5152,25 @@ const SolutionsSection = ()=>{
                                                                                 children: "•"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 119,
+                                                                                lineNumber: 118,
                                                                                 columnNumber: 33
                                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                                             feature
                                                                         ]
                                                                     }, index, true, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 118,
+                                                                        lineNumber: 117,
                                                                         columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0)))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 116,
+                                                                lineNumber: 115,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                        lineNumber: 109,
+                                                        lineNumber: 108,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5191,19 +5191,19 @@ const SolutionsSection = ()=>{
                                                                             d: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 128,
+                                                                            lineNumber: 127,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 127,
+                                                                        lineNumber: 126,
                                                                         columnNumber: 29
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     "Benefits"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 126,
+                                                                lineNumber: 125,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5216,25 +5216,25 @@ const SolutionsSection = ()=>{
                                                                                 children: "•"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 135,
+                                                                                lineNumber: 134,
                                                                                 columnNumber: 33
                                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                                             benefit
                                                                         ]
                                                                     }, index, true, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 134,
+                                                                        lineNumber: 133,
                                                                         columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0)))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 132,
+                                                                lineNumber: 131,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                        lineNumber: 125,
+                                                        lineNumber: 124,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5255,19 +5255,19 @@ const SolutionsSection = ()=>{
                                                                             d: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 144,
+                                                                            lineNumber: 143,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 143,
+                                                                        lineNumber: 142,
                                                                         columnNumber: 29
                                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                                     "Tech"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 142,
+                                                                lineNumber: 141,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5280,43 +5280,43 @@ const SolutionsSection = ()=>{
                                                                                 children: "•"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 151,
+                                                                                lineNumber: 150,
                                                                                 columnNumber: 33
                                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                                             tech
                                                                         ]
                                                                     }, index, true, {
                                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                        lineNumber: 150,
+                                                                        lineNumber: 149,
                                                                         columnNumber: 31
                                                                     }, ("TURBOPACK compile-time value", void 0)))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                lineNumber: 148,
+                                                                lineNumber: 147,
                                                                 columnNumber: 27
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                        lineNumber: 141,
+                                                        lineNumber: 140,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                lineNumber: 108,
+                                                lineNumber: 107,
                                                 columnNumber: 23
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, solution.id, true, {
                                         fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 95,
                                         columnNumber: 19
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, void 0, false))
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                            lineNumber: 86,
+                            lineNumber: 85,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5327,12 +5327,12 @@ const SolutionsSection = ()=>{
                                 children: "View All Solutions"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                lineNumber: 165,
+                                lineNumber: 164,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                            lineNumber: 164,
+                            lineNumber: 163,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
@@ -5352,7 +5352,7 @@ const SolutionsSection = ()=>{
                                     children: "Solutions"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                    lineNumber: 178,
+                                    lineNumber: 177,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5360,15 +5360,15 @@ const SolutionsSection = ()=>{
                                     children: "India's Leading Biometric Solutions"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                    lineNumber: 181,
+                                    lineNumber: 180,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-[14px] text-white font-thin tracking-[1px]",
-                                    children: "This is a growing market. Security incidents in schools grab emotions & budget allocations."
+                                    children: "This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies."
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                    lineNumber: 184,
+                                    lineNumber: 183,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -5377,13 +5377,13 @@ const SolutionsSection = ()=>{
                                     children: "View All Solutions"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                    lineNumber: 189,
+                                    lineNumber: 187,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                            lineNumber: 177,
+                            lineNumber: 176,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5397,7 +5397,7 @@ const SolutionsSection = ()=>{
                                 className: "h-full",
                                 children: solutions.map((solution)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden flex items-between flex-col pb-5",
+                                            className: "rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden h-[350px] flex items-between flex-col pb-5",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "px-3 pb-4 text-white mt-4",
@@ -5407,7 +5407,7 @@ const SolutionsSection = ()=>{
                                                             children: solution?.title
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                            lineNumber: 214,
+                                                            lineNumber: 212,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -5415,13 +5415,13 @@ const SolutionsSection = ()=>{
                                                             children: solution?.short_description
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                            lineNumber: 217,
+                                                            lineNumber: 215,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                    lineNumber: 213,
+                                                    lineNumber: 211,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5445,19 +5445,19 @@ const SolutionsSection = ()=>{
                                                                                 d: "M5 13l4 4L19 7"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 225,
+                                                                                lineNumber: 223,
                                                                                 columnNumber: 31
                                                                             }, ("TURBOPACK compile-time value", void 0))
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 224,
+                                                                            lineNumber: 222,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         "Features"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 223,
+                                                                    lineNumber: 221,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5470,25 +5470,25 @@ const SolutionsSection = ()=>{
                                                                                     children: "•"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                    lineNumber: 232,
+                                                                                    lineNumber: 230,
                                                                                     columnNumber: 33
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 feature
                                                                             ]
                                                                         }, index, true, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 231,
+                                                                            lineNumber: 229,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 229,
+                                                                    lineNumber: 227,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                            lineNumber: 222,
+                                                            lineNumber: 220,
                                                             columnNumber: 25
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5509,19 +5509,19 @@ const SolutionsSection = ()=>{
                                                                                 d: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 241,
+                                                                                lineNumber: 239,
                                                                                 columnNumber: 31
                                                                             }, ("TURBOPACK compile-time value", void 0))
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 240,
+                                                                            lineNumber: 238,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         "Benefits"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 239,
+                                                                    lineNumber: 237,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5534,25 +5534,25 @@ const SolutionsSection = ()=>{
                                                                                     children: "•"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                    lineNumber: 248,
+                                                                                    lineNumber: 246,
                                                                                     columnNumber: 33
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 benefit
                                                                             ]
                                                                         }, index, true, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 247,
+                                                                            lineNumber: 245,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 245,
+                                                                    lineNumber: 243,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                            lineNumber: 238,
+                                                            lineNumber: 236,
                                                             columnNumber: 25
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5573,19 +5573,19 @@ const SolutionsSection = ()=>{
                                                                                 d: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                lineNumber: 257,
+                                                                                lineNumber: 255,
                                                                                 columnNumber: 31
                                                                             }, ("TURBOPACK compile-time value", void 0))
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 256,
+                                                                            lineNumber: 254,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         "Tech"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 255,
+                                                                    lineNumber: 253,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -5598,54 +5598,54 @@ const SolutionsSection = ()=>{
                                                                                     children: "•"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                                    lineNumber: 264,
+                                                                                    lineNumber: 262,
                                                                                     columnNumber: 33
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 tech
                                                                             ]
                                                                         }, index, true, {
                                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                            lineNumber: 263,
+                                                                            lineNumber: 261,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                                    lineNumber: 261,
+                                                                    lineNumber: 259,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                            lineNumber: 254,
+                                                            lineNumber: 252,
                                                             columnNumber: 25
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                                    lineNumber: 221,
+                                                    lineNumber: 219,
                                                     columnNumber: 23
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, solution.id, true, {
                                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                            lineNumber: 209,
+                                            lineNumber: 207,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                                lineNumber: 199,
+                                lineNumber: 197,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                            lineNumber: 198,
+                            lineNumber: 196,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/sections/SolutionsSection.tsx",
-                    lineNumber: 175,
+                    lineNumber: 174,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]

@@ -772,12 +772,12 @@ const Header = () => {
         
         <div className="h-full overflow-y-auto pb-32">
           {/* Search Bar - TOP */}
-          <div className="px-4 py-4 border-b border-[#333]">
+          <div className="px-4 py-4 border-b border-[#333] hidden">
             <div
               className={`relative w-full ${
                 settings?.show_search_in_header ? "" : "hidden"
               }`}>
-              <form onSubmit={handleSearch}>
+              <form onSubmit={handleSearch} >
                 <input
                   type="text"
                   placeholder="Search Products..."

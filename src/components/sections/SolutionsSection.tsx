@@ -78,8 +78,7 @@ const SolutionsSection = () => {
               India's Leading Biometric Solutions
             </p>
             <p className="text-xs text-white font-thin tracking-[0.5px] mb-6">
-              This is a growing market. Security incidents in schools grab the
-              headlines, emotions & budget allocations.
+              This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.
             </p>
           </div>
 
@@ -182,8 +181,7 @@ const SolutionsSection = () => {
               India's Leading Biometric Solutions
             </p>
             <p className="text-[14px] text-white font-thin tracking-[1px]">
-              This is a growing market. Security incidents in schools grab
-              emotions & budget allocations.
+              This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.
             </p>
 
             <Link
@@ -208,7 +206,7 @@ const SolutionsSection = () => {
                 <>
                   <div
                     key={solution.id}
-                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden flex items-between flex-col pb-5"
+                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden h-[350px] flex items-between flex-col pb-5"
                   >
                     <div className="px-3 pb-4 text-white mt-4">
                       <h3 className="text-2xl font-thin mb-2 ms-2">

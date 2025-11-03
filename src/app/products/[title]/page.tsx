@@ -1,5 +1,4 @@
 // app/products/[title]/page.tsx
-import { baseUri } from "@/services/constant";
 import { getProductBySlug } from "@/services/productService";
 import Layout from "@/components/layout/Layout";
 import FeaturePill from "@/components/common/FeaturePill";
@@ -13,7 +12,14 @@ import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 // import Title from "@/components/common/Title";
 
+type Category = {
+  id?: number | string;
+  name?: string;
+  slug?: string;
+};
+
 type ProductCategory = {
+  category: Category | null;
   title: string;
   images: string[];
   features: string[];
@@ -31,6 +37,7 @@ export async function generateMetadata({
 }) {
   const { title } = await params; // ✅ FIXED
   const res = await getProductBySlug(title);
+  console.log("product", res);
   const product: ProductCategory | null = res?.data?.[0] || null;
 
   if (!product) {
@@ -63,7 +70,8 @@ export default async function ProductPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product.title, href: `/products/${title}` },
+    { label: product.category?.name || "Category", href: "#" },
+    { label: product.title || "Product", href: `/products/${title}` },
   ];
 
   return (
@@ -74,18 +82,20 @@ export default async function ProductPage({
         <div className="max-w-6xl mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
             {/* Left - Image */}
-            <div>
-              <ProductImage
-                src={`${baseUri}${product.images?.[0] || ""}`}
-                alt={product.title}
-              />
+            <div className="lg:sticky lg:top-10">
+              <ProductImage images={product.images || []} alt={product.title} />
             </div>
 
             {/* Right - Content */}
             <div>
-              <h1 className="text-3xl font-semibold text-gray-900 mb-4">
-                {product.title}
+              <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+                {product?.title}
               </h1>
+              {product?.category?.name && (
+                <p className="text-sm uppercase tracking-wider text-[#EA5921] font-medium mb-6">
+                  {product?.category?.name}
+                </p>
+              )}
 
               <div className="flex items-center gap-3 mb-6">
                 <Link
@@ -98,10 +108,12 @@ export default async function ProductPage({
                 </Link>
 
                 {/* Client component for download */}
-                <DownloadCatalogueButton
-                  productTitle={product.title}
-                  catalogueDoc={product.catalogue_document}
-                />
+                {product.catalogue_document && (
+                  <DownloadCatalogueButton
+                    productTitle={product.title}
+                    catalogueDoc={product.catalogue_document}
+                  />
+                )}
               </div>
 
               <div className="bg-[#F3F3F3] rounded-[24px]">

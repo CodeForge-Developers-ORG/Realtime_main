@@ -168,7 +168,7 @@ const renderMobileNestedChildren = (children: ChildItem[], closeMenu: () => void
     }
 
     const hasNestedChildren = hasValidChildren(child.children);
-    console.log("nes",child)
+    
     return (
       <div key={index}>
         <div className={`flex justify-between items-center ${level > 0 ? 'pl-4' : ''}`}>
@@ -551,7 +551,15 @@ const Header = () => {
                 {/* Render nested children for items like Smart Cameras */}
                 {hasNestedChildren && (
                   <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
-                    {renderMobileNestedChildren(child.children!, closeMobileMenu, 1)}
+                    {child.children!.map((nestedChild, nestedIndex) => (
+                      <Link
+                        key={nestedIndex}
+                        href={nestedChild.url || "#"}
+                        onClick={closeMobileMenu}
+                        className="block py-3 px-4 text-sm text-gray-400 hover:bg-[#333] hover:text-orange-500 border-b border-gray-600 transition-colors">
+                        {nestedChild.title}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
@@ -907,7 +915,7 @@ const Header = () => {
                   <div key={index} className="border-b border-[#333]">
                     <div className="flex justify-between items-center py-4 px-4 hover:bg-[#333] transition-colors">
                       <Link
-                        href={item.url || ""}
+                        href={item.url || "#"}
                         onClick={closeMobileMenu}
                         className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
                         {item.title}

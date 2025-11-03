@@ -11,7 +11,7 @@ export default function FeaturePill({ icon, label }: FeaturePillProps) {
       <div className="w-8 h-8 flex items-center justify-center bg-[#BEF4BE] rounded-full text-[#0E890E] text-sm">
         {icon ?? "✓"}
       </div>
-      <span className="text-sm w-[80%] text-nowrap font-[500] text-[#1E1410]">
+      <span className="text-sm w-[50%] text-nowrap font-[500] text-[#1E1410]">
         {label}
       </span>
     </div>

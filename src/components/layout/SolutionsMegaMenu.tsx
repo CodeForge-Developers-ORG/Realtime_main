@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
+import { useRouter } from "next/navigation";
 
 type Solution = {
   id: string;
@@ -31,6 +32,7 @@ const SolutionsMegaMenu = () => {
   const [activeSolution, setActiveSolution] = useState<string | null>(null);
   const [solutions, setSolutions] = useState<Solution[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   // Fetch solutions from API
   useEffect(() => {
@@ -59,6 +61,10 @@ const SolutionsMegaMenu = () => {
 
     fetchSolutions();
   }, []);
+
+  const handleSolutionClick = (slug: string) => {
+    router.push(`/solutions/${slug}`);
+  };
 
   // Get active solution data
   const activeSolutionData = solutions.find(
@@ -95,7 +101,8 @@ const SolutionsMegaMenu = () => {
                       ? "bg-orange-500 text-white"
                       : "text-gray-300 hover:bg-gray-800 hover:text-white"
                   }`}
-                  onMouseEnter={() => setActiveSolution(solution.id)}>
+                  onMouseEnter={() => setActiveSolution(solution.id)}
+                  onClick={() => handleSolutionClick(solution.slug)}>
                   <div className="font-medium">{solution.title}</div>
                   {solution.featured && (
                     <div className="text-xs opacity-75 mt-1">

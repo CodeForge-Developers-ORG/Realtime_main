@@ -44,13 +44,13 @@ export default function RealtimeScrollCards() {
         if (!card) return;
 
         if (i === 0) {
-          gsap.set(card, { position: "sticky", top: "35vh", zIndex: 1 });
+          gsap.set(card, { position: "sticky", top: "40vh", zIndex: 1 });
         }
 
         ScrollTrigger.create({
           trigger: card,
           start: "top center", // Changed from "top bottom" to "top center"
-          end: "top 25%",      // Changed from "top center" to "top 20%"
+          end: "top 40%",      // Changed from "top center" to "top 20%"
           scrub: true,
           onEnter: () => {
             setActiveCard(i);
@@ -80,7 +80,7 @@ export default function RealtimeScrollCards() {
           onLeave: () => {
             gsap.set(card, {
               position: "sticky",
-              top: `25vh`,
+              top: `40vh`,
               zIndex: i + 1,
             });
           },
@@ -142,7 +142,7 @@ export default function RealtimeScrollCards() {
   return (
     <section ref={containerRef} className="bg-white py-10 relative">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
-      <div className="sticky lg:max-w-[75%] top-1 lg:top-3 bg-white z-50 sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
+      <div className="sticky max-w-[65%] lg:max-w-[75%] top-42 lg:top-40 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
         {solutions.map((card, index) => (
           <button
             key={index}

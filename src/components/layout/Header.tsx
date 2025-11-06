@@ -579,108 +579,111 @@ const Header = () => {
   const { branding, navigation, settings } = headerData;
 
   return (
-    <header className="w-full bg-[#2B2B2B] text-white z-50 relative">
-      {/* Top Bar */}
-      <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
-          <Image
-            src={branding?.logo_url || "/logo.png"}
-            alt={branding?.site_title || "Logo"}
-            width={180}
-            height={60}
-            className="h-auto w-[120px] lg:w-[130px] xl:w-[150px]"
-          />
-        </Link>
+    <header className="w-full bg-[#2B2B2B] text-white z-50 sticky top-0">
+      {/* Sticky Top Bar */}
+      <div className="sticky top-0 bg-[#2B2B2B] z-50">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center transition-transform duration-300 hover:scale-105 z-50"
+          >
+            <Image
+              src={branding?.logo_url || "/logo.png"}
+              alt={branding?.site_title || "Logo"}
+              width={180}
+              height={60}
+              className="h-auto w-[120px] lg:w-[130px] xl:w-[150px]"
+            />
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav
-          className="hidden md:flex items-center space-x-4 lg:space-x-8 text-lg"
-          ref={dropdownRef}>
-          {navigation.map((item, index) => {
-            if (!item?.title || item.title.trim() === "") {
-              return null;
-            }
+          {/* Desktop Nav */}
+          <nav
+            className="hidden md:flex items-center space-x-4 lg:space-x-8 text-lg"
+            ref={dropdownRef}
+          >
+            {navigation.map((item, index) => {
+              if (!item?.title || item.title.trim() === "") {
+                return null;
+              }
 
-            if (item.type === "single") {
-              return (
-                <Link
-                  key={index}
-                  href={item.url || "#"}
-                  className={`font-[600] text-[14px] hover:text-orange-500 transition-colors ${
-                    pathname === item.url ? "text-orange-500" : "text-white"
-                  }`}>
-                  {item.title}
-                </Link>
-              );
-            }
-
-            if (item.type === "dropdown") {
-              // Check which mega menu to show
-              const isProductsDropdown =
-                item.title?.toLowerCase() === "products";
-              const isSolutionsDropdown =
-                item.title?.toLowerCase() === "solutions";
-              const isSoftwareDropdown =
-                item.title?.toLowerCase() === "software";
-
-              return (
-                <div key={index} className="relative group">
+              if (item.type === "single") {
+                return (
                   <Link
+                    key={index}
                     href={item.url || "#"}
-                    className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
+                    className={`font-[600] text-[14px] hover:text-orange-500 transition-colors ${
                       pathname === item.url ? "text-orange-500" : "text-white"
                     }`}>
                     {item.title}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
                   </Link>
+                );
+              }
 
-                  {/* Regular Dropdown for items without mega menu */}
-                  {hasValidChildren(item.children) &&
-                    !isProductsDropdown &&
-                    !isSolutionsDropdown &&
-                    !isSoftwareDropdown && (
-                      <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        {renderChildItems(item.children!)}
-                      </div>
+              if (item.type === "dropdown") {
+                // Check which mega menu to show
+                const isProductsDropdown =
+                  item.title?.toLowerCase() === "products";
+                const isSolutionsDropdown =
+                  item.title?.toLowerCase() === "solutions";
+                const isSoftwareDropdown =
+                  item.title?.toLowerCase() === "software";
+
+                return (
+                  <div key={index} className="relative group">
+                    <Link
+                      href={item.url || "#"}
+                      className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
+                        pathname === item.url ? "text-orange-500" : "text-white"
+                      }`}>
+                      {item.title}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </Link>
+
+                    {/* Regular Dropdown for items without mega menu */}
+                    {hasValidChildren(item.children) &&
+                      !isProductsDropdown &&
+                      !isSolutionsDropdown &&
+                      !isSoftwareDropdown && (
+                        <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                          {renderChildItems(item.children!)}
+                        </div>
+                      )}
+
+                    {/* Mega Menu for Products */}
+                    {isProductsDropdown && (
+                      <ResponsiveMegaMenu>
+                        <ProductsMegaMenu />
+                      </ResponsiveMegaMenu>
                     )}
 
-                  {/* Mega Menu for Products */}
-                  {isProductsDropdown && (
-                    <ResponsiveMegaMenu>
-                      <ProductsMegaMenu />
-                    </ResponsiveMegaMenu>
-                  )}
+                    {/* Mega Menu for Solutions */}
+                    {isSolutionsDropdown && (
+                      <ResponsiveMegaMenu>
+                        <SolutionsMegaMenu />
+                      </ResponsiveMegaMenu>
+                    )}
 
-                  {/* Mega Menu for Solutions */}
-                  {isSolutionsDropdown && (
-                    <ResponsiveMegaMenu>
-                      <SolutionsMegaMenu />
-                    </ResponsiveMegaMenu>
-                  )}
-
-                  {/* Mega Menu for Software */}
-                  {isSoftwareDropdown && (
-                    <ResponsiveMegaMenu>
-                      <SoftwareMegaMenu />
-                    </ResponsiveMegaMenu>
-                  )}
-                </div>
-              );
-            }
+                    {/* Mega Menu for Software */}
+                    {isSoftwareDropdown && (
+                      <ResponsiveMegaMenu>
+                        <SoftwareMegaMenu />
+                      </ResponsiveMegaMenu>
+                    )}
+                  </div>
+                );
+              }
             return null;
           })}
         </nav>
@@ -760,6 +763,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
+      </div>
       </div>
 
       {/* Mobile Menu */}

@@ -15,6 +15,8 @@ export default function SectionList({
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const programmaticScroll = useRef(false);
+  const scrollEndTimeout = useRef<NodeJS.Timeout>();
 
   // Listen to sidebar click custom event
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function SectionList({
             window.scrollY -
             (containerRef.current.offsetTop ?? 0) -
             8; // small padding
+          programmaticScroll.current = true;
           window.scrollTo({ top: topOffset, behavior: "smooth" });
         }
       }
@@ -38,9 +41,31 @@ export default function SectionList({
       window.removeEventListener("scroll-to-section", handler as EventListener);
   }, []);
 
+  // Effect to detect end of scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      if (programmaticScroll.current) {
+        clearTimeout(scrollEndTimeout.current);
+        scrollEndTimeout.current = setTimeout(() => {
+          programmaticScroll.current = false;
+        }, 100); // 100ms of no scrolling is considered the end.
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollEndTimeout.current);
+    };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (programmaticScroll.current) {
+          return;
+        }
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute("data-idx");
@@ -50,7 +75,8 @@ export default function SectionList({
       },
       {
         root: null, // observe relative to viewport
-        threshold: [0.15, 0.5, 0.9],
+        rootMargin: "-40% 0px -60% 0px", // trigger earlier when title is 30% from top
+        threshold: 0,
       }
     );
 

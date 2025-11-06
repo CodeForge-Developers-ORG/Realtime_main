@@ -48,6 +48,8 @@ const Footer = () => {
     fetchFooter();
   }, []);
 
+  console.log(data)
+
   if (!data) return null;
 
   const { branding, contact, social_media, quick_links } = data;
@@ -78,30 +80,12 @@ const Footer = () => {
   return (
     <footer className="bg-[#2B2B2B] text-white py-10 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-          {/* Contact */}
-          <div>
-            <h3 className="text-lg uppercase mb-4 font-medium">CONTACT</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="text-white/55 hover:text-orange-500"
-                >
-                  {contact.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${contact.phone}`}
-                  className="text-white/55 hover:text-orange-500"
-                >
-                  {contact.phone}
-                </a>
-              </li>
-              <li className="border-t border-[#F4F4F4] w-1/2 my-3" />
-              <li className="text-white/55 text-sm">{contact.address}</li>
-            </ul>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
+
+          {/* About */}
+          <div className=" ">
+            <h3 className="text-lg uppercase mb-4 font-medium">ABOUT</h3>
+           <p className="text-sm text-white/55 hover:text-white pe-3">{branding.footer_description}</p>
           </div>
 
           {/* Company */}
@@ -154,6 +138,32 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Contact */}
+          <div >
+            <h3 className="text-lg uppercase mb-4 font-medium">CONTACT</h3>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="text-white/55 hover:text-orange-500"
+                >
+                  {contact.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${contact.phone}`}
+                  className="text-white/55 hover:text-orange-500"
+                >
+                  {contact.phone}
+                </a>
+              </li>
+              <li className="border-t border-[#F4F4F4] w-1/2 my-3" />
+              <li className="text-white/55 text-sm">{contact.address}</li>
+            </ul>
+          </div>
+
         </div>
 
         {/* Logo */}
@@ -197,8 +207,10 @@ const Footer = () => {
             )}
           </div>
         </div>
+
       </div>
     </footer>
+
   );
 };
 

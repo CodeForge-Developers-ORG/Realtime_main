@@ -3,6 +3,7 @@ import Link from "next/link";
 import Slider from "../ui/Slider";
 import { useEffect, useState } from "react";
 import axiosClient from "@/services/axiosClient";
+import { useRouter } from "next/navigation";
 
 type Solution = {
   id: string;
@@ -29,6 +30,7 @@ type Solution = {
 const SolutionsSection = () => {
   const [solutions, setSolutions] = useState<Solution[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const fetchSolutions = async () => {
     try {
@@ -44,6 +46,10 @@ const SolutionsSection = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSolutionClick = (slug: string) => {
+    router.push(`/solutions/${slug}`);
   };
 
   useEffect(() => {
@@ -92,7 +98,8 @@ const SolutionsSection = () => {
                 <>
                   <div
                     key={solution.id}
-                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden flex items-between flex-col pb-5"
+                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161] overflow-hidden flex items-between flex-col pb-5 cursor-pointer hover:border-orange-500 transition-all duration-300"
+                    onClick={() => handleSolutionClick(solution.slug)}
                   >
                     <div className="px-3 pb-4 text-white mt-4">
                       <h3 className="text-2xl font-thin mb-2 ms-2">
@@ -204,9 +211,10 @@ const SolutionsSection = () => {
                 <>
                   <div
                     key={solution.id}
-                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161]  overflow-hidden h-[350px] flex items-between flex-col pb-5"
+                    className="rounded-2xl mx-4 bg-[#414141] border border-[#616161] overflow-hidden flex items-between flex-col pb-5 cursor-pointer hover:border-orange-500 transition-all duration-300 min-h-[350px]"
+                    onClick={() => handleSolutionClick(solution.slug)}
                   >
-                    <div className="px-3 pb-4 text-white mt-4">
+                    <div className="px-3 pb-4 text-white mt-4 flex-grow">
                       <h3 className="text-2xl font-thin mb-2 ms-2">
                         {solution?.title}
                       </h3>
@@ -214,49 +222,49 @@ const SolutionsSection = () => {
                         {solution?.short_description}
                       </p>
                     </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-1 max-h-80 overflow-y-auto  custom-scrollbar mt-3 mx-5">
-                        <div className="bg-green-100 rounded-lg p-3 border border-gray-700">
-                          <h4 className="font-semibold text-black text-sm mb-2 flex items-center gap-1">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-1  overflow-hidden  mx-5">
+                        <div className="bg-green-100 rounded-lg p-3 border border-gray-700 flex flex-col">
+                          <h4 className="font-semibold text-black text-sm mb-2 flex items-center gap-1 line-clamp-1">
                             <svg className="w-4 h-4 text-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                             Features
                           </h4>
-                          <ul className="space-y-1">
+                          <ul className="space-y-1 flex-grow">
                             {solution.features.map((feature, index) => (
-                              <li key={index} className="text-black text-xs flex items-start gap-1">
+                              <li key={index} className="text-black text-xs flex items-start gap-1 line-clamp-1">
                                 <span className="text-green-900 mt-0.5">•</span>
                                 {feature}
                               </li>
                             ))}
                           </ul>
                         </div>
-                        <div className="bg-blue-100 rounded-lg p-2 border border-gray-700">
-                          <h4 className="font-semibold text-black text-sm mb-2 flex items-center gap-1">
+                        <div className="bg-blue-100 rounded-lg p-2 border border-gray-700 flex flex-col">
+                          <h4 className="font-semibold text-black text-sm mb-2 flex items-center gap-1 ">
                             <svg className="w-4 h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Benefits
                           </h4>
-                          <ul className="space-y-1">
+                          <ul className="space-y-1 flex-grow">
                             {solution.benefits.map((benefit, index) => (
-                              <li key={index} className="text-black text-xs flex items-start gap-1">
+                              <li key={index} className="text-black text-xs flex items-start gap-1 line-clamp-1">
                                 <span className="text-blue-900 mt-0.5">•</span>
                                 {benefit}
                               </li>
                             ))}
                           </ul>
                         </div>
-                        <div className="bg-purple-100 rounded-lg p-2 border border-gray-700">
+                        <div className="bg-purple-100 rounded-lg p-2 border border-gray-700 flex flex-col">
                           <h4 className="font-semibold text-black text-sm mb-2 flex items-center gap-1">
                             <svg className="w-4 h-4 text-purple-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                             </svg>
                             Tech
                           </h4>
-                          <ul className="space-y-1">
+                          <ul className="space-y-1 flex-grow">
                             {solution.technologies.map((tech, index) => (
-                              <li key={index} className="text-black text-xs flex items-start gap-1">
+                              <li key={index} className="text-black text-xs flex items-start gap-1 line-clamp-1">
                                 <span className="text-purple-900 mt-0.5">•</span>
                                 {tech}
                               </li>

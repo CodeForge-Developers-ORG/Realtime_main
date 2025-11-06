@@ -64,41 +64,43 @@ const ProductsSection = () => {
             ]}>
             {products &&
               products.map((product, index) => (
-                <div
-                  key={product.id}
-                  className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
-                  style={{
-                    background:
-                      index % 2 === 0
-                        ? "linear-gradient(to bottom, #FFCC33, #FFB347)"
-                        : "linear-gradient(to bottom, #FF7F50, #FF6347)",
-                  }}>
-                  <div className="flex flex-col">
-                    <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl pt-2 sm:pt-12  flex align-middle justify-center">
-                      <Image
-                        src={`${baseUri}${product.images[0]}`}
-                        alt={product.title}
-                        width={0}
-                        height={0}
-                        unoptimized
-                        className="h-[100] lg:h-[200] w-[100] lg:w-[200] object-contain"
-                      />
-                    </div>
-                    <div
-                      style={{
-                        color: index % 2 === 0 ? "#000" : "#fff",
-                      }}>
-                      <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1 line-clamp-1">
-                        {product.category?.name.charAt(0).toLocaleUpperCase()}
-                        {product?.category?.name?.slice(1)}
-                      </p>
-                      <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px] line-clamp-1">
-                        {product.title.charAt(0).toUpperCase()}
-                        {product.title.slice(1)}
-                      </h3>
+                <Link href={`/products/${product?.slug}`}>
+                  <div
+                    key={product.id}
+                    className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
+                    style={{
+                      background:
+                        index % 2 === 0
+                          ? "linear-gradient(to bottom, #FFCC33, #FFB347)"
+                          : "linear-gradient(to bottom, #FF7F50, #FF6347)",
+                    }}>
+                    <div className="flex flex-col">
+                      <div className="relative h-30 sm:h-80 w-full mb-4 bg-white rounded-lg sm:rounded-xl pt-2 sm:pt-12  flex align-middle justify-center">
+                        <Image
+                          src={`${baseUri}${product.images[0]}`}
+                          alt={product.title}
+                          width={0}
+                          height={0}
+                          unoptimized
+                          className="h-[100] lg:h-[200] w-[100] lg:w-[200] object-contain"
+                        />
+                      </div>
+                      <div
+                        style={{
+                          color: index % 2 === 0 ? "#000" : "#fff",
+                        }}>
+                        <p className="text-xs sm:text-lg md:text-xl font-thin sm:mb-1 line-clamp-1">
+                          {product.category?.name.charAt(0).toLocaleUpperCase()}
+                          {product?.category?.name?.slice(1)}
+                        </p>
+                        <h3 className="text-sm sm:text-2xl md:text-3xl font-thin tracking-[0.5px] md:tracking-[1px] line-clamp-1">
+                          {product.title.charAt(0).toUpperCase()}
+                          {product.title.slice(1)}
+                        </h3>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
           </Slider>
         </div>

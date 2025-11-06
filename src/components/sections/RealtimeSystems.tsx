@@ -75,6 +75,9 @@ export default function RealtimeScrollCards() {
                 });
               }
             });
+            
+            // Ensure the current card has proper z-index
+            gsap.set(card, { zIndex: i + 5 });
             gsap.to(card, { opacity: 1, scale: 1, duration: 0.3 });
           },
           onLeave: () => {
@@ -122,14 +125,14 @@ export default function RealtimeScrollCards() {
     });
 
     cardRefs.current.forEach((c, i) => {
-      gsap.set(c, { zIndex: i === index ? 999 : i + 1 });
+      gsap.set(c, { zIndex: i === index ? 30 : i + 1 });
     });
 
     gsap.to(window, {
       duration: 0.8,
-      scrollTo: { y: targetCard, offsetY: 120 },
+      scrollTo: { y: targetCard, offsetY: 270 },
       ease: "power2.inOut",
-      onComplete: () => { gsap.set(targetCard, { zIndex: 999 }); },
+      onComplete: () => { gsap.set(targetCard, { zIndex: 30 }); },
     });
 
     gsap.fromTo(
@@ -140,9 +143,9 @@ export default function RealtimeScrollCards() {
   };
 
   return (
-    <section ref={containerRef} className="bg-white py-10 relative">
+    <section ref={containerRef} className="bg-white py-10 relative isolate">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
-      <div className="sticky max-w-[65%] lg:max-w-[75%] top-42 lg:top-40 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto  no-scrollbar" >
+      <div className="sticky max-w-[65%] lg:max-w-[75%] top-42 lg:top-38 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto no-scrollbar z-[60]" >
         {solutions.map((card, index) => (
           <button
             key={index}
@@ -159,7 +162,7 @@ export default function RealtimeScrollCards() {
 
       {/* ✅ Dynamic Cards Section */}
       <div
-        className="relative container mx-auto px-4"
+        className="relative container mx-auto px-4 z-10"
         style={{ minHeight: `${solutions.length * 50}vh` }}
         // Responsive minHeight using CSS media query in inline style
       >

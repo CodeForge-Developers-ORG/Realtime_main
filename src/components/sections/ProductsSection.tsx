@@ -64,9 +64,9 @@ const ProductsSection = () => {
             ]}>
             {products &&
               products.map((product, index) => (
-                <Link href={`/products/${product?.slug}`}>
+                <Link key={product.id} href={`/products/${product?.slug}`}>
                   <div
-                    key={product.id}
+                    
                     className="rounded-lg sm:rounded-3xl p-3 sm:p-6 md:p-8 transition-transform mx-2 md:mx-4"
                     style={{
                       background:

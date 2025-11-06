@@ -1,11 +1,32 @@
 "use client";
 import { FaCheckCircle, FaStar, FaCog, FaInfoCircle } from "react-icons/fa";
 import { baseUri } from "@/services/constant";
-import Image from "next/image";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
-import Link from "next/link";
 
-const SolutionDetails = ({ solution }: { solution: any }) => {
+export interface Solution {
+  id: string;
+  title: string;
+  slug: string;
+  short_description: string;
+  description: string;
+  features: string[];
+  benefits: string[];
+  technologies: string[];
+  status: boolean;
+  featured: boolean;
+  sort_order: number;
+  category: string | null;
+  price_range: string | null;
+  delivery_time: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  meta_title: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+
+const SolutionDetails = ({ solution }: { solution: Solution }) => {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Solutions", href: "/solutions" },

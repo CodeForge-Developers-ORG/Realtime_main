@@ -106,7 +106,7 @@ const SoftwareMegaMenu = () => {
 
   return (
     <>
-      <div className="absolute md:-left-50 lg:left-0 mt-3 w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+      <div className="absolute md:-left-0 lg:left-0 mt-3 w-[100%] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
         <div className="p-4">
           <div className="flex gap-4">
             {/* Left Sidebar - Software List */}
@@ -352,7 +352,7 @@ const SoftwareMegaMenu = () => {
                   </div>
 
                   {/* Download/External Link */}
-                  <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-3 w-[70%] ">
+                  <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-3 md:w-[65%] lg:w-[70%] ">
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => handleDownloadClick(activeSoftwareData)}

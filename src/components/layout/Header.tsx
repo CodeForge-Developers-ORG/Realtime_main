@@ -130,7 +130,7 @@ const ResponsiveMegaMenu = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="hidden md:block absolute left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+    <div className="hidden md:block absolute md:-left-65 lg:left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[700px] lg:max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
       {children}
     </div>
   );

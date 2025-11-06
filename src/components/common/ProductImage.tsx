@@ -107,13 +107,13 @@ const ProductImages: React.FC<ProductImagesProps> = ({
               <ChevronLeft size={40} />
             </button>
 
-            <div className="max-w-[90%] max-h-[85%] flex items-center justify-center">
+            <div className="max-w-[100%] max-h-[85%] flex items-center justify-center">
               <Image
                 src={`${baseUri}${images[currentIndex]}`}
                 alt={alt}
                 width={900}
                 height={600}
-                className="rounded-lg object-contain w-auto h-auto max-h-[80vh]"
+                className="rounded-lg object-contain  h-auto max-h-[80vh]"
               />
             </div>
 

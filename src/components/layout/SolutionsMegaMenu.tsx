@@ -84,7 +84,7 @@ const SolutionsMegaMenu = () => {
   }
 
   return (
-    <div className="absolute md:-left-50 lg:left-0 mt-3 w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+    <div className="absolute md:left-40 lg:left-0 mt-3 w-[100%] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
       <div className="p-4">
         <div className="flex gap-4">
           {/* Left Sidebar - Solutions List */}

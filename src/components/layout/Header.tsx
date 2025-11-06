@@ -168,7 +168,6 @@ const renderMobileNestedChildren = (children: ChildItem[], closeMenu: () => void
     }
 
     const hasNestedChildren = hasValidChildren(child.children);
-    console.log("nes",child)
     return (
       <div key={index}>
         <div className={`flex justify-between items-center ${level > 0 ? 'pl-4' : ''}`}>

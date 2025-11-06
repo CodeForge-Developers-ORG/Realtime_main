@@ -28,12 +28,12 @@
       "namedRegex": "^/blog/(?<nxtPslug>[^/]+?)(?:/)?$"
     },
     {
-      "page": "/products/category/[title]",
+      "page": "/products/category/[id]",
       "regex": "^/products/category/([^/]+?)(?:/)?$",
       "routeKeys": {
-        "nxtPtitle": "nxtPtitle"
+        "nxtPid": "nxtPid"
       },
-      "namedRegex": "^/products/category/(?<nxtPtitle>[^/]+?)(?:/)?$"
+      "namedRegex": "^/products/category/(?<nxtPid>[^/]+?)(?:/)?$"
     },
     {
       "page": "/products/[title]",
@@ -44,12 +44,12 @@
       "namedRegex": "^/products/(?<nxtPtitle>[^/]+?)(?:/)?$"
     },
     {
-      "page": "/software/[title]",
+      "page": "/software/[slug]",
       "regex": "^/software/([^/]+?)(?:/)?$",
       "routeKeys": {
-        "nxtPtitle": "nxtPtitle"
+        "nxtPslug": "nxtPslug"
       },
-      "namedRegex": "^/software/(?<nxtPtitle>[^/]+?)(?:/)?$"
+      "namedRegex": "^/software/(?<nxtPslug>[^/]+?)(?:/)?$"
     },
     {
       "page": "/solutions/[title]",

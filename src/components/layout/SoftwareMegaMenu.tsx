@@ -116,9 +116,10 @@ const SoftwareMegaMenu = () => {
               </h3>
               <div className="space-y-1">
                 {software.map((item) => (
-                  <div
+                  <Link
                     key={item.id}
-                    className={`p-2 rounded-md cursor-pointer transition-all duration-200 text-sm ${
+                    href={`/software/${item?.slug}`}
+                    className={`p-2 block rounded-md cursor-pointer transition-all duration-200 text-sm ${
                       activeSoftware === item.id
                         ? "bg-orange-500 text-white"
                         : "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -133,7 +134,7 @@ const SoftwareMegaMenu = () => {
                         <span>• {item.main_category}</span>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

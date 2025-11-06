@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
 import DownloadModal from "./DownloadModal";
 import axiosClient from "@/services/axiosClient";
+import Link from "next/link";
 
 type Software = {
+  slug: string;
   id: string;
   title: string;
   version: string;
@@ -19,7 +21,9 @@ type Software = {
 
 export default function DownloadSoftware() {
   const [softwares, setSoftwares] = useState<Software[]>([]);
-  const [selectedSoftware, setSelectedSoftware] = useState<Software | null>(null);
+  const [selectedSoftware, setSelectedSoftware] = useState<Software | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,16 +55,21 @@ export default function DownloadSoftware() {
         </h2>
 
         {loading ? (
-          <div className="text-center text-gray-500 py-10">Loading software list...</div>
+          <div className="text-center text-gray-500 py-10">
+            Loading software list...
+          </div>
         ) : error ? (
           <div className="text-center text-red-500 py-10">{error}</div>
         ) : softwares.length === 0 ? (
-          <div className="text-center text-gray-500 py-10">No software available.</div>
+          <div className="text-center text-gray-500 py-10">
+            No software available.
+          </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-4">
             {softwares.map((s) => (
-              <div
+              <Link
                 key={s.id}
+                href={`/software/${s?.slug}`}
                 className="flex items-center justify-between bg-neutral-50 border border-neutral-200 rounded-xl px-5 py-4 hover:bg-neutral-100 transition">
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-sm font-medium text-neutral-700">
@@ -76,16 +85,22 @@ export default function DownloadSoftware() {
                     )}
                   </div>
                   {s.one_line_description && (
-                    <p className="text-xs text-neutral-500">{s.one_line_description}</p>
+                    <p className="text-xs text-neutral-500">
+                      {s.one_line_description}
+                    </p>
                   )}
                 </div>
 
                 <button
-                  onClick={() => setSelectedSoftware(s)}
+                  onClick={(e) => {
+                    e.preventDefault(); // 🔥 Link navigation ko roke
+                    e.stopPropagation(); // 🔥 Event bubble na ho
+                    setSelectedSoftware(s); // Aapka function chale
+                  }}
                   className="text-orange-600 font-semibold flex items-center gap-1 cursor-pointer">
                   Download <Download className="w-4 h-4" />
                 </button>
-              </div>
+              </Link>
             ))}
           </div>
         )}

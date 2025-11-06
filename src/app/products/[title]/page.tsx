@@ -37,7 +37,6 @@ export async function generateMetadata({
 }) {
   const { title } = await params; // ✅ FIXED
   const res = await getProductBySlug(title);
-  console.log("product", res);
   const product: ProductCategory | null = res?.data?.[0] || null;
 
   if (!product) {
@@ -70,7 +69,7 @@ export default async function ProductPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product.category?.name || "Category", href: "#" },
+    { label: product.category?.name || "Category", href: `/products/category/${product.category?.id}` },
     { label: product.title || "Product", href: `/products/${title}` },
   ];
 

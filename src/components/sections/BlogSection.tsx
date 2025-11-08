@@ -9,17 +9,8 @@ import { Blog } from "@/types/blog";
 import { baseUri } from "@/services/constant";
 
 const BlogSection = () => {
-  const [isMobile, setIsMobile] = useState(false);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Fetch blogs
   useEffect(() => {

@@ -8,12 +8,10 @@ export const metadata: Metadata = {
 
 const CookiePolicyPage = async () => {
   let decodedContent = "";
-  let title = "";
 
   try {
     const res = await getCookiePolicyData();
     if (res.success && res.data) {
-      title = res.data.title;
       const encodedContent = res.data.content;
       decodedContent = decodeURIComponent(
         encodedContent

@@ -90,8 +90,6 @@ const SoftwareMegaMenu = () => {
     setSelectedSoftware(software);
   };
 
-  const baseUrl = "https://app.realtimebiometrics.net";
-
   if (loading) {
     return (
       <div className="absolute left-0 mt-3 w-96 bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50">

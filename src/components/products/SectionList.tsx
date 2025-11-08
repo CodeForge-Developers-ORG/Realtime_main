@@ -6,11 +6,10 @@ import Link from "next/link";
 
 export default function SectionList({
   categories,
-  activeIndex,
   onActiveChange,
 }: {
   categories: Category[];
-  activeIndex: number;
+  activeIndex?: number;
   onActiveChange: (i: number) => void;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);

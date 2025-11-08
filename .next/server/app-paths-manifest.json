@@ -1,4 +1,7 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/cookie-policy/page": "app/cookie-policy/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/page": "app/page.js",
-  "/solutions/page": "app/solutions/page.js"
+  "/terms-of-service/page": "app/terms-of-service/page.js"
 }

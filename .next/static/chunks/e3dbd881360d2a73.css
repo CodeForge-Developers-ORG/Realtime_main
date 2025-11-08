@@ -1,0 +1,1 @@
+.scrolling-banner{gap:20px;display:flex;overflow-x:hidden}.banner-item{flex-shrink:0;width:90vw;position:relative}.banner-item img{width:100%;height:100%}.scroll-container::-webkit-scrollbar{display:none}

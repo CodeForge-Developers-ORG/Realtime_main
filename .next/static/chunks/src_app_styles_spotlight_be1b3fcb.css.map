@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///D:/staff/Realtime_main/src/app/styles/spotlight.css"],"sourcesContent":["\r\n\r\n\r\n.scrolling-banner {\r\n  display: flex;\r\n  gap: 20px; /* spacing between cards */\r\n  overflow-x: hidden;\r\n}\r\n\r\n.banner-item {\r\n  flex-shrink: 0;\r\n  width: 90vw;  /* fixed card width */\r\n  position: relative;\r\n}\r\n\r\n.banner-item img {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n.scroll-container::-webkit-scrollbar {\r\n  display: none; /* Hide scrollbar for WebKit browsers */\r\n}"],"names":[],"mappings":"AAGA;;;;;;AAMA;;;;;;AAMA;;;;;AAIA","debugId":null}}]
-}

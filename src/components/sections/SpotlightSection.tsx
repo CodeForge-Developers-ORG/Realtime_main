@@ -131,7 +131,7 @@ const SpotlightSection = () => {
     return (
       <section className="lg:hidden bg-white pt-2 md:pt-6 pb-0">
         <div className="container-fluid px-4 mx-auto relative">
-          <div className="text-center py-4 mb-6">
+          <div className="text-center py-4 mb-1">
             <h2 className="text-xl sm:text-3xl text-black font-thin ">
               World-Class Biometric Solutions
             </h2>
@@ -143,10 +143,10 @@ const SpotlightSection = () => {
           <div className="relative pb-2">
             <div
               ref={scrollRef}
-              className="scroll-container flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-4"
+              className="scroll-container flex  overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-4"
             >
               {cards.map((card) => (
-                <div className="scroll-item w-[85vw] flex-shrink-0 snap-center" key={card.id}>
+                <div className="scroll-item w-[85vw] flex-shrink-0 snap-center overflow-hidden" key={card.id}>
                   <div
                     className={`relative rounded-xl  shadow-lg ${card.bgColor} text-white pb-0 px-4  pt-4 h-[200px] flex flex-col`}
                   >

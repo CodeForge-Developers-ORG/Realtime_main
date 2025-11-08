@@ -34,7 +34,7 @@ export default function Sidebar({
   }, [activeIndex]);
 
   return (
-    <div className="sticky top-5">
+    <div className="sticky top-40">
       <div className="space-y-3">
         {categories.map((c, i) => (
           <button

@@ -37,7 +37,6 @@ const SolutionsPage = () => {
   return (
     <Layout>
       <Title title="Solutions" />
-
       <main className=" bg-gray-50">
         {/* Page Header */}
         <div className="bg-gray-50 py-4 h-auto">

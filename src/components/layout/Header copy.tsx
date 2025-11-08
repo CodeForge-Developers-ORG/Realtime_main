@@ -71,6 +71,8 @@ const hasValidChildren = (children?: ChildItem[]): boolean => {
   if (!children || !Array.isArray(children) || children.length === 0) {
     return false;
   }
+
+  // Check if there's at least one child with a title
   return children.some((child) => child?.title && child.title.trim() !== "");
 };
 
@@ -86,6 +88,7 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
         return null;
       }
 
+      // If child has its own children, render them recursively
       if (hasValidChildren(child.children)) {
         return (child.children as ChildItem[])
           .map((subChild, subIndex) => {
@@ -106,6 +109,7 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
           .filter(Boolean);
       }
 
+      // Render single child item
       return (
         <Link
           key={childIndex}
@@ -120,7 +124,11 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
 };
 
 // Responsive Mega Menu Wrapper Component - DESKTOP ONLY
-const ResponsiveMegaMenu = ({ children }: { children: React.ReactNode }) => {
+const ResponsiveMegaMenu = ({ 
+  children 
+}: { 
+  children: React.ReactNode;
+}) => {
   return (
     <div className="hidden md:block absolute md:-left-65 lg:left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[700px] lg:max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
       {children}
@@ -129,11 +137,11 @@ const ResponsiveMegaMenu = ({ children }: { children: React.ReactNode }) => {
 };
 
 // Mobile Dropdown Component - SIMPLE DROPDOWN
-const MobileDropdown = ({
-  children,
-  title,
-}: {
-  children: React.ReactNode;
+const MobileDropdown = ({ 
+  children, 
+  title 
+}: { 
+  children: React.ReactNode; 
   title?: string;
 }) => {
   return (
@@ -141,9 +149,53 @@ const MobileDropdown = ({
       <div className="text-white font-medium p-3 border-b border-gray-600 text-sm bg-[#333] rounded-t-lg">
         {title}
       </div>
-      <div className="py-2">{children}</div>
+      <div className="py-2">
+        {children}
+      </div>
     </div>
   );
+};
+
+// Recursive function to render nested children in mobile view
+const renderMobileNestedChildren = (children: ChildItem[], closeMenu: () => void, level: number = 0) => {
+  if (!hasValidChildren(children)) {
+    return null;
+  }
+
+  return children.map((child, index) => {
+    if (!child?.title || child.title.trim() === "") {
+      return null;
+    }
+
+    const hasNestedChildren = hasValidChildren(child.children);
+    return (
+      <div key={index}>
+        <div className={`flex justify-between items-center ${level > 0 ? 'pl-4' : ''}`}>
+          <Link
+            href={child.url || "#"}
+            onClick={closeMenu}
+            className={`flex-1 py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 border-b border-gray-700 transition-colors ${
+              level > 0 ? 'text-sm' : ''
+            }`}>
+            {child.title}
+          </Link>
+          
+          {hasNestedChildren && (
+            <div className="px-4 text-gray-400 text-xs">
+              {child.children?.length} items
+            </div>
+          )}
+        </div>
+        
+        {/* Render nested children */}
+        {hasNestedChildren && (
+          <div className="bg-[#252525] border-l-2 border-orange-500">
+            {renderMobileNestedChildren(child.children!, closeMenu, level + 1)}
+          </div>
+        )}
+      </div>
+    );
+  });
 };
 
 const Header = () => {
@@ -156,8 +208,6 @@ const Header = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
-  // NEW: State for nested dropdowns
-  const [openNestedDropdowns, setOpenNestedDropdowns] = useState<Set<string>>(new Set());
   const [headerData, setHeaderData] = useState<HeaderData | null>(
     headerDataCache
   );
@@ -173,34 +223,41 @@ const Header = () => {
     if (data?.branding) {
       const { site_title, site_tagline, favicon_url } = data.branding;
 
+      // Update document title
       if (site_title) {
         const currentTitle = document.title;
+        // Only update if not already set correctly
         if (!currentTitle.includes(site_title)) {
           document.title =
             site_title + (site_tagline ? ` | ${site_tagline}` : "");
         }
       }
 
+      // Update favicon
       if (favicon_url) {
         let link = document.querySelector(
           "link[rel*='icon']"
         ) as HTMLLinkElement | null;
 
         if (!link) {
+          // Create new favicon link if doesn't exist
           link = document.createElement("link");
           link.rel = "icon";
           document.head.appendChild(link);
         }
 
+        // Update favicon URL
         link.href = favicon_url;
       }
 
+      // Update meta description
       if (site_tagline) {
         let metaDescription = document.querySelector(
           'meta[name="description"]'
         );
 
         if (!metaDescription) {
+          // Create new meta description if doesn't exist
           metaDescription = document.createElement("meta");
           metaDescription.setAttribute("name", "description");
           document.head.appendChild(metaDescription);
@@ -209,6 +266,7 @@ const Header = () => {
         metaDescription.setAttribute("content", site_tagline);
       }
 
+      // Update og:title and og:description
       let ogTitle = document.querySelector('meta[property="og:title"]');
       if (!ogTitle) {
         ogTitle = document.createElement("meta");
@@ -318,7 +376,37 @@ const Header = () => {
     };
   }, [searchQuery, performSearch]);
 
-  // NEW: Remove outside click handler completely
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setActiveDropdown(null);
+        setActiveMegaMenu(null);
+      }
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowSearchDropdown(false);
+      }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        !(event.target as Element).closest('button[aria-label="Mobile menu"]')
+      ) {
+        setMobileMenuOpen(false);
+        setActiveMegaMenu(null);
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // Handle body scroll
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -358,90 +446,51 @@ const Header = () => {
     setActiveDropdown(null);
   };
 
-  // NEW: Toggle nested dropdowns
-  const toggleNestedDropdown = (key: string) => {
-    setOpenNestedDropdowns(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(key)) {
-        newSet.delete(key);
-      } else {
-        newSet.add(key);
-      }
-      return newSet;
-    });
-  };
-
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
     setActiveMegaMenu(null);
-    setOpenNestedDropdowns(new Set());
     setSearchQuery("");
     setSearchResults([]);
     setShowSearchDropdown(false);
   };
 
-  // NEW: Recursive function to render nested children with state management
-  const renderMobileNestedChildren = (
-    children: ChildItem[],
-    parentKey: string = "",
-    level: number = 0
-  ) => {
-    if (!hasValidChildren(children)) return null;
+  // Render mobile dropdown for regular items with API data
+  const renderMobileDropdown = (children: ChildItem[]) => {
+    if (!hasValidChildren(children)) {
+      return null;
+    }
 
     return (
-      <div className="divide-y divide-[#333]">
-        {children.map((child, i) => {
-          if (!child?.title || child.title.trim() === "") return null;
+      <div className="space-y-0">
+        {children.map((child, childIndex) => {
+          if (!child?.title || child.title.trim() === "") {
+            return null;
+          }
 
           const hasNestedChildren = hasValidChildren(child.children);
-          const childKey = `${parentKey}-${i}`;
-          const isNestedOpen = openNestedDropdowns.has(childKey);
 
           return (
-            <div key={i} className="w-full">
-              <div className="flex justify-between items-center">
+            <div key={childIndex}>
+              <div className="flex justify-between items-center hover:bg-[#333] transition-colors">
                 <Link
                   href={child.url || "#"}
-                  onClick={(e) => {
-                    if (!hasNestedChildren) {
-                      closeMobileMenu();
-                    } else {
-                      e.preventDefault();
-                      toggleNestedDropdown(childKey);
-                    }
-                  }}
-                  className="flex-1 block py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 transition-colors"
-                >
+                  onClick={closeMobileMenu}
+                  className="flex-1 py-3 px-4 text-sm text-gray-300 hover:text-orange-500 border-b border-gray-700 transition-colors">
                   {child.title}
                 </Link>
-
+                
                 {hasNestedChildren && (
-                  <button
-                    onClick={() => toggleNestedDropdown(childKey)}
-                    className="p-3 text-gray-400 hover:text-orange-500 transition"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`h-4 w-4 transition-transform ${isNestedOpen ? 'rotate-180' : ''}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
+                  <div className="px-4 text-gray-400 text-xs">
+                    {child.children?.length}
+                  </div>
                 )}
               </div>
-
-              {hasNestedChildren && isNestedOpen && (
-                <div className="pl-4 border-l-2 border-orange-500 bg-[#252525]">
-                  {renderMobileNestedChildren(child.children!, childKey, level + 1)}
+              
+              {/* Render nested children if they exist */}
+              {hasNestedChildren && (
+                <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
+                  {renderMobileNestedChildren(child.children!, closeMobileMenu, 1)}
                 </div>
               )}
             </div>
@@ -451,79 +500,13 @@ const Header = () => {
     );
   };
 
-  // UPDATED: Render mobile dropdown for regular items with state management
-  const renderMobileDropdown = (children: ChildItem[], parentTitle: string) => {
-    if (!hasValidChildren(children)) return null;
-
-    return (
-      <div className="divide-y divide-[#333]">
-        {children.map((child, index) => {
-          if (!child?.title || child.title.trim() === "") return null;
-
-          const hasNestedChildren = hasValidChildren(child.children);
-          const childKey = `${parentTitle}-${index}`;
-          const isNestedOpen = openNestedDropdowns.has(childKey);
-
-          return (
-            <div key={index} className="w-full">
-              <div className="flex justify-between items-center">
-                <Link
-                  href={child.url || "#"}
-                  onClick={(e) => {
-                    if (!hasNestedChildren) {
-                      closeMobileMenu();
-                    } else {
-                      e.preventDefault();
-                      toggleNestedDropdown(childKey);
-                    }
-                  }}
-                  className="flex-1 block py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 transition-colors"
-                >
-                  {child.title}
-                </Link>
-
-                {hasNestedChildren && (
-                  <button
-                    onClick={() => toggleNestedDropdown(childKey)}
-                    className="p-3 text-gray-400 hover:text-orange-500 transition"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`h-4 w-4 transition-transform ${isNestedOpen ? 'rotate-180' : ''}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                )}
-              </div>
-
-              {hasNestedChildren && isNestedOpen && (
-                <div className="pl-4 border-l-2 border-orange-500 bg-[#252525]">
-                  {renderMobileNestedChildren(child.children!, childKey, 1)}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  // UPDATED: Render mobile content for mega menu items with state management
+  // Render mobile content for mega menu items - DYNAMIC FROM API
   const renderMobileMegaMenu = (item: NavItem) => {
     if (!hasValidChildren(item.children)) {
       return (
         <MobileDropdown title={item.title || ""}>
-          <Link
-            href={item.url || "#"}
+          <Link 
+            href={item.url || "#"} 
             onClick={closeMobileMenu}
             className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium">
             Explore {item.title} →
@@ -535,61 +518,39 @@ const Header = () => {
     return (
       <MobileDropdown title={item.title || ""}>
         <div className="space-y-0">
-          <Link
-            href={item.url || "#"}
+          {/* Main category link */}
+          <Link 
+            href={item.url || "#"} 
             onClick={closeMobileMenu}
             className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium border-b border-gray-700 bg-[#333]">
             All {item.title} →
           </Link>
-
+          
+          {/* Child items from API */}
           {item.children!.map((child, index) => {
             const hasNestedChildren = hasValidChildren(child.children);
-            const childKey = `${item.title}-${index}`;
-            const isNestedOpen = openNestedDropdowns.has(childKey);
-
+            
             return (
               <div key={index}>
                 <div className="flex justify-between items-center hover:bg-[#333] transition-colors">
                   <Link
                     href={child.url || "#"}
-                    onClick={(e) => {
-                      if (!hasNestedChildren) {
-                        closeMobileMenu();
-                      } else {
-                        e.preventDefault();
-                        toggleNestedDropdown(childKey);
-                      }
-                    }}
+                    onClick={closeMobileMenu}
                     className="flex-1 py-3 px-4 text-sm text-gray-300 hover:text-orange-500 border-b border-gray-700 transition-colors">
                     {child.title}
                   </Link>
-
+                  
                   {hasNestedChildren && (
-                    <button
-                      onClick={() => toggleNestedDropdown(childKey)}
-                      className="px-4 text-gray-400 hover:text-orange-500"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 transition-transform ${isNestedOpen ? 'rotate-180' : ''}`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
+                    <div className="px-4 text-gray-400 text-xs">
+                      {child.children?.length}
+                    </div>
                   )}
                 </div>
-
-                {hasNestedChildren && isNestedOpen && (
+                
+                {/* Render nested children for items like Smart Cameras */}
+                {hasNestedChildren && (
                   <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
-                    {renderMobileNestedChildren(child.children!, childKey, 1)}
+                    {renderMobileNestedChildren(child.children!, closeMobileMenu, 1)}
                   </div>
                 )}
               </div>
@@ -609,7 +570,7 @@ const Header = () => {
   if (!headerData) {
     return (
       <div className="bg-[#2B2B2B] text-white text-center py-4">
-        Failed to load header
+        Failed to load header 
       </div>
     );
   }
@@ -623,7 +584,8 @@ const Header = () => {
         <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
+            className="flex items-center transition-transform duration-300 hover:scale-105 z-50"
+          >
             <Image
               src={branding?.logo_url || "/logo.png"}
               alt={branding?.site_title || "Logo"}
@@ -636,7 +598,8 @@ const Header = () => {
           {/* Desktop Nav */}
           <nav
             className="hidden md:flex items-center space-x-4 lg:space-x-8 text-lg"
-            ref={dropdownRef}>
+            ref={dropdownRef}
+          >
             {navigation.map((item, index) => {
               if (!item?.title || item.title.trim() === "") {
                 return null;
@@ -656,6 +619,7 @@ const Header = () => {
               }
 
               if (item.type === "dropdown") {
+                // Check which mega menu to show
                 const isProductsDropdown =
                   item.title?.toLowerCase() === "products";
                 const isSolutionsDropdown =
@@ -686,6 +650,7 @@ const Header = () => {
                       </svg>
                     </Link>
 
+                    {/* Regular Dropdown for items without mega menu */}
                     {hasValidChildren(item.children) &&
                       !isProductsDropdown &&
                       !isSolutionsDropdown &&
@@ -695,18 +660,21 @@ const Header = () => {
                         </div>
                       )}
 
+                    {/* Mega Menu for Products */}
                     {isProductsDropdown && (
                       <ResponsiveMegaMenu>
                         <ProductsMegaMenu />
                       </ResponsiveMegaMenu>
                     )}
 
+                    {/* Mega Menu for Solutions */}
                     {isSolutionsDropdown && (
                       <ResponsiveMegaMenu>
                         <SolutionsMegaMenu />
                       </ResponsiveMegaMenu>
                     )}
 
+                    {/* Mega Menu for Software */}
                     {isSoftwareDropdown && (
                       <ResponsiveMegaMenu>
                         <SoftwareMegaMenu />
@@ -715,86 +683,86 @@ const Header = () => {
                   </div>
                 );
               }
-              return null;
-            })}
-          </nav>
+            return null;
+          })}
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            aria-label="Mobile menu"
-            className="md:hidden focus:outline-none text-white z-50 p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
+        {/* Mobile Menu Button */}
+        <button
+          aria-label="Mobile menu"
+          className="md:hidden focus:outline-none text-white z-50 p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 transition-transform"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          )}
+        </button>
 
-          {/* Desktop App Links */}
-          <div className="hidden lg:flex items-center lg:space-x-1 xl:space-x-4">
-            <Link
-              href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
-              className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 xl:py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
-              <Image
-                src="/images/gplay.png"
-                alt="App Icon"
-                width={25}
-                height={25}
-                className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
-              />
-              <div className="ml-2">
-                <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
-                  REALTIME MOBILE
-                </div>
-                <div className="lg:text-[9px] font-bold">SMART APP</div>
+        {/* Desktop App Links */}
+        <div className="hidden lg:flex items-center lg:space-x-1 xl:space-x-4">
+          <Link
+            href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 xl:py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
+            <Image
+              src="/images/gplay.png"
+              alt="App Icon"
+              width={25}
+              height={25}
+              className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
+            />
+            <div className="ml-2">
+              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
+                REALTIME MOBILE
               </div>
-            </Link>
-            <Link
-              href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
-              className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
-              <Image
-                src="/images/gplay.png"
-                alt="App Icon"
-                width={25}
-                height={25}
-                className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
-              />
-              <div className="ml-2">
-                <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
-                  REALTIME MOBILE
-                </div>
-                <div className="lg:text-[9px] font-bold text-orange-500">
-                  ATTENDANCE APP
-                </div>
+              <div className="lg:text-[9px] font-bold">SMART APP</div>
+            </div>
+          </Link>
+          <Link
+            href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
+            className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
+            <Image
+              src="/images/gplay.png"
+              alt="App Icon"
+              width={25}
+              height={25}
+              className="h-6 lg:h-4 xl:h-7 w-6 lg:w-4 xl:w-7"
+            />
+            <div className="ml-2">
+              <div className="text-[12px] lg:text-[10px] xl:text-[12px]">
+                REALTIME MOBILE
               </div>
-            </Link>
-          </div>
+              <div className="lg:text-[9px] font-bold text-orange-500">
+                ATTENDANCE APP
+              </div>
+            </div>
+          </Link>
         </div>
+      </div>
       </div>
 
       {/* Mobile Menu */}
@@ -804,6 +772,7 @@ const Header = () => {
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ paddingTop: "100px" }}>
+        
         <div className="h-full overflow-y-auto pb-32">
           {/* Search Bar - TOP */}
           <div className="px-4 py-4 border-b border-[#333] hidden">
@@ -811,7 +780,7 @@ const Header = () => {
               className={`relative w-full ${
                 settings?.show_search_in_header ? "" : "hidden"
               }`}>
-              <form onSubmit={handleSearch}>
+              <form onSubmit={handleSearch} >
                 <input
                   type="text"
                   placeholder="Search Products..."
@@ -907,7 +876,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Navigation Links - STATE BASED DROPDOWNS */}
+          {/* Navigation Links */}
           <nav className="py-2">
             {navigation.map((item, index) => {
               if (!item?.title || item.title.trim() === "") {
@@ -937,8 +906,6 @@ const Header = () => {
                   item.title?.toLowerCase() === "solutions" ||
                   item.title?.toLowerCase() === "software";
 
-                const isActive = activeDropdown === item.title || activeMegaMenu === item.title;
-
                 return (
                   <div key={index} className="border-b border-[#333]">
                     <div className="flex justify-between items-center py-4 px-4 hover:bg-[#333] transition-colors">
@@ -962,7 +929,9 @@ const Header = () => {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className={`h-5 w-5 transition-transform duration-300 ${
-                              isActive ? "rotate-180 text-orange-500" : ""
+                              (activeDropdown === item.title || activeMegaMenu === item.title)
+                                ? "rotate-180 text-orange-500"
+                                : ""
                             }`}
                             fill="none"
                             viewBox="0 0 24 24"
@@ -979,14 +948,14 @@ const Header = () => {
                     </div>
 
                     {/* Regular Dropdown for non-mega menu items */}
-                    {isActive && activeDropdown === item.title && hasChildren && !isMegaMenu && (
+                    {activeDropdown === item.title && hasChildren && !isMegaMenu && (
                       <div className="bg-[#2B2B2B] border-t border-[#333]">
-                        {renderMobileDropdown(item.children!, item.title || "")}
+                        {renderMobileDropdown(item.children!)}
                       </div>
                     )}
 
-                    {/* Mega Menu Content */}
-                    {isActive && activeMegaMenu === item.title && isMegaMenu && (
+                    {/* Mega Menu Content - DYNAMIC FROM API */}
+                    {activeMegaMenu === item.title && isMegaMenu && (
                       <div className="bg-[#2B2B2B] border-t border-[#333]">
                         {renderMobileMegaMenu(item)}
                       </div>

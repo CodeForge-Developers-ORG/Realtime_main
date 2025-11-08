@@ -114,7 +114,7 @@ const Page = () => {
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Sidebar */}
             <aside className="w-full lg:w-1/4">
-              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24 border border-orange-100">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-38 border border-orange-100">
                 <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-orange-200">
                   About Us
                 </h3>

@@ -6,7 +6,7 @@ const FINGERPRINT_IMAGE_URL = "/images/image.png";
 
 const AboutRealtimeBiometrics: React.FC = () => {
   return (
-    <div className="flex justify-center items-center  bg-gray-50 p-4 sm:p-8">
+    <div className="flex justify-center items-center  bg-gray-50 px-0 p-2 sm:p-8">
       {/* Card Container */}
       <div
         className="
@@ -46,21 +46,21 @@ const AboutRealtimeBiometrics: React.FC = () => {
             flex flex-col justify-center
           ">
           {/* Title */}
-          <h2 className="text-3xl sm:text-4xl font-normal text-gray-800 mb-6">
+          <h2 className="text-[20px] lg:text-[40px] font-[400] text-[#1E1410] mb-2 lg:mb-6">
             About Realtime Biometrics
           </h2>
 
           {/* Text Paragraphs (Flex container for side-by-side on desktop) */}
-          <div className="flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col lg:flex-row lg:gap-6">
             {/* Main Text */}
-            <p className="text-lg text-gray-600 lg:w-2/3 leading-relaxed">
+            <p className="text-base lg:text-lg text-[#1E1410] lg:w-2/3 leading-relaxed">
               This is a growing market. Security incidents in schools grab the
               headlines, emotions and budget allocations. How to address
               security concerns leaves room for many opinions and strategies.
             </p>
 
             {/* Sidebar Text */}
-            <p className="text-base text-gray-500 lg:w-1/3 text-[14px] pl-4 py-1">
+            <p className="text-[14px] text-base text-gray-500 lg:w-1/3 lg:text-[14px] lg:pl-4 py-1">
               Relationship selling past experience with school districts and
               government sourcing requirements make this opportunity a complex
               environment to grow your business.

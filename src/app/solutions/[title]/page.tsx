@@ -1,49 +1,73 @@
 "use client";
-
-import React, { useState, useRef, useEffect } from "react";
-import AboutRealtimeBiometrics from "@/components/sections/AboutRealtimeBiometrics";
-import RealtimeSystems from "@/components/sections/RealtimeSystems";
-import Title from "@/components/common/Title";
+import { useEffect, useState } from "react";
+import { getSolutionBySlug } from "@/services/solutionServices";
+import SolutionDetails from "@/components/sections/SolutionDetails";
 import Layout from "@/components/layout/Layout";
+import { useParams } from "next/navigation";
 
-// Components for the solutions page
-const SolutionsPage = () => {
-  // Reference for scrolling tabs
-  const tabsRef = useRef<HTMLDivElement>(null);
-  // State for checking if scroll buttons should be visible
-  const [showScrollButtons, setShowScrollButtons] = useState(false);
+export interface Solution {
+  id: string;
+  title: string;
+  slug: string;
+  short_description: string;
+  description: string;
+  features: string[];
+  benefits: string[];
+  technologies: string[];
+  status: boolean;
+  featured: boolean;
+  sort_order: number;
+  category: string | null;
+  price_range: string | null;
+  delivery_time: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  meta_title: string | null;
+  created_at: string;
+  updated_at: string;
+}
 
-  // Check if scroll buttons should be visible
+
+const SolutionDetailPage = () => {
+  const [solution, setSolution] = useState<Solution | null>(null);
+  const params = useParams();
+  const title = params?.title as string;
+
+
+
+
   useEffect(() => {
-    const checkScrollable = () => {
-      if (tabsRef.current) {
-        const { scrollWidth, clientWidth } = tabsRef.current;
-        setShowScrollButtons(scrollWidth > clientWidth);
-      }
+    const fetchSolution = async () => {
+      if (!title) return;
+      
+      const response = await getSolutionBySlug(title);
+      setSolution(response.data); // API response is the data
     };
 
-    // Check on initial render and window resize
-    checkScrollable();
-    window.addEventListener("resize", checkScrollable);
+    fetchSolution();
+  }, [title]);
 
-    return () => {
-      window.removeEventListener("resize", checkScrollable);
-    };
-  }, []);
+
+
+
+  if (!solution) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading solution details...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      <Title title="Solutions" />
-      <main className=" bg-gray-50">
-        <div className="bg-gray-50 py-4 h-auto">
-          <div className="container-fluid mx-auto px-4">
-            <AboutRealtimeBiometrics />
-            <RealtimeSystems />
-          </div>
-        </div>
-      </main>
+      <SolutionDetails solution={solution} />
     </Layout>
   );
 };
 
-export default SolutionsPage;
+export default SolutionDetailPage;

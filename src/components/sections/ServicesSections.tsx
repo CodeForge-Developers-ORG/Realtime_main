@@ -79,7 +79,7 @@ const ServicesSections = () => {
       // Make the first image sticky immediately
       gsap.set(imageElements[0], { 
         position: "sticky",
-        top: "30vh",
+        top: "40vh",
         zIndex: 1
       });
       
@@ -168,7 +168,7 @@ const ServicesSections = () => {
             // When image reaches the top position, make it sticky with increasing offset
             gsap.to(currentImage, {
               position: "sticky",
-              top: `calc(30vh + ${offsetPixels}px)`, // Increasing offset for each element
+              top: `calc(40vh + ${offsetPixels}px)`, // Increasing offset for each element
               y: 0,
               zIndex: zIndex,
               duration: 0.5,
@@ -211,7 +211,7 @@ const ServicesSections = () => {
     <section ref={sectionRef} className="bg-[#FFFF]">
       <div className="container mx-auto relative py-5 md:py-14 px-4 md:px-6 lg:px-0">
         {/* Desktop heading with sticky behavior */}
-        <div ref={headerRef} className="hidden md:block text-center mb-8 sticky top-20 pb-14 bg-white">
+        <div ref={headerRef} className="hidden md:block text-center mb-8 sticky top-40 pb-14 bg-white">
           <h2 className="text-2xl lg:text-4xl text-[#1E1410] font-thin mb-4">Services</h2>
           <p className="text-sm md:text-lg text-[#1E1410] uppercase tracking-[1px] px-2">Wide-Range of Attendance Recorder & Access Control</p>
         </div>

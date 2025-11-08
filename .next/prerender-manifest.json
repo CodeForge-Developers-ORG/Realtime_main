@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "270f6ba84fc70500e87dae307bd02aa3",
-    "previewModeSigningKey": "d0cfec31359852fbec58dbed3a45775238eca66d6e1aaf874c414bc1fb855559",
-    "previewModeEncryptionKey": "a1b4f7e94537f34d3a0845804eac0e05002958c9e9563103a5cf502473632e5f"
-  }
-}
+{"version":4,"routes":{"/software/realsoft-v126":{}},"dynamicRoutes":{"/software/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/software/[slug]","routeRegex":"^\\/software\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"1d33ccd8decf7c5e98d3c08ef7e0d2cf","previewModeSigningKey":"75267454431dc0af5d3053daac30c62113d938bdd5cafdb67e62dea90688cd8c","previewModeEncryptionKey":"0f10d930f0139b39e0b61a73db9d81c212a9f06bb3dfc4c20b61b4dc8ee7a47c"}}

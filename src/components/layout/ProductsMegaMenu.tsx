@@ -176,7 +176,7 @@ const ProductsMegaMenu = () => {
             <div className="space-y-1 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
               {categories.map((category) => (
                 <Link 
-                href={`/products/category/${category.id}`}
+                href={`/products/category/${category.slug}`}
                   key={category.id}
                   className={`p-2 rounded-md cursor-pointer transition-all duration-200 text-sm block ${
                     activeCategory === category.id

@@ -98,6 +98,8 @@ const __TURBOPACK__default__export__ = axiosClient;
 "use strict";
 
 __turbopack_context__.s([
+    "getProductByCategorySlug",
+    ()=>getProductByCategorySlug,
     "getProductById",
     ()=>getProductById,
     "getProductBySlug",
@@ -123,6 +125,10 @@ const getProductBySlug = async (slug)=>{
 };
 const getProductById = async (id)=>{
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$axiosClient$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].get(`/content/products?category_id=${id}`);
+    return response.data;
+};
+const getProductByCategorySlug = async (slug)=>{
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$axiosClient$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].get(`/content/categories?slug=${slug}`);
     return response.data;
 };
 }),
@@ -569,7 +575,7 @@ async function ProductPage({ params }) {
         },
         {
             label: product.category?.name || "Category",
-            href: `/products/category/${product.category?.id}`
+            href: `/products/category/${product.category?.slug}`
         },
         {
             label: product.title || "Product",

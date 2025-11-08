@@ -69,7 +69,7 @@ export default async function ProductPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product.category?.name || "Category", href: `/products/category/${product.category?.id}` },
+    { label: product.category?.name || "Category", href: `/products/category/${product.category?.slug}` },
     { label: product.title || "Product", href: `/products/${title}` },
   ];
 

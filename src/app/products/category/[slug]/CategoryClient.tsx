@@ -76,7 +76,7 @@ export default function CategoryClient({
     return (
       <Layout>
         <div className="max-w-6xl mx-auto px-6 py-12 bg-white text-center">
-          Loading category...
+          Loading category... 
         </div>
       </Layout>
     );

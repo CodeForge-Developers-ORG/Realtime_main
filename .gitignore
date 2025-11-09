@@ -20,7 +20,7 @@
 out/
 # build/
 # .next/static
-.next/
+# .next/
 
 # Environment files
 .env

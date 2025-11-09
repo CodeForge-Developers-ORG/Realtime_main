@@ -134,7 +134,6 @@ const ServicesSections = () => {
           end: "top center",
           scrub: 0.3, // Decrease scroll duration (smaller value = faster response)
           onEnter: () => {
-            console.log(`Animation triggered for image ${i}`);
             // Start animation when image reaches center of viewport with improved easing
             gsap.fromTo(currentImage, 
               { y: "50%", opacity: 0 },
@@ -173,7 +172,6 @@ const ServicesSections = () => {
               zIndex: zIndex,
               duration: 0.5,
               onComplete: () => {
-                console.log(`Image ${i} is now sticky at offset ${offsetPixels}px`);
                 
                 // If this is the last image and animation is complete, hide the header
                 if (isLastCard) {

@@ -52,7 +52,6 @@ const SoftwareMegaMenu = () => {
         setLoading(true);
         const response = await axiosClient.get("/content/software");
         const data = await response.data;
-        console.log("Fetched software data:", data);
 
         if (data.success) {
           const softwareData = data.data;

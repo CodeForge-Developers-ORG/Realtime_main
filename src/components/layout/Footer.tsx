@@ -48,7 +48,6 @@ const Footer = () => {
     fetchFooter();
   }, []);
 
-  console.log(data)
 
   if (!data) return null;
 

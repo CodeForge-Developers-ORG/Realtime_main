@@ -1,0 +1,19 @@
+{
+  "pages": {
+    "/software/[slug]/page": [
+      "static/chunks/ff1a16fafef87110.js",
+      "static/chunks/7dd66bdf8a7e5707.js",
+      "static/chunks/4d9f5332d800e841.css",
+      "static/chunks/764743f9889e827a.css",
+      "static/chunks/6ea6f012f30d02ff.js",
+      "static/chunks/49d4f4b0bf7be6a9.js",
+      "static/chunks/74faddbf77d88d84.js",
+      "static/chunks/69c716de4a5cce44.js",
+      "static/chunks/c85a7d07e7b82c9a.js",
+      "static/chunks/5564f493499345f1.js",
+      "static/chunks/150316a471952cee.js",
+      "static/chunks/3e0f93b37bf948e9.js",
+      "static/chunks/turbopack-7e8840ea68700fe4.js"
+    ]
+  }
+}

@@ -139,7 +139,6 @@ const ContactSection = () => {
     if(e.target.checked){
       try {
         const response  = await submitNewsletter(name , email);
-        console.log("Newsletter Response:", response);
         Swal.fire({
           showCancelButton: true,
           title: "Subscribed!",

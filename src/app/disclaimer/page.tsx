@@ -1,17 +1,17 @@
 import { Metadata } from "next";
 import DOMPurify from "./dompurifire";
-import { getCookiePolicyData } from "@/services/cookiePolicyService";
 import Layout from "@/components/layout/Layout";
+import { getDisclaimerData } from "@/services/disclaimerService";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
 };
 
-const CookiePolicyPage = async () => {
+const DisclaimerPage = async () => {
   let decodedContent = "";
 
   try {
-    const res = await getCookiePolicyData();
+    const res = await getDisclaimerData();
     if (res.success && res.data) {
       const encodedContent = res.data.content;
       decodedContent = decodeURIComponent(
@@ -40,4 +40,4 @@ const CookiePolicyPage = async () => {
   );
 };
 
-export default CookiePolicyPage;
+export default DisclaimerPage;

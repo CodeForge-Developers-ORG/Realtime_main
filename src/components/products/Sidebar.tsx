@@ -12,21 +12,20 @@ export default function Sidebar({
   onSelect: (i: number) => void;
 }) {
   const btnRefs = useRef<Record<number, HTMLButtonElement | null>>({});
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Keep active button visible relative to viewport (parent scroll)
+  // ✅ Keep active button visible inside sidebar scroll
   useEffect(() => {
     const activeBtn = btnRefs.current[activeIndex];
-    if (activeBtn) {
-      const rect = activeBtn.getBoundingClientRect();
-      const offsetTop = rect.top + window.scrollY;
-      const offsetBottom = rect.bottom + window.scrollY;
-      const viewTop = window.scrollY;
-      const viewBottom = viewTop + window.innerHeight;
+    const container = containerRef.current;
+    if (activeBtn && container) {
+      const btnRect = activeBtn.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
 
-      if (offsetTop < viewTop || offsetBottom > viewBottom) {
-        // Scroll window so button is visible
-        window.scrollTo({
-          top: offsetTop - 20, // 20px padding from top
+      // Check if active button is outside visible container area
+      if (btnRect.top < containerRect.top || btnRect.bottom > containerRect.bottom) {
+        activeBtn.scrollIntoView({
+          block: "center",
           behavior: "smooth",
         });
       }
@@ -35,11 +34,16 @@ export default function Sidebar({
 
   return (
     <div className="sticky top-40">
-      <div className="space-y-3">
+      <div
+        ref={containerRef}
+        className="max-h-[calc(100vh-150px)] overflow-y-auto pr-2 space-y-3 no-scrollbar"
+      >
         {categories.map((c, i) => (
           <button
             key={c.title}
-            ref={(el) => { btnRefs.current[i] = el; }}
+            ref={(el) => {
+              btnRefs.current[i] = el;
+            }}
             className={`block w-full text-[16px] text-left px-4 py-3 rounded-lg transition-shadow hover:shadow-md ${
               activeIndex === i
                 ? "bg-[#EFAF00] text-[#1E1410] font-[300]"

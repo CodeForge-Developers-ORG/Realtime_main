@@ -81,7 +81,7 @@ export default async function ProductPage({
         <div className="max-w-6xl mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
             {/* Left - Image */}
-            <div className="lg:sticky lg:top-10">
+            <div className="lg:sticky lg:top-40">
               <ProductImage images={product.images || []} alt={product.title} />
             </div>
 

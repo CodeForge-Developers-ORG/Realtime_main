@@ -1,7 +1,7 @@
 import axiosClient from "./axiosClient";
 
 export const getProducts = async (pageNum: number) => {
-  const response = await axiosClient.get(`/content/products?page=${pageNum}`);
+  const response = await axiosClient.get(`/content/products?per_page=100&page=${pageNum}`);
   return response.data;
 };
 export const getProductsWithoutPagination = async () => {

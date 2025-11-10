@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Play } from "lucide-react";
 import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
+import { ReactNode } from "react";
 // import Title from "@/components/common/Title";
 
 type Category = {
@@ -19,6 +20,7 @@ type Category = {
 };
 
 type ProductCategory = {
+  description: ReactNode;
   category: Category | null;
   title: string;
   images: string[];
@@ -95,6 +97,10 @@ export default async function ProductPage({
                   {product?.category?.name}
                 </p>
               )}
+
+              <p className="pb-4 text-justify" >
+                {product?.description}
+              </p>
 
               <div className="flex items-center gap-3 mb-6">
                 <Link

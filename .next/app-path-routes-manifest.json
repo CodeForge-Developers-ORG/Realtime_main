@@ -10,6 +10,7 @@
   "/disclaimer/page": "/disclaimer",
   "/favicon.ico/route": "/favicon.ico",
   "/page": "/",
+  "/partner/page": "/partner",
   "/privacy-policy/page": "/privacy-policy",
   "/products/[title]/page": "/products/[title]",
   "/products/category/[slug]/page": "/products/category/[slug]",

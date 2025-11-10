@@ -15,12 +15,12 @@
 # Testing coverage
 /coverage
 
-Next.js build outputs
-/.next/
-out/
-build/
-.next/static
-.next/
+# Next.js build outputs
+# /.next/
+# out/
+# build/
+# .next/static
+# .next/
 
 # Environment files
 .env

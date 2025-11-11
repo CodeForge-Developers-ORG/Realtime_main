@@ -261,7 +261,7 @@ const ProductsMegaMenu = () => {
                 {displayedProducts.length > 0 && (
                   <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-4 block w-[70%]">
                     <Link
-                      href={`/products/category/${activeCategoryData?.id}`}
+                      href={`/products/category/${activeCategoryData?.slug}`}
                       className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors flex items-center justify-center gap-1">
                       View all in Category
                       <svg

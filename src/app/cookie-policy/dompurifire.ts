@@ -6,7 +6,7 @@ const sanitizeHTML = (html: string): string => {
   const objectTagRegex = /<object\b[^>]*>[\s\S]*?<\/object>/gi;
   const embedTagRegex = /<embed\b[^>]*>[\s\S]*?<\/embed>/gi;
 
-  let sanitized = html
+  const sanitized = html
     .replace(scriptTagRegex, "")
     .replace(eventHandlerRegex, "")
     .replace(javascriptProtocolRegex, "")

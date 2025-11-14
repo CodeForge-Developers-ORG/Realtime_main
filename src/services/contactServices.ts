@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosClient from "./axiosClient";
 
 export const submitForm = async (formData: unknown) => {
@@ -9,3 +10,5 @@ export const submitNewsletter = async (name:string ,  email: string) => {
   const response = await axiosClient.post(`/contact/newsletter`, { name , email });
   return response.data;
 };
+
+

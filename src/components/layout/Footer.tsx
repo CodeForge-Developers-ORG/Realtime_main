@@ -4,6 +4,7 @@ import { JSX, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
+import axios from "axios";
 
 type FooterData = {
   branding: {
@@ -25,6 +26,8 @@ type FooterData = {
 
 const Footer = () => {
   const [data, setData] = useState<FooterData | null>(null);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [email , setEmail] = useState<string>('')
 
   useEffect(() => {
     const fetchFooter = async () => {
@@ -48,8 +51,20 @@ const Footer = () => {
     fetchFooter();
   }, []);
 
-  console.log(data)
-
+  const handleSubmitNewsLatter = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const response = await axios.post(`https://markvisitor.com/app/dev/website/subscribe.php` , {email})
+      if(response.data.status === 'subscribed'){
+        setStatus("success");
+        setEmail('')
+      }
+    } catch (error) {
+        console.log(error)
+        setStatus("error");
+    }
+  }
   if (!data) return null;
 
   const { branding, contact, social_media, quick_links } = data;
@@ -167,15 +182,37 @@ const Footer = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex justify-center md:justify-start mt-10 md:mt-16">
+        <div className="flex-col  sm:flex-row flex justify-center sm:justify-between mt-10 md:mt-16">
           <Image
             src={branding.footer_logo_url}
             alt="Footer Logo"
             width={200}
             height={100}
-            className="h-10 md:h-14 w-auto"
+            className="h-12 md:h-14"
             unoptimized
           />
+
+          <form onSubmit={handleSubmitNewsLatter} className="flex flex-row items-center gap-3 mt-6 md:mt-0 max-w-md">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="flex-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-white"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className={`px-6 py-2 rounded-md text-white font-medium transition-all duration-200 ${
+            status === "loading"
+              ? "bg-orange-400 cursor-not-allowed"
+              : "bg-orange-600 hover:bg-orange-700"
+          }`}
+        >
+          {status === "loading" ? "Subscribing..." : "Subscribe"}
+        </button>
+      </form>
         </div>
 
         {/* Bottom */}

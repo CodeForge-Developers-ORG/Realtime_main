@@ -11,6 +11,8 @@ import { Play } from "lucide-react";
 import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 import { ReactNode } from "react";
+import DOMPurify from "@/app/privacy-policy/dompurifire";
+import ProductEnquiryButton from "@/components/common/ProductEnquiryButton";
 // import Title from "@/components/common/Title";
 
 type Category = {
@@ -20,6 +22,7 @@ type Category = {
 };
 
 type ProductCategory = {
+  a_plus_content_html: string;
   description: ReactNode;
   category: Category | null;
   title: string;
@@ -40,6 +43,7 @@ export async function generateMetadata({
   const { title } = await params; // ✅ FIXED
   const res = await getProductBySlug(title);
   const product: ProductCategory | null = res?.data?.[0] || null;
+  
 
   if (!product) {
     return {
@@ -71,16 +75,42 @@ export default async function ProductPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product.category?.name || "Category", href: `/products/category/${product.category?.slug}` },
+    {
+      label: product.category?.name || "Category",
+      href: `/products/category/${product.category?.slug}`,
+    },
     { label: product.title || "Product", href: `/products/${title}` },
   ];
+
+function safeDecodeContent(raw: string = ""): string {
+  try {
+    if (!raw) return "";
+
+    const cleaned = raw
+      .replace(/\\u003C/g, "<")
+      .replace(/\\u003E/g, ">")
+      .replace(/\\u0026/g, "&")
+      .replace(/\\n/g, "")
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, "\\")
+      .replace(/\r/g, "");
+
+    return cleaned; // ❌ decodeURIComponent hata diya
+  } catch (err) {
+    console.error("Decode Error:", err);
+    return raw;
+  }
+}
+
+
+
 
   return (
     <Layout>
       <AdvancedBreadcrumb items={breadcrumbItems} />
       {/* <Title title={product.title} /> */}
       <div className="bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-25">
+        <div className="w-[90%] mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
             {/* Left - Image */}
             <div className="lg:sticky lg:top-40">
@@ -98,19 +128,11 @@ export default async function ProductPage({
                 </p>
               )}
 
-              <p className="pb-4 text-justify" >
-                {product?.description}
-              </p>
+              <p className="pb-4 text-justify text-black">{product?.description}</p>
 
               <div className="flex items-center gap-3 mb-6">
-                <Link
-                  href="/support"
-                  className="bg-[#EA5921] text-white hover:bg-orange-600 inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer">
-                  <span className="border rounded-full w-[20px] h-[20px] flex items-center justify-center">
-                    <Play className="w-[10px]" />
-                  </span>{" "}
-                  VIEW DEMO
-                </Link>
+                <ProductEnquiryButton />
+
 
                 {/* Client component for download */}
                 {product.catalogue_document && (
@@ -138,6 +160,18 @@ export default async function ProductPage({
             </div>
           </div>
         </div>
+        {product?.a_plus_content_html &&
+          (() => {
+            const decodedHTML = safeDecodeContent(product.a_plus_content_html);
+            const sanitizedHTML = DOMPurify.sanitize(decodedHTML);
+
+            return (
+              <div
+                className="max-w-7xl mx-auto px-6 py-12"
+                dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+              />
+            );
+          })()}
 
         <Testimonials />
       </div>

@@ -9,6 +9,7 @@ import { baseUri } from "@/services/constant";
 import ProductsMegaMenu from "./ProductsMegaMenu";
 import SoftwareMegaMenu from "./SoftwareMegaMenu";
 import SolutionsMegaMenu from "./SolutionsMegaMenu";
+import FormModalPopUp from "../common/FormModalPopUp";
 
 type ChildItem = {
   children?: ChildItem[];
@@ -617,6 +618,7 @@ const Header = () => {
   const { branding, navigation, settings } = headerData;
 
   return (
+    <>
     <header className="w-full bg-[#2B2B2B] text-white z-50 sticky top-0">
       {/* Sticky Top Bar */}
       <div className="sticky top-0 bg-[#2B2B2B] z-50">
@@ -1191,6 +1193,8 @@ const Header = () => {
         />
       )}
     </header>
+    <FormModalPopUp headerData={headerData}/>
+    </>
   );
 };
 

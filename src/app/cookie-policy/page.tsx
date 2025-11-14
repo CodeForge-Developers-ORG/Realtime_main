@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import DOMPurify from "./dompurifire";
 import { getCookiePolicyData } from "@/services/cookiePolicyService";
+import Layout from "@/components/layout/Layout";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -8,12 +9,10 @@ export const metadata: Metadata = {
 
 const CookiePolicyPage = async () => {
   let decodedContent = "";
-  let title = "";
 
   try {
     const res = await getCookiePolicyData();
     if (res.success && res.data) {
-      title = res.data.title;
       const encodedContent = res.data.content;
       decodedContent = decodeURIComponent(
         encodedContent
@@ -27,16 +26,17 @@ const CookiePolicyPage = async () => {
     }
   } catch (error) {
     console.error("Failed to fetch cookie policy data:", error);
-    decodedContent =
-      "<p>Error loading content. Please try again later.</p>";
+    decodedContent = "<p>Error loading content. Please try again later.</p>";
   }
 
   const sanitizedContent = DOMPurify.sanitize(decodedContent);
 
   return (
-    <div className="prose max-w-none p-6 bg-white rounded-lg shadow-md min-h-screen">
-      <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-    </div>
+    <Layout>
+      <div className="prose max-w-none p-6 bg-white rounded-lg shadow-md min-h-screen">
+        <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+      </div>
+    </Layout>
   );
 };
 

@@ -36,7 +36,6 @@ const getSoftwareData = cache(
     slug: string
   ): Promise<{ software: Software | null; error: string | null }> => {
     try {
-      console.log(`Fetching software with slug: ${slug}`);
 
       if (!slug || slug === "undefined") {
         return { software: null, error: "Invalid software slug" };
@@ -44,12 +43,10 @@ const getSoftwareData = cache(
 
       const res = await axiosClient.get(`/content/software/${slug}`);
 
-      console.log("API Response:", res.data);
 
       if (res.data?.success) {
         return { software: res.data.data, error: null };
       } else {
-        console.log("API success false:", res.data);
         return { software: null, error: "Failed to load software" };
       }
     } catch (error: unknown) {
@@ -122,9 +119,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   try {
-    console.log("Generating static params...");
     const res = await axiosClient.get("/content/software");
-    console.log("Software list response:", res.data);
 
     const softwares = res.data?.data || [];
 
@@ -132,7 +127,6 @@ export async function generateStaticParams() {
       slug: software.slug,
     }));
 
-    console.log("Generated params:", params);
     return params;
   } catch (error) {
     console.error("Error generating static params:", error);
@@ -142,10 +136,8 @@ export async function generateStaticParams() {
 
 export default async function SoftwareDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  console.log("Page params slug:", slug);
 
   const { software, error } = await getSoftwareData(slug);
-  console.log("Page data:", { software, error });
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Software", href: "/software" },

@@ -4,6 +4,7 @@ import { Inter, Geist_Mono } from "next/font/google"; // Replace Geist with Inte
 import "./globals.css";
 import FloatingButtons from "@/components/common/FloatingButtons";
 import PopupModal from "@/components/common/PopupModal";
+import AnalyticsProvider from "@/components/layout/AnalyticsProvider";
 
 // Use Inter instead of Geist
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
+         <AnalyticsProvider />
         {children}
         <FloatingButtons />
         <PopupModal />

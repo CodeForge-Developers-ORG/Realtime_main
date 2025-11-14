@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Play } from "lucide-react";
 import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
+import { ReactNode } from "react";
 // import Title from "@/components/common/Title";
 
 type Category = {
@@ -19,6 +20,7 @@ type Category = {
 };
 
 type ProductCategory = {
+  description: ReactNode;
   category: Category | null;
   title: string;
   images: string[];
@@ -81,7 +83,7 @@ export default async function ProductPage({
         <div className="max-w-6xl mx-auto px-6 py-25">
           <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8 items-start">
             {/* Left - Image */}
-            <div className="lg:sticky lg:top-10">
+            <div className="lg:sticky lg:top-40">
               <ProductImage images={product.images || []} alt={product.title} />
             </div>
 
@@ -95,6 +97,10 @@ export default async function ProductPage({
                   {product?.category?.name}
                 </p>
               )}
+
+              <p className="pb-4 text-justify" >
+                {product?.description}
+              </p>
 
               <div className="flex items-center gap-3 mb-6">
                 <Link

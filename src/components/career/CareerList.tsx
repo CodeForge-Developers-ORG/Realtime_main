@@ -41,7 +41,7 @@ const CareerList: React.FC = () => {
 
   useEffect(() => {
     fetchJobs(filters.page, filters.page === 1);
-  }, [filters.page, filters.employment_type, filters.location, filters.search]);
+  }, [filters.page, filters.employment_type, filters.location, filters.search, fetchJobs]);
 
   const handleFilterChange = (newFilters: Partial<typeof filters>) => {
     setFilters(prev => ({ ...prev, ...newFilters, page: 1 }));

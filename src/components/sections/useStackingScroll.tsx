@@ -124,5 +124,5 @@ export const useStackingScroll = (
       ctx.revert();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, []);
+  }, [sectionRef, headerRef, cardRefs]);
 };

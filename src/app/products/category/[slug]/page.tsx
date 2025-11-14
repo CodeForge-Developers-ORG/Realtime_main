@@ -32,10 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function CategoryPage({ params }: Props) {
+export default function CategoryPage() {
   return (
     <div className="bg-white">
-      <CategoryClient params={params} />
+      <CategoryClient />
     </div>
   );
 }

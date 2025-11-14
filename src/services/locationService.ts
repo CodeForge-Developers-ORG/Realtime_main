@@ -116,7 +116,9 @@ export const fetchStatesByCountry = async (countryCode: string): Promise<State[]
   }
 };
 
-export default {
+const locationService = {
   fetchCountries,
   fetchStatesByCountry,
 };
+
+export default locationService;

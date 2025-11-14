@@ -1,0 +1,20 @@
+{
+  "pages": {
+    "/solutions/[title]/page": [
+      "static/chunks/ff1a16fafef87110.js",
+      "static/chunks/7dd66bdf8a7e5707.js",
+      "static/chunks/4d9f5332d800e841.css",
+      "static/chunks/c50ef095c5cff4ad.css",
+      "static/chunks/90cfc3a66a0ced17.js",
+      "static/chunks/49d4f4b0bf7be6a9.js",
+      "static/chunks/31a6d290a797bb4a.js",
+      "static/chunks/0249c0b4a590251e.js",
+      "static/chunks/e95fea1e798d9bd6.js",
+      "static/chunks/c85a7d07e7b82c9a.js",
+      "static/chunks/5564f493499345f1.js",
+      "static/chunks/150316a471952cee.js",
+      "static/chunks/3e0f93b37bf948e9.js",
+      "static/chunks/turbopack-7e8840ea68700fe4.js"
+    ]
+  }
+}

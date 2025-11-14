@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
 import { useRouter } from "next/navigation";
 
@@ -41,7 +40,6 @@ const SolutionsMegaMenu = () => {
         setLoading(true);
         const response = await axiosClient.get("/content/solutions");
         const data = await response.data;
-        console.log("Fetched solutions data:", data);
         
         if (data.success) {
           const solutionsData = data.data;

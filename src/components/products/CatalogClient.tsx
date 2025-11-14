@@ -25,14 +25,19 @@ export default function CatalogClient() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [scrollYBeforeLoad, setScrollYBeforeLoad] = useState(0);
   const loaderRef = useRef<HTMLDivElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const lastScrollY = useRef(0);
 
   // Load products (paginated)
   const loadProducts = async (pageNum: number) => {
     try {
+      // Record current scroll before loading
+      setScrollYBeforeLoad(window.scrollY);
       setLoading(true);
       const res = await getProducts(pageNum);
-      // const json = await res.json();
+
       if (res?.data?.length) {
         setProducts((prev) => {
           const merged = [...prev, ...res.data];
@@ -43,9 +48,11 @@ export default function CatalogClient() {
         setHasMore(false);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error loading products:", err);
     } finally {
       setLoading(false);
+      // Restore scroll position (prevent jump)
+      setTimeout(() => window.scrollTo(0, scrollYBeforeLoad), 50);
     }
   };
 
@@ -53,24 +60,46 @@ export default function CatalogClient() {
     loadProducts(page);
   }, [page]);
 
-  // Infinite scroll
+  // Infinite scroll observer
   useEffect(() => {
-    if (!loaderRef.current) return;
+    const node = loaderRef.current;
+    if (!node || !hasMore) return;
+
+    if (observerRef.current) observerRef.current.disconnect();
+
+    let lastTrigger = 0;
+
     const observer = new IntersectionObserver(
       (entries) => {
         const first = entries[0];
-        if (first.isIntersecting && hasMore && !loading) {
-          setPage((prev) => prev + 1);
+        const now = Date.now();
+
+        // Prevent trigger if scrolling up
+        const isScrollingDown = window.scrollY > lastScrollY.current;
+        lastScrollY.current = window.scrollY;
+
+        if (
+          first.isIntersecting &&
+          hasMore &&
+          !loading &&
+          isScrollingDown &&
+          now - lastTrigger > 800 // throttle 800ms
+        ) {
+          lastTrigger = now;
+          observer.unobserve(node);
+          setTimeout(() => setPage((prev) => prev + 1), 300);
         }
       },
-      { threshold: 1 }
+      { threshold: 1, rootMargin: "150px" }
     );
 
-    observer.observe(loaderRef.current);
+    observer.observe(node);
+    observerRef.current = observer;
+
     return () => observer.disconnect();
   }, [hasMore, loading]);
 
-  // Group products by category for Sidebar + SectionList
+  // Group products by category
   const groupedCategories: Category[] = Object.values(
     products.reduce((acc, p) => {
       const catName = p.category?.name || "Uncategorized";
@@ -85,15 +114,10 @@ export default function CatalogClient() {
     }, {} as Record<string, Category>)
   );
 
-  const isLastActive = activeIndex === groupedCategories.length - 1;
-
   return (
-    <div
-      className={`flex gap-6 bg-white p-4 md:p-8 lg:p-[100px] transition-all duration-300 ${
-        isLastActive ? "sticky" : "sticky -top-20"
-      }`}>
+    <div className="flex gap-6 bg-white p-4 md:p-8 lg:p-[100px]">
       {/* Sidebar */}
-      <aside className="w-64 hidden lg:block">
+      <aside className="w-64 hidden lg:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto">
         <Sidebar
           categories={groupedCategories}
           activeIndex={activeIndex}

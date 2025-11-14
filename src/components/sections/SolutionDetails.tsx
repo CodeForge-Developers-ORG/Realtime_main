@@ -1,6 +1,5 @@
 "use client";
 import { FaCheckCircle, FaStar, FaCog, FaInfoCircle } from "react-icons/fa";
-import { baseUri } from "@/services/constant";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 
 export interface Solution {
@@ -32,10 +31,6 @@ const SolutionDetails = ({ solution }: { solution: Solution }) => {
     { label: "Solutions", href: "/solutions" },
     { label: solution?.title, href: `/solutions/${solution?.slug}` },
   ];
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return null;
-    return `${baseUri}${imagePath}`;
-  };
 
   return (
     <div className="bg-white">

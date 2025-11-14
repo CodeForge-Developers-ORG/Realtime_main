@@ -17,10 +17,10 @@
 
 # Next.js build outputs
 # /.next/
-out/
+# out/
 # build/
 # .next/static
-.next/
+# .next/
 
 # Environment files
 .env

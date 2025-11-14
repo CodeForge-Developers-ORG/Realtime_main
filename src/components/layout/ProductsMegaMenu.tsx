@@ -69,20 +69,15 @@ const ProductsMegaMenu = () => {
         let allProducts: Product[] = [];
         let totalPages = 1;
 
-        console.log("Starting to fetch all products...");
 
         // Fetch first page to get total pages
         const firstResponse = await axiosClient.get("/content/products?per_page=100&page=1");
         const firstData: ApiResponse = firstResponse.data;
 
-        console.log("First page response:", firstData);
 
         if (firstData.success) {
           allProducts = [...firstData.data];
           totalPages = firstData.meta.last_page;
-          
-          console.log(`Total pages: ${totalPages}, Total products: ${firstData.meta.total}`);
-          console.log(`First page products: ${firstData.data.length}`);
 
           // Fetch remaining pages if any
           const pagePromises = [];
@@ -93,19 +88,16 @@ const ProductsMegaMenu = () => {
           }
 
           if (pagePromises.length > 0) {
-            console.log(`Fetching ${pagePromises.length} more pages...`);
             const responses = await Promise.all(pagePromises);
             
             responses.forEach((response, index) => {
               const pageData: ApiResponse = response.data;
               if (pageData.success) {
-                console.log(`Page ${index + 2} products: ${pageData.data.length}`);
                 allProducts = [...allProducts, ...pageData.data];
               }
             });
           }
 
-          console.log("Total products fetched:", allProducts.length);
 
           // Organize products by category
           const categoriesMap = new Map();
@@ -122,7 +114,6 @@ const ProductsMegaMenu = () => {
           });
 
           const categoriesArray = Array.from(categoriesMap.values());
-          console.log("Categories with products:", categoriesArray);
           setCategories(categoriesArray);
 
           // Set first category as active
@@ -270,7 +261,7 @@ const ProductsMegaMenu = () => {
                 {displayedProducts.length > 0 && (
                   <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-4 block w-[70%]">
                     <Link
-                      href={`/products/category/${activeCategoryData?.id}`}
+                      href={`/products/category/${activeCategoryData?.slug}`}
                       className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors flex items-center justify-center gap-1">
                       View all in Category
                       <svg

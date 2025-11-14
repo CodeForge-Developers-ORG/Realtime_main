@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Layout from "@/components/layout/Layout";
 import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
@@ -32,18 +32,14 @@ type Category = {
   products: Product[];
 };
 
-export default function CategoryClient({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function CategoryClient() {
   const { slug } = useParams();
   const [category, setCategory] = useState<Category | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // 🔹 Load category data
-  const loadCategory = async () => {
+  const loadCategory = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -61,14 +57,14 @@ export default function CategoryClient({
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
 
   // 🔹 Initial fetch
   useEffect(() => {
     if (slug) {
       loadCategory();
     }
-  }, [slug]);
+  }, [slug, loadCategory]);
 
   
 

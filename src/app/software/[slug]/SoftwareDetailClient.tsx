@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { 
   Download, 
-  Calendar, 
   User, 
   Tag, 
   CheckCircle, 
@@ -14,7 +13,6 @@ import {
   Building,
   BarChart3,
   Shield,
-  Clock,
   Menu,
   X
 } from "lucide-react";

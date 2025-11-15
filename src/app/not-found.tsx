@@ -1,8 +1,10 @@
+import Layout from "@/components/layout/Layout";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="page_404">
+<Layout>
+    <section className="page_404 w-full py-20 bg-white flex items-center justify-center">
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
@@ -22,5 +24,6 @@ export default function NotFound() {
         </div>
       </div>
     </section>
+</Layout>
   );
 }

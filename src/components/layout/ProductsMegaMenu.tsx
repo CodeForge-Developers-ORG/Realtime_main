@@ -144,11 +144,11 @@ const ProductsMegaMenu = () => {
 
   if (loading) {
     return (
-      <div className="absolute left-0 mt-3 w-96 bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50">
+      <div className="absolute left-0 mt-3 w-96 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
         <div className="p-4">
           <div className="flex justify-center items-center h-20">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500"></div>
-            <span className="ml-2 text-white text-sm">Loading products...</span>
+            <span className="ml-2 text-gray-700 text-sm">Loading products...</span>
           </div>
         </div>
       </div>
@@ -156,12 +156,12 @@ const ProductsMegaMenu = () => {
   }
 
   return (
-    <div className="absolute md:left-10 lg:left-0 mt-3 w-[100%] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+    <div className="absolute md:left-10 lg:left-0 mt-3 w-[100%] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300" style={{ fontFamily: 'var(--font-montserrat)' }}>
       <div className="p-4">
         <div className="flex gap-4">
           {/* Left Sidebar - Categories */}
           <div className="w-48 flex-shrink-0">
-            <h3 className="text-sm font-semibold text-white mb-3 pb-2 border-b border-gray-700">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">
               CATEGORIES ({categories.length})
             </h3>
             <div className="space-y-1 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
@@ -172,11 +172,11 @@ const ProductsMegaMenu = () => {
                   className={`p-2 rounded-md cursor-pointer transition-all duration-200 text-sm block ${
                     activeCategory === category.id
                       ? "bg-orange-500 text-white"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                      : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                   }`}
                   onMouseEnter={() => setActiveCategory(category.id)}>
                   <div className="font-medium">{category.name}</div>
-                  <div className="text-xs opacity-75 mt-1 flex items-center gap-1">
+                  <div className="text-xs opacity-75 mt-1 flex items-center gap-1 text-gray-500">
                     <span>{category.products.length} products</span>
                     {category.parent && (
                       <span>• in {category.parent.name}</span>
@@ -190,10 +190,10 @@ const ProductsMegaMenu = () => {
           {/* Right Side - Products */}
           <div className="flex-1 min-h-[400px]">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-gray-900">
                 {activeCategoryData?.name}
               </h3>
-              <span className="text-xs text-gray-400 bg-[#424141] px-2 py-1 rounded">
+              <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded border border-gray-200">
                 {totalProductsInCategory} products
               </span>
             </div>
@@ -205,12 +205,12 @@ const ProductsMegaMenu = () => {
                     <Link
                       key={product.id}
                       href={`/products/${product.slug}`}
-                      className="group bg-[#424141] rounded-lg p-3 hover:bg-gray-750 transition-all duration-200 border border-gray-700 hover:border-orange-500/50">
+                      className="group bg-white rounded-lg p-3 hover:bg-gray-50 transition-all duration-200 border border-gray-200 hover:border-orange-500/50">
                       <div className="flex gap-3">
                         {/* Product Image */}
                         {product.images && product.images.length > 0 ? (
                           <div className="flex-shrink-0">
-                            <div className="w-16 h-16 bg-gray-700 rounded-md overflow-hidden relative">
+                            <div className="w-16 h-16 bg-gray-100 rounded-md overflow-hidden relative border border-gray-200">
                               <Image
                                 src={`${baseUrl}/storage/${product.images[0]}`}
                                 alt={product.title}
@@ -225,7 +225,7 @@ const ProductsMegaMenu = () => {
                           </div>
                         ) : (
                           <div className="flex-shrink-0">
-                            <div className="w-16 h-16 bg-gray-700 rounded-md flex items-center justify-center">
+                            <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center border border-gray-200">
                               <svg
                                 className="w-6 h-6 text-gray-400"
                                 fill="none"
@@ -244,11 +244,10 @@ const ProductsMegaMenu = () => {
 
                         {/* Product Details */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-white text-sm mb-1 line-clamp-1 group-hover:text-orange-400 transition-colors">
+                          <h4 className="font-semibold text-gray-900 text-sm mb-1 line-clamp-1 group-hover:text-orange-600 transition-colors">
                             {product.title}
                           </h4>
-
-                          <p className="text-gray-400 text-xs line-clamp-2">
+                          <p className="text-gray-600 text-xs line-clamp-2">
                             {product.description.replace(/<[^>]*>/g, "")}
                           </p>
                         </div>
@@ -259,10 +258,10 @@ const ProductsMegaMenu = () => {
 
                 {/* View All Button - Always show when there are products */}
                 {displayedProducts.length > 0 && (
-                  <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-4 block w-[70%]">
+                  <div className="mt-4 pt-3 border-t border-gray-200 absolute bottom-4 block w-[70%]">
                     <Link
                       href={`/products/category/${activeCategoryData?.slug}`}
-                      className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors flex items-center justify-center gap-1">
+                      className="text-orange-600 hover:text-orange-500 text-sm font-medium transition-colors flex items-center justify-center gap-1">
                       View all in Category
                       <svg
                         className="w-4 h-4"
@@ -282,7 +281,7 @@ const ProductsMegaMenu = () => {
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                <div className="w-12 h-12 bg-gray-100 rounded-full border border-gray-200 flex items-center justify-center mx-auto mb-3">
                   <svg
                     className="w-6 h-6 text-gray-500"
                     fill="none"
@@ -296,7 +295,7 @@ const ProductsMegaMenu = () => {
                     />
                   </svg>
                 </div>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-600 text-sm">
                   No products in this category
                 </p>
               </div>
@@ -310,15 +309,15 @@ const ProductsMegaMenu = () => {
           width: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #1f2937;
+          background: #E5E7EB;
           border-radius: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #4b5563;
+          background: #9CA3AF;
           border-radius: 2px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #6b7280;
+          background: #6B7280;
         }
         .line-clamp-1 {
           display: -webkit-box;

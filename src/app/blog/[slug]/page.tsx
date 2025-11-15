@@ -4,7 +4,6 @@ import { blogService } from "@/services/blogService";
 import { notFound } from "next/navigation";
 import SingleBlogPage from "@/components/blog/SingleBlogPage";
 import Layout from "@/components/layout/Layout";
-import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 
 interface Props {
   params: {
@@ -87,15 +86,8 @@ export default async function BlogDetailPage({ params }: Props) {
     }
 
     const blog = response.data[0];
-    const breadcrumbItems = [
-      { label: "Home", href: "/" },
-      { label: "Blog", href: "/blog" },
-      { label: blog.title }, // Current page - no href
-    ];
-
     return (
       <Layout>
-        <AdvancedBreadcrumb items={breadcrumbItems} />
         <SingleBlogPage blog={blog} />
       </Layout>
     );

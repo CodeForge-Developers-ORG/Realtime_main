@@ -1,24 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/about-us/page": "app/about-us/page.js",
-  "/api/categories/route": "app/api/categories/route.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/careers/page": "app/careers/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/cookie-policy/page": "app/cookie-policy/page.js",
-  "/disclaimer/page": "app/disclaimer/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
-  "/partner/page": "app/partner/page.js",
-  "/privacy-policy/page": "app/privacy-policy/page.js",
+  "/api/hero-content/route": "app/api/hero-content/route.js",
   "/products/[title]/page": "app/products/[title]/page.js",
-  "/products/category/[slug]/page": "app/products/category/[slug]/page.js",
-  "/products/page": "app/products/page.js",
-  "/software/[slug]/page": "app/software/[slug]/page.js",
-  "/software/page": "app/software/page.js",
-  "/solutions/[title]/page": "app/solutions/[title]/page.js",
-  "/solutions/page": "app/solutions/page.js",
-  "/support/page": "app/support/page.js",
-  "/terms-of-service/page": "app/terms-of-service/page.js"
+  "/page": "app/page.js"
 }

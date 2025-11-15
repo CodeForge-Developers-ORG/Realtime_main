@@ -106,7 +106,7 @@ const Page = () => {
 
   return (
     <Layout>
-      <div className="bg-white">
+      <div className="bg-white" style={{ fontFamily: 'var(--font-montserrat)' }}>
         <AdvancedBreadcrumb items={breadcrumbItems} />
 
         {/* Hero Section */}
@@ -114,8 +114,8 @@ const Page = () => {
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Sidebar */}
             <aside className="w-full lg:w-1/4">
-              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-38 border border-orange-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-orange-200">
+              <div className="bg-white rounded-xl shadow-sm p-6 sticky top-38 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">
                   About Us
                 </h3>
                 <nav className="space-y-2">
@@ -135,10 +135,10 @@ const Page = () => {
                     { name: "Contact", href: "/support", icon: FaLightbulb },
                   ].map((item, i) => (
                     <Link key={i} href={item.href}>
-                      <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:text-white hover:bg-orange-500 transition-all duration-300 group cursor-pointer">
-                        <item.icon className="text-orange-500 group-hover:text-white transition-colors" />
+                      <div className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200 group cursor-pointer">
+                        <item.icon className="text-orange-600 group-hover:text-orange-700 transition-colors" />
                         <span className="font-medium">{item.name}</span>
-                        <FaArrowRight className="ml-auto text-orange-300 group-hover:text-white opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all" />
+                        <FaArrowRight className="ml-auto text-gray-400 group-hover:text-gray-700 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all" />
                       </div>
                     </Link>
                   ))}
@@ -150,7 +150,7 @@ const Page = () => {
             <div className="w-full lg:w-3/4 space-y-20">
               {/* Who We Are */}
               <section id="who-we-are" className="scroll-mt-24">
-                <div className="bg-white rounded-2xl shadow-lg p-8 border border-orange-100">
+                <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-200">
                   <div className="mb-8">
                     <span className="inline-block px-4 py-1 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
                       About Company
@@ -176,8 +176,7 @@ const Page = () => {
 
                     {/* Who We Are Image */}
                     <div className="relative">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl transform rotate-2"></div>
-                      <div className="relative bg-white p-2 rounded-2xl shadow-xl">
+                      <div className="relative bg-white p-2 rounded-xl shadow-sm ring-1 ring-gray-200">
                         {data.who_we_are_image ? (
                           <Image
                             src={getImageUrl(data.who_we_are_image) || ""}
@@ -194,16 +193,16 @@ const Page = () => {
                               if (parent) {
                                 const fallback = document.createElement("div");
                                 fallback.className =
-                                  "w-full h-64 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center";
+                                  "w-full h-64 bg-gray-100 rounded-xl flex items-center justify-center";
                                 fallback.innerHTML =
-                                  '<FaUsers className="text-6xl text-orange-400 opacity-50" />';
+                                  '<FaUsers className="text-6xl text-gray-400 opacity-50" />';
                                 parent.appendChild(fallback);
                               }
                             }}
                           />
                         ) : (
-                          <div className="w-full h-64 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
-                            <FaUsers className="text-6xl text-orange-400 opacity-50" />
+                          <div className="w-full h-64 bg-gray-100 rounded-xl flex items-center justify-center">
+                            <FaUsers className="text-6xl text-gray-400 opacity-50" />
                           </div>
                         )}
                       </div>
@@ -214,9 +213,9 @@ const Page = () => {
                     {data.who_we_are_features.map((feature, i) => (
                       <div
                         key={i}
-                        className="group bg-gradient-to-br from-white to-orange-50 p-8 rounded-2xl border border-orange-100 hover:border-orange-300 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                        className="group bg-white p-8 rounded-xl border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300">
                         <div className="flex justify-center mb-6">
-                          <div className="p-4 text-black bg-orange-100 rounded-2xl group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
+                          <div className="p-4 text-orange-700 bg-orange-100 rounded-xl group-hover:bg-orange-200 transition-all duration-200">
                             {renderIcon(feature.icon)}
                           </div>
                         </div>
@@ -245,18 +244,18 @@ const Page = () => {
 
                 <div className="grid lg:grid-cols-2 gap-8">
                   {/* Mission */}
-                  <div className="group relative overflow-hidden bg-gradient-to-br from-orange-500 to-orange-600 p-8 rounded-2xl shadow-xl text-white hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="group relative bg-white p-8 rounded-xl shadow-sm border border-gray-200 text-gray-900 hover:shadow-md transition-all duration-300">
                     <div className="relative z-10">
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="p-3 bg-white bg-opacity-20 rounded-2xl">
-                          <FaRocket className="text-2xl" />
+                        <div className="p-3 bg-orange-100 rounded-xl">
+                          <FaRocket className="text-2xl text-orange-700" />
                         </div>
                         <h3 className="text-2xl font-bold">
                           {data.mission_title}
                         </h3>
                       </div>
                       <div
-                        className="text-orange-50 space-y-4 leading-relaxed mb-6"
+                        className="text-gray-700 space-y-4 leading-relaxed mb-6"
                         dangerouslySetInnerHTML={{
                           __html: data.mission_content,
                         }}
@@ -265,47 +264,44 @@ const Page = () => {
 
                     {/* Mission Image */}
                     {data.mission_image && (
-                      <div className="relative z-10">
-                        <div className="absolute -inset-4 bg-white/10 rounded-2xl transform rotate-1"></div>
-                        <div className="relative bg-white/10 p-2 rounded-xl backdrop-blur-sm">
-                          <Image
-                            src={getImageUrl(data.mission_image) || ""}
-                            alt="Our Mission"
-                            width={400}
-                            height={200}
-                            className="w-full h-48 object-cover rounded-lg"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = "none";
-                              const parent = target.parentElement;
-                              if (parent) {
-                                const fallback = document.createElement("div");
-                                fallback.className =
-                                  "w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center";
-                                fallback.innerHTML =
-                                  '<FaRocket className="text-4xl text-white/40" />';
-                                parent.appendChild(fallback);
-                              }
-                            }}
-                          />
-                        </div>
+                      <div className="mt-4">
+                        <Image
+                          src={getImageUrl(data.mission_image) || ""}
+                          alt="Our Mission"
+                          width={400}
+                          height={200}
+                          className="w-full h-48 object-cover rounded-lg ring-1 ring-gray-200"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const parent = target.parentElement;
+                            if (parent) {
+                              const fallback = document.createElement("div");
+                              fallback.className =
+                                "w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center";
+                              fallback.innerHTML =
+                                '<FaRocket className="text-4xl text-gray-400" />';
+                              parent.appendChild(fallback);
+                            }
+                          }}
+                        />
                       </div>
                     )}
                   </div>
 
                   {/* Vision */}
-                  <div className="group relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl shadow-xl text-white hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="group relative bg-white p-8 rounded-xl shadow-sm border border-gray-200 text-gray-900 hover:shadow-md transition-all duration-300">
                     <div className="relative z-10">
                       <div className="flex items-center gap-4 mb-6">
-                        <div className="p-3 bg-white bg-opacity-20 rounded-2xl">
-                          <FaEye className="text-2xl" />
+                        <div className="p-3 bg-orange-100 rounded-xl">
+                          <FaEye className="text-2xl text-orange-700" />
                         </div>
                         <h3 className="text-2xl font-bold">
                           {data.vision_title}
                         </h3>
                       </div>
                       <div
-                        className="text-gray-200 space-y-4 leading-relaxed mb-6"
+                        className="text-gray-700 space-y-4 leading-relaxed mb-6"
                         dangerouslySetInnerHTML={{
                           __html: data.vision_content,
                         }}
@@ -313,35 +309,27 @@ const Page = () => {
                     </div>
 
                     {/* Vision Illustration */}
-                    <div className="relative z-10">
-                      <div className="absolute -inset-4 bg-white/10 rounded-2xl transform -rotate-1"></div>
-                      <div className="relative bg-white/10 p-4 rounded-xl backdrop-blur-sm flex items-center justify-center">
-                        <div className="w-full h-40 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-lg flex items-center justify-center">
-                          {/* <FaEye className="text-4xl text-white/40" /> */}
-                          {/* <div className="relative bg-white/10 p-2 rounded-xl backdrop-blur-sm"> */}
-                          <Image
-                            src={getImageUrl(data.vision_image) || ""}
-                            alt="Our Mission"
-                            width={400}
-                            height={200}
-                            className="w-full h-48 object-cover rounded-lg"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = "none";
-                              const parent = target.parentElement;
-                              if (parent) {
-                                const fallback = document.createElement("div");
-                                fallback.className =
-                                  "w-full h-48 bg-gradient-to-br from-orange-400/20 to-orange-600/20 rounded-lg flex items-center justify-center";
-                                fallback.innerHTML =
-                                  '<FaRocket className="text-4xl text-white/40" />';
-                                parent.appendChild(fallback);
-                              }
-                            }}
-                          />
-                          {/* </div> */}
-                        </div>
-                      </div>
+                    <div className="mt-4">
+                      <Image
+                        src={getImageUrl(data.vision_image) || ""}
+                        alt="Our Vision"
+                        width={400}
+                        height={200}
+                        className="w-full h-48 object-cover rounded-lg ring-1 ring-gray-200"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                          const parent = target.parentElement;
+                          if (parent) {
+                            const fallback = document.createElement("div");
+                            fallback.className =
+                              "w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center";
+                            fallback.innerHTML =
+                              '<FaEye className="text-4xl text-gray-400" />';
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                 </div>

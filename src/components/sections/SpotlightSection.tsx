@@ -1,260 +1,143 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
-import '@/app/styles/spotlight.css';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Slider from "@/components/ui/Slider";
+import { getProductsWithoutPagination } from "@/services/productService";
+import { baseUri } from "@/services/constant";
 
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-// Define the card data structure
-interface CardData {
+type Product = {
   id: string;
+  slug: string;
   title: string;
-  subtitle: string;
-  description: string;
-  bgColor: string;
-  images: string;
-}
+  description?: string;
+  category?: { name: string; slug: string };
+  images: string[];
+};
 
 const SpotlightSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Dynamic card data
-  const cards: CardData[] = [
-    {
-      id: 'innovation',
-      title: 'Innovation at Core',
-      subtitle: 'Pioneering fingerprint and biometric solutions.',
-      description: 'Cutting-edge technology built on our own proprietary systems.',
-      bgColor: 'bg-[#EA5921]',
-      images: '/images/spotlight1.png',
-    },
-    {
-      id: 'security',
-      title: 'Advanced Security',
-      subtitle: 'Military-grade encryption for all devices.',
-      description: 'Secure authentication with multi-factor verification systems.',
-      bgColor: 'bg-[#EFAF00]',
-      images: '/images/spotlight2.png',
-    },
-    {
-      id: 'reliability',
-      title: 'Unmatched Reliability',
-      subtitle: '99.9% uptime with failsafe mechanisms.',
-      description: 'Trusted by government agencies and Fortune 500 companies.',
-      bgColor: 'bg-[#EA5921]',
-      images: '/images/spotlight5.png',
-    },
-    {
-      id: 'integration',
-      title: 'Seamless Integration',
-      subtitle: 'Works with all major smart home systems.',
-      description: 'Easy installation and configuration for any environment.',
-      bgColor: 'bg-[#EFAF00]',
-      images: '/images/spotlight2.png',
-    },
-    {
-      id: 'support',
-      title: '24/7 Support',
-      subtitle: 'Expert assistance whenever you need it.',
-      description: 'Dedicated team of specialists for all your security needs.',
-      bgColor: 'bg-[#EA5921]',
-      images: '/images/spotlight5.png',
-    },
-  ];
-
-  // Check if we're on mobile and set state
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
+    async function fetchProducts() {
+      try {
+        setLoading(true);
+        const resp = await getProductsWithoutPagination();
+        setProducts(resp.data || []);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
   }, []);
 
-  // GSAP animation for desktop
-  useEffect(() => {
-    if (typeof window === 'undefined' || isMobile) return;
-
-    // Initialize ScrollTrigger
-    const sections = gsap.utils.toArray('.banner-item');
-    
-    // Create a timeline for the horizontal scrolling
-     const tl = gsap.timeline({
-        ease: "none",
-       scrollTrigger: {
-         trigger: '.scrolling-section',
-          start: 'top-=200 top', // Adjusted to start much higher on the page
-         end: () => '+=' + ((document.querySelector('.banner-container') as HTMLElement)?.offsetWidth || 0) * 0.8,
-         pin: true,
-         pinSpacing: true,
-         scrub: 1.2,
-         anticipatePin: 0,
-         preventOverlaps: true,
-         refreshPriority: 1,
-         onEnter: () => {
-           // Prevent default scroll behavior when entering the trigger area
-           document.body.style.overflow = 'auto';
-         },
-         onLeave: () => {
-           // Restore default scroll behavior when leaving the trigger area
-           document.body.style.overflow = 'auto';
-         }
-       }
-     });
-    
-    // Add the animation to the timeline
-    tl.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: 'none',
-      duration: 1
-    });
-
-    // Cleanup function
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      document.body.style.overflow = 'auto';
-    };
-  }, [isMobile]);
-
-  // Mobile view
-  if (isMobile) {
-    return (
-      <section className="lg:hidden bg-white pt-2 md:pt-6 pb-0">
-        <div className="container-fluid px-4 mx-auto relative">
-          <div className="text-center py-4 mb-1">
-            <h2 className="text-xl sm:text-3xl text-black font-thin ">
-              World-Class Biometric Solutions
-            </h2>
-            <p className="text-xs font-light text-black/70">
-              Innovating smarter, safer access for all.
-            </p>
-          </div>
-
-          <div className="relative pb-2">
-            <div
-              ref={scrollRef}
-              className="scroll-container flex  overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-4"
-            >
-              {cards.map((card) => (
-                <div className="scroll-item w-[85vw] flex-shrink-0 snap-center overflow-hidden" key={card.id}>
-                  <div
-                    className={`relative rounded-xl  shadow-lg ${card.bgColor} text-white pb-0 px-4  pt-4 h-[200px] flex flex-col`}
-                  >
-                    <h3 className="text-xl font-light mb-2">{card.title}</h3>
-
-                    <div className='flex h-full '>
-                      <div className='w-[50%]'>
-                      <p className="text-[10px] leading-3 bg-white text-black rounded-lg p-1 mb-2 inline-block line-clamp-3">
-                      {card.subtitle}
-                    </p>
-                      <p className="text-[10px] leading-3 bg-white text-black rounded-lg p-1 line-clamp-3">
-                        {card.description}
-                      </p>
-                      </div>
-                    <div className="flex items-end w-[80%] h-[100%] justify-end mt-0 relative">
-                      <Image
-                        src={card.images}
-                        alt={card.id}
-                        height={500}
-                        width={400}
-                        className="h-full w-full object-cover "
-                      />
-                    </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex justify-center mt-0 gap-1">
-              {cards.map((card, index) => (
-                <button
-                  key={index}
-                  className="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-500 focus:bg-gray-700"
-                  onClick={() => {
-                    if (scrollRef.current) {
-                      const scrollItems = scrollRef.current.querySelectorAll('.scroll-item');
-                      if (scrollItems[index]) {
-                        scrollItems[index].scrollIntoView({
-                          behavior: 'smooth',
-                          block: 'nearest',
-                          inline: 'center',
-                        });
-                      }
-                    }
-                  }}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  // Desktop view with GSAP
   return (
-    <section className="hidden lg:block spotlight-section bg-white relative py-14">
-      <div className="text-center sticky top-14  bg-white mb-[10%]">
-        <h2 className="text-3xl lg:text-4xl text-black font-thin mb-3">
-          World-Class Biometric Solutions
-        </h2>
-        <p className="text-sm lg:text-[15px] uppercase text-black/80 font-light mb-6">
-          Innovating smarter, safer access for all.
-        </p>
-      </div>
+    <section className="pt-16 lg:py-0 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="section-title">Spotlight Products</h2>
+          <p className="section-subtitle">Enhance Your Security with Cutting-Edge Technology</p>
+        </div>
 
-      <div className="container-fluid px-8 lg:px-14 mx-auto ">
-        <div className="scrolling-section">
-          <div className="banner-container ">
-            <div className="scrolling-banner">
-              {cards.map((card) => (
-                <div className="banner-item" key={card.id}>
-                  <div
-                    className={`relative ${card.bgColor} text-white rounded-2xl overflow-hidden shadow-xl mx-4 h-110  flex flex-col p-8 lg:pb-0 lg:p-12`}
-                  >
-                    <div className="flex flex-col h-full">
-                      <div className="flex relative flex-col lg:flex-row items-center justify-center h-full">
-                        <h3 className="text-4xl w-1/4 pe-20 lg:text-6xl font-light mb-4 absolute inset-0">
-                          {card.title}
-                        </h3>
-                        <div className="flex item-end justify-end w-1/2 h-[500px] ">
-                          <Image
-                            src={card.images}
-                            alt={card.id}
-                            height={600}
-                            width={600}
-                            className="h-full w-full object-contain absolute -right-10 bottom-0"
-                          />
-                        </div>
-                        <div className=" w-1/4 h-full relative">
-                          <div className="bg-white text-black w-fit p-4 rounded-xl shadow-md absolute top-1 -left-20">
-                            <p className="font-medium text-lg">{card.subtitle}</p>
-                          </div>
-                          <div className="bg-white text-black w-fit p-4 rounded-xl shadow-md  absolute -left-20 top-1/3 ">
-                            <p className='text-lg font-medium'>{card.description}</p>
-                          </div>
-                        </div>
-                      </div>
+        {loading && (
+          <div className="flex items-center justify-center py-8">
+            <span className="text-sm text-gray-600">Loading products…</span>
+          </div>
+        )}
+
+        {error && (
+          <div className="flex items-center justify-center py-8">
+            <span className="text-sm text-red-600">{error}</span>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <Slider
+            autoPlay={true}
+            autoPlayInterval={4500}
+            showArrows={false}
+            showDots={true}
+            slidesToShow={4}
+            className="h-full pb-8"
+            responsive={[
+              { breakpoint: 1400, slidesToShow: 3, showDots: true },
+              { breakpoint: 1024, slidesToShow: 2, showDots: true },
+              { breakpoint: 768, slidesToShow: 1, showDots: true }
+            ]}
+            dotStyle={{ size: 10, activeSize: 12, color: "#D1D5DB", activeColor: "#EA5921", position: "outside", containerClass: "" }}
+          >
+            {products.slice(0, 12).map((product) => (
+              <Link key={product.id} href={`/products/${product.slug}`}>
+                <div className="group mx-3 rounded-md bg-white overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-gray-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <div className="relative bg-gray-100 h-64 md:h-72 flex items-center justify-center p-6">
+                    {product.images?.[0] ? (
+                      <Image
+                        src={`${baseUri}${product.images[0]}`}
+                        alt={product.title}
+                        width={0}
+                        height={0}
+                        unoptimized
+                        className="h-full max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="text-gray-400 text-xs">No image</div>
+                    )}
+                    <span className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white text-gray-700 ring-1 ring-gray-300 grid place-items-center shadow-md transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 group-hover:text-orange-600 group-hover:ring-orange-500 group-hover:bg-orange-50">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                        <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="h-px w-full bg-gray-200" />
+                  <div className="p-6">
+                    <h3 className="text-base md:text-lg font-semibold text-[#1E1410] mb-1 line-clamp-1">
+                      {product.title}
+                    </h3>
+                    <p className="text-[11px] md:text-sm text-gray-600 font-light mb-3 line-clamp-2">
+                      {product.description}
+                    </p>
+                    <div className="flex">
+                      <span className="inline-flex items-center justify-center w-full bg-orange-500 text-white rounded-lg py-2 text-sm font-medium transition-colors duration-300 group-hover:bg-orange-600">
+                        Read More
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </Link>
+            ))}
+          </Slider>
+        )}
+
+        <div className="text-center mt-8">
+          <Link
+            href="/products"
+            className="inline-flex items-center bg-orange-500 text-white text-xs md:text-sm px-4 md:px-6 py-2 rounded-md font-medium hover:bg-orange-600 transition"
+          >
+            VIEW ALL
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

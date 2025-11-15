@@ -93,7 +93,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#2B2B2B] text-white py-10 md:py-16">
+    <footer className="bg-[#2B2B2B] text-white py-10 md:py-16" style={{ fontFamily: 'var(--font-montserrat)' }}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
 

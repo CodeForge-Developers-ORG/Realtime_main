@@ -6,19 +6,23 @@ import ContactSection from '@/components/sections/ContactSection';
 import BlogSection from '@/components/sections/BlogSection';
 import SpotlightSection from '@/components/sections/SpotlightSection'
 import ServicesSections from '@/components/sections/ServicesSections'
+import FeaturesSection from '@/components/sections/FeaturesSection'
 import TestimonialCarousel from '@/components/sections/Testimonials';
 
 export default function Home() {
   return (
     <Layout>
-      <HeroSection />
-      <SpotlightSection />
-      <ServicesSections/>
-      <ProductsSection />
-      <SolutionsSection />
-      <TestimonialCarousel />
-      <ContactSection />
-      <BlogSection />
+      <div className="space-y-8 md:space-y-12 lg:space-y-16">
+        <HeroSection />
+        <SpotlightSection />
+        <ServicesSections/>
+        <FeaturesSection />
+        {/* <ProductsSection /> */}
+        <SolutionsSection />
+        <TestimonialCarousel />
+        <BlogSection />
+        <ContactSection />
+      </div>
     </Layout>
   );
 }

@@ -91,7 +91,7 @@ const SoftwareMegaMenu = () => {
 
   if (loading) {
     return (
-      <div className="absolute left-0 mt-3 w-96 bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50">
+      <div className="absolute left-0 mt-3 w-96 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
         <div className="p-4">
           <div className="flex justify-center items-center h-20">
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-orange-500"></div>
@@ -103,12 +103,12 @@ const SoftwareMegaMenu = () => {
 
   return (
     <>
-      <div className="absolute md:-left-0 lg:left-0 mt-3 w-[100%] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+      <div className="absolute md:-left-0 lg:left-0 mt-3 w-[100%] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300" style={{ fontFamily: 'var(--font-montserrat)' }}>
         <div className="p-4">
           <div className="flex gap-4">
             {/* Left Sidebar - Software List */}
             <div className="w-48 flex-shrink-0">
-              <h3 className="text-sm font-semibold text-white mb-3 pb-2 border-b border-gray-700">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">
                 SOFTWARE
               </h3>
               <div className="space-y-1">
@@ -119,13 +119,13 @@ const SoftwareMegaMenu = () => {
                     className={`p-2 block rounded-md cursor-pointer transition-all duration-200 text-sm ${
                       activeSoftware === item.id
                         ? "bg-orange-500 text-white"
-                        : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     }`}
                     onMouseEnter={() => setActiveSoftware(item.id)}>
                     <div className="font-medium">{item.title}</div>
-                    <div className="text-xs opacity-75 mt-1 flex items-center gap-1">
+                    <div className="text-xs opacity-75 mt-1 flex items-center gap-1 text-gray-500">
                       {item.is_free && (
-                        <span className="text-green-400">Free</span>
+                        <span className="text-green-600">Free</span>
                       )}
                       {item.main_category && (
                         <span>• {item.main_category}</span>
@@ -142,23 +142,22 @@ const SoftwareMegaMenu = () => {
                 <>
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <h3 className="text-lg font-bold text-white">
+                      <h3 className="text-lg font-bold text-gray-900">
                         {activeSoftwareData.title}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
                         {activeSoftwareData.is_free && (
-                          <span className="text-xs text-green-400 bg-green-900/30 px-2 py-1 rounded">
+                          <span className="text-xs text-green-700 bg-green-100 px-2 py-1 rounded border border-green-200">
                             FREE
                           </span>
                         )}
                         {activeSoftwareData.featured && (
-                          <span className="text-xs text-yellow-400 bg-yellow-900/30 px-2 py-1 rounded flex items-center gap-1">
-                            <span>⭐</span>
-                            Featured
+                          <span className="text-xs text-orange-600 bg-orange-100 px-2 py-1 rounded border border-orange-200">
+                            FEATURED
                           </span>
                         )}
                         {activeSoftwareData.download_count > 0 && (
-                          <span className="text-xs text-blue-400 bg-blue-900/30 px-2 py-1 rounded">
+                          <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded border border-blue-200">
                             {activeSoftwareData.download_count} downloads
                           </span>
                         )}
@@ -168,7 +167,7 @@ const SoftwareMegaMenu = () => {
 
                   {/* One Line Description */}
                   <div className="mb-4">
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {activeSoftwareData.one_line_description}
                     </p>
                   </div>
@@ -176,10 +175,10 @@ const SoftwareMegaMenu = () => {
                   {/* Software Details Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
                     {/* Basic Information */}
-                    <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                      <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                    <div className="bg-white rounded-lg p-3 border border-gray-200">
+                      <h4 className="font-semibold text-gray-900 text-sm mb-2 flex items-center gap-1">
                         <svg
-                          className="w-4 h-4 text-orange-400"
+                          className="w-4 h-4 text-orange-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24">
@@ -195,48 +194,48 @@ const SoftwareMegaMenu = () => {
                       <div className="space-y-2 text-xs">
                         {activeSoftwareData.version && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">Version:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">Version:</span>
+                            <span className="text-gray-900">
                               {activeSoftwareData.version}
                             </span>
                           </div>
                         )}
                         {activeSoftwareData.size && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">Size:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">Size:</span>
+                            <span className="text-gray-900">
                               {formatFileSize(activeSoftwareData.size)}
                             </span>
                           </div>
                         )}
                         {activeSoftwareData.developer && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">Developer:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">Developer:</span>
+                            <span className="text-gray-900">
                               {activeSoftwareData.developer}
                             </span>
                           </div>
                         )}
                         {activeSoftwareData.license && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">License:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">License:</span>
+                            <span className="text-gray-900">
                               {activeSoftwareData.license}
                             </span>
                           </div>
                         )}
                         {activeSoftwareData.main_category && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">Category:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">Category:</span>
+                            <span className="text-gray-900">
                               {activeSoftwareData.main_category}
                             </span>
                           </div>
                         )}
                         {activeSoftwareData.sub_category && (
                           <div className="flex justify-between">
-                            <span className="text-gray-400">Sub Category:</span>
-                            <span className="text-white">
+                            <span className="text-gray-600">Sub Category:</span>
+                            <span className="text-gray-900">
                               {activeSoftwareData.sub_category}
                             </span>
                           </div>
@@ -247,10 +246,10 @@ const SoftwareMegaMenu = () => {
                     {/* Platforms */}
                     {activeSoftwareData.platforms &&
                       activeSoftwareData.platforms.length > 0 && (
-                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                        <div className="bg-white rounded-lg p-3 border border-gray-200">
+                          <h4 className="font-semibold text-gray-900 text-sm mb-2 flex items-center gap-1">
                             <svg
-                              className="w-4 h-4 text-blue-400"
+                              className="w-4 h-4 text-blue-500"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24">
@@ -268,8 +267,8 @@ const SoftwareMegaMenu = () => {
                               (platform, index) => (
                                 <li
                                   key={index}
-                                  className="text-gray-300 text-xs flex items-start gap-1">
-                                  <span className="text-blue-400 mt-0.5">
+                                  className="text-gray-700 text-xs flex items-start gap-1">
+                                  <span className="text-blue-500 mt-0.5">
                                     •
                                   </span>
                                   {platform}
@@ -283,10 +282,10 @@ const SoftwareMegaMenu = () => {
                     {/* Requirements */}
                     {activeSoftwareData.requirements &&
                       activeSoftwareData.requirements.length > 0 && (
-                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                        <div className="bg-white rounded-lg p-3 border border-gray-200">
+                          <h4 className="font-semibold text-gray-900 text-sm mb-2 flex items-center gap-1">
                             <svg
-                              className="w-4 h-4 text-green-400"
+                              className="w-4 h-4 text-green-600"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24">
@@ -304,8 +303,8 @@ const SoftwareMegaMenu = () => {
                               (requirement, index) => (
                                 <li
                                   key={index}
-                                  className="text-gray-300 text-xs flex items-start gap-1">
-                                  <span className="text-green-400 mt-0.5">
+                                  className="text-gray-700 text-xs flex items-start gap-1">
+                                  <span className="text-green-600 mt-0.5">
                                     •
                                   </span>
                                   {requirement}
@@ -319,10 +318,10 @@ const SoftwareMegaMenu = () => {
                     {/* Tags */}
                     {activeSoftwareData.tags &&
                       activeSoftwareData.tags.length > 0 && (
-                        <div className="bg-[#424141] rounded-lg p-3 border border-gray-700">
-                          <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-1">
+                        <div className="bg-white rounded-lg p-3 border border-gray-200">
+                          <h4 className="font-semibold text-gray-900 text-sm mb-2 flex items-center gap-1">
                             <svg
-                              className="w-4 h-4 text-purple-400"
+                              className="w-4 h-4 text-purple-600"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24">
@@ -335,21 +334,21 @@ const SoftwareMegaMenu = () => {
                             </svg>
                             Tags
                           </h4>
-                          <div className="flex flex-wrap gap-1">
-                            {activeSoftwareData.tags.map((tag, index) => (
-                              <span
+                           <div className="flex flex-wrap gap-1">
+                             {activeSoftwareData.tags.map((tag, index) => (
+                               <span
                                 key={index}
-                                className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                                className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded border border-gray-200">
+                                 {tag}
+                               </span>
+                             ))}
+                           </div>
+                         </div>
+                       )}
                   </div>
 
                   {/* Download/External Link */}
-                  <div className="mt-4 pt-3 border-t border-gray-700 absolute bottom-3 md:w-[65%] lg:w-[70%] ">
+                  <div className="mt-4 pt-3 border-t border-gray-200 absolute bottom-3 md:w-[65%] lg:w-[70%] ">
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => handleDownloadClick(activeSoftwareData)}

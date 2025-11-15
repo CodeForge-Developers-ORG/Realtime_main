@@ -6,7 +6,7 @@ const FINGERPRINT_IMAGE_URL = "/images/image.png";
 
 const AboutRealtimeBiometrics: React.FC = () => {
   return (
-    <div className="flex justify-center items-center  bg-gray-50 px-0 p-2 sm:p-8">
+    <div className="flex justify-center items-center bg-white px-0 p-2 sm:p-8">
       {/* Card Container */}
       <div
         className="
@@ -46,9 +46,7 @@ const AboutRealtimeBiometrics: React.FC = () => {
             flex flex-col justify-center
           ">
           {/* Title */}
-          <h2 className="text-[20px] lg:text-[40px] font-[400] text-[#1E1410] mb-2 lg:mb-6">
-            About Realtime Biometrics
-          </h2>
+          <h2 className="section-title mb-2 lg:mb-6">About Realtime Biometrics</h2>
 
           {/* Text Paragraphs (Flex container for side-by-side on desktop) */}
           <div className="flex flex-col lg:flex-row lg:gap-6">

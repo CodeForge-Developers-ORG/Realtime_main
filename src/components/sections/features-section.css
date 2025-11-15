@@ -1,0 +1,113 @@
+/* Scoped styles for Features section to match the provided design */
+
+.features-section {
+  background-color: #ffffff;
+  padding: 2.5rem 1rem; /* align with global section spacing */
+}
+
+@media (min-width: 1024px) {
+  .features-section {
+    padding: 2.5rem 1rem; /* keep consistent spacing on desktop */
+  }
+}
+
+.features-section .container {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* Header */
+.features-section .features-header {
+  text-align: center;
+  margin-bottom: 2rem; /* tighter for sober look */
+}
+
+.features-section .features-title {
+  /* Defer typography to global .section-title for uniformity */
+  letter-spacing: -0.01em;
+}
+
+.features-section .features-subtitle {
+  margin-top: 0.5rem;
+  /* Defer typography to global .section-subtitle for uniformity */
+}
+
+/* Grid */
+.features-section .features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem; /* more compact */
+}
+
+@media (min-width: 640px) {
+  .features-section .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-section .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; /* xl:gap-8 approx */
+  }
+}
+
+/* Cards */
+.features-section .feature-card {
+  background-color: #ffffff;
+  border: 1px solid #eaedf1; /* subtle border */
+  border-radius: 0.75rem; /* ~12px */
+  box-shadow: none; /* remove heavy shadows */
+  padding: 1.25rem; /* p-5 */
+  min-height: 200px; /* increased card height */
+}
+
+.features-section .feature-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Direct icon (no badge) */
+.features-section .feature-icon {
+  width: 32px;
+  height: 32px;
+  color: #EA5921; /* orange icon color */
+}
+
+.features-section .icon-badge {
+  width: 44px; /* compact badge */
+  height: 44px;
+  border-radius: 9999px; /* circle */
+  background: #fde8ea; /* light red wash */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f6cfd3; /* soft outline */
+}
+
+.features-section .badge-icon {
+  width: 22px;
+  height: 22px;
+  color: #e84850; /* red icon, no gradient */
+}
+
+.features-section .feature-title {
+  font-weight: 600;
+  font-size: 1.0625rem; /* slightly smaller */
+  color: #1f2937; /* slate-800 */
+}
+
+.features-section .feature-description {
+  margin-top: 0.375rem;
+  color: #6b7280; /* slate-500 */
+  font-size: 0.9375rem; /* compact */
+  line-height: 1.6;
+}
+
+/* Subtle hover to mirror refined UI */
+.features-section .feature-card:hover {
+  border-color: #e4e8ee;
+}

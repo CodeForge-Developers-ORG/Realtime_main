@@ -11,4 +11,10 @@ export const submitNewsletter = async (name:string ,  email: string) => {
   return response.data;
 };
 
+export const getContactInfo = async () => {
+  const response = await axiosClient.get(`/content/contact-info`);
+  return response.data;
+  
+};
+
 

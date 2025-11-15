@@ -454,7 +454,7 @@ function FloatingInput({
   return (
     <div className="relative">
       <input
-        className={`peer w-full border-2 rounded-xl px-4 pt-6 pb-2 bg-gray-50 focus:bg-white transition 
+        className={`peer w-full border-2 rounded-xl px-4 pt-6 pb-2 text-black bg-gray-50 focus:bg-white transition 
          ${
            showError
              ? "border-red-500"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import ProductEnquiryButton from "@/components/common/ProductEnquiryButton";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   categoryName?: string;
   catalogueDoc?: string;
   productTitle?: string;
-  DownloadCatalogueButton?: (props: { productTitle: string; catalogueDoc: string }) => JSX.Element;
+  DownloadCatalogueButton?: (props: { productTitle: string; catalogueDoc: string }) => ReactElement;
 };
 
 export default function StickyProductBar({

@@ -169,30 +169,51 @@ const Header = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastScrollY = useRef(0);
+  const lastToggleY = useRef(0);
+  const ticking = useRef(false);
   const [isSecondaryBarHidden, setIsSecondaryBarHidden] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const SCROLL_HIDE_DISTANCE = 50; // distance to hide when scrolling down
+    const SCROLL_SHOW_DISTANCE = 20; // distance to show when scrolling up
+
+    const onScroll = () => {
       const currentY = window.scrollY;
-      const delta = currentY - lastScrollY.current;
-      const threshold = 5;
 
-      if (currentY < 10) {
-        setIsSecondaryBarHidden(false);
-      } else if (delta > threshold) {
-        setIsSecondaryBarHidden(true);
-      } else if (delta < -threshold) {
-        setIsSecondaryBarHidden(false);
+      if (!ticking.current) {
+        ticking.current = true;
+        window.requestAnimationFrame(() => {
+          const delta = currentY - lastScrollY.current;
+
+          // Always show when near top
+          if (currentY < 10) {
+            if (isSecondaryBarHidden) setIsSecondaryBarHidden(false);
+            lastToggleY.current = currentY;
+          } else if (!isSecondaryBarHidden) {
+            // Currently shown: hide after sustained downward scroll
+            if (delta > 0 && currentY - lastToggleY.current > SCROLL_HIDE_DISTANCE) {
+              setIsSecondaryBarHidden(true);
+              lastToggleY.current = currentY;
+            }
+          } else {
+            // Currently hidden: show after sustained upward scroll
+            if (delta < 0 && lastToggleY.current - currentY > SCROLL_SHOW_DISTANCE) {
+              setIsSecondaryBarHidden(false);
+              lastToggleY.current = currentY;
+            }
+          }
+
+          lastScrollY.current = currentY;
+          ticking.current = false;
+        });
       }
-
-      lastScrollY.current = currentY;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [isSecondaryBarHidden]);
 
   // Update document meta tags and favicon
   const updateDocumentMetadata = useCallback((data: HeaderData) => {

@@ -1,14 +1,12 @@
 // app/products/[title]/page.tsx
 import { getProductBySlug } from "@/services/productService";
 import Layout from "@/components/layout/Layout";
-import FeaturePill from "@/components/common/FeaturePill";
 import ProductImage from "@/components/common/ProductImage";
 import SpecsTable from "@/components/products/productdetail/SpecsTable";
 import Testimonials from "@/components/sections/Testimonials";
 import DownloadCatalogueButton from "./DownloadCatalogueButton";
-import StickyProductBar from "@/components/products/productdetail/StickyProductBar";
 import Link from "next/link";
-import { Play, Fingerprint, KeyRound, CreditCard, Cloud, Activity, User, SunMedium } from "lucide-react";
+import { Fingerprint, KeyRound, CreditCard, Cloud, Activity, User, SunMedium } from "lucide-react";
 import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 import { ReactNode } from "react";
@@ -39,9 +37,9 @@ type ProductCategory = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ title: string }>;
+  params: { title: string };
 }) {
-  const { title } = await params; // ✅ FIXED
+  const { title } = params;
   const res = await getProductBySlug(title);
   const product: ProductCategory | null = res?.data?.[0] || null;
   
@@ -63,9 +61,9 @@ export async function generateMetadata({
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ title: string }>;
+  params: { title: string };
 }) {
-  const { title } = await params; // ✅ FIXED
+  const { title } = params;
   const res = await getProductBySlug(title);
   const product: ProductCategory | null = res?.data?.[0] || null;
 
@@ -86,10 +84,13 @@ export default async function ProductPage({
   const specArray: { title: string; value: unknown }[] = Array.isArray(
     product.specifications as unknown
   )
-    ? ((product.specifications as unknown as any[]) || []).map((s: any) => ({
-        title: String(s?.title ?? ""),
-        value: s?.value ?? s,
-      }))
+    ? ((product.specifications as unknown as unknown[]) || []).map((s: unknown) => {
+        const obj = s as { title?: unknown; value?: unknown };
+        return {
+          title: String(obj.title ?? ""),
+          value: obj.value ?? s,
+        };
+      })
     : Object.entries((product.specifications as Record<string, unknown>) || {})
         .map(([title, value]) => ({ title, value }));
 
@@ -146,13 +147,6 @@ function safeDecodeContent(raw: string = ""): string {
 
   return (
     <Layout>
-      <StickyProductBar
-        title={product.title}
-        categoryName={product.category?.name || undefined}
-        catalogueDoc={product.catalogue_document}
-        productTitle={product.title}
-        DownloadCatalogueButton={DownloadCatalogueButton as any}
-      />
       <AdvancedBreadcrumb items={breadcrumbItems} />
       {/* <Title title={product.title} /> */}
       <div className="bg-white" style={{ fontFamily: 'var(--font-montserrat)' }}>

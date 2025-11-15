@@ -4,15 +4,11 @@ import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import axiosClient from "@/services/axiosClient";
+import Image from "next/image";
 
 interface Option {
   value: string;
   label: string;
-}
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
 }
 
 interface FloatingTextareaProps {
@@ -33,7 +29,7 @@ interface FloatingInputProps {
   maxLength?: number;
 }
 
-export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
+export default function RequirementForm() {
   /** ---------------- OPTIONS ---------------- **/
   const requirementTypes: Option[] = [
     { value: "Face + Fingerprint Device", label: "Face + Fingerprint Device" },
@@ -98,15 +94,8 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
     setTouched({});
   };
 
-  /** ---------------- LOCK BODY SCROLL WHEN OPEN ---------------- **/
+  /** ---------------- INITIALIZE TRACKING ---------------- **/
   useEffect(() => {
-    if (!isOpen) {
-      resetForm();
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-
     const params = new URLSearchParams(window.location.search);
 
     setTracking({
@@ -116,11 +105,7 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || "",
     });
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
+  }, []);
 
   /** ---------------- HANDLE INPUT ---------------- **/
   const handleChange = (
@@ -248,189 +233,232 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
 
       Swal.fire({
         icon: "success",
-        title: "Submitted",
+        title: "Submitted Successfully!",
         text: res.data.message,
       });
 
-      onClose();
+      resetForm();
     } catch {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Something went wrong",
+        text: "Something went wrong. Please try again.",
       });
     } finally {
       setLoading(false);
     }
   };
 
-  if (!isOpen) return null;
-
   /** ---------------- UI START ---------------- **/
   return (
-    <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden">
-        {/* HEADER */}
-        <div className="flex justify-between items-center p-6 pb-0  bg-orage-50/60">
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden">
+      {/* HEADER WITH LOGO/IMAGE */}
+      <div className="bg-gradient-to-r bg-white p-6 text-center relative">
+        {/* Logo/Image Section */}
+        <div className="flex justify-center items-center mb-4">
+          <img src="/images/logo-black.png" />
+        </div>
+
+        <h2 className="text-3xl font-bold text-black mb-2">
+          Send Your Requirement
+        </h2>
+        <p className="text-gray-500 text-lg">
+          We&apos;ll get back to you within 24 hours
+        </p>
+      </div>
+
+      {/* FORM BODY */}
+      <div className="p-6 md:p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FloatingInput
+            label="Full Name *"
+            name="name"
+            value={form.name}
+            onBlur={handleBlur}
+            touched={touched.name}
+            validate={validateField}
+            onChange={handleChange}
+          />
+          <FloatingInput
+            label="Email Address *"
+            name="email"
+            value={form.email}
+            onBlur={handleBlur}
+            touched={touched.email}
+            validate={validateField}
+            onChange={handleChange}
+          />
+
+          <FloatingInput
+            label="Phone Number *"
+            name="phone"
+            value={form.phone}
+            onBlur={handleBlur}
+            touched={touched.phone}
+            validate={validateField}
+            onChange={handleChange}
+            maxLength={10}
+          />
+
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              Send Your Requirement
-            </h2>
-            <p className="text-sm text-gray-600 mt-1">
-              We&apos;ll get back to you within 24 hours
+            <FloatingInput
+              label="Pincode *"
+              name="pincode"
+              value={form.pincode}
+              onBlur={handleBlur}
+              touched={touched.pincode}
+              validate={validateField}
+              onChange={handleChange}
+              maxLength={6}
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Enter pincode to auto-fill state & country
             </p>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-black cursor-pointer">
-            ✖
-          </button>
-        </div>
-
-        {/* FORM BODY */}
-        <div className="p-6 max-h-[60vh] overflow-y-auto no-scrollbar">
-          <form
-            onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FloatingInput
-              label="Full Name *"
-              name="name"
-              value={form.name}
-              onBlur={handleBlur}
-              touched={touched.name}
-              validate={validateField}
-              onChange={handleChange}
-            />
-            <FloatingInput
-              label="Email Address *"
-              name="email"
-              value={form.email}
-              onBlur={handleBlur}
-              touched={touched.email}
-              validate={validateField}
-              onChange={handleChange}
-            />
-
-            <FloatingInput
-              label="Phone Number *"
-              name="phone"
-              value={form.phone}
-              onBlur={handleBlur}
-              touched={touched.phone}
-              validate={validateField}
-              onChange={handleChange}
-              maxLength={10}
-            />
-
-            <div>
-              <FloatingInput
-                label="Pincode *"
-                name="pincode"
-                value={form.pincode}
-                onBlur={handleBlur}
-                touched={touched.pincode}
-                validate={validateField}
-                onChange={handleChange}
-                maxLength={6}
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                Enter pincode to auto-fill state & country
+            {pincodeLoading && (
+              <p className="text-xs text-orange-500 mt-1 animate-pulse">
+                Fetching location…
               </p>
-              {pincodeLoading && (
-                <p className="text-xs text-orange-500 mt-1 animate-pulse">
-                  Fetching location…
-                </p>
+            )}
+          </div>
+
+          <FloatingInput
+            label="Country *"
+            name="country"
+            value={form.country}
+            onBlur={handleBlur}
+            touched={touched.country}
+            validate={validateField}
+            onChange={handleChange}
+          />
+          <FloatingInput
+            label="State *"
+            name="state"
+            value={form.state}
+            onBlur={handleBlur}
+            touched={touched.state}
+            validate={validateField}
+            onChange={handleChange}
+          />
+
+          {/* REQUIREMENT */}
+          <div>
+            <label className="text-sm text-gray-700 mb-1 block">
+              Requirement Type *
+            </label>
+            <Select
+              options={requirementTypes}
+              value={selectedRequirement}
+              onChange={setSelectedRequirement}
+              placeholder="Select requirement..."
+              menuPortalTarget={document.body}
+              menuPosition="fixed"
+              menuShouldScrollIntoView={false}
+              styles={{
+                menuPortal: (base) => ({ ...base, zIndex: 999999 }),
+                control: (base) => ({
+                  ...base,
+                  border: "2px solid #e5e7eb",
+                  borderRadius: "12px",
+                  padding: "4px 0",
+                  cursor: "pointer",
+                  ":hover": {
+                    border: "2px solid #f97316",
+                  },
+                }),
+                option: (base) => ({
+                  ...base,
+                  color: "#333333",
+                  cursor: "pointer",
+                  ":hover": {
+                    backgroundColor: "#fff7ed",
+                  },
+                }),
+              }}
+            />
+          </div>
+
+          {/* SOURCE */}
+          <div>
+            <label className="text-sm text-gray-700 mb-1 block">
+              How did you hear about us? *
+            </label>
+            <Select
+              options={sourceOptions}
+              value={selectedSource}
+              onChange={setSelectedSource}
+              placeholder="Select source..."
+              menuPortalTarget={document.body}
+              menuPosition="fixed"
+              menuShouldScrollIntoView={false}
+              styles={{
+                menuPortal: (base) => ({ ...base, zIndex: 999999 }),
+                control: (base) => ({
+                  ...base,
+                  border: "2px solid #e5e7eb",
+                  borderRadius: "12px",
+                  padding: "4px 0",
+                  cursor: "pointer",
+                  ":hover": {
+                    border: "2px solid #f97316",
+                  },
+                }),
+                option: (base) => ({
+                  ...base,
+                  color: "#333333",
+                  cursor: "pointer",
+                  ":hover": {
+                    backgroundColor: "#fff7ed",
+                  },
+                }),
+              }}
+            />
+          </div>
+
+          {/* MESSAGE */}
+          <div className="md:col-span-2">
+            <FloatingTextArea
+              label="Additional Message"
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* SUBMIT BUTTON */}
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl font-semibold text-lg shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed">
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Submitting...
+                </div>
+              ) : (
+                "Submit Requirement"
               )}
-            </div>
-
-            <FloatingInput
-              label="Country *"
-              name="country"
-              value={form.country}
-              onBlur={handleBlur}
-              touched={touched.country}
-              validate={validateField}
-              onChange={handleChange}
-            />
-            <FloatingInput
-              label="State *"
-              name="state"
-              value={form.state}
-              onBlur={handleBlur}
-              touched={touched.state}
-              validate={validateField}
-              onChange={handleChange}
-            />
-
-            {/* REQUIREMENT */}
-            <div>
-              <label className="text-sm text-gray-700 mb-1 block">
-                Requirement Type *
-              </label>
-              <Select
-                options={requirementTypes}
-                value={selectedRequirement}
-                onChange={setSelectedRequirement}
-                placeholder="Select requirement..."
-                menuPortalTarget={document.body}
-                menuPosition="fixed"
-                menuShouldScrollIntoView={false}
-                styles={{
-                  menuPortal: (base) => ({ ...base, zIndex: 999999 }),
-                  option: (base) => ({
-                    ...base,
-                    color: "#333333",
-                    cursor:"pointer"
-                  }),
-                }}
-              />
-            </div>
-
-            {/* SOURCE */}
-            <div>
-              <label className="text-sm text-gray-700 mb-1 block">
-                How did you hear about us? *
-              </label>
-              <Select
-                options={sourceOptions}
-                value={selectedSource}
-                onChange={setSelectedSource}
-                placeholder="Select source..."
-                menuPortalTarget={document.body}
-                menuPosition="fixed"
-                menuShouldScrollIntoView={false}
-                styles={{
-                  menuPortal: (base) => ({ ...base, zIndex: 999999 }),
-                    option: (base) => ({
-                    ...base,
-                    color: "#333333",
-                    cursor:"pointer"
-                  }),
-                }}
-              />
-            </div>
-
-            {/* MESSAGE */}
-            <div className="md:col-span-2">
-              <FloatingTextArea
-                label="Additional Message"
-                name="message"
-                value={form.message}
-                onChange={handleChange}
-              />
-            </div>
-          </form>
-        </div>
-
-        {/* STICKY FOOTER BUTTON */}
-        <div className="p-5 bg-white sticky bottom-0">
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold shadow-md transition">
-            {loading ? "Submitting..." : "Submit Requirement"}
-          </button>
-        </div>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
@@ -457,7 +485,7 @@ function FloatingInput({
         className={`peer w-full border-2 rounded-xl px-4 pt-6 pb-2 text-black bg-gray-50 focus:bg-white transition 
          ${
            showError
-             ? "border-red-500"
+             ? "border-red-500 focus:border-red-500"
              : "border-gray-200 focus:border-orange-500"
          }`}
         placeholder=" "
@@ -467,7 +495,7 @@ function FloatingInput({
         onBlur={onBlur}
         maxLength={maxLength}
       />
-      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-2 peer-focus:text-xs peer-placeholder-shown:top-4 transition">
+      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600 peer-placeholder-shown:top-4 transition-all duration-200 pointer-events-none">
         {label}
       </label>
       {showError && <p className="text-red-500 text-xs mt-1">{error}</p>}
@@ -475,18 +503,23 @@ function FloatingInput({
   );
 }
 
-function FloatingTextArea({ label, name, value, onChange }: FloatingTextareaProps) {
+function FloatingTextArea({
+  label,
+  name,
+  value,
+  onChange,
+}: FloatingTextareaProps) {
   return (
     <div className="relative">
       <textarea
         rows={4}
-        className="peer w-full border-2 border-gray-200 rounded-xl px-4 pt-7 pb-3 text-black bg-gray-50 focus:border-orange-500"
+        className="peer w-full border-2 border-gray-200 rounded-xl px-4 pt-7 pb-3 text-black bg-gray-50 focus:bg-white focus:border-orange-500 transition resize-none"
         placeholder=" "
         name={name}
         value={value}
         onChange={onChange}
       />
-      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-3 peer-focus:text-xs transition">
+      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-3 peer-focus:text-xs peer-focus:text-orange-600 transition-all duration-200 pointer-events-none">
         {label}
       </label>
     </div>

@@ -6,7 +6,7 @@ import ServiceDetailClient from "@/components/sections/ServiceDetailClient";
 import { getServiceBySlug } from "@/services/serviceService";
 
 type PageProps = {
-  params: Promise<{ slug: string }> | { slug: string };
+  params: { slug: string };
 };
 
 export const metadata: Metadata = {
@@ -22,8 +22,7 @@ const getServiceData = cache(async (slug: string) => {
 });
 
 export default async function ServiceDetailPage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const slug = params.slug;
 
   const { service, error } = await getServiceData(slug);
   const breadcrumbItems = [

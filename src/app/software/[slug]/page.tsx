@@ -69,13 +69,11 @@ const getSoftwareData = cache(
 );
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = params;
   const { software } = await getSoftwareData(slug);
 
   if (!software) {
@@ -135,7 +133,7 @@ export async function generateStaticParams() {
 }
 
 export default async function SoftwareDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
 
   const { software, error } = await getSoftwareData(slug);
   const breadcrumbItems = [

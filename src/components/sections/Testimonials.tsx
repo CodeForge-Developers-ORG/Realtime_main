@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Star } from "lucide-react";
 import { getTestimonials } from "@/services/testimonialService";
+import Slider from "@/components/ui/Slider";
 
 type Testimonial = {
   id: string;
@@ -12,6 +11,12 @@ type Testimonial = {
   position: string;
   company: string;
   content: string;
+  rating?: number;
+  featured?: boolean;
+  status?: boolean;
+  sort_order?: number;
+  image?: string;
+  created_at?: string;
 };
 
 export default function TestimonialCarousel() {
@@ -19,19 +24,11 @@ export default function TestimonialCarousel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "start", slidesToScroll: 1 },
-    [Autoplay({ delay: 4000 })]
-  );
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
   useEffect(() => {
     async function fetchTestimonials() {
       try {
         const data = await getTestimonials();
-        setTestimonials(data);
+        setTestimonials(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error(err);
         setError("Failed to load testimonials");
@@ -42,67 +39,104 @@ export default function TestimonialCarousel() {
     fetchTestimonials();
   }, []);
 
+  const ordered = useMemo(() => {
+    return [...testimonials]
+      .sort((a, b) => {
+        // featured first
+        const f = Number(b?.featured) - Number(a?.featured);
+        if (f !== 0) return f;
+        // then sort_order asc
+        const s = Number(a?.sort_order ?? 0) - Number(b?.sort_order ?? 0);
+        if (s !== 0) return s;
+        // then recent first
+        const da = new Date(a?.created_at ?? 0).getTime();
+        const db = new Date(b?.created_at ?? 0).getTime();
+        return db - da;
+      });
+  }, [testimonials]);
+
+  function getInitials(name?: string) {
+    if (!name) return "";
+    const parts = name.trim().split(/\s+/);
+    const first = parts[0]?.[0] ?? "";
+    const last = parts[parts.length - 1]?.[0] ?? "";
+    return (first + last).toUpperCase();
+  }
+
   return (
-    <section className="bg-[#f8f8f8] py-5 md:py-16 px-4 md:px-12 lg:px-20">
-        <h2 className="text-xl md:text-4xl font-thin text-black text-center">What our partners Say</h2>
+    <section
+      className="bg-white py-10 md:py-16 lg:py-20 px-4 md:px-12 lg:px-20"
+      style={{ fontFamily: "var(--font-montserrat)" }}
+    >
+      <div className="max-w-7xl mx-auto">
+        <h2 className="section-title text-center">Trusted by Industry Leaders</h2>
+        <p className="text-center text-slate-600 mt-2 md:mt-3">
+          See what our customers say about their experience with TimeWatch
+        </p>
 
-
-      <div className="relative max-w-6xl mx-auto">
-        {/* Left Arrow */}
-        <button
-          onClick={scrollPrev}
-          aria-label="Previous testimonial"
-          className="absolute left-[-10px] top-1/2 -translate-y-1/2 z-10 rounded-full p-2 hover:bg-gray-100">
-          <ChevronLeft className="w-5 h-5 text-gray-700" />
-        </button>
-
-        {/* Carousel */}
-        <div
-          className="overflow-hidden my-5 md:my-10 lg:my-10 lg:mx-10 mx-5"
-          ref={emblaRef}>
-          {loading ? (
-            <div className="flex justify-center items-center h-40 text-gray-500">
-              Loading testimonials...
-            </div>
-          ) : error ? (
-            <div className="text-center text-red-500">{error}</div>
-          ) : testimonials.length === 0 ? (
-            <div className="text-center text-gray-500">No testimonials available</div>
-          ) : (
-            <div className="flex">
-              {testimonials.map((t) => (
-                <div
-                  key={t.id}
-                  className="flex-[0_0_100%] md:flex-[0_0_48%] lg:flex-[0_0_48.2%] mx-3 bg-white rounded-xl md:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="flex items-start gap-4 lg:h-[168px] ">
-                    <div className="text-orange-500 bg-[#F5F5F5] w-[50] md:w-[80px] h-[50] md:h-[80px] flex items-center justify-center">
-                      <Quote className="w-5 md:w-8 h-4 md:h-6" fill="currentColor" />
+        {loading ? (
+          <div className="flex justify-center items-center h-40 text-gray-500 mt-8">
+            Loading testimonials...
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-500 mt-8">{error}</div>
+        ) : ordered.length === 0 ? (
+          <div className="text-center text-gray-500 mt-8">No testimonials available</div>
+        ) : (
+          <div className="mt-8">
+            <Slider
+              autoPlay={true}
+              autoPlayInterval={5000}
+              showArrows={false}
+              showDots={true}
+              slidesToShow={4}
+              className="h-full"
+              responsive={[
+                { breakpoint: 1024, slidesToShow: 3, showDots: false },
+                { breakpoint: 768, slidesToShow: 2, showDots: false },
+                { breakpoint: 480, slidesToShow: 1, showDots: false },
+              ]}
+              dotStyle={{
+                position: 'outside',
+                containerClass: 'px-0 py-0',
+                size: 8,
+                activeSize: 10,
+                color: '#e5e7eb',
+                activeColor: '#EA5921'
+              }}
+            >
+              {ordered.map((t) => (
+                <div key={t.id} className="px-2 md:px-3">
+                  <article className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8 h-[280px] md:h-[320px] flex flex-col">
+                    <div className="flex items-center gap-1 mb-4">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${i < Number(t.rating ?? 0) ? "text-yellow-500" : "text-gray-300"}`}
+                          fill="currentColor"
+                        />
+                      ))}
                     </div>
-                    <div className="ps-0 p-5 md:p-6 w-[85%]">
-                      <p className="text-[#4F423D] font-[300] text-[13px] lg:text-[16px] leading-4.5 mb-0 ">
-                        “{t.content.slice(0, 300)}”
-                      </p>
-                    </div>
-                  </div>
-                  <div className="py-0 px-6 md:py-6 md:px-6 ">
-                    <p className="font-light text-[#070504] text-sm">{t.name},</p>
-                    <p className="text-[#6d6765] font-light text-sm">
-                      {t.position} – {t.company}
+
+                    <p className="text-slate-800 text-sm md:text-base leading-relaxed" style={{ display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      “{t.content.length > 300 ? t.content.slice(0, 300) + "…" : t.content}”
                     </p>
-                  </div>
+
+                    <div className="flex items-center gap-3 mt-6 md:mt-auto">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-orange-600 text-white flex items-center justify-center font-semibold">
+                        {getInitials(t.name)}
+                      </div>
+                      <div>
+                        <p className="text-slate-900 font-medium text-sm md:text-base">{t.name}</p>
+                        <p className="text-slate-600 text-xs md:text-sm">{t.position}</p>
+                      </div>
+                    </div>
+                  </article>
                 </div>
               ))}
-            </div>
-          )}
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={scrollNext}
-          aria-label="Next testimonial"
-          className="absolute right-[-10px] top-1/2 -translate-y-1/2 z-10 rounded-full p-2 hover:bg-gray-100">
-          <ChevronRight className="w-5 h-5 text-gray-700" />
-        </button>
+            </Slider>
+          </div>
+        )}
       </div>
     </section>
   );

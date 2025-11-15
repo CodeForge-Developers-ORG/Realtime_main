@@ -20,6 +20,7 @@ interface SliderProps {
     color?: string;
     activeColor?: string;
     position?: 'inside' | 'outside';
+    containerClass?: string;
   };
 }
 
@@ -38,6 +39,7 @@ const Slider: React.FC<SliderProps> = ({
     color: '#fff',
     activeColor: '#EA5921',
     position: 'inside',
+    containerClass: 'bg-black/20 px-4 py-[5px] border rounded-full'
   },
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -57,8 +59,8 @@ const Slider: React.FC<SliderProps> = ({
     const handleResize = () => {
       if (responsive.length === 0) return;
       
-      // Sort responsive breakpoints in descending order
-      const sortedBreakpoints = [...responsive].sort((a, b) => b.breakpoint - a.breakpoint);
+      // Sort responsive breakpoints in ascending order so smaller breakpoints match first
+      const sortedBreakpoints = [...responsive].sort((a, b) => a.breakpoint - b.breakpoint);
       
       // Find the appropriate settings based on current window width
       const width = window.innerWidth;
@@ -114,7 +116,9 @@ const Slider: React.FC<SliderProps> = ({
       interval = setInterval(() => {
         setCurrentSlide((prev) => {
           const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
-          return prev >= maxSlide ? 0 : prev + 1;
+          // Advance by a full group to match dots/groups
+          const next = prev + currentSlidesToShow;
+          return next > maxSlide ? 0 : next;
         });
       }, autoPlayInterval);
     }
@@ -128,14 +132,16 @@ const Slider: React.FC<SliderProps> = ({
   const goToNextSlide = () => {
     setCurrentSlide((prev) => {
       const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
-      return prev >= maxSlide ? 0 : prev + 1;
+      const next = prev + currentSlidesToShow;
+      return next > maxSlide ? 0 : next;
     });
   };
 
   const goToPrevSlide = () => {
     setCurrentSlide((prev) => {
       const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
-      return prev === 0 ? maxSlide : prev - 1;
+      const next = prev - currentSlidesToShow;
+      return prev === 0 ? maxSlide : Math.max(0, next);
     });
   };
 
@@ -319,7 +325,7 @@ const Slider: React.FC<SliderProps> = ({
       {/* Dots Navigation */}
       {currentShowDots && totalSlides > 1 && (
         <div className="absolute left-0 right-0 flex justify-center">
-          <div className={`${dotStyle.position === 'outside' ? 'bottom-[-20px]' : 'bottom-4'} absolute bg-black/20 px-4 py-[5px] border rounded-full flex gap-2 items-center`}>
+          <div className={`${dotStyle.position === 'outside' ? 'bottom-[-20px]' : 'bottom-4'} absolute ${dotStyle.containerClass ?? 'bg-black/20 px-4 py-[5px] border rounded-full'} flex gap-2 items-center`}>
             {Array.from({ length: Math.ceil(totalSlides / currentSlidesToShow) }).map((_, index) => (
               <button
                 key={index}

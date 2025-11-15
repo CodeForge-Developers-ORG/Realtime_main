@@ -1,22 +1,30 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Montserrat, Geist_Mono, Rajdhani } from "next/font/google";
 import { checkMaintenanceMode } from "@/services/maintenanceService";
 import "./globals.css";
 import FloatingButtons from "@/components/common/FloatingButtons";
 import PopupModal from "@/components/common/PopupModal";
 import AnalyticsProvider from "@/components/layout/AnalyticsProvider";
 import MaintenancePage from "@/components/common/MaintenancePage";
+import GlobalPreloader from "@/components/common/GlobalPreloader";
 
-// Use Inter instead of Geist
-const inter = Inter({
-  variable: "--font-inter",
+// Use Montserrat for the primary sans font
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Add Rajdhani for heading style replication
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -63,7 +71,7 @@ export default async function RootLayout({
   if (isMaintenance) {
     return (
       <html lang="en">
-        <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
+        <body className={`${montserrat.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}>
           <MaintenancePage />
         </body>
       </html>
@@ -73,8 +81,9 @@ export default async function RootLayout({
   // Normal site content - maintenance off hai
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${montserrat.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}>
         <AnalyticsProvider />
+        <GlobalPreloader />
         {children}
         <FloatingButtons />
         <PopupModal />

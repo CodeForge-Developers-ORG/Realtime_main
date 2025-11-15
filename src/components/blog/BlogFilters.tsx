@@ -76,7 +76,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search blogs..."
-            className="w-full pl-10 text-black pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+            className="w-full pl-10 text-black pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
             disabled={loading}
           />
         </div>
@@ -87,7 +87,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
             <select
               value={localFilters.category || ""}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              className="w-full px-3 py-3 border text-black border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              className="w-full px-3 py-3 border text-black border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
               disabled={loading}>
               <option value="">All Categories</option>
               {categories.map((category) => (
@@ -103,7 +103,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
             <select
               value={localFilters.sort_by || "published_at"}
               onChange={(e) => handleSortChange(e.target.value)}
-              className="w-full px-3 py-3 text-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              className="w-full px-3 py-3 text-black border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
               disabled={loading}>
               <option value="published_at">Newest</option>
               <option value="title">Title A-Z</option>
@@ -153,7 +153,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search by title, content..."
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
               disabled={loading}
             />
           </div>
@@ -171,7 +171,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
               id="category"
               value={localFilters.category || ""}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
               disabled={loading}>
               <option value="">All Categories</option>
               {categories.map((category) => (
@@ -193,7 +193,7 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
               id="sort_by"
               value={localFilters.sort_by || "published_at"}
               onChange={(e) => handleSortChange(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50"
               disabled={loading}>
               <option value="published_at">Newest First</option>
               <option value="title">Title A-Z</option>
@@ -219,11 +219,11 @@ const BlogFilters: React.FC<BlogFiltersProps> = ({
           <div className="flex items-center gap-2 text-sm">
             <span className="text-gray-500">Active filters:</span>
             {localFilters.search && (
-              <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs">
+              <span className="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-2 py-1 rounded-full text-xs">
                 Search: &quot;{localFilters.search}&quot;
                 <button
                   onClick={() => setSearchInput("")}
-                  className="hover:text-blue-900">
+                  className="hover:text-orange-900">
                   ×
                 </button>
               </span>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import locationService from '../../services/locationService';
 import { submitForm, submitNewsletter } from '@/services/contactServices';
 import Swal from 'sweetalert2';
@@ -36,6 +36,31 @@ const ContactSection = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Lazily render Google Maps iframe only when visible to avoid dev aborts
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const [showMap, setShowMap] = useState(false);
+
+  useEffect(() => {
+    const node = mapContainerRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setShowMap(true);
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { root: null, rootMargin: "200px", threshold: 0 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   // Fetch countries on component mount
   useEffect(() => {
@@ -174,11 +199,11 @@ const ContactSection = () => {
   }
 
   return (
-    <section className=" mx-auto not-first:py-25 bg-white">
+    <section className="mx-auto not-first:py-25 lg:py-0 bg-white">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="md:mb-6 text-[#1E1410]">
-          <h2 className="text-lg md:text-5xl font-thin mb-1 md:mb-4">Contact Us</h2>
-          <p className="text-xs md:text-[15px] font-[300] uppercase">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
+        <div className="md:mb-6 text-[#1E1410] text-center">
+          <h2 className="section-title mb-4">Contact Us</h2>
+          <p className="section-subtitle uppercase max-w-4xl mx-auto">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
@@ -386,8 +411,18 @@ const ContactSection = () => {
               </div>
             </div>
             
-            <div className="relative h-40 sm:h-81 rounded-lg overflow-hidden">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.2676026374565!2d77.28099627550043!3d28.621740775670638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce350d82a5555%3A0xded517f01ea7b98f!2sRealtime%20Biometrics!5e0!3m2!1sen!2sin!4v1760680350707!5m2!1sen!2sin" width="100%" height="100%" style={{border:0}} loading="lazy" ></iframe>
+            <div ref={mapContainerRef} className="relative h-40 sm:h-81 rounded-lg overflow-hidden">
+              {showMap && (
+                <iframe
+                  title="Realtime Biometrics Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.2676026374565!2d77.28099627550043!3d28.621740775670638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce350d82a5555%3A0xded517f01ea7b98f!2sRealtime%20Biometrics!5e0!3m2!1sen!2sin!4v1760680350707!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              )}
             </div>
           </div>
         </div>

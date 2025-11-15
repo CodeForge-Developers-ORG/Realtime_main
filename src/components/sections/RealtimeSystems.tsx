@@ -143,7 +143,7 @@ export default function RealtimeScrollCards() {
   };
 
   return (
-    <section ref={containerRef} className="bg-white py-10 relative isolate">
+    <section ref={containerRef} className="bg-white py-10 lg:py-0 relative isolate">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
       <div className="sticky max-w-[65%] lg:max-w-[75%] top-42 lg:top-38 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto no-scrollbar z-[60]" >
         {solutions.map((card, index) => (
@@ -181,7 +181,7 @@ export default function RealtimeScrollCards() {
                 <span className="text-orange-500 font-semibold text-3xl mr-3 bg-gray-100 rounded-md w-15 h-15 flex items-center justify-center">
                   {i + 1}
                 </span>
-                <h2 className=" text-lg lg:text-3xl font-thin text-gray-800 leading-snug">
+                <h2 className="section-title section-title--left">
                   {card.title}
                 </h2>
               </div>

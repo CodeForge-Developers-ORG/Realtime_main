@@ -163,7 +163,7 @@ const BlogList: React.FC = () => {
             {(filters.search || filters.category) && (
               <button
                 onClick={() => setFilters({})}
-                className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="px-6 py-2.5 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-medium"
               >
                 View All Blogs
               </button>

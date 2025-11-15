@@ -92,7 +92,7 @@ const SolutionDetails = ({ solution }: { solution: Solution }) => {
                 <span className="inline-block px-4 py-1 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
                   Technologies
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900">Technologies We Use</h2>
+                <h2 className="section-title">Technologies We Use</h2>
               </div>
 
               <div className="flex flex-wrap gap-3 ">
@@ -112,7 +112,7 @@ const SolutionDetails = ({ solution }: { solution: Solution }) => {
                 <span className="inline-block px-4 py-1 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
                   Key Features
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900">Features</h2>
+                <h2 className="section-title">Features</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@ const SolutionDetails = ({ solution }: { solution: Solution }) => {
                 <span className="inline-block px-4 py-1 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
                   Benefits
                 </span>
-                <h2 className="text-2xl font-bold text-gray-900">What You Get</h2>
+                <h2 className="section-title">What You Get</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">

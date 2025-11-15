@@ -99,7 +99,7 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
                 key={`${childIndex}-${subIndex}`}
                 href={subChild.url || "#"}
                 onClick={closeMenu}
-                className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-600">
                 {subChild.title}
               </Link>
             );
@@ -112,7 +112,7 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
           key={childIndex}
           href={child.url || "#"}
           onClick={closeMenu}
-          className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500">
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-600">
           {child.title}
         </Link>
       );
@@ -123,7 +123,7 @@ const renderChildItems = (children: ChildItem[], closeMenu?: () => void) => {
 // Responsive Mega Menu Wrapper Component - DESKTOP ONLY
 const ResponsiveMegaMenu = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="hidden md:block absolute md:-left-65 lg:left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[700px] lg:max-w-[800px] bg-[#2B2B2B] border border-gray-700 rounded-lg shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+    <div className="hidden md:block absolute md:-left-65 lg:left-1/4 transform -translate-x-1/4 mt-3 w-[90vw] max-w-[1100px] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
       {children}
     </div>
   );
@@ -138,8 +138,8 @@ const MobileDropdown = ({
   title?: string;
 }) => {
   return (
-    <div className="md:hidden bg-[#2B2B2B] border border-gray-700 rounded-lg mx-4 my-2">
-      <div className="text-white font-medium p-3 border-b border-gray-600 text-sm bg-[#333] rounded-t-lg">
+    <div className="md:hidden bg-white border border-gray-200 rounded-lg mx-4 my-2">
+      <div className="text-gray-800 font-medium p-3 border-b border-gray-200 text-sm bg-gray-50 rounded-t-lg">
         {title}
       </div>
       <div className="py-2">{children}</div>
@@ -168,6 +168,31 @@ const Header = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollY = useRef(0);
+  const [isSecondaryBarHidden, setIsSecondaryBarHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+      const threshold = 5;
+
+      if (currentY < 10) {
+        setIsSecondaryBarHidden(false);
+      } else if (delta > threshold) {
+        setIsSecondaryBarHidden(true);
+      } else if (delta < -threshold) {
+        setIsSecondaryBarHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Update document meta tags and favicon
   const updateDocumentMetadata = useCallback((data: HeaderData) => {
@@ -391,7 +416,7 @@ const Header = () => {
     if (!hasValidChildren(children)) return null;
 
     return (
-      <div className="divide-y divide-[#333]">
+      <div className="divide-y divide-gray-200">
         {children.map((child, i) => {
           if (!child?.title || child.title.trim() === "") return null;
 
@@ -412,7 +437,7 @@ const Header = () => {
                       toggleNestedDropdown(childKey);
                     }
                   }}
-                  className="flex-1 block py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 transition-colors"
+                  className="flex-1 block py-3 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-colors"
                 >
                   {child.title}
                 </Link>
@@ -441,7 +466,7 @@ const Header = () => {
               </div>
 
               {hasNestedChildren && isNestedOpen && (
-                <div className="pl-4 border-l-2 border-orange-500 bg-[#252525]">
+                <div className="pl-4 border-l-2 border-orange-500 bg-gray-50">
                   {renderMobileNestedChildren(child.children!, childKey, level + 1)}
                 </div>
               )}
@@ -457,7 +482,7 @@ const Header = () => {
     if (!hasValidChildren(children)) return null;
 
     return (
-      <div className="divide-y divide-[#333]">
+      <div className="divide-y divide-gray-200">
         {children.map((child, index) => {
           if (!child?.title || child.title.trim() === "") return null;
 
@@ -478,7 +503,7 @@ const Header = () => {
                       toggleNestedDropdown(childKey);
                     }
                   }}
-                  className="flex-1 block py-3 px-4 text-sm text-gray-300 hover:bg-[#333] hover:text-orange-500 transition-colors"
+                  className="flex-1 block py-3 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600 transition-colors"
                 >
                   {child.title}
                 </Link>
@@ -486,7 +511,7 @@ const Header = () => {
                 {hasNestedChildren && (
                   <button
                     onClick={() => toggleNestedDropdown(childKey)}
-                    className="p-3 text-gray-400 hover:text-orange-500 transition"
+                    className="p-3 text-gray-500 hover:text-orange-600 transition"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -507,7 +532,7 @@ const Header = () => {
               </div>
 
               {hasNestedChildren && isNestedOpen && (
-                <div className="pl-4 border-l-2 border-orange-500 bg-[#252525]">
+                <div className="pl-4 border-l-2 border-orange-500 bg-gray-50">
                   {renderMobileNestedChildren(child.children!, childKey, 1)}
                 </div>
               )}
@@ -526,7 +551,7 @@ const Header = () => {
           <Link
             href={item.url || "#"}
             onClick={closeMobileMenu}
-            className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium">
+            className="block py-3 px-4 text-sm text-orange-600 hover:bg-gray-100 font-medium">
             Explore {item.title} →
           </Link>
         </MobileDropdown>
@@ -539,7 +564,7 @@ const Header = () => {
           <Link
             href={item.url || "#"}
             onClick={closeMobileMenu}
-            className="block py-3 px-4 text-sm text-orange-500 hover:bg-[#333] font-medium border-b border-gray-700 bg-[#333]">
+            className="block py-3 px-4 text-sm text-orange-600 hover:bg-gray-100 font-medium border-b border-gray-200 bg-gray-50">
             All {item.title} →
           </Link>
 
@@ -550,7 +575,7 @@ const Header = () => {
 
             return (
               <div key={index}>
-                <div className="flex justify-between items-center hover:bg-[#333] transition-colors">
+                <div className="flex justify-between items-center hover:bg-gray-100 transition-colors">
                   <Link
                     href={child.url || "#"}
                     onClick={(e) => {
@@ -561,14 +586,14 @@ const Header = () => {
                         toggleNestedDropdown(childKey);
                       }
                     }}
-                    className="flex-1 py-3 px-4 text-sm text-gray-300 hover:text-orange-500 border-b border-gray-700 transition-colors">
+                    className="flex-1 py-3 px-4 text-sm text-gray-700 hover:text-orange-600 border-b border-gray-200 transition-colors">
                     {child.title}
                   </Link>
 
                   {hasNestedChildren && (
                     <button
                       onClick={() => toggleNestedDropdown(childKey)}
-                      className="px-4 text-gray-400 hover:text-orange-500"
+                      className="px-4 text-gray-500 hover:text-orange-600"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -589,7 +614,7 @@ const Header = () => {
                 </div>
 
                 {hasNestedChildren && isNestedOpen && (
-                  <div className="bg-[#252525] border-l-2 border-orange-500 ml-4">
+                  <div className="bg-gray-50 border-l-2 border-orange-500 ml-4">
                     {renderMobileNestedChildren(child.children!, childKey, 1)}
                   </div>
                 )}
@@ -602,14 +627,29 @@ const Header = () => {
   };
 
   if (loading) {
+    // Show a skeleton header while data loads; global preloader overlay handles
+    // the initial page load animation. This avoids showing "Loading..." text.
     return (
-      <div className="bg-[#2B2B2B] text-white text-center py-4">Loading...</div>
+      <header className="w-full bg-white text-gray-800 z-50 sticky top-0 border-b border-gray-200" style={{ fontFamily: 'var(--font-montserrat)' }}>
+        <div className="container mx-auto px-6 lg:px-8 py-6 flex items-center justify-between">
+          {/* Logo skeleton */}
+          <div className="h-8 w-[140px] lg:w-[150px] xl:w-[170px] rounded bg-gray-200 animate-pulse" />
+
+          {/* Nav skeleton (desktop) */}
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="h-4 w-20 rounded bg-gray-200 animate-pulse" />
+            <div className="h-4 w-24 rounded bg-gray-200 animate-pulse" />
+            <div className="h-4 w-16 rounded bg-gray-200 animate-pulse" />
+            <div className="h-4 w-20 rounded bg-gray-200 animate-pulse" />
+          </div>
+        </div>
+      </header>
     );
   }
 
   if (!headerData) {
     return (
-      <div className="bg-[#2B2B2B] text-white text-center py-4">
+      <div className="bg-white text-gray-800 text-center py-4">
         Failed to load header
       </div>
     );
@@ -619,10 +659,10 @@ const Header = () => {
 
   return (
     <>
-    <header className="w-full bg-[#2B2B2B] text-white z-50 sticky top-0">
+    <header className="w-full bg-white text-gray-800 z-50 sticky top-0 border-b border-gray-200" style={{ fontFamily: 'var(--font-montserrat)' }}>
       {/* Sticky Top Bar */}
-      <div className="sticky top-0 bg-[#2B2B2B] z-50">
-        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div className="sticky top-0 bg-white z-50">
+        <div className="container mx-auto px-6 lg:px-8 py-6 flex items-center justify-between">
           <Link
             href="/"
             className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
@@ -631,7 +671,7 @@ const Header = () => {
               alt={branding?.site_title || "Logo"}
               width={180}
               height={60}
-              className="h-auto w-[120px] lg:w-[130px] xl:w-[150px]"
+              className="h-auto w-[140px] lg:w-[150px] xl:w-[170px]"
             />
           </Link>
 
@@ -649,8 +689,8 @@ const Header = () => {
                   <Link
                     key={index}
                     href={item.url || "#"}
-                    className={`font-[600] text-[14px] hover:text-orange-500 transition-colors ${
-                      pathname === item.url ? "text-orange-500" : "text-white"
+                    className={`font-[600] text-[15px] hover:text-orange-600 transition-colors ${
+                      pathname === item.url ? "text-orange-600" : "text-gray-800"
                     }`}>
                     {item.title}
                   </Link>
@@ -669,8 +709,8 @@ const Header = () => {
                   <div key={index} className="relative group">
                     <Link
                       href={item.url || "#"}
-                      className={`flex text-[14px] items-center font-[600] hover:text-orange-500 ${
-                        pathname === item.url ? "text-orange-500" : "text-white"
+                      className={`flex text-[15px] items-center font-[600] hover:text-orange-600 ${
+                        pathname === item.url ? "text-orange-600" : "text-gray-800"
                       }`}>
                       {item.title}
                       <svg
@@ -692,7 +732,7 @@ const Header = () => {
                       !isProductsDropdown &&
                       !isSolutionsDropdown &&
                       !isSoftwareDropdown && (
-                        <div className="absolute left-0 mt-2 w-56 bg-[#222] rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div className="absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                           {renderChildItems(item.children!)}
                         </div>
                       )}
@@ -724,7 +764,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             aria-label="Mobile menu"
-            className="md:hidden focus:outline-none text-white z-50 p-2"
+            className="md:hidden focus:outline-none text-gray-900 z-50 p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? (
               <svg
@@ -802,7 +842,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <div
         ref={mobileMenuRef}
-        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-[#222] z-40 transform transition-transform duration-300 ${
+        className={`md:hidden fixed top-0 left-0 w-full h-screen bg-white z-40 transform transition-transform duration-300 ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ paddingTop: "100px" }}>
@@ -922,10 +962,10 @@ const Header = () => {
                     key={index}
                     href={item.url || "#"}
                     onClick={closeMobileMenu}
-                    className={`block text-white py-4 px-4 font-medium border-b border-[#333] transition-colors ${
+                    className={`block text-gray-800 py-4 px-4 font-medium border-b border-gray-200 transition-colors ${
                       pathname === item.url
-                        ? "text-orange-500 bg-[#333]"
-                        : "hover:text-orange-500 hover:bg-[#333]"
+                        ? "text-orange-600 bg-gray-50"
+                        : "hover:text-orange-600 hover:bg-gray-50"
                     }`}>
                     {item.title}
                   </Link>
@@ -942,12 +982,12 @@ const Header = () => {
                 const isActive = activeDropdown === item.title || activeMegaMenu === item.title;
 
                 return (
-                  <div key={index} className="border-b border-[#333]">
-                    <div className="flex justify-between items-center py-4 px-4 hover:bg-[#333] transition-colors">
+                  <div key={index} className="border-b border-gray-200">
+                    <div className="flex justify-between items-center py-4 px-4 hover:bg-gray-50 transition-colors">
                       <Link
                         href={item.url || ""}
                         onClick={closeMobileMenu}
-                        className="text-white font-medium flex-1 hover:text-orange-500 transition-colors">
+                        className="text-gray-800 font-medium flex-1 hover:text-orange-600 transition-colors">
                         {item.title}
                       </Link>
 
@@ -960,7 +1000,7 @@ const Header = () => {
                               toggleDropdown(item.title || "");
                             }
                           }}
-                          className="text-gray-400 hover:text-orange-500 transition-colors p-1">
+                          className="text-gray-500 hover:text-orange-600 transition-colors p-1">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className={`h-5 w-5 transition-transform duration-300 ${
@@ -982,14 +1022,14 @@ const Header = () => {
 
                     {/* Regular Dropdown for non-mega menu items */}
                     {isActive && activeDropdown === item.title && hasChildren && !isMegaMenu && (
-                      <div className="bg-[#2B2B2B] border-t border-[#333]">
+                      <div className="bg-white border-t border-gray-200">
                         {renderMobileDropdown(item.children!, item.title || "")}
                       </div>
                     )}
 
                     {/* Mega Menu Content */}
                     {isActive && activeMegaMenu === item.title && isMegaMenu && (
-                      <div className="bg-[#2B2B2B] border-t border-[#333]">
+                      <div className="bg-white border-t border-gray-200">
                         {renderMobileMegaMenu(item)}
                       </div>
                     )}
@@ -1001,7 +1041,7 @@ const Header = () => {
           </nav>
 
           {/* Action Buttons */}
-          <div className="px-4 py-6 border-t border-[#333] space-y-3">
+          <div className="px-4 py-6 border-t border-gray-200 space-y-3">
             <Link
               href="/partner"
               onClick={closeMobileMenu}
@@ -1023,7 +1063,7 @@ const Header = () => {
           </div>
 
           {/* App Links */}
-          <div className="px-4 py-6 space-y-3 border-t border-[#333]">
+          <div className="px-4 py-6 space-y-3 border-t border-gray-200">
             <Link
               href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
               onClick={closeMobileMenu}
@@ -1063,7 +1103,7 @@ const Header = () => {
       </div>
 
       {/* Search and Action Bar - ONLY DESKTOP */}
-      <div className="hidden md:block bg-white py-3">
+      <div className={`hidden md:block bg-white transition-all duration-300 ease-in-out ${isSecondaryBarHidden ? 'md:-translate-y-5 md:opacity-0 md:pointer-events-none md:max-h-0 md:py-0 md:overflow-hidden' : 'md:translate-y-0 md:opacity-100 md:max-h-40 md:py-3'}`}>
         <div className="container mx-auto lg:px-4 flex flex-col md:flex-row items-center justify-between">
           <div
             ref={searchRef}

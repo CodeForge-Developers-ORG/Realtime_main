@@ -1,10 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
-  "/partner/page": "app/partner/page.js",
+  "/api/hero-content/route": "app/api/hero-content/route.js",
   "/products/[title]/page": "app/products/[title]/page.js",
-  "/products/category/[slug]/page": "app/products/category/[slug]/page.js",
-  "/products/page": "app/products/page.js",
-  "/support/page": "app/support/page.js"
+  "/page": "app/page.js"
 }

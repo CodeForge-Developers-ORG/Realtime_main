@@ -1,11 +1,9 @@
 "use client";
 
-import Link from 'next/link';
-import Slider from '../ui/Slider';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { getSliderData, imageLink } from '@/services/heroServices';
-import DOMPurify from 'dompurify';
+import Slider from "../ui/Slider";
+import { useEffect, useState, useMemo } from "react";
+import { getSliderData, imageLink } from "@/services/heroServices";
+import DOMPurify from "dompurify";
 
 // ✅ Types
 export interface ApiResponse {
@@ -19,6 +17,7 @@ export interface SliderData {
   title: string;
   subtitle: string;
   content: string; // contains HTML string (escaped)
+  content_file?: string; // path to HTML file relative to storage base
   image_alt: string | null;
   button_text: string | null;
   button_link: string | null;
@@ -38,7 +37,7 @@ export interface SliderData {
   display_to: string | null;
   updated_at: string;
   created_at: string;
-  image: string;
+  image?: string;
 }
 
 // ✅ Helper to decode escaped HTML (\u003Cdiv... → <div...)
@@ -48,6 +47,21 @@ const decodeHTML = (html: string) => {
   return txt.value;
 };
 
+// ✅ Extract only <body> inner HTML if a full document is provided
+const extractBodyContent = (html: string) => {
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  if (bodyMatch && bodyMatch[1]) {
+    return bodyMatch[1];
+  }
+  // Remove potential <html> and <head> wrappers to avoid invalid nesting
+  const cleaned = html
+    .replace(/<\/?html[^>]*>/gi, "")
+    .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, "");
+  return cleaned;
+};
+
+// We intentionally avoid extra UI and only render slide content.
+
 const HeroSection = () => {
   const [heroSlides, setHeroSlides] = useState<SliderData[]>([]);
 
@@ -56,6 +70,7 @@ const HeroSection = () => {
       try {
         const data: ApiResponse = await getSliderData();
         if (data.success) {
+          console.log("[HeroSection] Fetched hero slides:", data.data);
           setHeroSlides(data.data);
         } else {
           console.error("Failed to load hero slides");
@@ -68,82 +83,51 @@ const HeroSection = () => {
     fetchHeroSlides();
   }, []);
 
+  const autoPlayInterval = useMemo(() => {
+    return heroSlides[0]?.auto_play_delay || 5000;
+  }, [heroSlides]);
+
   return (
-    <section className="bg-[#FFF5F2] min-h-[60vh]  md:min-h-[80vh]">
+    <section
+      className="pt-0"
+      style={{ fontFamily: 'var(--font-montserrat)', paddingTop: 0, marginTop: 0 }}
+    >
       <Slider
         autoPlay={true}
-        autoPlayInterval={3000}
+        autoPlayInterval={autoPlayInterval}
         showArrows={false}
         showDots={true}
+        className="h-[80vh]"
+        dotStyle={{
+          size: 10,
+          activeSize: 12,
+          color: "#D1D5DB",
+          activeColor: "#EA5921",
+          position: "inside",
+          containerClass: "bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full"
+        }}
         slidesToShow={1}
-        responsive={[
-          {
-            breakpoint: 768,
-            showDots: false,
-            slidesToShow: 1,
-          },
-        ]}
+        responsive={[{ breakpoint: 768, slidesToShow: 1, showDots: true }]}
       >
         {heroSlides.map((slide) => (
-          <div
-            key={slide.id}
-            className={`relative w-full ${slide.background_color} min-h-[60vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[82vh] flex justify-center overflow-hidden`}
-          >
-            {/* Overlay effect */}
-            <div className="absolute z-10 inset-0 flex justify-center items-center">
-              <div className="w-[80%] h-[80%] bg-[radial-gradient(circle_at_center,rgba(255,200,200,0.8),transparent_70%)] blur-3xl"></div>
-            </div>
-
-            {/* Main content */}
-            <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
-              {/* Subtitle */}
-              <div className="absolute text-center left-[30%] sm:left-[47%] top-3 sm:top-7 px-7 py-1 mb-4 rounded-full text-black bg-yellow-500 text-xs sm:text-lg tracking-wide font-medium">
-                {slide.subtitle}
-              </div>
-
-              {/* Button */}
-              {slide.button_text && (
-                <Link
-                  href={slide.button_link || "#"}
-                  className="absolute top-11 sm:top-16 left-[43%] sm:left-[52%] px-7 py-1 bg-[#1E1410] text-white text-xs sm:text-lg uppercase rounded-full hover:bg-gray-800 transition-colors transform-3d z-1"
-                  style={{ transform: "rotate(-5deg)" }}
-                >
-                  {slide.button_text}
-                </Link>
-              )}
-
-              {/* Title */}
-              <h1
-                className={`text-[40px] sm:text-[60px] md:text-[80px] leading-none lg:text-[110px] mb-6 relative left-0 md:left-0 top-12 sm:top-20 md:top-0 text-[#F8D1C7] text-center whitespace-wrap sm:whitespace-nowrap`}
-                style={{ fontWeight: "bolder" }}
-              >
-                {slide.title}
-              </h1>
-
-              {/* Image + Features */}
-              <div className="w-full relative">
-                <div className="absolute inset-0 top-[30px] sm:top-[100px] md:top-[-50px] mx-auto w-[230px] sm:w-[280px] md:w-[400px] h-[280px] sm:h-[400px] md:h-[500px]">
-                  <Image
-                    src={`${imageLink}${slide.image}`}
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                    alt={slide.image_alt || "Smart Door Lock"}
-                    priority
-                  />
-
-                  {/* ✅ Inject decoded HTML content (features) */}
-                  {slide.content && (
-                    <div
-                      className="relative"
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(decodeHTML(slide.content)),
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
+          <div key={slide.id}>
+            {slide.content_file ? (
+              <iframe
+                src={`/api/hero-content?file=${encodeURIComponent(slide.content_file)}`}
+                style={{ width: "100%", height: "80vh", border: "none" }}
+                title={`hero-slide-${slide.id}`}
+              />
+            ) : (
+              slide.content && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      extractBodyContent(decodeHTML(slide.content))
+                    ),
+                  }}
+                />
+              )
+            )}
           </div>
         ))}
       </Slider>

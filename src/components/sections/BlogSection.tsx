@@ -35,7 +35,7 @@ const BlogSection = () => {
   // Skeleton loader
   if (loading) {
     return (
-      <section className="py-5 md:py-20 bg-[#E8E9E3]">
+      <section className="py-5 md:py-20 lg:py-0 bg-white">
         <div className="container mx-auto px-4">
           <div className="animate-pulse">
             <div className="h-6 w-1/3 bg-gray-300 mb-3 rounded"></div>
@@ -56,27 +56,21 @@ const BlogSection = () => {
   // No blogs case
   if (!blogs.length) {
     return (
-      <section className="py-5 md:py-20 bg-[#E8E9E3] text-center">
+      <section className="py-5 md:py-20 lg:py-0 bg-white text-center">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-4xl font-thin text-[#1E1410]">
-            No Blogs Found
-          </h2>
+          <h2 className="section-title">No Blogs Found</h2>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="py-5 md:py-20 bg-[#e8e9e3]">
+    <section className="py-5 md:py-20 lg:py-0 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="mb-6 md:mb-10">
-          <h2 className="text-xl md:text-4xl font-thin text-[#1E1410] md:mb-4">
-            Blogs
-          </h2>
-          <p className="text-shadow-amber-100 text-sm md:text-lg font-thin uppercase bg-amber-400 p-1 px-2 text-black inline-block">
-            Our Latest Updates
-          </p>
+        <div className="mb-6 md:mb-10 text-center">
+          <h2 className="section-title md:mb-4">Blogs</h2>
+          <p className="section-subtitle max-w-3xl mx-auto">Our Latest Updates</p>
         </div>
 
         {/* Mobile Slider */}
@@ -97,8 +91,8 @@ const BlogSection = () => {
                 <div className="relative h-30 md:h-48">
                   <Image
                     src={
-                      post.image
-                        ? `${baseUri}${post.image}`
+                      post.featured_image
+                        ? `${baseUri}${post.featured_image}`
                         : "/images/blog1.png"
                     }
                     alt={post.title}
@@ -124,6 +118,12 @@ const BlogSection = () => {
                       year: "numeric",
                     })}
                   </p>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="mt-2 inline-block bg-orange-500 text-white text-[10px] md:text-xs px-3 py-1.5 rounded-md font-medium hover:bg-orange-600 transition"
+                    aria-label={`Read more about ${post.title}`}>
+                    Read More
+                  </Link>
                 </div>
               </div>
             ))}
@@ -140,7 +140,9 @@ const BlogSection = () => {
               <div className="relative h-60 lg:h-48 xl:h-60">
                 <Image
                   src={
-                    post.image ? `${baseUri}${post.image}` : "/images/blog1.png"
+                    post.featured_image
+                      ? `${baseUri}${post.featured_image}`
+                      : "/images/blog1.png"
                   }
                   alt={post.title}
                   fill
@@ -168,13 +170,19 @@ const BlogSection = () => {
                 {/* <p className="text-[#9B918D] text-xs">
                   Author: {post.author?.name || "Unknown"}
                 </p> */}
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="mt-2 inline-block bg-orange-500 text-white text-xs md:text-sm px-4 py-2 rounded-md font-medium hover:bg-orange-600 transition"
+                  aria-label={`Read more about ${post.title}`}>
+                  Read More
+                </Link>
               </div>
             </div>
           ))}
         </div>
 
         {/* View All Button */}
-        <div className="text-right mt-0 md:mt-6">
+        <div className="text-center mt-0 md:mt-6">
           <Link
             href="/blog"
             className="bg-orange-500 text-white text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 rounded-md font-medium hover:bg-orange-600 transition inline-flex items-center">

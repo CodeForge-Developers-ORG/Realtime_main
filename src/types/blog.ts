@@ -6,7 +6,9 @@ export interface BlogAuthor {
 }
 
 export interface Blog {
-  image: unknown;
+  // API provides featured_image like "blogs/xyz.jpg" stored under baseUri
+  featured_image?: string;
+  image?: string | null; // legacy/unused in blog API but kept optional
   id: string;
   title: string;
   slug: string;

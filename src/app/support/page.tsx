@@ -243,7 +243,6 @@ export default function SupportPage() {
               }</p>
               <p><b>Priority:</b> ${form.priority.toUpperCase()}</p>
               <p><b>Expected Response:</b> Within 24 hours</p>
-            </div>
           `,
           confirmButtonColor: "#2563eb",
         });
@@ -303,26 +302,26 @@ export default function SupportPage() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br bg-gray-50 py-8 md:py-12">
-        <div className="container max-w-6xl mx-auto px-4">
+      <section className="bg-white py-12 md:py-20">
+        <div className="container max-w-7xl mx-auto px-4">
           {/* Header Section */}
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Support Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="w-3 h-8 bg-orange-600 rounded-full mr-3"></div>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    Submit Support Ticket
-                  </h2>
-                </div>
+                <h1 className="text-3xl md:text-5xl font-light mb-2 text-[#1E1410]">
+                  Submit Support Ticket
+                </h1>
+                <p className="text-gray-600 mb-10 text-sm md:text-base">
+                  Please fill the form to raise your support ticket.
+                </p>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-10">
                   {/* Personal Information */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-orange-600 pl-3">
+                    {/* <h3 className="text-lg font-semibold text-gray-900 ">
                       Personal Information
-                    </h3>
+                    </h3> */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <FloatingInput
                         name="name"
@@ -366,14 +365,14 @@ export default function SupportPage() {
                   {/* Auto-fetched Address Section */}
                   {postOffices.length > 0 && (
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between">
+                      {/* <div className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-orange-600 pl-3">
                           Address Details
                         </h3>
                         <span className="text-sm text-orange-600 bg-orange-50 px-3 py-1 rounded-full">
                           ✓ Auto-detected
                         </span>
-                      </div>
+                      </div> */}
 
                       <SelectBox
                         label="Select Post Office / Area"
@@ -453,9 +452,9 @@ export default function SupportPage() {
 
                   {/* Ticket Details */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-orange-400 pl-3">
+                    {/* <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-orange-400 pl-3">
                       Ticket Details
-                    </h3>
+                    </h3> */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <SelectBox
                         label="Category *"
@@ -484,9 +483,9 @@ export default function SupportPage() {
 
                   {/* Message */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-red-400 pl-3">
+                    {/* <h3 className="text-lg font-semibold text-gray-900 border-l-4 border-red-400 pl-3">
                       Describe Your Issue
-                    </h3>
+                    </h3> */}
                     <FloatingTextArea
                       name="message"
                       label=""
@@ -497,35 +496,13 @@ export default function SupportPage() {
                   </div>
 
                   {/* Submit Button */}
-                  <div className="flex justify-center pt-4">
+                  <div className="flex justify-start">
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="bg-orange-600 text-white px-12 py-4 rounded-xl hover:bg-orange-700 w-full cursor-pointer font-semibold disabled:opacity-60 disabled:cursor-not-allowed text-lg min-w-48 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
-                      {isLoading ? (
-                        <span className="flex items-center justify-center">
-                          <svg
-                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24">
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Submitting...
-                        </span>
-                      ) : (
-                        "Submit Ticket"
-                      )}
+                      className="bg-orange-500 text-white px-8 py-3 rounded-md hover:bg-orange-600 transition-all font-medium disabled:opacity-60"
+                    >
+                      {isLoading ? "Submitting..." : "Submit Ticket"}
                     </button>
                   </div>
                 </form>
@@ -537,7 +514,6 @@ export default function SupportPage() {
               {/* Contact Info Card */}
               <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
                 <div className="flex items-center mb-6">
-                  <div className="w-3 h-8 bg-orange-600 rounded-full mr-3"></div>
                   <h2 className="text-2xl font-bold text-gray-900">
                     Contact Information
                   </h2>
@@ -703,7 +679,7 @@ export default function SupportPage() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </Layout>
   );
 }
@@ -739,7 +715,7 @@ function FloatingInput({
         value={value}
         onChange={onChange}
         maxLength={maxLength}
-        className="peer w-full border border-gray-300 rounded-xl px-4 pt-5 pb-2 text-[15px] text-black focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-white"
+        className="peer w-full border border-gray-300 rounded-xl px-4 pt-5 pb-2 text-[15px] text-black focus:border-orange-500 focus:ring-0 outline-none transition-all"
         placeholder={placeholder || " "}
       />
       <label
@@ -779,14 +755,14 @@ function FloatingTextArea({
         value={value}
         onChange={onChange}
         rows={5}
-        className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 text-[15px] text-black focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all resize-vertical bg-white"
+        className="peer w-full border border-gray-300 rounded-xl px-4 pt-6 pb-2 text-[15px] text-black focus:border-orange-500 focus:ring-0 outline-none transition-all"
         placeholder={placeholder || " "}
       />
       <label
         htmlFor={name}
         className={`absolute left-4 bg-white px-1 transition-all duration-200 ${
           hasValue
-            ? "top-1 text-[12px] text-gray-500"
+            ? "top-1 text-[12px] text-orange-500"
             : "top-4 text-gray-400 text-[15px]"
         } peer-focus:top-1 peer-focus:text-[12px] peer-focus:text-orange-500`}>
         {label}
@@ -814,9 +790,7 @@ function SelectBox({
 }: SelectBoxProps) {
   return (
     <div>
-      <label className="text-black/60 text-xs mb-2 block font-medium">
-        {label}
-      </label>
+      <label className="text-black/60 text-xs mb-1 block">{label}</label>
       <Select
         options={options}
         value={value}
@@ -827,14 +801,12 @@ function SelectBox({
         className="react-select-container"
         classNames={{
           control: (state) =>
-            `border border-gray-300 rounded-xl hover:border-orange-400 focus:border-orange-500 transition-all bg-white ${
-              state.isFocused ? "border-orange-500 ring-2 ring-orange-200" : ""
+            `border border-gray-300 rounded-xl hover:border-orange-400 focus:border-orange-500 transition-all ${
+              state.isFocused ? "border-orange-500 ring-0" : ""
             }`,
           option: (state) =>
             `${
-              state.isFocused
-                ? "bg-orange-50 text-orange-800"
-                : "bg-white text-gray-800"
+              state.isFocused ? "bg-orange-50 text-orange-800" : "bg-white text-gray-800"
             }`,
         }}
         styles={{
@@ -844,15 +816,13 @@ function SelectBox({
             borderRadius: "12px",
             boxShadow: "none",
             minHeight: "52px",
-            borderColor: "#d1d5db",
-            backgroundColor: "white",
           }),
           option: (base, state) => ({
             ...base,
-            backgroundColor: state.isFocused ? "#dbeafe" : "white",
-            color: state.isFocused ? "#1e40af" : "#1e1410",
+            backgroundColor: state.isFocused ? "#fff7ed" : "white",
+            color: state.isFocused ? "#9a3412" : "#1e1410",
             ":active": {
-              backgroundColor: "#93c5fd",
+              backgroundColor: "#fed7aa",
             },
           }),
           singleValue: (base) => ({

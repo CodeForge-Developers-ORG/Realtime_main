@@ -132,7 +132,7 @@ const Page = () => {
                       icon: FaRocket,
                     },
                     { name: "Products", href: "/products", icon: FaAward },
-                    { name: "Contact", href: "/support", icon: FaLightbulb },
+                    { name: "Contact", href: "/contact", icon: FaLightbulb },
                   ].map((item, i) => (
                     <Link key={i} href={item.href}>
                       <div className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all duration-200 group cursor-pointer">

@@ -136,13 +136,13 @@ export default function PartnerRegisterPage() {
         const res = await fetch("https://api.ipify.org?format=json");
         const data = await res.json();
         setTracking((prev) => ({ ...prev, ip_address: data.ip }));
-      } catch (err) {
+      } catch {
         console.warn("ipify failed, trying ipapi...");
         try {
           const res2 = await fetch("https://ipapi.co/json/");
           const data2 = await res2.json();
           setTracking((prev) => ({ ...prev, ip_address: data2.ip || "Unavailable" }));
-        } catch (e) {
+        } catch {
           console.error("Both IP fetch failed",);
           setTracking((prev) => ({ ...prev, ip_address: "Unavailable" }));
         }

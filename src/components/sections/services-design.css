@@ -1,0 +1,188 @@
+/* Scoped CSS ported from service design, without global resets */
+
+.services-section {
+  padding: 2.5rem 1rem; /* align with global section spacing */
+  background-color: #ffffff; /* switched to white background */
+}
+
+.services-section .container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Header */
+.services-section .services-header {
+  margin-bottom: 5rem;
+  text-align: center; /* Center-align header content */
+}
+
+.services-section .services-title {
+  /* Defer typography to global .section-title for uniformity */
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.services-section .services-subtitle {
+  /* Defer typography to global .section-subtitle for uniformity */
+  max-width: 42rem;
+  margin: 0 auto; /* Center the narrower subtitle block */
+}
+
+/* Grid Layout */
+.services-section .services-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 300px;
+}
+
+/* Responsive Grid */
+@media (min-width: 640px) {
+  .services-section .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-section {
+    padding: 2.5rem 1rem; /* keep consistent spacing on desktop */
+  }
+  .services-section .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Making 1st and 4th cards span 2 rows for masonry effect */
+  .services-section .service-card-1,
+  .services-section .service-card-4 {
+    grid-row: span 2;
+  }
+}
+
+/* Service Cards */
+.services-section .service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid #374151;
+  background-color: #1f2937;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.services-section .service-card:hover {
+  border-color: #EA5921;
+  box-shadow: 0 20px 25px -5px rgba(234, 89, 33, 0.12);
+}
+
+/* Image Background */
+.services-section .service-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.services-section .service-card:hover .service-image {
+  transform: scale(1.1);
+}
+
+/* Overlay Gradient */
+.services-section .service-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3), transparent);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.services-section .service-card:hover .service-overlay {
+  opacity: 0.75;
+}
+
+/* Content */
+.services-section .service-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.services-section .service-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.services-section .service-card:hover .service-title {
+  color: #EA5921;
+}
+
+.services-section .service-description {
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+/* Arrow Icon */
+.services-section .service-arrow {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: #EA5921;
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateX(0);
+}
+
+.services-section .service-card:hover .service-arrow {
+  opacity: 1;
+  transform: translateX(0.5rem);
+}
+
+.services-section .arrow-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2;
+}
+
+/* Tablet Adjustments */
+@media (max-width: 768px) {
+  .services-section {
+    padding: 3rem 1rem;
+  }
+
+  .services-section .services-header {
+    margin-bottom: 2rem;
+  }
+
+  /* Heading size inherits from .section-title */
+
+  .services-section .service-card-1,
+  .services-section .service-card-4 {
+    grid-row: span 1;
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+  .services-section .services-grid {
+    gap: 1rem;
+  }
+
+  .services-section .service-title {
+    font-size: 1.25rem;
+  }
+}

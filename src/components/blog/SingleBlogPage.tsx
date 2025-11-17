@@ -28,7 +28,7 @@ const SingleBlogPage: React.FC<SingleBlogPageProps> = ({ blog }) => {
   };
 
   return (
-    <article className="bg-white">
+    <article className="bg-white" style={{ fontFamily: 'var(--font-montserrat)' }}>
       {/* Hero image in centered container */}
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
@@ -109,11 +109,11 @@ const SingleBlogPage: React.FC<SingleBlogPageProps> = ({ blog }) => {
 
           {/* Excerpt */}
           {blog.excerpt ? (
-            <p className="text-xl text-gray-700 mb-6">{blog.excerpt}</p>
+            <p className="text-xl text-gray-700 mb-6" style={{ fontFamily: 'var(--font-montserrat)' }}>{blog.excerpt}</p>
           ) : null}
 
           {/* Content */}
-          <div className="prose prose-lg max-w-none mt-6 prose-headings:text-gray-900 prose-a:text-orange-600 prose-strong:text-gray-900 prose-blockquote:border-l-orange-400 prose-img:rounded-lg">
+          <div className="prose prose-lg text-justify max-w-none mt-6 prose-headings:text-gray-900 prose-a:text-orange-600 prose-strong:text-gray-900 prose-blockquote:border-l-orange-400 prose-img:rounded-lg" style={{ fontFamily: 'var(--font-montserrat)' }}>
             <div dangerouslySetInnerHTML={createMarkup(blog.content)} />
           </div>
 

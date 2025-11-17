@@ -1128,7 +1128,7 @@ const Header = () => {
       </div>
 
       {/* Search and Action Bar - ONLY DESKTOP */}
-      <div className={`hidden md:block bg-white transition-all duration-300 ease-in-out ${isSecondaryBarHidden ? 'md:-translate-y-5 md:opacity-0 md:pointer-events-none md:max-h-0 md:py-0 md:overflow-hidden' : 'md:translate-y-0 md:opacity-100 md:max-h-40 md:py-3'}`}>
+      <div className={`hidden md:block bg-[#FFF7ED] border-t border-orange-100 transition-all duration-300 ease-in-out ${isSecondaryBarHidden ? 'md:-translate-y-5 md:opacity-0 md:pointer-events-none md:max-h-0 md:py-0 md:overflow-hidden' : 'md:translate-y-0 md:opacity-100 md:max-h-40 md:py-3'}`}>
         <div className="container mx-auto lg:px-4 flex flex-col md:flex-row items-center justify-between">
           <div
             ref={searchRef}

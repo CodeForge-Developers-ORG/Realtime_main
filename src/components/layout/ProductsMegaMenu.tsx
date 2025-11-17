@@ -177,7 +177,11 @@ const ProductsMegaMenu = () => {
                   onMouseEnter={() => setActiveCategory(category.id)}>
                   <div className="font-medium">{category.name}</div>
                   <div className="text-xs opacity-75 mt-1 flex items-center gap-1 text-gray-500">
-                    <span>{category.products.length} products</span>
+                    <span className={` ${
+                    activeCategory === category.id
+                      ? " text-white"
+                      : "text-gray-600"
+                  }`} >{category.products.length} products</span>
                     {category.parent && (
                       <span>• in {category.parent.name}</span>
                     )}

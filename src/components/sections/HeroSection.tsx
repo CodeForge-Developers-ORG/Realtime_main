@@ -89,15 +89,15 @@ const HeroSection = () => {
 
   return (
     <section
-      className="pt-0"
-      style={{ fontFamily: 'var(--font-montserrat)', paddingTop: 0, marginTop: 0 }}
+      className="pt-0 "
+      style={{ fontFamily: 'var(--font-montserrat)', paddingTop: 0, marginTop: 0,marginBlockEnd:0,paddingBlockEnd:0 }}
     >
       <Slider
         autoPlay={true}
         autoPlayInterval={autoPlayInterval}
         showArrows={false}
         showDots={true}
-        className="h-[80vh]"
+        // className="h-[80vh]"
         dotStyle={{
           size: 10,
           activeSize: 12,

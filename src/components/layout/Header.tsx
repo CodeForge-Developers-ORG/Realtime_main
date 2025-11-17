@@ -687,7 +687,7 @@ const Header = () => {
     <header className="w-full bg-white text-gray-800 z-50 sticky top-0 border-b border-gray-200" style={{ fontFamily: 'var(--font-montserrat)' }}>
       {/* Sticky Top Bar */}
       <div className="sticky top-0 bg-white z-50">
-        <div className="container mx-auto px-6 lg:px-8 py-6 flex items-center justify-between">
+        <div className="container mx-auto px-6 lg:px-8 py-3 lg:py-6 flex items-center justify-between">
           <Link
             href="/"
             className="flex items-center transition-transform duration-300 hover:scale-105 z-50">
@@ -696,7 +696,7 @@ const Header = () => {
               alt={branding?.site_title || "Logo"}
               width={180}
               height={60}
-              className="h-auto w-[140px] lg:w-[150px] xl:w-[170px]"
+              className="h-auto w-[120px] md:w-[140px] lg:w-[150px] xl:w-[170px]"
             />
           </Link>
 
@@ -870,7 +870,7 @@ const Header = () => {
         className={`md:hidden fixed top-0 left-0 w-full h-screen bg-white z-40 transform transition-transform duration-300 ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ paddingTop: "100px" }}>
+        style={{ paddingTop: "72px" }}>
         <div className="h-full overflow-y-auto pb-32">
           {/* Search Bar - TOP */}
           <div className="px-4 py-4 border-b border-[#333] hidden">

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import Slider from "@/components/ui/Slider";
 import { useEffect, useState } from "react";
 import axiosClient from "@/services/axiosClient";
 import { useRouter } from "next/navigation";
@@ -74,6 +75,8 @@ const SolutionsSection = () => {
       </div>
     );
   }
+  // Limit desktop grid to two rows (max 6 items on large screens). Tablet/mobile use the slider.
+  const displayedSolutions = solutions.slice(0, 6);
   return (
     <section className="py-[3rem] bg-white">
       <div className="container mx-auto px-6">
@@ -84,50 +87,120 @@ const SolutionsSection = () => {
           <p className="section-subtitle max-w-3xl mx-auto">This is a growing market. Security incidents in schools grab the headlines, Emotions and budget allocations. How to address security concerns leaves room for many opinions and strategies.</p>
         </div>
 
-        {/* Service-design inspired grid */}
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[280px] md:auto-rows-[320px]">
-          {solutions.map((solution, index) => (
-            <div
-              key={solution.id}
-              onClick={() => handleSolutionClick(solution.slug)}
-              className={`group relative overflow-hidden rounded-xl border border-[#4a4a4a] bg-[#3a3a3a] transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer ${
-                index === 0 || index === 3 ? "lg:row-span-2" : ""
-              }`}
-            >
-              {/* Background image (uses API image if available, otherwise gradient) */}
-              {solution.image ? (
-                <Image
-                  src={`${baseUri}${solution.image}`}
-                  alt={solution.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  priority={index < 3}
-                />
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-[#3a3a3a] via-[#333333] to-[#1f1f1f] transition-transform duration-700 group-hover:scale-105" />
-              )}
+        {/* Mobile & tablet slider */}
+        <div className="lg:hidden">
+          <Slider
+            slidesToShow={1}
+            showArrows={false}
+            showDots={true}
+            autoPlay={true}
+            autoPlayInterval={4000}
+            dotStyle={{
+              size: 8,
+              activeSize: 10,
+              color: "#ffffff",
+              activeColor: "#EA5921",
+              position: "outside",
+              containerClass: "bg-transparent"
+            }}
+            className="-mx-2"
+            responsive={[{ breakpoint: 640, slidesToShow: 1, showDots: true }]}
+          >
+            {solutions.map((solution, index) => (
+              <div key={solution.id} className="px-2">
+                <div
+                  onClick={() => handleSolutionClick(solution.slug)}
+                  className="group relative h-64 overflow-hidden rounded-xl border border-[#4a4a4a] bg-[#3a3a3a] transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer"
+                >
+                  {solution.image ? (
+                    <Image
+                      src={`${baseUri}${solution.image}`}
+                      alt={solution.title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      priority={index < 3}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#3a3a3a] via-[#333333] to-[#1f1f1f] transition-transform duration-700 group-hover:scale-105" />
+                  )}
 
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-75" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-75" />
 
-              {/* Content bottom */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-thin text-white mb-2 transition-colors duration-300 group-hover:text-orange-500">
-                  {solution.title}
-                </h3>
-                <p className="text-sm text-gray-300 line-clamp-2">
-                  {solution.short_description}
-                </p>
-
-                <div className="mt-4 inline-flex items-center text-orange-500 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-2">
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  <div className="absolute inset-0 flex flex-col justify-end p-5">
+                    <h3 className="text-xl font-thin text-white mb-2 transition-colors duration-300 group-hover:text-orange-500">
+                      {solution.title}
+                    </h3>
+                    <p className="text-sm text-gray-300 line-clamp-2">
+                      {solution.short_description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </Slider>
+        </div>
+
+        {/* Desktop grid (modern layout, max two rows) */}
+        <div className="hidden lg:grid gap-6 grid-cols-12 auto-rows-[320px]">
+          {displayedSolutions.map((solution, index) => {
+            const spanMap = [
+              "lg:col-span-6", // big tile
+              "lg:col-span-3", // small tile
+              "lg:col-span-3", // small tile
+              "lg:col-span-4", // medium tile
+              "lg:col-span-4", // medium tile
+              "lg:col-span-4", // medium tile
+            ];
+            const spanClass = spanMap[index % spanMap.length];
+            return (
+              <div
+                key={solution.id}
+                onClick={() => handleSolutionClick(solution.slug)}
+                className={`group relative overflow-hidden rounded-2xl border border-[#3f3f3f] bg-[#2f2f2f] transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer ${spanClass}`}
+              >
+                {solution.image ? (
+                  <Image
+                    src={`${baseUri}${solution.image}`}
+                    alt={solution.title}
+                    fill
+                    sizes="(max-width: 1280px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03] group-hover:rotate-[0.2deg]"
+                    priority={index < 3}
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#3a3a3a] via-[#333333] to-[#1f1f1f] transition-transform duration-700 group-hover:scale-[1.03] group-hover:rotate-[0.2deg]" />
+                )}
+
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-75" />
+
+                {/* Category pill */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700 ring-1 ring-orange-200">
+                    {solution.category || "Solution"}
+                  </span>
+                </div>
+
+                {/* Content bottom with glass overlay */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <div className="bg-black/30 backdrop-blur-sm ring-1 ring-white/10 rounded-lg p-4">
+                    <h3 className="text-xl font-semibold text-white mb-2 tracking-wide">
+                      {solution.title}
+                    </h3>
+                    <p className="text-sm text-gray-200 line-clamp-2">
+                      {solution.short_description}
+                    </p>
+                    <div className="mt-3 inline-flex items-center text-orange-500 transition-all duration-300 group-hover:translate-x-1">
+                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* CTA */}

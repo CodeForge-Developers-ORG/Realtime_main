@@ -80,15 +80,15 @@ const BlogSection = () => {
             autoPlayInterval={3000}
             showArrows={false}
             showDots
-            slidesToShow={1.2}
-            responsive={[{ breakpoint: 640, slidesToShow: 2, showDots: false }]}
-            className="pb-8">
+            slidesToShow={1}
+            responsive={[{ breakpoint: 640, slidesToShow: 1, showDots: true }]}
+            className="pb-6">
             {blogs.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden h-60 mx-1"
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden mx-1 flex flex-col min-h-[280px]"
               >
-                <div className="relative h-30 md:h-48">
+                <div className="relative h-28 md:h-48">
                   <Image
                     src={
                       post.featured_image
@@ -101,7 +101,7 @@ const BlogSection = () => {
                     unoptimized
                   />
                 </div>
-                <div className="p-2 md:p-4">
+                <div className="p-2 md:p-4 flex flex-col gap-1 flex-1">
                   <h3 className="text-xs md:text-lg font-light text-black md:mb-2 line-clamp-2">
                     {post.title}
                   </h3>
@@ -120,7 +120,7 @@ const BlogSection = () => {
                   </p>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="mt-2 inline-block bg-orange-500 text-white text-[10px] md:text-xs px-3 py-1.5 rounded-md font-medium hover:bg-orange-600 transition"
+                    className="mt-auto inline-block bg-orange-500 text-white text-[10px] md:text-xs px-3 py-1.5 rounded-md font-medium hover:bg-orange-600 transition"
                     aria-label={`Read more about ${post.title}`}>
                     Read More
                   </Link>

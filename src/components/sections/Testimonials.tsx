@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { getTestimonials } from "@/services/testimonialService";
 import Slider from "@/components/ui/Slider";
+import Image from "next/image";
+import { baseUri } from "@/services/constant";
 
 type Testimonial = {
   id: string;
@@ -92,17 +94,17 @@ export default function TestimonialCarousel() {
               slidesToShow={4}
               className="h-full"
               responsive={[
-                { breakpoint: 1024, slidesToShow: 3, showDots: false },
-                { breakpoint: 768, slidesToShow: 2, showDots: false },
-                { breakpoint: 480, slidesToShow: 1, showDots: false },
+                { breakpoint: 1024, slidesToShow: 3, showDots: true },
+                { breakpoint: 768, slidesToShow: 2, showDots: true },
+                { breakpoint: 480, slidesToShow: 1, showDots: true },
               ]}
               dotStyle={{
                 position: 'outside',
-                containerClass: 'px-0 py-0',
+                containerClass: 'mt-3 bg-transparent px-0 py-0',
                 size: 8,
                 activeSize: 10,
                 color: '#e5e7eb',
-                activeColor: '#EA5921'
+                activeColor: '#FF6000',
               }}
             >
               {ordered.map((t) => (
@@ -123,8 +125,20 @@ export default function TestimonialCarousel() {
                     </p>
 
                     <div className="flex items-center gap-3 mt-6 md:mt-auto">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-orange-600 text-white flex items-center justify-center font-semibold">
-                        {getInitials(t.name)}
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-orange-100 flex items-center justify-center">
+                        {t.image ? (
+                          <Image
+                            src={`${baseUri}${t.image}`}
+                            alt={t.name ? `${t.name} photo` : "Testimonial"}
+                            width={48}
+                            height={48}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="bg-orange-600 text-white w-full h-full flex items-center justify-center font-semibold">
+                            {getInitials(t.name)}
+                          </span>
+                        )}
                       </div>
                       <div>
                         <p className="text-slate-900 font-medium text-sm md:text-base">{t.name}</p>

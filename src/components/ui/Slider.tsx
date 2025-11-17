@@ -21,6 +21,7 @@ interface SliderProps {
     activeColor?: string;
     position?: 'inside' | 'outside';
     containerClass?: string;
+    offsetBottom?: number;
   };
 }
 
@@ -115,10 +116,10 @@ const Slider: React.FC<SliderProps> = ({
     if (isAutoPlaying && totalSlides > 1) {
       interval = setInterval(() => {
         setCurrentSlide((prev) => {
-          const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
-          // Advance by a full group to match dots/groups
+          const groups = Math.ceil(totalSlides / currentSlidesToShow);
+          const maxStart = Math.max(0, (groups - 1) * currentSlidesToShow);
           const next = prev + currentSlidesToShow;
-          return next > maxSlide ? 0 : next;
+          return next > maxStart ? 0 : next;
         });
       }, autoPlayInterval);
     }
@@ -131,23 +132,26 @@ const Slider: React.FC<SliderProps> = ({
   // Navigation functions
   const goToNextSlide = () => {
     setCurrentSlide((prev) => {
-      const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
+      const groups = Math.ceil(totalSlides / currentSlidesToShow);
+      const maxStart = Math.max(0, (groups - 1) * currentSlidesToShow);
       const next = prev + currentSlidesToShow;
-      return next > maxSlide ? 0 : next;
+      return next > maxStart ? 0 : next;
     });
   };
 
   const goToPrevSlide = () => {
     setCurrentSlide((prev) => {
-      const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
+      const groups = Math.ceil(totalSlides / currentSlidesToShow);
+      const maxStart = Math.max(0, (groups - 1) * currentSlidesToShow);
       const next = prev - currentSlidesToShow;
-      return prev === 0 ? maxSlide : Math.max(0, next);
+      return prev === 0 ? maxStart : Math.max(0, next);
     });
   };
 
   const goToSlide = (index: number) => {
-    const maxSlide = Math.max(0, totalSlides - currentSlidesToShow);
-    setCurrentSlide(Math.min(index, maxSlide));
+    const groups = Math.ceil(totalSlides / currentSlidesToShow);
+    const maxStart = Math.max(0, (groups - 1) * currentSlidesToShow);
+    setCurrentSlide(Math.min(index, maxStart));
   };
 
   // Pause auto-play on hover
@@ -323,9 +327,32 @@ const Slider: React.FC<SliderProps> = ({
       )}
 
       {/* Dots Navigation */}
-      {currentShowDots && totalSlides > 1 && (
+      {currentShowDots && totalSlides > 1 && dotStyle.position !== 'outside' && (
         <div className="absolute left-0 right-0 flex justify-center">
-          <div className={`${dotStyle.position === 'outside' ? 'bottom-[-20px]' : 'bottom-4'} absolute ${dotStyle.containerClass ?? 'bg-black/20 px-4 py-[5px] border rounded-full'} flex gap-2 items-center`}>
+          <div
+            className={`absolute ${dotStyle.containerClass ?? 'bg-black/20 px-4 py-[5px] border rounded-full'} flex gap-2 items-center`}
+            style={{ bottom: dotStyle.offsetBottom ?? 16 }}
+          >
+            {Array.from({ length: Math.ceil(totalSlides / currentSlidesToShow) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index * currentSlidesToShow)}
+                className={`rounded-full transition-all duration-300`}
+                style={{
+                  height: `${Math.floor(currentSlide / currentSlidesToShow) === index ? dotStyle.activeSize : dotStyle.size}px`,
+                  width: `${Math.floor(currentSlide / currentSlidesToShow) === index ? dotStyle.activeSize : dotStyle.size}px`,
+                  backgroundColor: Math.floor(currentSlide / currentSlidesToShow) === index ? dotStyle.activeColor : dotStyle.color
+                }}
+                aria-label={`Go to slide group ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {currentShowDots && totalSlides > 1 && dotStyle.position === 'outside' && (
+        <div className="flex justify-center">
+          <div className={`${dotStyle.containerClass ?? 'px-4 py-[5px]'} flex gap-2 items-center mt-4`}>
             {Array.from({ length: Math.ceil(totalSlides / currentSlidesToShow) }).map((_, index) => (
               <button
                 key={index}

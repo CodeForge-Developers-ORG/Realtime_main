@@ -42,7 +42,7 @@ export default function GlobalPreloader() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#FFE8DF]/80 backdrop-blur-sm">
       {/* Preloader animation from globals.css (.loader and spans) */}
       <div className="loader">
         <span />

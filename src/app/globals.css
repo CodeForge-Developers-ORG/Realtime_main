@@ -96,7 +96,7 @@ section {
     transform: rotate(0);
   }
   55% {
-    background-color: #F37272;
+    background-color: #EA5921;
   }
   100% {
     transform: rotate(90deg);
@@ -108,7 +108,7 @@ section {
     transform: rotate(0);
   }
   55% {
-    background-color: #F37272;
+    background-color: #EA5921;
   }
   100% {
     transform: rotate(-90deg);
@@ -130,7 +130,7 @@ section {
   display: block;
   width: 40px;
   height: 40px;
-  background-color: #EE4040;
+  background-color: #FF5C00;
   animation: loaderBlock 1.2s infinite ease-in-out both;
 }
 

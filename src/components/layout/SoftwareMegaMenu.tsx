@@ -103,7 +103,9 @@ const SoftwareMegaMenu = () => {
 
   return (
     <>
-      <div className="absolute md:-left-0 lg:left-0 mt-3 w-[100%] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300" style={{ fontFamily: 'var(--font-montserrat)' }}>
+      <div
+        className="absolute md:-left-0 lg:left-0 mt-3 w-[100%] bg-white border border-gray-200 rounded-xl shadow-2xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300"
+        style={{ fontFamily: "var(--font-montserrat)" }}>
         <div className="p-4">
           <div className="flex gap-4">
             {/* Left Sidebar - Software List */}
@@ -128,7 +130,14 @@ const SoftwareMegaMenu = () => {
                         <span className="text-green-600">Free</span>
                       )}
                       {item.main_category && (
-                        <span>• {item.main_category}</span>
+                        <span
+                          className={` ${
+                            activeSoftware === item.id
+                              ? " text-white"
+                              : "text-gray-600"
+                          }`}>
+                          • {item.main_category}
+                        </span>
                       )}
                     </div>
                   </Link>
@@ -334,17 +343,17 @@ const SoftwareMegaMenu = () => {
                             </svg>
                             Tags
                           </h4>
-                           <div className="flex flex-wrap gap-1">
-                             {activeSoftwareData.tags.map((tag, index) => (
-                               <span
+                          <div className="flex flex-wrap gap-1">
+                            {activeSoftwareData.tags.map((tag, index) => (
+                              <span
                                 key={index}
                                 className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded border border-gray-200">
-                                 {tag}
-                               </span>
-                             ))}
-                           </div>
-                         </div>
-                       )}
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                   </div>
 
                   {/* Download/External Link */}

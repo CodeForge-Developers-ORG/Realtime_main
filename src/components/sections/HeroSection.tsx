@@ -89,8 +89,8 @@ const HeroSection = () => {
 
   return (
     <section
-      className="pt-0"
-      style={{ fontFamily: 'var(--font-montserrat)', paddingTop: 0, marginTop: 0 }}
+      className="pt-0 "
+      style={{ fontFamily: 'var(--font-montserrat)', paddingTop: 0, marginTop: 0,marginBlockEnd:0,paddingBlockEnd:0 }}
     >
       <Slider
         autoPlay={true}

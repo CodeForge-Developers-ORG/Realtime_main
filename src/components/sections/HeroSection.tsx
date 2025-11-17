@@ -97,7 +97,7 @@ const HeroSection = () => {
         autoPlayInterval={autoPlayInterval}
         showArrows={false}
         showDots={true}
-        className="h-[80vh]"
+        // className="h-[80vh]"
         dotStyle={{
           size: 10,
           activeSize: 12,

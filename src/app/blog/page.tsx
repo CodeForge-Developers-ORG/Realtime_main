@@ -14,12 +14,12 @@ const BlogPage = async () => {
     <Layout>
       <AdvancedBreadcrumb items={breadcrumbItems} />
       <Title title="Blog" />
-      <div className="min-h-screen bg-gray-50 py-8">
+      <section className="bg-gray-50 py-8" style={{ fontFamily: 'var(--font-montserrat)' }}>
         <div className="container mx-auto px-4">
           {/* Blog List Component */}
           <BlogList />
         </div>
-      </div>
+      </section>
     </Layout>
   );
 };

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ArrowDownToLine } from "lucide-react";
 import CTAButton from "@/components/common/CTAButton";
-import fileDownload from "js-file-download";
 import Swal from "sweetalert2";
 import { baseUri } from "@/services/constant";
 
@@ -29,41 +28,15 @@ export default function DownloadCatalogueButton({
     try {
       setIsDownloading(true);
 
-      // ✅ Clean URL (avoid double slashes)
-      const pdfUrl = `${baseUri.replace(/\/+$/, "")}/${catalogueDoc.replace(/^\/+/, "")}`;
+      // Use same-origin proxy route to force direct download
+      const apiUrl = `/api/catalogue?doc=${encodeURIComponent(
+        catalogueDoc.replace(/^\/+/, "")
+      )}&title=${encodeURIComponent(productTitle)}`;
 
-      // Download start alert
-      Swal.fire({
-        title: "Downloading...",
-        text: "Please wait while your catalogue is being downloaded.",
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-
-      const res = await fetch(pdfUrl, { cache: "no-cache" });
-      if (!res.ok) throw new Error("Failed to download catalogue");
-
-      const blob = await res.blob();
-      const filename =
-        catalogueDoc.split("/").pop() ||
-        `${productTitle.replace(/\s+/g, "_")}_catalogue.pdf`;
-
-      fileDownload(blob, filename);
-
-      // ✅ Success Alert
-      Swal.fire({
-        icon: "success",
-        title: "Download Complete",
-        text: "Your catalogue has been downloaded successfully!",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      // Navigating to the API route triggers browser download via Content-Disposition
+      window.location.href = apiUrl;
     } catch (err) {
       console.error(err);
-      // ❌ Error Alert
       Swal.fire({
         icon: "error",
         title: "Download Failed",

@@ -71,10 +71,12 @@ export default function TestimonialCarousel() {
       style={{ fontFamily: "var(--font-montserrat)" }}
     >
       <div className="max-w-7xl mx-auto">
-        <h2 className="section-title text-center">Trusted by Industry Leaders</h2>
-        <p className="text-center text-slate-600 mt-2 md:mt-3">
-          See what our customers say about their experience with TimeWatch
-        </p>
+        <div className="text-center">
+          <h2 className="section-title mx-auto">Trusted by Industry Leaders</h2>
+          <p className="text-center text-slate-600 mt-2 md:mt-3">
+            See what our customers say about their experience with TimeWatch
+          </p>
+        </div>
 
         {loading ? (
           <div className="flex justify-center items-center h-40 text-gray-500 mt-8">

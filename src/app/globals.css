@@ -55,8 +55,22 @@ body {
   font-weight: 700;
   font-size: 30px;
   line-height: 36px;
-  color: #374151; /* gray-700: dark/mid gray */
   text-align: center;
+  color: #374151; /* gray-700 */
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 96px;
+  background-color: #f97316; /* Tailwind orange-500 */
+  border-radius: 9999px;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-subtitle {
@@ -70,6 +84,11 @@ body {
 /* Variant: Left-aligned section title for inline headings */
 .section-title--left {
   text-align: left !important;
+}
+
+.section-title--left::after {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* Enforce Montserrat across all section content and consistent spacing */

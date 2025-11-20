@@ -182,15 +182,18 @@ const Footer = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex-col  sm:flex-row flex justify-center sm:justify-between mt-10 md:mt-16">
-          <Image
-            src={branding.footer_logo_url}
-            alt="Footer Logo"
-            width={200}
-            height={100}
-            className="h-12 md:h-14"
-            unoptimized
-          />
+        <div className="flex-col sm:flex-row flex justify-center sm:justify-between mt-10 md:mt-16">
+          {/* Ensure logo never stretches: fixed container with object-contain */}
+          <div className="relative h-12 md:h-14 w-[160px] md:w-[200px]">
+            <Image
+              src={branding.footer_logo_url}
+              alt="Footer Logo"
+              fill
+              className="object-contain"
+              sizes="(min-width: 768px) 200px, 160px"
+              unoptimized
+            />
+          </div>
 
           <form onSubmit={handleSubmitNewsLatter} className="flex flex-row items-center gap-3 mt-6 md:mt-0 max-w-md">
         <input

@@ -37,7 +37,7 @@ const TestimonialsSection = () => {
   return (
     <section className="py-5 md:py-14 lg:py-0 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="section-title mb-3 md:mb-20 text-center">What our partners Say</h2>
+        <h2 className="section-title mb-3 md:mb-20 text-center mx-auto">What our partners Say</h2>
 
         <div className="pb-2 md:pb-10">
           <Slider

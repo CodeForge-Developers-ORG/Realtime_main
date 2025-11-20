@@ -7,6 +7,7 @@ import SpotlightSection from "@/components/sections/SpotlightSection";
 import ServicesSections from "@/components/sections/ServicesSections";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import TestimonialCarousel from "@/components/sections/Testimonials";
+import StatsCounter from "@/components/sections/StatsCounter";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <SpotlightSection />
         <ServicesSections />
         <FeaturesSection />
+        <StatsCounter />
         <SolutionsSection />
         <TestimonialCarousel />
         <BlogSection />

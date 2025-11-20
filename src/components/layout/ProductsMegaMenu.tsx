@@ -34,6 +34,8 @@ type Category = {
     slug: string;
     id: string;
   } | null;
+  // Optional sort order if provided by API
+  sort_order?: number;
   products: Product[];
 };
 
@@ -113,10 +115,51 @@ const ProductsMegaMenu = () => {
             categoriesMap.get(category.id).products.push(product);
           });
 
-          const categoriesArray = Array.from(categoriesMap.values());
+          let categoriesArray: Category[] = Array.from(categoriesMap.values());
+
+          // Try to fetch category sort orders from API and sort accordingly
+          try {
+            const catRes = await axiosClient.get("/content/categories?all=true");
+            const catPayload = catRes.data;
+            if (catPayload?.success && Array.isArray(catPayload?.data)) {
+              const orderMap = new Map<string, number>();
+              catPayload.data.forEach((cat: any) => {
+                const id = String(cat.id);
+                const orderVal = Number(cat.sort_order ?? Number.POSITIVE_INFINITY);
+                orderMap.set(id, orderVal);
+              });
+
+              // Attach sort_order if known
+              categoriesArray = categoriesArray.map((c) => ({
+                ...c,
+                sort_order: orderMap.get(String(c.id)) ?? c.sort_order,
+              }));
+
+              // Sort by sort_order ascending, fallback to name
+              categoriesArray.sort((a, b) => {
+                const normalize = (v: unknown) => {
+                  const n = Number(v);
+                  // Place 0 at the end; valid positive numbers come first
+                  if (!isFinite(n) || n === 0) return Number.POSITIVE_INFINITY;
+                  return n;
+                };
+                const sa = normalize(a?.sort_order);
+                const sb = normalize(b?.sort_order);
+                if (sa !== sb) return sa - sb;
+                return String(a.name).localeCompare(String(b.name));
+              });
+            } else {
+              // Fallback alphabetical sort by name when API not available
+              categoriesArray.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+            }
+          } catch {
+            // Fallback alphabetical sort by name if categories endpoint fails
+            categoriesArray.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+          }
+
           setCategories(categoriesArray);
 
-          // Set first category as active
+          // Set first category as active after sorting
           if (categoriesArray.length > 0) {
             setActiveCategory(categoriesArray[0].id);
           }

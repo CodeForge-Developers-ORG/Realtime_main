@@ -9,6 +9,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 export default function GlobalPreloader() {
   const pathname = usePathname();
   const search = useSearchParams();
+  const searchString = search?.toString();
   const [visible, setVisible] = useState(false);
   const hideTimer = useRef<NodeJS.Timeout | null>(null);
 
@@ -24,14 +25,12 @@ export default function GlobalPreloader() {
   // Show once on initial hydration
   useEffect(() => {
     trigger(800);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Show on pathname or search param changes
   useEffect(() => {
     trigger();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, search?.toString()]);
+  }, [pathname, searchString]);
 
   useEffect(() => {
     return () => {

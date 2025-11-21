@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
         "Cache-Control": "public, max-age=60", // small cache
       },
     });
-  } catch (err) {
+  } catch {
     return new NextResponse("Failed to fetch upstream content", { status: 500 });
   }
 }

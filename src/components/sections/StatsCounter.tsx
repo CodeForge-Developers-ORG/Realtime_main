@@ -7,6 +7,12 @@ type StatItem = {
   suffix?: string;
 };
 
+type CounterApiItem = {
+  label?: string;
+  key?: string;
+  value?: string | number;
+};
+
 const defaultStats: StatItem[] = [
   { label: "Current Clients", value: 180, suffix: "+" },
   { label: "Years Of Experience", value: 10, suffix: "+" },
@@ -54,7 +60,7 @@ export default function StatsCounter({
         const res = await fetch("https://app.realtimebiometrics.net/api/site/counters");
         const json = await res.json();
         const list = Array.isArray(json?.data) ? json.data : [];
-        const mapped: StatItem[] = list.map((item: any) => {
+        const mapped: StatItem[] = list.map((item: CounterApiItem) => {
           const raw = String(item?.value ?? "");
           const numMatch = raw.match(/\d+/);
           const num = numMatch ? parseInt(numMatch[0], 10) : 0;

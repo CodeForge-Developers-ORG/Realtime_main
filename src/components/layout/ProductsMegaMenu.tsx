@@ -39,6 +39,12 @@ type Category = {
   products: Product[];
 };
 
+// Minimal shape returned by categories endpoint used for sorting
+type CategorySummary = {
+  id: string | number;
+  sort_order?: number;
+};
+
 type ApiResponse = {
   success: boolean;
   data: Product[];
@@ -92,7 +98,7 @@ const ProductsMegaMenu = () => {
           if (pagePromises.length > 0) {
             const responses = await Promise.all(pagePromises);
             
-            responses.forEach((response, index) => {
+            responses.forEach((response) => {
               const pageData: ApiResponse = response.data;
               if (pageData.success) {
                 allProducts = [...allProducts, ...pageData.data];
@@ -120,10 +126,10 @@ const ProductsMegaMenu = () => {
           // Try to fetch category sort orders from API and sort accordingly
           try {
             const catRes = await axiosClient.get("/content/categories?all=true");
-            const catPayload = catRes.data;
+            const catPayload = catRes.data as { success: boolean; data: CategorySummary[] };
             if (catPayload?.success && Array.isArray(catPayload?.data)) {
               const orderMap = new Map<string, number>();
-              catPayload.data.forEach((cat: any) => {
+              catPayload.data.forEach((cat: CategorySummary) => {
                 const id = String(cat.id);
                 const orderVal = Number(cat.sort_order ?? Number.POSITIVE_INFINITY);
                 orderMap.set(id, orderVal);

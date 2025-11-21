@@ -313,6 +313,8 @@ const ContactSection = () => {
               {/* COUNTRY + STATE */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Select
+                  instanceId="country-select"
+                  inputId="country-select-input"
                   options={countries.map((c) => ({
                     label: c.name,
                     value: c.code,
@@ -329,6 +331,8 @@ const ContactSection = () => {
                 />
 
                 <Select
+                  instanceId="state-select"
+                  inputId="state-select-input"
                   options={states.map((s) => ({
                     label: s.name,
                     value: s.code,

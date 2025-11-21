@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ArrowDownToLine } from "lucide-react";
 import CTAButton from "@/components/common/CTAButton";
 import Swal from "sweetalert2";
-import { baseUri } from "@/services/constant";
 
 export default function DownloadCatalogueButton({
   productTitle,

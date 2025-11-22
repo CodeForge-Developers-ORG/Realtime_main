@@ -29,6 +29,12 @@ const Footer = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [email , setEmail] = useState<string>('')
 
+  const normalizeHref = (url: string) => {
+    const u = url || "";
+    if (/^(https?:|mailto:|tel:)/i.test(u)) return u;
+    return u.startsWith("/") ? u : `/${u}`;
+  };
+
   useEffect(() => {
     const fetchFooter = async () => {
       try {
@@ -144,8 +150,13 @@ const Footer = () => {
               {Array.isArray(quick_links.support) && quick_links.support.length > 0 ? (
                 quick_links.support.map((link) => {
                   const isApiRef = link.title?.toLowerCase() === "api reference";
+                  const isContactSupport = link.title?.toLowerCase() === "contact support";
                   const displayTitle = isApiRef ? "FAQs" : link.title;
-                  const displayUrl = isApiRef ? "/faqs" : link.url;
+                  const displayUrl = isApiRef
+                    ? "/faqs"
+                    : isContactSupport
+                    ? "/contact"
+                    : normalizeHref(link.url);
                   return (
                     <li key={link.url}>
                       <Link href={displayUrl} className="text-white/55 hover:text-white text-sm">

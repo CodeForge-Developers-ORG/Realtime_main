@@ -88,7 +88,7 @@ export default function TestimonialCarousel() {
         <div className="text-center">
           <h2 className="section-title mx-auto">Trusted by Industry Leaders</h2>
           <p className="text-center text-slate-600 mt-2 md:mt-3">
-            See what our customers say about their experience with TimeWatch
+            See what our customers say about their experience with Realtime Biometrics
           </p>
         </div>
 

@@ -23,3 +23,9 @@ export const getProductByCategorySlug = async (slug: string) => {
   const response = await axiosClient.get(`/content/categories?slug=${slug}`);
   return response.data;
 };
+
+// Fetch all categories with sort order info
+export const getAllCategoriesWithOrder = async () => {
+  const response = await axiosClient.get(`/content/categories?all=1`);
+  return response.data;
+};

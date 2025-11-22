@@ -137,6 +137,33 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Support */}
+          <div className="ml-[50px] md:ml-0">
+            <h3 className="text-lg uppercase mb-4 font-medium">SUPPORT</h3>
+            <ul className="space-y-2">
+              {Array.isArray(quick_links.support) && quick_links.support.length > 0 ? (
+                quick_links.support.map((link) => {
+                  const isApiRef = link.title?.toLowerCase() === "api reference";
+                  const displayTitle = isApiRef ? "FAQs" : link.title;
+                  const displayUrl = isApiRef ? "/faqs" : link.url;
+                  return (
+                    <li key={link.url}>
+                      <Link href={displayUrl} className="text-white/55 hover:text-white text-sm">
+                        {displayTitle}
+                      </Link>
+                    </li>
+                  );
+                })
+              ) : (
+                <li>
+                  <Link href="/faqs" className="text-white/55 hover:text-white text-sm">
+                    FAQs
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+
           {/* Legal */}
           <div className="ml-[50px] md:ml-0" >
             <h3 className="text-lg uppercase mb-4 font-medium">LEGAL</h3>

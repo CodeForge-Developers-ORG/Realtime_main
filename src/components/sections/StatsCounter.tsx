@@ -90,26 +90,47 @@ export default function StatsCounter({
     if (!visible || animated) return;
     setAnimated(true);
 
-    const duration = durationMs; // ms, slower for a more relaxed count-up
-    const start = performance.now();
-    const startValues = dataStats.map(() => 0);
-    const endValues = dataStats.map((s) => s.value);
+    const startTime = performance.now();
+    const targets = dataStats.map((s) => s.value);
 
-    const step = (now: number) => {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-      const next = endValues.map((end, i) => Math.floor(startValues[i] + (end - startValues[i]) * eased));
-      setDisplayValues(next);
-      if (progress < 1) requestAnimationFrame(step);
-    };
+    // Scale duration per counter so large numbers animate with smaller visual jumps
+    const baseDuration = Math.max(1200, durationMs); // ensure minimum duration
+    const durations = dataStats.map((s) => {
+      const v = Math.max(0, s.value);
+      // Scale based on order of magnitude (log), capped for sanity
+      const factor = Math.min(3, 1 + Math.log10(v + 1) * 0.7);
+      return baseDuration * factor;
+    });
 
-    // Respect reduced motion
+    // Stagger starts for nicer rhythm
+    const offsets = dataStats.map((_, idx) => idx * 150);
+
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
-      setDisplayValues(endValues);
-    } else {
-      requestAnimationFrame(step);
+      setDisplayValues(targets);
+      return;
     }
+
+    const step = (now: number) => {
+      let allDone = true;
+      const next = targets.map((target, i) => {
+        const elapsed = now - startTime - offsets[i];
+        if (elapsed <= 0) {
+          allDone = false;
+          return 0;
+        }
+        const progress = Math.min(1, elapsed / durations[i]);
+        if (progress < 1) allDone = false;
+        // easeOutCubic for smooth finish
+        const eased = 1 - Math.pow(1 - progress, 3);
+        return Math.round(target * eased);
+      });
+
+      setDisplayValues(next);
+      if (!allDone) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
   }, [visible, animated, dataStats, durationMs]);
 
   return (

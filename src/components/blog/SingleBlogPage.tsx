@@ -107,10 +107,7 @@ const SingleBlogPage: React.FC<SingleBlogPageProps> = ({ blog }) => {
             </div>
           ) : null}
 
-          {/* Excerpt */}
-          {blog.excerpt ? (
-            <p className="text-xl text-gray-700 mb-6" style={{ fontFamily: 'var(--font-montserrat)' }}>{blog.excerpt}</p>
-          ) : null}
+          {/* Excerpt removed from detail page */}
 
           {/* Content */}
           <div className="prose prose-lg text-justify max-w-none mt-6 prose-headings:text-gray-900 prose-a:text-orange-600 prose-strong:text-gray-900 prose-blockquote:border-l-orange-400 prose-img:rounded-lg" style={{ fontFamily: 'var(--font-montserrat)' }}>

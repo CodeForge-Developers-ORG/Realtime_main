@@ -42,7 +42,16 @@ export default function TestimonialCarousel() {
   }, []);
 
   const ordered = useMemo(() => {
-    return [...testimonials]
+    // Consider only active testimonials
+    const active = testimonials.filter((t) => {
+      const s = t?.status;
+      if (typeof s === "boolean") return s;
+      if (typeof s === "number") return s === 1;
+      if (typeof s === "string") return ["1", "true", "active"].includes(s.toLowerCase());
+      return false;
+    });
+
+    return [...active]
       .sort((a, b) => {
         // featured first
         const f = Number(b?.featured) - Number(a?.featured);
@@ -65,6 +74,11 @@ export default function TestimonialCarousel() {
     return (first + last).toUpperCase();
   }
 
+  // If not loading and there are no active testimonials, do not render the section
+  if (!loading && (error || ordered.length === 0)) {
+    return null;
+  }
+
   return (
     <section
       className="bg-white py-10 md:py-16 lg:py-20 px-4 md:px-12 lg:px-20"
@@ -82,10 +96,6 @@ export default function TestimonialCarousel() {
           <div className="flex justify-center items-center h-40 text-gray-500 mt-8">
             Loading testimonials...
           </div>
-        ) : error ? (
-          <div className="text-center text-red-500 mt-8">{error}</div>
-        ) : ordered.length === 0 ? (
-          <div className="text-center text-gray-500 mt-8">No testimonials available</div>
         ) : (
           <div className="mt-8">
             <Slider

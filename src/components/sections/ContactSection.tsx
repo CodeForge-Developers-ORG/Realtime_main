@@ -233,15 +233,14 @@ const ContactSection = () => {
     <section className="mx-auto not-first:py-25 lg:py-0 bg-white">
       <div className="container max-w-6xl mx-auto px-4">
         <div className="md:mb-6 text-[#1E1410] text-center">
-          <h2 className="section-title mb-4">Contact Us</h2>
+          <h2 className="section-title mb-1">Contact Us</h2>
           <p className="section-subtitle uppercase max-w-4xl mx-auto">CONTACT US OR GIVE US A CALL TO DISCOVER HOW WE CAN HELP.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Left Column - Contact Form */}
-          <div>
-            <h3 className="text-md md:text-[30px] font-[300] mb-2 md:mb-6 mt-4 md:mt-10 text-[#1E1410]">Send Us a Message</h3>
-
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8">
+            <h3 className="text-md md:text-[26px] font-[400] mb-4 md:mb-6 text-[#1E1410]">Send Us a Message</h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
 
@@ -374,7 +373,7 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition"
+                className="bg-orange-500 text-white px-6 py-3 rounded-md shadow-md hover:shadow-lg hover:bg-orange-600 transition"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>
@@ -382,7 +381,7 @@ const ContactSection = () => {
           </div>
 
           {/* Right Column - Contact Information */}
-          <div>
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 md:p-8">
             <div className="mb-4 mt-1 md:mt-15">
               <h4 className="text-sm md:text-[16px] uppercase font-medium mb-4 text-[#1E1410]">CORPORATE HEADQUARTERS - DELHI, INDIA</h4>
 
@@ -418,7 +417,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="relative h-40 sm:h-81 rounded-lg overflow-hidden">
+            <div className="relative h-40 sm:h-81 rounded-lg overflow-hidden shadow-md">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.2676026374565!2d77.28099627550043!3d28.621740775670638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce350d82a5555%3A0xded517f01ea7b98f!2sRealtime%20Biometrics!5e0!3m2!1sen!2sin!4v1760680350707!5m2!1sen!2sin" width="100%" height="100%" style={{ border: 0 }} loading="lazy" ></iframe>
             </div>
           </div>

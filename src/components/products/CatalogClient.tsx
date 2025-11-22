@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import SectionList from "./SectionList";
 import Sidebar from "./Sidebar";
-import { getProducts } from "@/services/productService";
+import { getProducts, getAllCategoriesWithOrder } from "@/services/productService";
 
 export type Product = {
   slug: string;
@@ -21,6 +21,7 @@ export type Category = {
 
 export default function CatalogClient() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categoryOrderMap, setCategoryOrderMap] = useState<Record<string, number>>({});
   const [activeIndex, setActiveIndex] = useState(0);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -29,6 +30,29 @@ export default function CatalogClient() {
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastScrollY = useRef(0);
+
+  // Fetch category sort order map
+  useEffect(() => {
+    const fetchCategoriesOrder = async () => {
+      try {
+        const res = await getAllCategoriesWithOrder();
+        const list = Array.isArray(res?.data) ? res.data : Array.isArray(res) ? res : [];
+        const map: Record<string, number> = {};
+        list.forEach((c: any) => {
+          const name = (c?.name || c?.title || "").trim();
+          const slug = (c?.slug || "").trim();
+          const orderRaw = c?.order ?? c?.sort_order ?? c?.sort ?? 0;
+          const order = typeof orderRaw === "string" ? parseInt(orderRaw, 10) : Number(orderRaw) || 0;
+          if (name) map[name] = order;
+          if (slug) map[slug] = order;
+        });
+        setCategoryOrderMap(map);
+      } catch (err) {
+        console.error("Error fetching category order:", err);
+      }
+    };
+    fetchCategoriesOrder();
+  }, []);
 
   // Load products (paginated)
   const loadProducts = async (pageNum: number) => {
@@ -114,12 +138,22 @@ export default function CatalogClient() {
     }, {} as Record<string, Category>)
   );
 
+  // Sort categories by order: ascending, with 0 at the end
+  const sortedCategories: Category[] = [...groupedCategories].sort((a, b) => {
+    const ao = categoryOrderMap[a.title] ?? 0;
+    const bo = categoryOrderMap[b.title] ?? 0;
+    if (ao === 0 && bo === 0) return a.title.localeCompare(b.title);
+    if (ao === 0) return 1;
+    if (bo === 0) return -1;
+    return ao - bo;
+  });
+
   return (
-    <div className="flex gap-6 bg-white p-4 md:p-8 lg:p-[100px]">
+    <div className="flex gap-6 bg-white mt-0 pt-0 px-4 pb-4 md:pt-0 md:px-8 md:pb-8 lg:pt-0 lg:px-[100px] lg:pb-[100px]">
       {/* Sidebar */}
       <aside className="w-64 hidden lg:block sticky top-24 h-[calc(100vh-100px)] overflow-y-auto">
         <Sidebar
-          categories={groupedCategories}
+          categories={sortedCategories}
           activeIndex={activeIndex}
           onSelect={setActiveIndex}
         />
@@ -128,7 +162,7 @@ export default function CatalogClient() {
       {/* SectionList */}
       <section className="flex-1">
         <SectionList
-          categories={groupedCategories}
+          categories={sortedCategories}
           activeIndex={activeIndex}
           onActiveChange={setActiveIndex}
         />

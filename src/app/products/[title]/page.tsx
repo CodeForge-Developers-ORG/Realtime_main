@@ -6,6 +6,7 @@ import SpecsTable from "@/components/products/productdetail/SpecsTable";
 import Testimonials from "@/components/sections/Testimonials";
 import DownloadCatalogueButton from "./DownloadCatalogueButton";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Fingerprint,
   KeyRound,
@@ -39,6 +40,7 @@ type ProductCategory = {
   meta_title?: string;
   meta_description?: string;
   catalogue_document?: string;
+  faqs?: Array<{ question?: string; answer?: string }> | string | null;
 };
 
 // ----------------------- METADATA GENERATION ----------------------
@@ -182,7 +184,7 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
                 </div>
               )}
 
-              {/* Buttons */}
+              {/* Action Buttons: Enquiry, Download, WhatsApp in one row */}
               <div className="flex flex-wrap items-center gap-3">
                 <ProductEnquiryButton />
                 {product.catalogue_document && (
@@ -191,6 +193,20 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
                     catalogueDoc={product.catalogue_document}
                   />
                 )}
+                <Link
+                  href="https://wa.me/918860886086"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 text-[12px] lg:text-[16px] px-2 lg:px-4 py-2 rounded-md font-[400] shadow-sm transition cursor-pointer bg-green-500 text-white hover:bg-green-600"
+                >
+                  <Image
+                    src="/watsapp.png"
+                    alt="WhatsApp"
+                    width={20}
+                    height={20}
+                    className="h-5 w-5 object-contain"
+                  />
+                  WhatsApp
+                </Link>
               </div>
 
               {/* Features */}
@@ -215,31 +231,54 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
                 </div>
               )}
 
-              {/* Downloads */}
-              {product.catalogue_document && (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-                  <h3 className="text-gray-900 font-semibold mb-3">Download</h3>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <DownloadCatalogueButton
-                      productTitle={product.title}
-                      catalogueDoc={product.catalogue_document}
-                    />
-                    <Link
-                      href="https://wa.me/918860886086"
-                      target="_blank"
-                      className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 hover:border-orange-300 hover:text-orange-700 transition-colors"
-                    >
-                      Enquire on Whatsapp
-                    </Link>
-                  </div>
-                </div>
-              )}
+              {/* Downloads section removed to avoid duplicate download button */}
 
               {/* Specs */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
                 <h3 className="text-gray-900 font-semibold mb-4">Product Specifications</h3>
                 <SpecsTable specs={product.specifications} />
               </div>
+
+              {/* FAQs */}
+              {(() => {
+                const faqList = Array.isArray(product?.faqs) ? product?.faqs : [];
+                const faqHtml = typeof product?.faqs === "string" ? product?.faqs : null;
+                const hasFaqs = (faqList && faqList.length > 0) || Boolean(faqHtml);
+                if (!hasFaqs) return null;
+                return (
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+                    <h3 className="text-gray-900 font-semibold">Frequently Asked Questions</h3>
+                    <p className="text-sm text-gray-600 mb-4">Quick answers about {product.title} to help you decide.</p>
+                    {/* Render structured FAQs if available */}
+                    {faqList && faqList.length > 0 ? (
+                      <div className="space-y-3">
+                        {faqList.map((faq, idx) => (
+                          <details key={idx} className="group border border-gray-200 rounded-lg px-4 py-3">
+                            <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
+                              <span className="text-sm md:text-base font-medium text-gray-900">
+                                {faq.question || `Question ${idx + 1}`}
+                              </span>
+                              <span className="text-gray-500 group-open:hidden">+</span>
+                              <span className="text-gray-500 hidden group-open:inline">−</span>
+                            </summary>
+                            <div className="mt-2 text-sm text-gray-700">
+                              {(faq.answer || "").trim()}
+                            </div>
+                          </details>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    {/* Fallback: render HTML FAQs if provided as string */}
+                    {faqHtml ? (
+                      <div
+                        className="prose prose-sm max-w-none mt-2"
+                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(faqHtml) }}
+                      />
+                    ) : null}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

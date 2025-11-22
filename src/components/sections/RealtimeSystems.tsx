@@ -5,6 +5,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { getSolutions } from "@/services/solutionServices";
+import Image from "next/image";
+import { baseUri } from "@/services/constant";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -14,10 +17,14 @@ type Solution = {
   title: string;
   description?: string;
   // add other fields returned by getSolutions() as needed
+  image?: string | null;
+  featured_image?: string | null;
+  slug?: string;
 };
 
 export default function RealtimeScrollCards() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const [activeCard, setActiveCard] = useState<number>(0);
   const [solutions, setSolutions] = useState<Solution[]>([]);
@@ -54,6 +61,13 @@ export default function RealtimeScrollCards() {
           scrub: true,
           onEnter: () => {
             setActiveCard(i);
+            // Center the corresponding tab in the sticky header on scroll
+            const header = headerRef.current;
+            const tabs = header?.querySelectorAll<HTMLButtonElement>("button");
+            const activeTab = tabs?.[i];
+            if (activeTab) {
+              activeTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+            }
             // Apply blur effect to lower cards only when card reaches the top center
             cardRefs.current.forEach((c, index) => {
               gsap.set(c, { zIndex: index <= i ? index + 1 : index });
@@ -143,14 +157,17 @@ export default function RealtimeScrollCards() {
   };
 
   return (
-    <section ref={containerRef} className="bg-white py-10 lg:py-0 relative isolate">
+    <section ref={containerRef} className="bg-white py-10 lg:py-0 relative isolate w-full">
       {/* ✅ Sticky Header (Dynamic Buttons) */}
-      <div className="sticky max-w-[65%] lg:max-w-[75%] top-42 lg:top-38 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-wrap sm:flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto no-scrollbar z-[60]" >
+      <div
+        ref={headerRef}
+        className="sticky w-full max-w-7xl top-42 lg:top-38 bg-white sm:rounded-full border-black/50 sm:border-1 py-2 px-2 md:px-4 flex flex-nowrap items-center gap-2 mx-auto mb-6 overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory no-scrollbar z-[60]"
+      >
         {solutions.map((card, index) => (
           <button
             key={index}
             onClick={() => handleScrollTo(index)}
-            className={`px-4 lg:px-5 py-2 lg:py-3 w-full rounded-full text-[13px]  md:text-[18px] text-nowrap font-thin transition-all ${activeCard === index
+            className={`px-4 lg:px-5 py-2 lg:py-3 w-full rounded-full text-[13px]  md:text-[18px] text-nowrap font-thin transition-all snap-start ${activeCard === index
                 ? "bg-[#EFAF00] text-black"
                 : "bg-[#F9F9F9] text-black"
               }`}
@@ -162,7 +179,7 @@ export default function RealtimeScrollCards() {
 
       {/* ✅ Dynamic Cards Section */}
       <div
-        className="relative container mx-auto px-4 z-10"
+        className="relative w-full max-w-7xl mx-auto px-4 z-10"
         style={{ minHeight: `${solutions.length * 50}vh` }}
         // Responsive minHeight using CSS media query in inline style
       >
@@ -175,7 +192,7 @@ export default function RealtimeScrollCards() {
             className={`relative ${i > 0 ? "mt-[50vh] md:mt-[100vh]" : ""}`}
             data-index={i}
           >
-            <div className="bg-white rounded-xl shadow-sm border border-[#D9D9D9]  p-6 max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl shadow-sm border border-[#D9D9D9] p-6 md:p-8 max-w-6xl mx-auto">
               {/* Top row: Number + Title */}
               <div className="flex items-center mb-3">
                 <span className="text-orange-500 font-semibold text-3xl mr-3 bg-gray-100 rounded-md w-15 h-15 flex items-center justify-center">
@@ -186,10 +203,51 @@ export default function RealtimeScrollCards() {
                 </h2>
               </div>
 
+              {/* Image (if available) */}
+              {(() => {
+                const src = card.image || card.featured_image
+                  ? `${baseUri}${card.image || card.featured_image}`
+                  : null;
+                return src ? (
+                  <div className="mt-2 mb-4">
+                    <Image
+                      src={src}
+                      alt={card.title}
+                      width={800}
+                      height={450}
+                      unoptimized
+                      className="w-full h-auto object-contain rounded-lg"
+                    />
+                  </div>
+                ) : null;
+              })()}
+
               {/* Description */}
-              <p className="text-gray-700 text-sm lg:text-lg mt-4 leading-relaxed">
+              <p className="text-gray-700 text-sm lg:text-lg mt-2 leading-relaxed">
                 {card.description}
               </p>
+
+              {/* CTA to detailed page */}
+              {card.slug && (
+                <div className="mt-4">
+                  <Link
+                    href={`/solutions/${card.slug}`}
+                    className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-500 font-medium"
+                  >
+                    View details
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="w-4 h-4"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 

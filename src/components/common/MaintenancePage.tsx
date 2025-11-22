@@ -3,6 +3,7 @@ import { realtimeAppPlayStore, realtimeAppStore } from "@/services/constant";
 import { fetchContactInfo } from "@/services/contactService";
 import { Phone, Mail } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 export const metadata = {
@@ -18,11 +19,9 @@ export default async function MaintenancePage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="bg-white shadow-lg rounded-2xl max-w-xl w-full p-10 text-center">
         {/* Logo */}
-        <img
-          src="/images/logo-black.png"
-          alt="Realtime Logo"
-          className="mx-auto h-16 mb-6"
-        />
+        <div className="mx-auto mb-6 flex justify-center">
+          <Image src="/images/logo-black.png" alt="Realtime Logo" width={200} height={64} />
+        </div>
 
         {/* Main Title */}
         <h1 className="text-3xl font-extrabold text-gray-900">
@@ -73,7 +72,7 @@ export default async function MaintenancePage() {
             <a
               href={realtimeAppStore}
               className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:opacity-80 transition">
-              <img src="/images/app-store.png" alt="Apple" className="h-6" />
+              <Image src="/images/app-store.png" alt="App Store" width={120} height={36} />
               <span className="text-sm text-left leading-tight">
                 <span className="block text-[10px]">Download on the</span>
                 <span className="font-semibold text-sm">App Store</span>
@@ -83,7 +82,7 @@ export default async function MaintenancePage() {
             <a
               href={realtimeAppPlayStore}
               className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:opacity-80 transition">
-              <img src="/images/gplay.png" alt="Google Play" className="h-6" />
+              <Image src="/images/gplay.png" alt="Google Play" width={120} height={36} />
               <span className="text-sm text-left leading-tight">
                 <span className="block text-[10px]">GET IT ON</span>
                 <span className="font-semibold text-sm">Google Play</span>

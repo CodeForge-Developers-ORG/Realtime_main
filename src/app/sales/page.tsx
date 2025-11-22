@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import Image from "next/image";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import axiosClient from "@/services/axiosClient";
@@ -258,7 +259,7 @@ export default function RequirementForm() {
       <div className="bg-gradient-to-r bg-white p-6 text-center relative">
         {/* Logo/Image Section */}
         <div className="flex justify-center items-center mb-4">
-          <img src="/images/logo-black.png" />
+          <Image src="/images/logo-black.png" alt="Realtime Biometrics logo" width={200} height={60} />
         </div>
 
         <h2 className="text-3xl font-bold text-black mb-2">

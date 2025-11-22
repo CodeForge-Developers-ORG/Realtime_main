@@ -15,7 +15,7 @@ type Testimonial = {
   content: string;
   rating?: number;
   featured?: boolean;
-  status?: boolean;
+  status?: boolean | number | string;
   sort_order?: number;
   image?: string;
   created_at?: string;

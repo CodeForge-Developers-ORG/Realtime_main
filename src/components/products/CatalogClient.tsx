@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import SectionList from "./SectionList";
 import Sidebar from "./Sidebar";
 import { getProducts, getAllCategoriesWithOrder } from "@/services/productService";
@@ -19,6 +19,15 @@ export type Category = {
   items: { id: string; name: string; image: string; slug: string }[];
 };
 
+type RawCategory = {
+  name?: string;
+  title?: string;
+  slug?: string;
+  order?: number | string;
+  sort_order?: number | string;
+  sort?: number | string;
+};
+
 export default function CatalogClient() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categoryOrderMap, setCategoryOrderMap] = useState<Record<string, number>>({});
@@ -26,7 +35,6 @@ export default function CatalogClient() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [scrollYBeforeLoad, setScrollYBeforeLoad] = useState(0);
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastScrollY = useRef(0);
@@ -38,7 +46,7 @@ export default function CatalogClient() {
         const res = await getAllCategoriesWithOrder();
         const list = Array.isArray(res?.data) ? res.data : Array.isArray(res) ? res : [];
         const map: Record<string, number> = {};
-        list.forEach((c: any) => {
+        list.forEach((c: RawCategory) => {
           const name = (c?.name || c?.title || "").trim();
           const slug = (c?.slug || "").trim();
           const orderRaw = c?.order ?? c?.sort_order ?? c?.sort ?? 0;
@@ -55,10 +63,10 @@ export default function CatalogClient() {
   }, []);
 
   // Load products (paginated)
-  const loadProducts = async (pageNum: number) => {
+  const loadProducts = useCallback(async (pageNum: number) => {
+    let prevScrollY = 0;
     try {
-      // Record current scroll before loading
-      setScrollYBeforeLoad(window.scrollY);
+      prevScrollY = window.scrollY;
       setLoading(true);
       const res = await getProducts(pageNum);
 
@@ -75,14 +83,13 @@ export default function CatalogClient() {
       console.error("Error loading products:", err);
     } finally {
       setLoading(false);
-      // Restore scroll position (prevent jump)
-      setTimeout(() => window.scrollTo(0, scrollYBeforeLoad), 50);
+      setTimeout(() => window.scrollTo(0, prevScrollY), 50);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadProducts(page);
-  }, [page]);
+  }, [page, loadProducts]);
 
   // Infinite scroll observer
   useEffect(() => {

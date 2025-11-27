@@ -118,9 +118,12 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
     });
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.removeProperty("overflow");
     };
   }, [isOpen]);
+
+  // Safe portal target for react-select menus (client-only)
+  const portalTarget = typeof document !== "undefined" ? document.body : undefined;
 
   /** ---------------- HANDLE INPUT ---------------- **/
   const handleChange = (
@@ -372,7 +375,7 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
                 value={selectedRequirement}
                 onChange={setSelectedRequirement}
                 placeholder="Select requirement..."
-                menuPortalTarget={document.body}
+                menuPortalTarget={portalTarget}
                 menuPosition="fixed"
                 menuShouldScrollIntoView={false}
                 styles={{
@@ -396,7 +399,7 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
                 value={selectedSource}
                 onChange={setSelectedSource}
                 placeholder="Select source..."
-                menuPortalTarget={document.body}
+                menuPortalTarget={portalTarget}
                 menuPosition="fixed"
                 menuShouldScrollIntoView={false}
                 styles={{

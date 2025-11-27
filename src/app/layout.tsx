@@ -39,7 +39,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}>
+      <body suppressHydrationWarning className={`${montserrat.variable} ${geistMono.variable} ${rajdhani.variable} antialiased`}>
         <AnalyticsProvider />
         <Suspense fallback={null}>
           <GlobalPreloader />

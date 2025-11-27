@@ -16,6 +16,7 @@ import {
   User,
   SunMedium,
 } from "lucide-react";
+import { IconAirTrafficControl, IconFaceId } from "@tabler/icons-react";
 import { notFound } from "next/navigation";
 import AdvancedBreadcrumb from "@/components/common/Bredacrumb";
 import { ReactNode } from "react";
@@ -35,7 +36,8 @@ type ProductCategory = {
   category: Category | null;
   title: string;
   images: string[];
-  features: string[];
+  // Features can be either strings or objects coming from API with icon codes
+  features: Array<string | { title: string; icon?: string }>;
   specifications: Record<string, string | number>;
   meta_title?: string;
   meta_description?: string;
@@ -214,19 +216,27 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
                   <h3 className="text-gray-900 font-semibold mb-3">Features</h3>
                   <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
-                    {product.features.map((feature, idx) => (
+                    {product.features.map((feature, idx) => {
+                      const { title: featureTitle, icon: featureIcon } =
+                        typeof feature === "string"
+                          ? { title: feature, icon: undefined }
+                          : { title: feature.title, icon: feature.icon };
+                      const iconNode =
+                        featureIcon ? getFeatureIconFromCode(featureIcon) || getFeatureIconFromLabel(featureTitle) : getFeatureIconFromLabel(featureTitle);
+                      return (
                       <div
                         key={idx}
                         className="group rounded-lg border border-gray-200 bg-gray-50 hover:bg-white hover:border-orange-300 transition-colors p-3 text-center"
                       >
                         <div className="flex flex-col items-center gap-2">
-                          {getFeatureIcon(feature)}
+                          {iconNode}
                           <span className="text-xs font-medium text-gray-800 line-clamp-1">
-                            {feature}
+                            {featureTitle}
                           </span>
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -304,8 +314,8 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
   );
 }
 
-// ------------------------ ICON MAPPER -------------------------
-function getFeatureIcon(label: string) {
+// ------------------------ ICON MAPPERS -------------------------
+function getFeatureIconFromLabel(label: string) {
   const l = (label || "").toLowerCase();
   if (l.includes("fingerprint")) return <Fingerprint className="w-5 h-5 text-orange-600" />;
   if (l.includes("password") || l.includes("passcode"))
@@ -316,4 +326,19 @@ function getFeatureIcon(label: string) {
   if (l.includes("wdr") || l.includes("hdr")) return <SunMedium className="w-5 h-5 text-orange-600" />;
   if (l.includes("face")) return <User className="w-5 h-5 text-orange-600" />;
   return <Activity className="w-5 h-5 text-orange-600" />;
+}
+
+// Prefer API-provided icon codes when available
+function getFeatureIconFromCode(code?: string) {
+  const c = (code || "").toLowerCase();
+  switch (c) {
+    // Tabler icon code mappings to tabler icons for exact match
+    case "tabler-face-id":
+      return <IconFaceId className="w-5 h-5 text-orange-600" />;
+    case "tabler-air-traffic-control":
+      return <IconAirTrafficControl className="w-5 h-5 text-orange-600" />;
+    // Add more mappings here as API starts sending them
+    default:
+      return null;
+  }
 }

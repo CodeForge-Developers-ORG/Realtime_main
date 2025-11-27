@@ -33,81 +33,80 @@
 }
 
 /* Grid */
+/* Grid: redesigned */
 .features-section .features-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  margin-top: 2rem; /* more compact */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .features-section .features-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.75rem;
   }
 }
 
 @media (min-width: 1024px) {
   .features-section .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem; /* xl:gap-8 approx */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
   }
 }
 
-/* Cards */
-.features-section .feature-card {
-  background-color: #ffffff;
-  border: 1px solid #eaedf1; /* subtle border */
-  border-radius: 0.75rem; /* ~12px */
-  box-shadow: none; /* remove heavy shadows */
-  padding: 1.25rem; /* p-5 */
-  min-height: 200px; /* increased card height */
+/* Item */
+.features-section .feature-item {
+  text-align: center;
+  padding: 1rem 0.5rem;
 }
 
-.features-section .feature-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-/* Direct icon (no badge) */
-.features-section .feature-icon {
-  width: 32px;
-  height: 32px;
-  color: #EA5921; /* orange icon color */
-}
-
-.features-section .icon-badge {
-  width: 44px; /* compact badge */
-  height: 44px;
-  border-radius: 9999px; /* circle */
-  background: #fde8ea; /* light red wash */
+.features-section .feature-circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 9999px;
+  border: 2px solid #e5e7eb; /* gray-200 */
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #f6cfd3; /* soft outline */
+  margin: 0 auto 0.75rem auto;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.features-section .badge-icon {
-  width: 22px;
-  height: 22px;
-  color: #e84850; /* red icon, no gradient */
+/* Accent arc to mimic provided design */
+.features-section .feature-circle-accent {
+  content: "";
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  top: -6px;
+  right: -6px;
+  border-radius: 9999px;
+  border-top: 3px solid #f97316; /* orange */
+  border-right: 3px solid #f97316;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  transform: rotate(12deg);
+  pointer-events: none;
 }
 
-.features-section .feature-title {
+.features-section .feature-circle-icon {
+  width: 36px;
+  height: 36px;
+  color: #f97316; /* orange-500 */
+}
+
+.features-section .feature-item-title {
   font-weight: 600;
-  font-size: 1.0625rem; /* slightly smaller */
-  color: #1f2937; /* slate-800 */
+  font-size: 1.0625rem;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
 }
 
-.features-section .feature-description {
-  margin-top: 0.375rem;
-  color: #6b7280; /* slate-500 */
-  font-size: 0.9375rem; /* compact */
+.features-section .feature-item-desc {
+  color: #6b7280;
+  font-size: 0.9375rem;
   line-height: 1.6;
-}
-
-/* Subtle hover to mirror refined UI */
-.features-section .feature-card:hover {
-  border-color: #e4e8ee;
 }

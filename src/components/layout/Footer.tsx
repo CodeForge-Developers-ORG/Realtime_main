@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axiosClient from "@/services/axiosClient";
 import axios from "axios";
+import { IconMail, IconPhone } from "@tabler/icons-react";
 
 type FooterData = {
   branding: {
@@ -28,6 +29,7 @@ const Footer = () => {
   const [data, setData] = useState<FooterData | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [email , setEmail] = useState<string>('')
+  const [apps, setApps] = useState<{ smart_app_link?: string; attendance_app_link?: string }>({});
 
   const normalizeHref = (url: string) => {
     const u = url || "";
@@ -55,6 +57,19 @@ const Footer = () => {
     };
 
     fetchFooter();
+  }, []);
+
+  useEffect(() => {
+    const fetchHeaderFooterApps = async () => {
+      try {
+        const res = await axiosClient.get("/site/header-footer");
+        const appsData = res.data?.data?.apps || {};
+        setApps(appsData);
+      } catch (error) {
+        console.warn("Header-Footer Apps API Error:", error);
+      }
+    };
+    fetchHeaderFooterApps();
   }, []);
 
   const handleSubmitNewsLatter = async (e: React.FormEvent) => {
@@ -98,10 +113,19 @@ const Footer = () => {
     ),
   };
 
+  const socialColors: Record<string, string> = {
+    facebook: "#1877F2",
+    twitter: "#1DA1F2",
+    linkedin: "#0A66C2",
+    instagram: "#E4405F",
+    youtube: "#FF0000",
+    whatsapp: "#25D366",
+  };
+
   return (
     <footer className="bg-[#2B2B2B] text-white py-10 md:py-16" style={{ fontFamily: 'var(--font-montserrat)' }}>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4">
 
           {/* About */}
           <div className=" ">
@@ -110,7 +134,7 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div className="ml-[50px] md:ml-0">
+          <div>
             <h3 className="text-lg  uppercase mb-4 font-medium">COMPANY</h3>
             <ul className="space-y-2 ">
               {quick_links.company.map((link) => (
@@ -144,7 +168,7 @@ const Footer = () => {
           </div>
 
           {/* Support */}
-          <div className="ml-[50px] md:ml-0">
+          <div>
             <h3 className="text-lg uppercase mb-4 font-medium">SUPPORT</h3>
             <ul className="space-y-2">
               {Array.isArray(quick_links.support) && quick_links.support.length > 0 ? (
@@ -176,7 +200,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div className="ml-[50px] md:ml-0" >
+          <div>
             <h3 className="text-lg uppercase mb-4 font-medium">LEGAL</h3>
             <ul className="space-y-2">
               {quick_links.legal.map((link) => (
@@ -193,31 +217,62 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div >
+          <div className="lg:col-span-2 sm:col-span-2">
             <h3 className="text-lg uppercase mb-4 font-medium">CONTACT</h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="text-white/55 hover:text-orange-500"
+                  className="text-white/55 hover:text-orange-500 flex items-center flex-wrap"
                 >
-                  {contact.email}
+                  <IconMail size={18} className="mr-2 text-white/70" />
+                  <span className="break-all whitespace-normal">{contact.email}</span>
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${contact.phone}`}
-                  className="text-white/55 hover:text-orange-500"
+                  className="text-white/55 hover:text-orange-500 flex items-center flex-wrap"
                 >
-                  {contact.phone}
+                  <IconPhone size={18} className="mr-2 text-white/70" />
+                  <span className="break-words whitespace-normal">{contact.phone}</span>
                 </a>
               </li>
               <li className="border-t border-[#F4F4F4] w-1/2 my-3" />
-              <li className="text-white/55 text-sm">{contact.address}</li>
+              <li className="text-white/55 text-sm break-words whitespace-normal">{contact.address}</li>
             </ul>
           </div>
 
+          {/* Apps */}
+          <div>
+            <h3 className="text-lg uppercase mb-4 font-medium">APPS</h3>
+            <div className="space-y-3">
+              <Link
+                href={apps.smart_app_link || "https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"}
+                className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-3 py-2 rounded-lg transition-transform hover:scale-105"
+              >
+                <Image src="/images/gplay.png" alt="App Icon" width={22} height={22} className="h-5 w-5" />
+                <div className="ml-2 text-left">
+                  <div className="text-[11px] leading-tight">REALTIME MOBILE</div>
+                  <div className="text-[10px] font-bold leading-tight">SMART APP</div>
+                </div>
+              </Link>
+              <Link
+                href={apps.attendance_app_link || "https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"}
+                className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-3 py-2 rounded-lg transition-transform hover:scale-105"
+              >
+                <Image src="/images/gplay.png" alt="App Icon" width={22} height={22} className="h-5 w-5" />
+                <div className="ml-2 text-left">
+                  <div className="text-[11px] leading-tight">REALTIME MOBILE</div>
+                  <div className="text-[10px] font-bold leading-tight text-orange-500">ATTENDANCE APP</div>
+                </div>
+              </Link>
+            </div>
+          </div>
+
         </div>
+
+        {/* App Buttons relocated into grid above */}
 
         {/* Logo */}
         <div className="flex-col sm:flex-row flex justify-center sm:justify-between mt-10 md:mt-16">
@@ -274,9 +329,10 @@ const Footer = () => {
                   className="rounded-full border border-white/30 p-2 flex items-center justify-center w-10 h-10 hover:border-orange-500 hover:bg-orange-500/10 transition-colors"
                 >
                   <svg
-                    className="h-4 w-4 text-[#fff]"
+                    className="h-4 w-4"
                     fill="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: socialColors[key] || '#ffffff' }}
                   >
                     {socialIcons[key]}
                   </svg>

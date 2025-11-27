@@ -59,17 +59,16 @@ export default function FeaturesSection() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="features-grid">
+        {/* Grid - redesigned to match provided example */}
+        <div className="features-grid redesigned">
           {features.map(({ Icon, title, description }, idx) => (
-            <div key={idx} className="feature-card">
-              <div className="feature-content">
-                <Icon className="feature-icon" />
-                <div>
-                  <h3 className="feature-title">{title}</h3>
-                  <p className="feature-description">{description}</p>
-                </div>
+            <div key={idx} className="feature-item">
+              <div className="feature-circle">
+                <span className="feature-circle-accent" aria-hidden="true"></span>
+                <Icon className="feature-circle-icon" />
               </div>
+              <h3 className="feature-item-title">{title}</h3>
+              <p className="feature-item-desc">{description}</p>
             </div>
           ))}
         </div>

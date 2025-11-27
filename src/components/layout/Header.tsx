@@ -70,6 +70,10 @@ type HeaderData = {
 };
 
 let headerDataCache: HeaderData | null = null;
+type HeaderFooterApps = {
+  smart_app_link?: string;
+  attendance_app_link?: string;
+};
 
 // Helper function to check if children array has valid items
 const hasValidChildren = (children?: ChildItem[]): boolean => {
@@ -167,6 +171,7 @@ const Header = () => {
     headerDataCache
   );
   const [loading, setLoading] = useState(!headerDataCache);
+  const [apps, setApps] = useState<HeaderFooterApps>({});
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -322,6 +327,25 @@ const Header = () => {
     fetchHeader();
   }, [updateDocumentMetadata]);
 
+  // Fetch header-footer apps for dynamic app links
+  useEffect(() => {
+    let cancelled = false;
+    const fetchHeaderFooter = async () => {
+      try {
+        const response = await axiosClient.get("/site/header-footer");
+        const data = response.data?.data;
+        const appsData: HeaderFooterApps = data?.apps || {};
+        if (!cancelled) setApps(appsData);
+      } catch (err) {
+        console.warn("Error fetching header-footer apps:", err);
+      }
+    };
+    fetchHeaderFooter();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   // Search function
   const performSearch = useCallback(async (query: string) => {
     if (!query.trim()) {
@@ -375,10 +399,10 @@ const Header = () => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.removeProperty("overflow");
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.removeProperty("overflow");
     };
   }, [mobileMenuOpen]);
 
@@ -825,7 +849,7 @@ const Header = () => {
           {/* Desktop App Links */}
           <div className="hidden lg:flex items-center lg:space-x-1 xl:space-x-4">
             <Link
-              href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
+              href={apps.smart_app_link || "https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"}
               className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 xl:py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
               <Image
                 src="/images/gplay.png"
@@ -842,7 +866,7 @@ const Header = () => {
               </div>
             </Link>
             <Link
-              href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
+              href={apps.attendance_app_link || "https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"}
               className="flex items-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 lg:px-3 xl:px-5 py-2 rounded-lg xl:rounded-xl transition-transform hover:scale-105">
               <Image
                 src="/images/gplay.png"
@@ -1090,7 +1114,7 @@ const Header = () => {
           {/* App Links */}
           <div className="px-4 py-6 space-y-3 border-t border-gray-200">
             <Link
-              href="https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"
+              href={apps.smart_app_link || "https://play.google.com/store/apps/details?id=com.realtimecamsmarthome"}
               onClick={closeMobileMenu}
               className="flex items-center justify-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 py-3 rounded-xl transition-transform hover:scale-105">
               <Image
@@ -1106,7 +1130,7 @@ const Header = () => {
               </div>
             </Link>
             <Link
-              href="https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"
+              href={apps.attendance_app_link || "https://play.google.com/store/apps/details?id=com.RealtimeBiometrics.realtime"}
               onClick={closeMobileMenu}
               className="flex items-center justify-center bg-[#1C1310] border-2 border-[#4F423D] text-white text-xs px-4 py-3 rounded-xl transition-transform hover:scale-105">
               <Image

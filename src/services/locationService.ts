@@ -12,10 +12,6 @@ export interface State {
 }
 
 // ApiCountries /countries response is an array of country objects
-interface ApiCountriesItem {
-  name: string;
-  alpha2Code?: string;
-}
 
 // Local countries.json record structure
 type LocalCountryRecord = {
@@ -34,7 +30,7 @@ let localCache: LocalCountryRecord[] | null = null;
 async function loadLocalCountries(): Promise<LocalCountryRecord[]> {
   if (localCache) return localCache;
   const res = await fetch("/countries.json", { cache: "no-store" });
-  let text = await res.text();
+  const text = await res.text();
   const cleaned = text
     .replace(/\uFEFF/g, "")
     .replace(/`/g, "")

@@ -325,6 +325,7 @@ const ContactSection = () => {
                   }
                   onChange={handleCountryChange}
                   isLoading={loading.countries}
+                  isSearchable={true}
                   placeholder="Search Country..."
                   styles={selectStyles}
                 />
@@ -344,6 +345,7 @@ const ContactSection = () => {
                   onChange={handleStateChange}
                   isDisabled={!selectedCountry}
                   isLoading={loading.states}
+                  isSearchable={true}
                   placeholder={
                     selectedCountry ? "Search State..." : "Select Country first"
                   }

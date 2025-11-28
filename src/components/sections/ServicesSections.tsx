@@ -96,9 +96,7 @@ const ServicesSections = () => {
                 <h3 className="service-title">{srv.title}</h3>
                 <p className="service-description">{srv.short_description || srv.description}</p>
                 <div className="service-arrow">
-                  <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  <span className="read-more-text">Read More</span>
                 </div>
               </div>
             </motion.a>

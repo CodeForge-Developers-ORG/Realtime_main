@@ -158,6 +158,12 @@
   stroke-width: 2;
 }
 
+/* Read More label styles */
+.services-section .read-more-text {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* semi-bold for emphasis */
+}
+
 /* Tablet Adjustments */
 @media (max-width: 768px) {
   .services-section {

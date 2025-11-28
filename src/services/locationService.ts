@@ -2,7 +2,7 @@
 
 export interface Country {
   name: string;
-  code: string;
+  code: string; // ISO 3166-1 alpha-2
 }
 
 export interface State {
@@ -11,108 +11,75 @@ export interface State {
   countryCode: string;
 }
 
-interface CountriesResponse {
-  error: boolean;
-  msg?: string;
-  data: Array<{
-    country: string;
-    iso2?: string;
-  }>;
+// ApiCountries /countries response is an array of country objects
+interface ApiCountriesItem {
+  name: string;
+  alpha2Code?: string;
 }
 
-interface StatesResponse {
-  error: boolean;
-  msg?: string;
-  data?: {
-    name?: string;
-    iso2?: string;
-    states?: Array<{
-      name: string;
-      state_code?: string;
-    }>;
-  };
-}
+// Local countries.json record structure
+type LocalCountryRecord = {
+  code2?: string;
+  code3?: string;
+  name?: string;
+  capital?: string;
+  region?: string;
+  subregion?: string;
+  states?: Array<{ code?: string; name?: string; subdivision?: unknown }>;
+};
 
 // Fetch all countries
+let localCache: LocalCountryRecord[] | null = null;
+
+async function loadLocalCountries(): Promise<LocalCountryRecord[]> {
+  if (localCache) return localCache;
+  const res = await fetch("/countries.json", { cache: "no-store" });
+  let text = await res.text();
+  const cleaned = text
+    .replace(/\uFEFF/g, "")
+    .replace(/`/g, "")
+    .replace(/\/\/.*$/gm, "")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/,\s*([\]\}])/g, "$1");
+  try {
+    const parsed = JSON.parse(cleaned);
+    localCache = Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    console.error("countries.json parse error:", err);
+    localCache = [];
+  }
+  return localCache;
+}
+
 export const fetchCountries = async (): Promise<Country[]> => {
   try {
-    const response = await fetch("https://countriesnow.space/api/v0.1/countries");
-    const data: CountriesResponse = await response.json();
-
-    if (data.error) {
-      throw new Error(data.msg || "Failed to fetch countries");
-    }
-
-    return data.data.map((country) => ({
-      name: country.country,
-      code: country.iso2 || country.country.substring(0, 2).toUpperCase(),
-    }));
+    const raw = await loadLocalCountries();
+    return raw
+      .filter((c) => !!c.name && !!c.code2)
+      .map((c) => ({ name: String(c.name), code: String(c.code2).toUpperCase() }));
   } catch (error) {
-    console.error("Error fetching countries:", error);
+    console.error("Error fetching countries from /countries.json:", error);
     return [];
   }
 };
 
-// Fallback method for fetching states
-const fetchStatesByCountryFallback = async (countryCode: string): Promise<State[]> => {
-  try {
-    const response = await fetch("https://countriesnow.space/api/v0.1/countries/states/q", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: countryCode,
-      }),
-    });
-
-    const data: StatesResponse = await response.json();
-
-    if (data.error || !data.data?.states) {
-      console.error("Fallback API error:", data);
-      return [];
-    }
-
-    return data.data.states.map((state) => ({
-      name: state.name,
-      code: state.state_code || state.name.substring(0, 2).toUpperCase(),
-      countryCode,
-    }));
-  } catch (error) {
-    console.error("Error in fallback state fetch:", error);
-    return [];
-  }
-};
-
-// Fetch states by country
+// Fetch states by country using local countries.json
 export const fetchStatesByCountry = async (countryCode: string): Promise<State[]> => {
   try {
-    const response = await fetch("https://countriesnow.space/api/v0.1/countries/states", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: countryCode,
-        iso2: countryCode,
-      }),
-    });
-
-    const data: StatesResponse = await response.json();
-
-    if (data.error || !data.data?.states) {
-      console.warn("Primary API failed, using fallback:", data);
-      return fetchStatesByCountryFallback(countryCode);
-    }
-
-    return data.data.states.map((state) => ({
-      name: state.name,
-      code: state.state_code || state.name.substring(0, 2).toUpperCase(),
-      countryCode,
-    }));
+    const raw = await loadLocalCountries();
+    const cc = String(countryCode).toUpperCase();
+    const match = raw.find((c) => String(c.code2 || "").toUpperCase() === cc || String(c.name || "").toUpperCase() === cc);
+    const states = match?.states || [];
+    return states
+      .filter((s) => !!s.name)
+      .map((s) => ({
+        name: String(s.name),
+        code: String(s.code || s.name?.substring(0, 2) || "").toUpperCase(),
+        countryCode: cc,
+      }));
   } catch (error) {
-    console.error("Error fetching states:", error);
-    return fetchStatesByCountryFallback(countryCode);
+    console.error("Error fetching states from local countries.json:", error);
+    return [];
   }
 };
 

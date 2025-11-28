@@ -35,12 +35,7 @@ const SolutionsGrid: React.FC = () => {
   return (
     <section className="py-8 md:py-12">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-center">
-          <h2 className="section-title">Explore Our Solutions</h2>
-        </div>
-        <p className="section-subtitle text-center max-w-2xl mx-auto">
-          Discover our end-to-end solutions for attendance, access, and security.
-        </p>
+        {/* Removed title and subtitle as requested */}
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">

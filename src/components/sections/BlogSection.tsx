@@ -81,6 +81,7 @@ const BlogSection = () => {
             showArrows={false}
             showDots
             slidesToShow={1}
+            dotStyle={{ position: 'outside' }}
             responsive={[{ breakpoint: 640, slidesToShow: 1, showDots: true }]}
             className="pb-6">
             {blogs.map((post) => (

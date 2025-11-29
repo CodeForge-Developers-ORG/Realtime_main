@@ -11,8 +11,6 @@ export interface State {
   countryCode: string;
 }
 
-// ApiCountries /countries response is an array of country objects
-// Removed unused ApiCountriesItem interface
 
 // Local countries.json record structure
 type LocalCountryRecord = {

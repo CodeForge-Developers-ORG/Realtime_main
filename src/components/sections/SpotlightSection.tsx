@@ -75,7 +75,7 @@ const SpotlightSection = () => {
             {products.slice(0, 12).map((product) => (
               <Link key={product.id} href={`/products/${product.slug}`}>
                 <div className="group mx-3 rounded-md bg-white overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-gray-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
-                  <div className="relative bg-gray-100 h-64 md:h-72 flex items-center justify-center p-6 rounded-xl">
+                  <div className="relative bg-gray-100 h-34 md:h-42 flex items-center justify-center p-6 rounded-xl">
                     {product.images?.[0] ? (
                       <Image
                         src={`${baseUri}${product.images[0]}`}

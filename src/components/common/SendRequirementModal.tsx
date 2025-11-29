@@ -13,6 +13,7 @@ interface Option {
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  productName?: string;
 }
 
 interface FloatingTextareaProps {
@@ -33,7 +34,7 @@ interface FloatingInputProps {
   maxLength?: number;
 }
 
-export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
+export default function SendRequirementModal({ isOpen, onClose, productName }: ModalProps) {
   /** ---------------- OPTIONS ---------------- **/
   const requirementTypes: Option[] = [
     { value: "Face + Fingerprint Device", label: "Face + Fingerprint Device" },
@@ -244,6 +245,7 @@ export default function SendRequirementModal({ isOpen, onClose }: ModalProps) {
       requirement_type: selectedRequirement!.value,
       source: selectedSource!.value,
       ...tracking,
+      ...(productName ? { product: productName } : {}),
     };
 
     try {
@@ -470,7 +472,7 @@ function FloatingInput({
         onBlur={onBlur}
         maxLength={maxLength}
       />
-      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-2 peer-focus:text-xs peer-placeholder-shown:top-4 transition">
+      <label className="absolute left-4 top-4 text-gray-500 text-sm transition peer-focus:top-2 peer-focus:text-xs peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:text-xs">
         {label}
       </label>
       {showError && <p className="text-red-500 text-xs mt-1">{error}</p>}
@@ -489,7 +491,7 @@ function FloatingTextArea({ label, name, value, onChange }: FloatingTextareaProp
         value={value}
         onChange={onChange}
       />
-      <label className="absolute left-4 top-4 text-gray-500 text-sm peer-focus:top-3 peer-focus:text-xs transition">
+      <label className="absolute left-4 top-4 text-gray-500 text-sm transition peer-focus:top-3 peer-focus:text-xs peer-[&:not(:placeholder-shown)]:top-3 peer-[&:not(:placeholder-shown)]:text-xs">
         {label}
       </label>
     </div>

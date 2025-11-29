@@ -110,7 +110,7 @@ const SolutionsSection = () => {
               <div key={solution.id} className="px-2">
                 <div
                   onClick={() => handleSolutionClick(solution.slug)}
-                  className="group relative h-64 overflow-hidden rounded-xl border border-[#4a4a4a] bg-[#3a3a3a] transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer"
+                  className="group relative h-64 overflow-hidden rounded-xl border border-white bg-[#3a3a3a] shadow-lg transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer"
                 >
                   {solution.image ? (
                     <Image
@@ -157,7 +157,7 @@ const SolutionsSection = () => {
               <div
                 key={solution.id}
                 onClick={() => handleSolutionClick(solution.slug)}
-                className={`group relative overflow-hidden rounded-2xl border border-[#3f3f3f] bg-[#2f2f2f] transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer ${spanClass}`}
+                className={`group relative overflow-hidden rounded-2xl border border-white bg-[#2f2f2f] shadow-lg transition-all duration-500 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer ${spanClass}`}
               >
                 {solution.image ? (
                   <Image

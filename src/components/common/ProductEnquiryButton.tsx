@@ -3,7 +3,7 @@
 import { useState } from "react";
 import SendRequirementModal from "./SendRequirementModal";
 
-export default function ProductEnquiryButton() {
+export default function ProductEnquiryButton({ productName }: { productName?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -15,7 +15,11 @@ export default function ProductEnquiryButton() {
         Enquire Now
       </button>
 
-      <SendRequirementModal isOpen={open} onClose={() => setOpen(false)} />
+      <SendRequirementModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        productName={productName}
+      />
     </>
   );
 }

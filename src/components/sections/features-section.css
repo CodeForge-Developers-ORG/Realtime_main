@@ -50,7 +50,7 @@
 
 @media (min-width: 1024px) {
   .features-section .features-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* enforce 3 columns on desktop */
     gap: 2rem;
   }
 }
@@ -58,7 +58,12 @@
 /* Item */
 .features-section .feature-item {
   text-align: center;
-  padding: 1rem 0.5rem;
+  padding: 1.25rem 1rem;
+  border: 1px solid #ffffff; /* card border */
+  border-radius: 0.75rem; /* rounded corners */
+  background: #ffffff; /* card background */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08),
+              0 4px 6px -2px rgba(0, 0, 0, 0.04); /* subtle drop shadow */
 }
 
 .features-section .feature-circle {

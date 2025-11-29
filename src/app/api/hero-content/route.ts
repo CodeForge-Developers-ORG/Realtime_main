@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
     }
     const html = await upstream.text();
 
-    // Inject Montserrat font links and a forcing style into the HTML
+    // Inject Montserrat font and helper script to auto-size iframe height
     const fontInject = `
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,40 @@ export async function GET(req: NextRequest) {
         html, body, * {
           font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif !important;
         }
+        html, body {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        /* Make media responsive so large images don’t overflow or crop oddly */
+        img, video, svg, canvas {
+          max-width: 100%;
+          height: auto;
+        }
       </style>
+      <script>
+        (function() {
+          function send() {
+            try {
+              var h = Math.max(
+                document.documentElement.scrollHeight || 0,
+                document.body.scrollHeight || 0
+              );
+              var file = (function(){
+                try { return new URL(window.location.href).searchParams.get('file') || ''; } catch(e) { return ''; }
+              })();
+              parent.postMessage({ type: 'hero-content-height', height: h, file: file }, window.location.origin);
+            } catch (e) {}
+          }
+          window.addEventListener('load', send);
+          window.addEventListener('resize', send);
+          var obs;
+          try {
+            obs = new MutationObserver(function() { send(); });
+            obs.observe(document.body, { childList: true, subtree: true });
+          } catch (e) {}
+          setTimeout(send, 300);
+        })();
+      </script>
     `;
 
     let transformed = html;

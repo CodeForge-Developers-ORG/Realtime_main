@@ -40,6 +40,26 @@ export interface SliderData {
   image?: string;
 }
 
+// Message type from iframe for auto-resizing hero content
+type HeroContentHeightMessage = {
+  type: "hero-content-height";
+  file?: string;
+  height?: number;
+};
+
+// Type guard to safely narrow unknown postMessage payloads
+const isHeroContentHeightMessage = (
+  data: unknown
+): data is HeroContentHeightMessage => {
+  if (typeof data !== "object" || data === null) return false;
+  const record = data as Record<string, unknown>;
+  return (
+    record.type === "hero-content-height" &&
+    (record.height === undefined || typeof record.height === "number") &&
+    (record.file === undefined || typeof record.file === "string")
+  );
+};
+
 // ✅ Helper to decode escaped HTML (\u003Cdiv... → <div...)
 const decodeHTML = (html: string) => {
   const txt = document.createElement("textarea");
@@ -64,6 +84,7 @@ const extractBodyContent = (html: string) => {
 
 const HeroSection = () => {
   const [heroSlides, setHeroSlides] = useState<SliderData[]>([]);
+  const [iframeHeights, setIframeHeights] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const fetchHeroSlides = async () => {
@@ -81,6 +102,24 @@ const HeroSection = () => {
     };
 
     fetchHeroSlides();
+  }, []);
+
+  // Listen for height messages from iframe content to auto-resize
+  useEffect(() => {
+    const onMessage = (e: MessageEvent) => {
+      const sameOrigin = typeof window !== "undefined" && e.origin === window.location.origin;
+      if (!sameOrigin) return;
+      const data = e.data;
+      if (isHeroContentHeightMessage(data)) {
+        const key = String(data.file || "");
+        const height = Number(data.height || 0);
+        if (key && height > 0) {
+          setIframeHeights((prev) => (prev[key] !== height ? { ...prev, [key]: height } : prev));
+        }
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, []);
 
   const autoPlayInterval = useMemo(() => {
@@ -114,8 +153,13 @@ const HeroSection = () => {
             {slide.content_file ? (
               <iframe
                 src={`/api/hero-content?file=${encodeURIComponent(slide.content_file)}`}
-                style={{ width: "100%", height: "80vh", border: "none" }}
+                style={{
+                  width: "100%",
+                  height: `${iframeHeights[slide.content_file] ?? 650}px`,
+                  border: "none",
+                }}
                 title={`hero-slide-${slide.id}`}
+                scrolling="no"
               />
             ) : (
               slide.content && (

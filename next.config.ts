@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "app.realtimebiometrics.net",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        pathname: "**",
+      },
     ],
   },
 };

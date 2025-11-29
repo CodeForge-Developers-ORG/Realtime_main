@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: { params: Promise<{ title:
 
               {/* Action Buttons: Enquiry, Download, WhatsApp in one row */}
               <div className="flex flex-wrap items-center gap-3">
-                <ProductEnquiryButton />
+                <ProductEnquiryButton productName={product.title} />
                 {product.catalogue_document && (
                   <DownloadCatalogueButton
                     productTitle={product.title}
